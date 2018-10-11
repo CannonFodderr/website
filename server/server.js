@@ -1,14 +1,15 @@
+require('dotenv').load();
+
 const   express = require('express'),
         path = require('path'),
-        env = require('dotenv').load(),
         port = process.env.PORT,
         bodyParser = require('body-parser'),
         methodOverride = require('method-override'),
         expressSession = require('express-session'),
         passport = require('passport'),
-        passLocal = require('passport-local'),
-        passportLocalSequelize = require('passport-local-sequelize'),
+        LocalStrategy = require('passport-local').Strategy,
         User = require('./models/user'),
+        bcrypt = require('bcrypt'),
         app = express();
 
 const sq = require('./db/connect');
@@ -24,19 +25,35 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, '../client/public')));
-app.use(expressSession({ secret: 'kornishon', resave: false, saveUninitialized: false }));
+app.use(expressSession({ secret: process.env.SECRET, resave: true, saveUninitialized: true }));
 
 // Auth
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new LocalStrategy(
+    function(username, password, done){
+        User.findOne({where: { 'username': username }})
+        .then((user)=>{
+            if (user == null){
+                return done(null, false, { message: 'Invalid Username'});
+            }
+            let hashedPassword = bcrypt.hashSync(password, user.salt);
+            if (hashedPassword == user.password) {
+                return done(null, user);
+            }
 
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
+            return done(null, false, { message: 'Authentication failed!'});
+        })
+    }
+))
+passport.serializeUser((function(user, done) { done(null, user) }));
+passport.deserializeUser(( function(user, done) { done(null, user) }));
 // USE ROUTES
 app.use(indexRoute);
 app.use(adminRoutes);
+
+// Seed DB
+// require('./seed');
 
 // Run Server
 app.listen(port, ()=>{ console.log(`Server is running on port: ${port}`)});
