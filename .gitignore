@@ -1,3 +1,4 @@
 node_modules
 .env
 dbconfig.js
+server/seed.js
