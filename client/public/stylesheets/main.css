@@ -1,6 +1,6 @@
 :root{
-    --bgPrimary: #3e3e3e;
-    --textPrimary: #fff;
+    --bgPrimary: ##fff;
+    --textPrimary: #343a40;
 }
 
 html, body{
