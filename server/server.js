@@ -9,7 +9,8 @@ const   express = require('express'),
 const sq = require('./db/connect');
 
 // IMPORT ROUTES
-const indexRoute = require('./routes/index');
+const   indexRoute = require('./routes/index'),
+        adminRoutes = require('./routes/auth');
 
 // APP CONFIG
 app.set('view engine', 'ejs');
@@ -19,5 +20,9 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, '../client/public')))
 
+// USE ROUTES
 app.use(indexRoute);
+app.use(adminRoutes);
+
+// Run Server
 app.listen(port, ()=>{ console.log(`Server is running on port: ${port}`)});

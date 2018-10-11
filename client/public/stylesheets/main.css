@@ -13,3 +13,8 @@ body{
     background: var(--bgPrimary);
     color: var(--textPrimary);
 }
+
+.admin-login{
+    padding: 2vh 2vw;
+    margin-top: 3vh;
+}

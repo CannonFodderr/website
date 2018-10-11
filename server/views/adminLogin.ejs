@@ -1,0 +1,11 @@
+<% include partials/header %>
+<div class="container">
+    <div class="card bg-light mb-3 admin-login">
+        <h5 class="card-title">Login</h5>
+        <form action="/admin" method="POST">
+            <% include forms/adminLogin %>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+        </form>
+    </div>
+</div>
+<% include partials/footer %>
