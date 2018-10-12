@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+
+<div class="container-fluid">
+    <h1>Admin Panel</h1>
+    <p>Welcome <%= user.username %></p>
+    <a href="/admin/<%= user.id %>/edit">edit profile</a>
+</div>
+
+
+
+<% include ../partials/footer %>

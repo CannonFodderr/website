@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+<div class="container-fluid">
+    <div class="card bg-light mb-3 admin-login">
+        <h1>Edit <%= user.username %> Profile:</h1>
+        <form action="/admin/<%= user.id %>/edit" method="POST">
+            <% include ../forms/adminEdit %>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Update</button>
+        </form>
+    </div>
+</div>
+<% include ../partials/footer %>

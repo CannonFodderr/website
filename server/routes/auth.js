@@ -15,7 +15,7 @@ router.post('/admin', passport.authenticate('local', {
 }));
 
 router.get('/admin/cp', middleware.isAdmin, (req, res)=>{
-    res.send(`Welcome ${req.user.username}`)
+    res.render('./admin/control', {user: req.user});
 });
 
 
