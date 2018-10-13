@@ -33,7 +33,7 @@ const User = sq.define('User', {
             isEmail: true
         }
     },
-    age: Sequelize.DATE,
+    birthday: Sequelize.DATE,
     salt: Sequelize.STRING
 });
 

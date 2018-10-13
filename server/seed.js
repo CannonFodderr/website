@@ -5,10 +5,18 @@ const bcrypt = require('bcrypt');
 // Force create table & seed the Admin
 // ***********************************
 
-User.sync({force: true, alter: true}).then(()=>{
+// clear Table
+User.destroy({
+    where: {'username': 'Admin'}
+});
+
+// Create table and seed first Admin
+User.sync({}).then(()=>{
     bcrypt.genSalt().then((s)=>{
-        let hashedPassword = bcrypt.hashSync('password', s)
-        User.create({ username: 'Admin', password: hashedPassword, salt: s, isAdmin: true});
+        let hashedPassword = bcrypt.hashSync('123456', s)
+        User.create({ username: 'Admin', password: hashedPassword, salt: s, isAdmin: true}).then((admin)=>{
+            admin.save()
+        })
         
     })
 });
