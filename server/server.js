@@ -20,11 +20,11 @@ const   indexRoute = require('./routes/index'),
 
 // APP CONFIG
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', __dirname + '/views');
+app.use(express.static('client/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
-app.use(express.static(path.join(__dirname, '../client/public')));
 app.use(expressSession({ secret: process.env.SECRET, resave: true, saveUninitialized: true }));
 
 // Auth
