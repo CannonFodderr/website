@@ -5,7 +5,7 @@ module.exports = {
         if (req.user && req.user != 'undefined' && req.user.isAdmin){
             return next();
         }
-        return res.redirect('/admin')
+        return res.redirect('/admin/login');
     },
     isLoggedIn(req, res, next){
         if(req.user && req.user != 'undefined'){

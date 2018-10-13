@@ -1,4 +1,4 @@
-require('dotenv').load();
+const env = require('dotenv').load();
 
 const   express = require('express'),
         path = require('path'),

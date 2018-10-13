@@ -5,18 +5,19 @@ const User = require('../models/user');
 const middleware = require('../middleware/auth');
 
 // ROUTES
-router.get('/admin', (req, res)=>{
+router.get('/admin', middleware.isAdmin, (req, res)=>{
+    res.render('./admin/control', { user: req.user });
+});
+
+router.get('/admin/login', (req, res) => {
     res.render('adminLogin')
 });
 
-router.post('/admin', passport.authenticate('local', {
-    successRedirect: '/admin/cp',
+router.post('/admin/login', passport.authenticate('local', {
+    successRedirect: '/admin',
     failureRedirect: '/admin'
 }));
 
-router.get('/admin/cp', middleware.isAdmin, (req, res)=>{
-    res.render('./admin/control', { user: req.user });
-});
 
 router.get('/admin/:id/edit', (req, res)=>{
     User.findById(req.params.id).then((user)=>{
@@ -39,6 +40,7 @@ router.post('/admin/:id/edit', middleware.isAdmin, (req, res)=>{
 });
 
 router.get('/logout', (req, res)=>{
+    console.log('Loggin out: ', req.user.username)
     req.logout();
     res.redirect('/');
 });
