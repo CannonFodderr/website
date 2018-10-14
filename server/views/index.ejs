@@ -1,18 +1,38 @@
 <% include ./partials/header %>
-<div class="container">
-    <h1 class="title">Home</h1>
-    <div class="row">
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+<% include ./loader/load %>
+<div class="fluid-container">
+    <div class="row no-gutters">
+        <div class="col-lg-3">
+            <div class="card">
+                <h5 class="card-header">
+                    <span id="username">
+                        <%= messages.username %>
+                    </span>
+                    <span class="pipe">|</span></h5>
+                <div class="img-bg">
+                    <img class="card-img-top profile-img" src="images/profile.jpg" alt="Card image cap">
+                </div>
+                <div class="card-body bg-dark text-light">
+                    <p class="card-text">
+                        <ul class="contact-list">
+                            <li><a class="social-link" href="mailto:izhaki.idan@gmail.com"><i class="fas fa-envelope-open social-icon"></i>E-Mail</a></li>
+                            <li><a class="social-link" href="tel:+972526773370"><i class="fas fa-phone social-icon"></i>Phone</a></li>
+                            <li><a class="social-link" href=""><i class="fab fa-facebook-messenger social-icon"></i>Messenger</a></li>
+                            <li><a class="social-link" href=""><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                            <li><a class="social-link" href=""><i class="fab fa-discord social-icon"></i>Discord</a></li>
+                        </ul>
+                    </p>
+                    <a href="#" class="btn btn-secondary">Go somewhere</a>
                 </div>
             </div>
         </div>
-        <div class="col"></div>
+        <div class="col-lg-9">
+            <div class="card">
+                <h5 class="card-header">
+                    Hi, Nice to meet you!
+                </h5>
+            </div>
+        </div>
     </div>
 </div>
 <% include ./partials/footer %>
