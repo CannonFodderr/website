@@ -2,16 +2,14 @@
 <% include ./loader/load %>
 <div class="fluid-container">
     <div class="row no-gutters">
-        <div class="col-lg-3">
+        <div class="col-md-6 col-lg-5 col-xl-4">
             <div class="card">
                 <h5 class="card-header">
-                    <span id="username">
-                        <%= messages.username %>
-                    </span>
-                    <span class="pipe">|</span></h5>
-                <div class="img-bg">
-                    <img class="card-img-top profile-img" src="images/profile.jpg" alt="Card image cap">
-                </div>
+                    <div class="typewriter">
+                        Hi, Nice to meet you :)
+                    </div>
+                </h5>
+                <div class="img-wrapper"></div>
                 <div class="card-body bg-dark text-light">
                     <p class="card-text">
                         <ul class="contact-list">
@@ -22,15 +20,37 @@
                             <li><a class="social-link" href=""><i class="fab fa-discord social-icon"></i>Discord</a></li>
                         </ul>
                     </p>
-                    <a href="#" class="btn btn-secondary">Go somewhere</a>
+                    <p class="card-text">
+                        <form action="" method="post">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Full Name</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Email</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                            </div>
+                            <label for="exampleFormControlTextarea1">Say Stuff...</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <br>
+                            <button class="btn btn-secondary" type="submit">Send</button>
+                        </form>
+                    </p>
+                    <!-- <a href="#" class="btn btn-secondary">Go somewhere</a> -->
                 </div>
             </div>
         </div>
-        <div class="col-lg-9">
+        <div class="col-md-6 col-lg-7 col-xl-8">
             <div class="card">
                 <h5 class="card-header">
-                    Hi, Nice to meet you!
+                    Details
+                    <!-- <span class="pipe">|</span> -->
                 </h5>
+                <div class="card-body bg-light text-dark">
+                    <p class="card-text">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos animi numquam quasi et perspiciatis, velit nihil nobis veritatis enim in explicabo adipisci suscipit, nemo minima! Enim quia pariatur quo aut?                          
+                    </p>
+                </div>
             </div>
         </div>
     </div>

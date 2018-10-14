@@ -6,5 +6,5 @@ window.addEventListener('load', ()=>{
     wrapper[0].classList.add('hide');
     setTimeout(()=>{
         wrapper[0].style.display = "none";
-    }, 2000)
+    }, 500)
 })
