@@ -4,7 +4,18 @@
     </div>
     <input name="username" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="<%= user.username %>">
 </div>
-
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text text-light bg-dark" id="basic-addon1">First Name:</span>
+    </div>
+    <input name="firstName" type="text" class="form-control" placeholder="First Name" aria-label="lastName" aria-describedby="basic-addon1" value="<%= user.firstName %>">
+</div>
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text text-light bg-dark" id="basic-addon1">Last Name:</span>
+    </div>
+    <input name="lastName" type="text" class="form-control" placeholder="Last Name" aria-label="lastName" aria-describedby="basic-addon1" value="<%= user.lastName %>">
+</div>
 <div class="input-group mb-3">
     <div class="input-group-prepend">
         <span class="input-group-text text-light bg-dark" id="basic-addon1">E-Mail:</span>

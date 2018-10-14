@@ -32,6 +32,15 @@ const User = sq.define('User', {
             isEmail: true
         }
     },
+    firstName: {
+        type: Sequelize.STRING
+    },
+    lastName: {
+        type: Sequelize.STRING
+    },
+    phone: {
+        type: Sequelize.TEXT
+    },
     birthday: Sequelize.DATE,
     salt: Sequelize.STRING
 });

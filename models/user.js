@@ -1,9 +1,18 @@
 'use strict';
+const db = require('./index')
+db.
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    username: DataTypes.STRING,
+    username: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+      validate: {
+        is: /^[a-z0-9\_\-]+$/i,
+      }
+    },
     password: DataTypes.STRING,
-    birthday: DataTypes.DATE,
+    birthday: DataTypes.DATEONLY,
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING
   }, {});
