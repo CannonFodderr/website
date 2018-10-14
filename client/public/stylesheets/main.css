@@ -21,7 +21,7 @@ img{
     height: 100%;
 }
 .img-wrapper{
-    height: 30vh;
+    height: 20vh;
     background-image: url('/images/profile.jpg');
     background-position: center;
     filter: grayscale();
@@ -85,7 +85,7 @@ img{
 }
 .menu-title{
     width: 100%;
-    margin-left: 2vw;
+    margin-left: 0vw;
     text-align: center;
 }
 .menu-icon{
