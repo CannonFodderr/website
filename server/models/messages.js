@@ -1,5 +1,3 @@
-const config = require('../../dbconfig');
-const passportLocalSequelize = require('passport-local-sequelize');
 const Sequelize = require('sequelize');
 const sq = require('../db/connect');
 

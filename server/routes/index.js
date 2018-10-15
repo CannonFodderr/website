@@ -1,12 +1,10 @@
 const router = require('express').Router();
-const messages = require('../media/messages');
-const csurf = require('csurf');
-const cookieParser = require('cookie-parser');
+const mgs = require('../media/messages');
 const csrfMiddleware = require('../middleware/csurf');
 const Messages = require('../models/messages');
 
 router.get('/',csrfMiddleware, (req, res)=>{
-    res.render('index', { messages:messages, csrf: req.csrfToken()} );
+    res.render('index', { messages:mgs, csrf: req.csrfToken()} );
 })
 
 
