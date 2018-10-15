@@ -6,3 +6,5 @@ config
 migrations
 seed
 config
+models
+seeders
