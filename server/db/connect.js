@@ -13,7 +13,11 @@ const sq = new Sequelize(config.db_name, config.username, config.password, {
 });
 
 sq.authenticate()
-.then(()=> { console.log(`Connected to db: ${config.db_name}`)})
-.catch((err) => { console.error(`Failed to connect:`, err)});
+    .then(() => {
+        console.log(`Connected to db: ${config.db_name}`)
+    })
+    .catch((err) => {
+        console.error(`Failed to connect:`, err)
+    });
 
 module.exports = sq;

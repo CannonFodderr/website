@@ -6,58 +6,74 @@ const csrfMiddleware = require('../middleware/csurf');
 const bcrypt = require('bcrypt');
 
 // ADMIN ROUTES
-router.get('/admin', middleware.isAdmin, (req, res)=>{
-    res.render('./admin/control', { user: req.user });
+router.get('/admin', middleware.isAdmin, (req, res) => {
+    res.render('./admin/control', {
+        user: req.user
+    });
 });
 
-router.get('/admin/:id/edit', (req, res)=>{
-    User.findById(req.params.id).then((user)=>{
-        res.render('./admin/editProfile', {user:user})
-    }).catch((e)=>{
+router.get('/admin/:id/edit', (req, res) => {
+    User.findById(req.params.id).then((user) => {
+        res.render('./admin/editProfile', {
+            user: user
+        })
+    }).catch((e) => {
         console.error(e)
         res.redirect('/admin');
     })
 });
 
-router.post('/admin/:id/edit', middleware.isAdmin, (req, res)=>{
-    User.update(req.body, {where:{id:req.params.id}})
-    .then(()=>{
-        User.findById(req.params.id).then((user)=>{
-            res.render('./admin/editProfile', {user: user})
+router.post('/admin/:id/edit', middleware.isAdmin, (req, res) => {
+    User.update(req.body, {
+            where: {
+                id: req.params.id
+            }
         })
-    }).catch((e)=>{
-        console.error('Failed to updated: ', e);
-    })
-    
+        .then(() => {
+            User.findById(req.params.id).then((user) => {
+                res.render('./admin/editProfile', {
+                    user: user
+                })
+            })
+        }).catch((e) => {
+            console.error('Failed to updated: ', e);
+        })
+
 });
 // Register new admin
-router.post('/admin/register', (req, res)=>{
-    if(req.body.password && req.body.username){
+router.post('/admin/register', (req, res) => {
+    if (req.body.password && req.body.username) {
         bcrypt.genSalt()
-        .then((s)=>{
-            let hashed = bcrypt.hashSync(req.body.password, s)
-            User.create({username:req.body.username, password: hashed, salt: s })
-            .then((newAdmin)=>{
-                newAdmin.save();
-                return res.redirect('/login');
+            .then((s) => {
+                let hashed = bcrypt.hashSync(req.body.password, s)
+                User.create({
+                        username: req.body.username,
+                        password: hashed,
+                        salt: s
+                    })
+                    .then((newAdmin) => {
+                        newAdmin.save();
+                        return res.redirect('/login');
+                    })
             })
-        })
     }
     return res.redirect('/login');
 });
 
 // LOG IN/OUT
-router.get('/login',csrfMiddleware, (req, res) => {
-    res.render('./admin/adminLogin', { csrf: req.csrfToken() })
+router.get('/login', csrfMiddleware, (req, res) => {
+    res.render('./admin/adminLogin', {
+        csrf: req.csrfToken()
+    })
 });
 
-router.post('/login',csrfMiddleware, passport.authenticate('local', {
+router.post('/login', csrfMiddleware, passport.authenticate('local', {
     successRedirect: '/admin',
     failureRedirect: '/admin'
 }));
 
-router.get('/logout', (req, res)=>{
-    if (req.user){
+router.get('/logout', (req, res) => {
+    if (req.user) {
         console.log('Loggin out: ', req.user.username)
         req.logout();
     }
