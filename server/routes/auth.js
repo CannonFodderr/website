@@ -3,6 +3,7 @@ const passport = require('passport');
 const User = require('../models/user');
 const middleware = require('../middleware/auth');
 const csrfMiddleware = require('../middleware/csurf');
+const bcrypt = require('bcrypt');
 
 // ADMIN ROUTES
 router.get('/admin', middleware.isAdmin, (req, res)=>{
@@ -28,6 +29,21 @@ router.post('/admin/:id/edit', middleware.isAdmin, (req, res)=>{
         console.error('Failed to updated: ', e);
     })
     
+});
+// Register new admin
+router.post('/admin/register', (req, res)=>{
+    if(req.body.password && req.body.username){
+        bcrypt.genSalt()
+        .then((s)=>{
+            let hashed = bcrypt.hashSync(req.body.password, s)
+            User.create({username:req.body.username, password: hashed, salt: s })
+            .then((newAdmin)=>{
+                newAdmin.save();
+                return res.redirect('/login');
+            })
+        })
+    }
+    return res.redirect('/login');
 });
 
 // LOG IN/OUT

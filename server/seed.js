@@ -6,9 +6,9 @@ const bcrypt = require('bcrypt');
 // Force create table & seed the Admin
 // ***********************************
 // clear Table
-User.destroy({
-    where: {'username': 'Admin'}
-});
+// User.destroy({
+//     where: {'username': 'Admin'}
+// });
 
 // // Create table and seed first Admin
 User.sync({}).then(()=>{
