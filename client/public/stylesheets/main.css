@@ -1,6 +1,8 @@
 :root{
     --bgPrimary: ##fff;
+    --bgSecondary: #343a40;
     --textPrimary: #343a40;
+    --textSecondary: #fff;
 }
 
 html, body{
@@ -8,14 +10,20 @@ html, body{
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-}
-
-body{
-    background: var(--bgPrimary);
-    color: var(--textPrimary);
     min-height: 100vh;
 }
 
+body{
+    background: var(--bgSecondary);
+    color: var(--textPrimary);
+    height: 100%;
+}
+.fluid-container{
+    height: 94vh;
+}
+.row1{
+    height: 100%;
+}
 img{
     width: 100%;
     height: 100%;
@@ -45,10 +53,21 @@ img{
     z-index: 500;
     transition: 0.8s ease-in-out;
 }
-.fluid-container{
-    min-height: -webkit-fill-available;
+#carouselExampleIndicators{
+    height: 100%;
 }
 
+.carousel-inner{
+    height: 100%;
+}
+
+.carousel-item{
+    height: 100%;
+}
+.carousel-caption{
+    background: #343a4091;
+}
+/* CSS LOADER */
 .loader{
     position: relative;
     width: 120px;
@@ -102,15 +121,15 @@ img{
     background: var(--textPrimary);
 }
 
-.card-text{
-    margin: 0;
-}
 
 .contact-list{
     list-style: none;
     padding: 0;
 }
-
+.details-list{
+    list-style: none;
+    padding: 0;
+}
 .social-link{
     display: block;
     font-size: 1.2em;
@@ -122,13 +141,19 @@ img{
     color: #3498db;
 }
 
-.pipe{
-    animation: blink infinite 0.75s
-}
-
 .card{
     border: none;
+    height: 100%;
 }
+.card-body{
+    height: 100%;
+    background: var(--bgSecondary);
+}
+.card-text{
+    margin: 0;
+    
+}
+
 @keyframes blink {
     0% { color: black;opacity: 1;}
     50% {color: #f8f9fa;opacity: 0;}
@@ -139,11 +164,11 @@ img{
     overflow: hidden; /* Ensures the content is not revealed until the animation */
     border-right: 1px solid black; /* The typwriter cursor */
     white-space: nowrap; /* Keeps the content on a single line */
-    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    /* margin: 0 auto; Gives that scrolling effect as the typing happens */
     letter-spacing: .25em; /* Adjust as needed */
     animation: 
     typing 2.5s steps(20, end),
-    blink-caret .75s step-end infinite;
+    blink-caret .75s step-end 2.5s;
 }
 
 @keyframes typing {
@@ -153,6 +178,6 @@ img{
   
   /* The typewriter cursor effect */
 @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: black; }
+    from, to { border-color: black }
+    50% { border-color: transparent; }
 }
