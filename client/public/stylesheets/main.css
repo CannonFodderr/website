@@ -14,7 +14,6 @@ html, body{
 }
 
 body{
-    background: var(--bgSecondary);
     color: var(--textPrimary);
     height: 100%;
 }

@@ -10,10 +10,11 @@ const   express = require('express'),
         LocalStrategy = require('passport-local').Strategy,
         User = require('./models/user'),
         bcrypt = require('bcrypt'),
+        cookieParser = require('cookie-parser'),
         app = express();
 
+const csrfMiddleware = require('./middleware/csurf');
 const sq = require('./db/connect');
-
 
 // IMPORT ROUTES
 const   indexRoute = require('./routes/index'),
@@ -25,6 +26,8 @@ app.set('views', __dirname + '/views');
 app.use(express.static('client/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(csrfMiddleware);
 app.use(methodOverride('_method'));
 app.use(expressSession({ secret: process.env.SECRET, resave: true, saveUninitialized: true }));
 

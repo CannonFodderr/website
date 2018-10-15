@@ -2,6 +2,7 @@ const router = require('express').Router()
 const passport = require('passport');
 const User = require('../models/user');
 const middleware = require('../middleware/auth');
+const csrfMiddleware = require('../middleware/csurf');
 
 // ADMIN ROUTES
 router.get('/admin', middleware.isAdmin, (req, res)=>{
@@ -30,11 +31,11 @@ router.post('/admin/:id/edit', middleware.isAdmin, (req, res)=>{
 });
 
 // LOG IN/OUT
-router.get('/login', (req, res) => {
-    res.render('./admin/adminLogin')
+router.get('/login',csrfMiddleware, (req, res) => {
+    res.render('./admin/adminLogin', { csrf: req.csrfToken() })
 });
 
-router.post('/login', passport.authenticate('local', {
+router.post('/login',csrfMiddleware, passport.authenticate('local', {
     successRedirect: '/admin',
     failureRedirect: '/admin'
 }));
