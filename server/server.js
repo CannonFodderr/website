@@ -1,20 +1,21 @@
-const env = require('dotenv').load();
+require('dotenv').load();
 
-const express = require('express'),
-    path = require('path'),
-    port = process.env.PORT,
-    bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
-    expressSession = require('express-session'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    User = require('./models/user'),
-    bcrypt = require('bcrypt'),
-    cookieParser = require('cookie-parser'),
-    app = express();
+const   express          = require('express'),
+        port            = process.env.PORT,
+        bodyParser      = require('body-parser'),
+        methodOverride  = require('method-override'),
+        expressSession  = require('express-session'),
+        passport        = require('passport'),
+        LocalStrategy   = require('passport-local').Strategy,
+        bcrypt          = require('bcrypt'),
+        cookieParser    = require('cookie-parser'),
+        app             = express();
 
+// CSRF MIDDELWARE
 const csrfMiddleware = require('./middleware/csurf');
-const sq = require('./db/connect');
+
+// DB Associations
+require('./db/associate');
 
 // IMPORT ROUTES
 const indexRoute = require('./routes/index'),
@@ -75,7 +76,9 @@ app.use(indexRoute);
 app.use(adminRoutes);
 
 // Seed DB
-// require('./seed');
+if(process.argv[2] == 'seed'){
+    require('./seed');
+}
 
 // Run Server
 app.listen(port, () => {

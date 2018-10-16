@@ -1,10 +1,9 @@
 const config = require('../../dbconfig');
 const passportLocalSequelize = require('passport-local-sequelize');
 const Sequelize = require('sequelize');
-const sq = require('../db/connect');
+const db = require('../db/connect');
 
-
-const User = sq.define('User', {
+const User = db.define('User', {
     id: {
         autoIncrement: true,
         primaryKey: true,
@@ -43,7 +42,8 @@ const User = sq.define('User', {
     },
     birthday: Sequelize.DATE,
     salt: Sequelize.STRING
-});
+},
+{underscored:true});
 
 passportLocalSequelize.attachToUser(User, {
     usernameField: 'nick',
