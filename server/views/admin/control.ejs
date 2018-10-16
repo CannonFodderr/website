@@ -3,10 +3,21 @@
 <div class="container-fluid">
     <h1>Admin Panel</h1>
     <p>Welcome
-        <%= user.username %>
+        <% if(user.firstName){ %>
+            <%= user.firstName %>
+        <%} else { %>
+            <%= user.username %>
+        <% } %>
     </p>
     <a href="/admin/<%= user.id %>/edit" class="btn btn-secondary">Edit profile</a>
     <a href="/logout" class="btn btn-secondary">Logout</a>
+    <hr>
+    <h5>projects</h5>
+    <ul>
+    <% projects.forEach((project)=>{ %>
+        <li><%= project.title %> - <%= project.description %></li>
+    <% }) %>
+    </ul>
 </div>
 
 

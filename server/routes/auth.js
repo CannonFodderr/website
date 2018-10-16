@@ -7,9 +7,13 @@ const bcrypt = require('bcrypt');
 
 // ADMIN ROUTES
 router.get('/admin', middleware.isAdmin, (req, res) => {
-    res.render('./admin/control', {
-        user: req.user
-    });
+    User.findById(req.user.id, {include: ['projects']}).then((user)=>{
+        res.render('./admin/control', {
+            user: req.user,
+            projects: user.projects
+        });
+    })
+    
 });
 
 router.get('/admin/:id/edit', (req, res) => {
