@@ -15,7 +15,8 @@ router.get('/admin', middleware.isAdmin, (req, res) => {
 router.get('/admin/:id/edit', (req, res) => {
     User.findById(req.params.id).then((user) => {
         res.render('./admin/editProfile', {
-            user: user
+            user: user,
+            csrf: req.csrfToken()
         })
     }).catch((e) => {
         console.error(e)
@@ -32,7 +33,8 @@ router.post('/admin/:id/edit', middleware.isAdmin, (req, res) => {
         .then(() => {
             User.findById(req.params.id).then((user) => {
                 res.render('./admin/editProfile', {
-                    user: user
+                    user: user,
+                    csrf: req.csrfToken()
                 })
             })
         }).catch((e) => {
