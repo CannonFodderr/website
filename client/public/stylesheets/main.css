@@ -55,7 +55,9 @@ img{
 #carouselExampleIndicators{
     height: 100%;
 }
-
+#carouselExampleFade{
+    height: 100%;
+}
 .carousel-inner{
     height: 100%;
 }
