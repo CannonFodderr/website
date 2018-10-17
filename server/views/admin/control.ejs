@@ -17,12 +17,13 @@
     <div class="row">
     <% projects.forEach((project)=>{ %>
         <div class="col col-xl-3 col-lg-4 col-md-6 col-sm-12 col-s-12">
-            <div class="card">
+            <div class="card project-card">
                 <a href="/admin/projects/<%=project.id%>/edit">
                     <img class="card-img-top project-grid-img" src="<%= project.img %>" alt="Card image cap">
                 </a>
                 <div class="card-body bg-dark text-light">
-                    <h5 class="card-title"><%= project.title %></h5>
+                    <h5 class="card-title"><%= project.title.toUpperCase() %></h5>
+                    <h6>Category: <%= project.category %></h6>
                     <p class="card-text project-card-text"><%= project.description %></p>
                     <hr>
                         <a href="/admin/projects/<%=project.id%>/edit" class="btn btn-info"><i class="fas fa-edit"></i>Edit</a>
