@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const mgs = require('../media/messages');
 const csrfMiddleware = require('../middleware/csurf');
-const Messages = require('../models/messages');
+const Message = require('../models/messages');
+const Contact = require('../models/contact');
 
 router.get('/', csrfMiddleware, (req, res) => {
     res.render('index', {
@@ -11,14 +12,16 @@ router.get('/', csrfMiddleware, (req, res) => {
 });
 
 router.post('/', csrfMiddleware, (req, res) => {
-    Messages.create({
-            author: req.body.author,
-            email: req.body.email,
-            content: req.body.content
+    Contact.findOrCreate({where: { email: req.body.email }, defaults: { name: req.body.name }})
+    .then((user)=>{
+        Message.create({ content: req.body.content, contact_id:  user[0].dataValues['id'] })
+        .then((createdMessage) => {
+            res.redirect('/');
         })
-        .then(() => {
-            res.redirect('/')
-        });
+    }).catch(e => {
+        console.error(e);
+        res.redirect('/')
+    })
 });
 
 module.exports = router

@@ -19,9 +19,9 @@ const csrfMiddleware = require('./middleware/csurf');
 require('./db/associate');
 
 // IMPORT ROUTES
-const indexRoute = require('./routes/index'),
-    adminRoutes = require('./routes/auth'),
-    projectsRoutes = require('./routes/projects');
+const   indexRoute = require('./routes/index'),
+        adminRoutes = require('./routes/auth'),
+        projectsRoutes = require('./routes/projects');
 
 // APP CONFIG
 app.set('view engine', 'ejs');
