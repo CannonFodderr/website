@@ -12,6 +12,7 @@ router.post('/admin/projects', middleware.isAdmin, (req, res)=>{
     let newProject = {
         title: req.body.title,
         description: req.body.desc,
+        category: req.body.category,
         img: req.body.img,
         link: req.body.link,
         content: req.body.content,
@@ -43,6 +44,7 @@ router.put('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
     let updateData = {
         title: req.body.title,
         description: req.body.desc,
+        category: req.body.category,
         img: req.body.img,
         link: req.body.link,
         content: req.body.content,

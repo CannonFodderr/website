@@ -13,6 +13,17 @@
             aria-describedby="basic-addon1" value="<%= project.description %>">
     </div>
     <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text text-light bg-dark" id="basic-addon1">Current Category:</span>
+            </div>
+            <select name="category" class="custom-select">
+                <option value="<%= project.category %>"><%= project.category %></option>
+                <option value="Web Development">Web Development</option>
+                <option value="E-Commerce">E-Commerce</option>
+                <option value="Sound Design">Sound Design</option>
+            </select>
+        </div>
+    <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text text-light bg-dark" id="basic-addon1">Image</span>
         </div>
