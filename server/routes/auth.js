@@ -15,7 +15,7 @@ router.get('/admin', middleware.isAdmin, (req, res) => {
     })
     
 });
-
+// Admin Edit
 router.get('/admin/:id/edit', (req, res) => {
     User.findById(req.params.id).then((user) => {
         res.render('./admin/editProfile', {
@@ -85,5 +85,6 @@ router.get('/logout', (req, res) => {
     }
     res.redirect('/');
 });
+
 
 module.exports = router

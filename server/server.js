@@ -20,7 +20,8 @@ require('./db/associate');
 
 // IMPORT ROUTES
 const indexRoute = require('./routes/index'),
-    adminRoutes = require('./routes/auth');
+    adminRoutes = require('./routes/auth'),
+    projectsRoutes = require('./routes/projects');
 
 // APP CONFIG
 app.set('view engine', 'ejs');
@@ -75,6 +76,7 @@ passport.deserializeUser((function (user, done) {
 // USE ROUTES
 app.use(indexRoute);
 app.use(adminRoutes);
+app.use(projectsRoutes);
 
 // Seed DB
 if(process.argv[2] == 'seed'){

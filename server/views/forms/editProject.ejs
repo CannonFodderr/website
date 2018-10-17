@@ -1,0 +1,34 @@
+<div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-light bg-dark" id="basic-addon1">Title:</span>
+        </div>
+        <input name="title" type="text" class="form-control" placeholder="" aria-label="Title"
+            aria-describedby="basic-addon1" value="<%= project.title %>" autofocus required>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-light bg-dark" id="basic-addon1">Description:</span>
+        </div>
+        <input name="desc" type="text" class="form-control" placeholder="" aria-label="Description"
+            aria-describedby="basic-addon1" value="<%= project.description %>">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-light bg-dark" id="basic-addon1">Image</span>
+        </div>
+        <input name="img" type="text" class="form-control" placeholder="Add image url" aria-label="image"
+            aria-describedby="basic-addon1" value="<%= project.img %>">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-light bg-dark" id="basic-addon1">Link</span>
+        </div>
+        <input name="link" type="url" class="form-control" placeholder="Link to project" aria-label="url" aria-describedby="basic-addon1"
+            value="<%= project.link %>">
+    </div>
+    
+    <div class="form-group">
+        <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="About the project"><%= project.content %></textarea>
+    </div>
+    <input type="hidden" name="_csrf" value="<%= csrf %>" />
+    

@@ -43,7 +43,9 @@ const User = db.define('User', {
     birthday: Sequelize.DATE,
     salt: Sequelize.STRING
 },
-{underscored:true});
+{
+    underscored:true
+});
 
 passportLocalSequelize.attachToUser(User, {
     usernameField: 'nick',

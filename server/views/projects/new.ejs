@@ -1,0 +1,10 @@
+<% include ../partials/header %>
+<% include ../loader/load %>
+<div class="container">
+    <h1>New project</h1>
+    <form action="/admin/projects" method="POST">
+        <% include ../forms/newProject %>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Add</button>
+    </form>
+</div>
+<% include ../partials/footer %>
