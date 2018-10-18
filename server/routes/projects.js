@@ -5,18 +5,18 @@ const Project = require('../models/project');
 router.get('/projects', (req, res)=>{
     if(req.query.category){
         Project.findAll({ where: {category: req.query.category }}).then((foundProjects)=>{
-        return res.render('./projects/all', { projects: foundProjects })
+        return res.render('./projects/all', { projects: foundProjects, title: `${req.query.category} projects` })
         })
     } else {
         Project.findAll().then((allProjects)=>{
-        return res.render('./projects/all', { projects: allProjects })
+        return res.render('./projects/all', { projects: allProjects, title: `All projects` })
         })
     }
 })
 
 
 router.get('/admin/projects/new',middleware.isAdmin, (req, res)=>{
-    res.render('./projects/new', {csrf: req.csrfToken()})
+    res.render('./projects/new', {csrf: req.csrfToken(), title: 'New project'})
 })
 
 
@@ -45,7 +45,7 @@ router.post('/admin/projects', middleware.isAdmin, (req, res)=>{
 router.get('/admin/projects/:projectid/edit', middleware.isAdmin, (req, res)=>{
     Project.findById(req.params.projectid)
     .then((project)=>{
-        res.render('./projects/edit', {project:project, csrf:req.csrfToken()});
+        res.render('./projects/edit', {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`});
     })
     .catch(e =>{ 
         console.log(e)

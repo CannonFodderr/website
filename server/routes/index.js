@@ -8,6 +8,7 @@ const sanitizer = require('../middleware/sanitizer');
 router.get('/', csrfMiddleware, (req, res) => {
     res.render('index', {
         messages: mgs,
+        title: process.env.OWNER,
         csrf: req.csrfToken()
     });
 });

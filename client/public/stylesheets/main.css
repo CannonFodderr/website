@@ -40,18 +40,7 @@ img{
 .hide{
     opacity: 0;
 }
-.load-wrapper{
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: #3e3e3e;
-    z-index: 500;
-    transition: 0.8s ease-in-out;
-}
+
 #carouselExampleIndicators{
     height: 100%;
 }
@@ -69,6 +58,30 @@ img{
     background: #343a4091;
 }
 /* CSS LOADER */
+.load-wrapper{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #3e3e3e;
+    z-index: 500;
+    transition: 0.8s ease-in-out;
+}
+.trans-load-wrapper{
+    display: block;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    top: 40vh;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 500;
+    transition: 1s ease-in-out;
+}
 .loader{
     position: relative;
     width: 120px;
@@ -110,8 +123,9 @@ img{
 }
 .menu-icon{
     margin-left: 1vw;
-    min-width: 5vw;
-    width: 5vw;
+    min-width: 4vw;
+    /* width: 5vw; */
+    border-left: 1px solid;
 }
 .social-icon{
     font-size: 1.5em;

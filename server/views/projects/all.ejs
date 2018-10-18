@@ -1,7 +1,7 @@
 <% include ../partials/header %>
-<!-- <% include ../loader/load %> -->
 <div class="container">
-        <h1>ALL PROJECTS</h1>
+    <a class="btn btn-secondary" href="/"><i class="fas fa-arrow-left"></i>Back</a>
+        <h2><%= title.toUpperCase() %></h2>
         <form id="projects-filter-form" action="/projects" method="GET">
             <div class="form-row">
             <div class="col-md-4 col-sm-6">
@@ -10,7 +10,7 @@
                         <span class="input-group-text" id="basic-addon2">Category</span>
                     </div>
                 <select id="category-select" name="category" id="category-select" class="custom-select" onchange=this.form.submit()>
-                    <option value="">Select</option>
+                    <option value=""></option>
                     <option value="">All</option>
                     <option value="Web Development">Web Development</option>
                     <option value="E-Commerce">E-Commerce</option>
@@ -25,6 +25,7 @@
 </div>
 <div class="container projects-grid">
     <div class="row projects-row">
+    <% include ../loader/transLoad %>
     <% for(var i in projects){ %>
     <div class="col-xs-12 col-lg-3 col-md-6 col-sm-12 col-xs-10">        
     <div class="card project-card bg-dark text-white">
@@ -39,5 +40,5 @@
     <%}%>
     </div>
 </div>
-<script src="scripts/gallery.js"></script>
+<script src="scripts/transloader.js"></script>
 <% include ../partials/footer %>

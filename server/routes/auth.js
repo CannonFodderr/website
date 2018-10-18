@@ -11,6 +11,7 @@ router.get('/admin', middleware.isAdmin, (req, res) => {
     User.findById(req.user.id, {include: ['projects']}).then((user)=>{
         res.render('./admin/control', {
             user: req.user,
+            title: `${ process.env.OWNER } - Control Panel`,
             projects: user.projects
         });
     })
@@ -21,6 +22,7 @@ router.get('/admin/:id/edit', (req, res) => {
     User.findById(req.params.id).then((user) => {
         res.render('./admin/editProfile', {
             user: user,
+            title: 'Edit profile',
             csrf: req.csrfToken()
         })
     }).catch((e) => {
@@ -40,6 +42,7 @@ router.post('/admin/:id/edit', middleware.isAdmin, (req, res) => {
             User.findById(req.params.id).then((user) => {
                 res.render('./admin/editProfile', {
                     user: user,
+                    title: 'Edit profile',
                     csrf: req.csrfToken()
                 })
             })
@@ -75,7 +78,8 @@ router.post('/admin/register', (req, res) => {
 // LOG IN/OUT
 router.get('/login', csrfMiddleware, (req, res) => {
     res.render('./admin/adminLogin', {
-        csrf: req.csrfToken()
+        csrf: req.csrfToken(),
+        title: 'Login'
     })
 });
 
