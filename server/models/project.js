@@ -36,7 +36,7 @@ const Project = db.define('Project', {
     category: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: 'Dev',
+        defaultValue: 'Web',
     }
 }, {
     underscored: true,

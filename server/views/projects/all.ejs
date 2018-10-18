@@ -1,0 +1,43 @@
+<% include ../partials/header %>
+<!-- <% include ../loader/load %> -->
+<div class="container">
+        <h1>ALL PROJECTS</h1>
+        <form id="projects-filter-form" action="/projects" method="GET">
+            <div class="form-row">
+            <div class="col-md-4 col-sm-6">
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon2">Category</span>
+                    </div>
+                <select id="category-select" name="category" id="category-select" class="custom-select" onchange=this.form.submit()>
+                    <option value="">Select</option>
+                    <option value="">All</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="E-Commerce">E-Commerce</option>
+                    <option value="Sound Design">Sound Design</option>
+                </select>
+                
+                </div>
+            </div>
+            <div class="col"></div>
+            </div>
+        </form>
+</div>
+<div class="container projects-grid">
+    <div class="row projects-row">
+    <% for(var i in projects){ %>
+    <div class="col-xs-12 col-lg-3 col-md-6 col-sm-12 col-xs-10">        
+    <div class="card project-card bg-dark text-white">
+        <img class="card-img project-grid-img" src="<%= projects[i].img %>" alt="<%=projects[i].title %>">
+        <div class="card-img-overlay">
+            <h5 class="card-title project-card-title bg-dark"><%= projects[i].title.toUpperCase() %></h5>
+            <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+            <!-- <p class="card-text">Last updated 3 mins ago</p> -->
+        </div>
+    </div>
+    </div>
+    <%}%>
+    </div>
+</div>
+<script src="scripts/gallery.js"></script>
+<% include ../partials/footer %>

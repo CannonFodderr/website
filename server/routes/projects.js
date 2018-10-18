@@ -2,6 +2,19 @@ const router = require('express').Router()
 const middleware = require('../middleware/auth');
 const Project = require('../models/project');
 // New Project routes
+router.get('/projects', (req, res)=>{
+    if(req.query.category){
+        Project.findAll({ where: {category: req.query.category }}).then((foundProjects)=>{
+        return res.render('./projects/all', { projects: foundProjects })
+        })
+    } else {
+        Project.findAll().then((allProjects)=>{
+        return res.render('./projects/all', { projects: allProjects })
+        })
+    }
+})
+
+
 router.get('/admin/projects/new',middleware.isAdmin, (req, res)=>{
     res.render('./projects/new', {csrf: req.csrfToken()})
 })

@@ -182,12 +182,26 @@ img{
     from, to { border-color: black }
     50% { border-color: transparent; }
 }
-
+.projects-grid{
+    margin-top: 2vh;
+}
 .project-grid-img{
     height: 30vh;
     width: 100%;
+    border-radius: 0;
+}
+
+.project-card{ 
+    border: none;
+    border-radius: 0;
 }
 .project-card-text{
     height: 20vh;
     overflow: hidden;
+}
+
+.project-card-title{
+    width: max-content;
+    opacity: 0.9;
+    padding: 1vh;
 }
