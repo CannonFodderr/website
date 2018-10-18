@@ -4,6 +4,7 @@ const User = require('../models/user');
 const middleware = require('../middleware/auth');
 const csrfMiddleware = require('../middleware/csurf');
 const bcrypt = require('bcrypt');
+const sanitizer = require('../middleware/sanitizer');
 
 // ADMIN ROUTES
 router.get('/admin', middleware.isAdmin, (req, res) => {
@@ -29,7 +30,8 @@ router.get('/admin/:id/edit', (req, res) => {
 });
 
 router.post('/admin/:id/edit', middleware.isAdmin, (req, res) => {
-    User.update(req.body, {
+    let sanitized = sanitizer.sanitizeBody(req)
+    User.update(sanitized, {
             where: {
                 id: req.params.id
             }
@@ -49,11 +51,15 @@ router.post('/admin/:id/edit', middleware.isAdmin, (req, res) => {
 // Register new admin
 router.post('/admin/register', (req, res) => {
     if (req.body.password && req.body.username) {
+        let sanitizedData = {
+            username: req.body.username,
+            password: req.body.password
+        }
         bcrypt.genSalt()
             .then((s) => {
-                let hashed = bcrypt.hashSync(req.body.password, s)
+                let hashed = bcrypt.hashSync(sanitizedData.password, s)
                 User.create({
-                        username: req.body.username,
+                        username: sanitizedData.username,
                         password: hashed,
                         salt: s
                     })

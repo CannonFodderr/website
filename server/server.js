@@ -3,6 +3,7 @@ require('dotenv').load();
 const   express          = require('express'),
         port            = process.env.PORT,
         bodyParser      = require('body-parser'),
+        expressSanitizer = require('express-sanitizer'),
         methodOverride  = require('method-override'),
         expressSession  = require('express-session'),
         passport        = require('passport'),
@@ -31,6 +32,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+app.use(expressSanitizer())
 app.use(cookieParser());
 app.use(csrfMiddleware);
 app.use(methodOverride('_method'));

@@ -3,6 +3,7 @@ const mgs = require('../media/messages');
 const csrfMiddleware = require('../middleware/csurf');
 const Message = require('../models/messages');
 const Contact = require('../models/contact');
+const sanitizer = require('../middleware/sanitizer');
 
 router.get('/', csrfMiddleware, (req, res) => {
     res.render('index', {
@@ -12,9 +13,10 @@ router.get('/', csrfMiddleware, (req, res) => {
 });
 
 router.post('/', csrfMiddleware, (req, res) => {
-    Contact.findOrCreate({where: { email: req.body.email }, defaults: { name: req.body.name }})
+    let sanitized = sanitizer.sanitizeBody(req)
+    Contact.findOrCreate({where: { email: sanitized.email }, defaults: { name: sanitized.name }})
     .then((user)=>{
-        Message.create({ content: req.body.content, contact_id:  user[0].dataValues['id'] })
+        Message.create({ content: sanitized.content, contact_id:  user[0].dataValues['id'] })
         .then((createdMessage) => {
             res.redirect('/');
         })

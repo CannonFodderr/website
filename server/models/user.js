@@ -40,7 +40,7 @@ const User = db.define('User', {
     phone: {
         type: Sequelize.TEXT
     },
-    birthday: Sequelize.DATE,
+    birthday: Sequelize.DATEONLY,
     salt: Sequelize.STRING
 },
 {
