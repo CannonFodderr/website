@@ -22,7 +22,7 @@ body{
     position: fixed;
     width: 100%;
     z-index: 500;
-    /* background: #343a4073; */
+    background: #20242741;
 }
 .home-fluid-con{
     height: 100vh;
