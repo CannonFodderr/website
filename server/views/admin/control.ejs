@@ -1,39 +1,43 @@
 <% include ../partials/header %>
 <% include ../loader/load %>
 <div class="container-fluid">
-    <h1>Admin Panel</h1>
-    <p>Welcome
+    <h2 class="text-dark bg-light">Admin Panel</h2>
+    <p class="text-light">Welcome
         <% if(user.firstName){ %>
             <%= user.firstName %>
-        <%} else { %>
-            <%= user.username %>
-        <% } %>
-    </p>
-    <a href="/admin/<%= user.id %>/edit" class="btn btn-secondary">Edit profile</a>
-    <a href="/logout" class="btn btn-secondary">Logout</a>
-    <hr>
-    <h5><strong>PROJECTS:</strong></h5>
-    <a class="btn btn-info" href="/admin/projects/new"><i class="fas fa-plus"></i>Add new</a>
-    <div class="row">
-    <% projects.forEach((project)=>{ %>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-            <div class="card project-card">
-                <a href="/admin/projects/<%=project.id%>/edit">
-                    <img class="card-img-top project-grid-img" src="<%= project.img %>" alt="Card image cap">
-                </a>
-                <div class="card-body bg-dark text-light">
-                    <h5 class="card-title"><%= project.title.toUpperCase() %></h5>
-                    <h6>Category: <%= project.category %></h6>
-                    <p class="card-text project-card-text"><%= project.description %></p>
-                    <hr>
-                        <a href="/admin/projects/<%=project.id%>/edit" class="btn btn-info"><i class="fas fa-edit"></i>Edit</a>
+            <%} else { %>
+                <%= user.username %>
+                <% } %>
+            </p>
+            <a href="/admin/<%= user.id %>/edit" class="btn bg-dark text-light">Edit profile</a>
+            <a href="/logout" class="btn bg-dark text-light">Logout</a>
+            <h5 class="bg-light">
+                <strong>PROJECTS:</strong>
+                <a class="btn btn-outline-dark" href="/admin/projects/new">
+                    <i class="fas fa-plus"></i>
+                    New Project</a>
+                </h5>
+                
+                <div class="row projects-row">
+                    <% projects.forEach((project)=>{ %>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                            <div class="card project-card">
+                                <a href="/admin/projects/<%=project.id%>/edit">
+                                    <img class="card-img-top project-grid-img" src="<%= project.img %>" alt="Card image cap">
+                                </a>
+                                <div class="card-body bg-dark text-light">
+                                    <h5 class="card-title"><%= project.title.toUpperCase() %></h5>
+                                    <h6>Category: <%= project.category %></h6>
+                                    <p class="card-text project-card-text"><%= project.description %></p>
+                                    <hr>
+                                    <a href="/admin/projects/<%=project.id%>/edit" class="btn btn-info"><i class="fas fa-edit"></i>Edit</a>
+                                </div>
+                            </div> 
+                        </div>
+                        <% }) %>
+                    </div>
                 </div>
-            </div> 
-        </div>
-    <% }) %>
-    </div>
-</div>
-
-
-
-<% include ../partials/footer %>
+                
+                
+                
+                <% include ../partials/footer %>

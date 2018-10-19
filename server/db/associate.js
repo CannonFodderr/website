@@ -12,10 +12,10 @@ Message.belongsTo(Contact);
 Contact.hasMany(Message, {as: 'messages'});
 
 
-db.sync().then(()=>{
-    User.findById(1, {include: ['projects', 'contacts']}).then((user)=>{
-        console.log(user.contacts[0].name)
-        console.log(user.projects)
-    })
-}).catch(e => { console.error(e) })
+// db.sync().then(()=>{
+//     User.findById(1, {include: ['projects', 'contacts']}).then((user)=>{
+//         console.log(user.contacts[0].name)
+//         console.log(user.projects)
+//     })
+// }).catch(e => { console.error(e) })
 

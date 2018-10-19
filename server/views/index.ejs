@@ -1,6 +1,6 @@
 <% include ./partials/header %>
 <% include ./loader/load %>
-<div class="fluid-container">
+<div class="fluid-container home-fluid-con">
     <div class="row row1 no-gutters">
         <div class="col-md-6 col-lg-7 col-xl-8">
             <div class="card homepage-cards bg-dark">
@@ -13,7 +13,7 @@
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <a href="/projects?category=Web+Development">
-                            <img class="d-block w-100" src="images/webdev.jpg" alt="First slide">
+                                <img class="d-block w-100" src="images/webdev.jpg" alt="First slide">
                             </a>
                             <div class="carousel-caption">
                                 <h5>Web Development</h5>
@@ -22,7 +22,7 @@
                         </div>
                         <div class="carousel-item">
                             <a href="/projects?category=Sound+Design">
-                            <img class="d-block w-100" src="images/sound.jpg" alt="Second slide">
+                                <img class="d-block w-100" src="images/sound.jpg" alt="Second slide">
                             </a>
                             <div class="carousel-caption">
                                 <h5>Sound Design</h5>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="carousel-item">
                             <a href="/projects?category=E-Commerce">
-                            <img class="d-block w-100" src="images/ecommerce.jpg" alt="Third slide">
+                                <img class="d-block w-100" src="images/ecommerce.jpg" alt="Third slide">
                             </a>
                             <div class="carousel-caption">
                                 <h5>E-Commerce</h5>
@@ -51,30 +51,37 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
-            <div class="card homepage-cards">
-                <h5 class="card-header">
+            <div class="card homepage-cards contact-col">
+                <h5 class="card-header typer">
                     <div class="typewriter">
                         Hi, Nice to meet you :)
                     </div>
                 </h5>
                 <div class="card-body bg-dark text-light">
                     <p class="card-text">
-                        <ul class="contact-list">
-                            <li><a class="social-link" href="mailto:izhaki.idan@gmail.com"><i class="fas fa-envelope-open social-icon"></i>E-Mail</a></li>
-                            <li><a class="social-link" href="tel:+972526773370"><i class="fas fa-phone social-icon"></i>Phone</a></li>
-                            <li><a target="_blank" class="social-link" href="https://www.facebook.com/izhaki.idan"><i class="fab fa-facebook-messenger social-icon"></i>Messenger</a></li>
-                            <li><a target="_blank" class="social-link" href="https://github.com/CannonFodderr"><i class="fab fa-github-square social-icon"></i>GitHub</a></li>
-                            <li><a target="_blank" class="social-link" href="https://www.instagram.com/idanizhaki"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
-                            <li><a target="_blank" class="social-link" href="https://discordapp.com/users/131703957260206080"><i class="fab fa-discord social-icon"></i>Discord</a></li>
-                            <li><a target="_blank" class="social-link" href="https://www.linkedin.com/in/idan-izhaki/"><i class="fab fa-linkedin social-icon"></i>Linkedin</a></li>
-                        </ul>
-                    </p>
-                    <p class="card-text">
-                        <form action="/" method="post">
-                            <% include forms/message %>
-                            <button class="btn btn-danger btn-lg btn-block" type="submit"><i class="far fa-paper-plane"></i> Send</button>
-                        </form>
-                    </p>
+                        <div class="row">
+                            <div class="col">
+                                <ul class="contact-list">
+                                    <li><a class="social-link" href="mailto:izhaki.idan@gmail.com"><i class="fas fa-envelope-open social-icon"></i>E-Mail</a></li>
+                                    <li><a class="social-link" href="tel:+972526773370"><i class="fas fa-phone social-icon"></i>Phone</a></li>
+                                    <li><a target="_blank" class="social-link" href="https://www.facebook.com/izhaki.idan"><i class="fab fa-facebook-messenger social-icon"></i>Messenger</a></li>
+                                    <li><a target="_blank" class="social-link" href="https://github.com/CannonFodderr"><i class="fab fa-github-square social-icon"></i>GitHub</a></li>
+                                    <li><a target="_blank" class="social-link" href="https://www.instagram.com/idanizhaki"><i class="fab fa-instagram social-icon"></i>Instagram</a></li>
+                                    <li><a target="_blank" class="social-link" href="https://discordapp.com/users/131703957260206080"><i class="fab fa-discord social-icon"></i>Discord</a></li>
+                                    <li><a target="_blank" class="social-link" href="https://www.linkedin.com/in/idan-izhaki/"><i class="fab fa-linkedin social-icon"></i>Linkedin</a></li>
+                                </ul>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="card-text">
+                                <form action="/" method="post">
+                                    <% include forms/message %>
+                                    <button class="btn btn-danger btn-lg btn-block" type="submit"><i class="far fa-paper-plane"></i> Send</button>
+                                </form>
+                            </p>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -82,7 +89,7 @@
     <div class="row row2 no-gutters">
         <div class="col-md-6 col-lg-7 col-xl-8">
             <div class="card homepage-cards">
-                <h5 class="card-header">
+                <h5 class="card-header bg-dark text-light">
                     Get to know me
                 </h5>
                 <div class="card-body bg-dark text-light">
