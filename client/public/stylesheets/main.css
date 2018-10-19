@@ -15,14 +15,24 @@ html, body{
 
 body{
     color: var(--textPrimary);
-    height: 100%;
-    background: var(--bgSecondary);
-}
-.navbar{
-    position: fixed;
     width: 100%;
-    z-index: 500;
-    background: #20242741;
+    background: var(--bgSecondary);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.navbar.navbar-expand-lg.navbar-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    transition: ease-in-out 0.5s;
+}
+.navbar.navbar-expand-lg.navbar-dark:hover{
+    background: #343a40a6;
+}
+.nav-container{
+    margin-bottom: 6vh;
 }
 .home-fluid-con{
     height: 100vh;
@@ -31,15 +41,18 @@ body{
     min-height: fit-content;
     height: 100vh;
 }
-/* .row2{
-    height:100%;
-} */
 .secondery-carousel-col{
     height: 50vh;
 }
 .profile-car-img{
     height: 100%;
     width: 100%;
+}
+.contact-col{
+    padding: 0;
+}
+.contact-form{
+    padding: 2vh;
 }
 img{
     width: 100%;
@@ -69,7 +82,7 @@ img{
 }
 .contact-col{
     position: relative;
-    z-index: 600;
+    /* z-index: 600; */
     width: 100%;
 }
 .typer{
@@ -78,6 +91,9 @@ img{
     /* font-size: 1em; */
     display: flex;
     line-height: 2.2;
+}
+.paw-icon{
+    font-size: 1.5rem;
 }
 .back-icon{
     height: 100%;
@@ -149,12 +165,8 @@ img{
 .fas {
     width: fit-content;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.6rem;
     margin-right: 1vw;
-}
-
-.fa-paw {
-    font-size: large; 
 }
 .social-link{
     color: #ccc;
@@ -239,6 +251,10 @@ img{
 @keyframes blink-caret {
     from, to { border-color: black }
     50% { border-color: transparent; }
+}
+
+.project-controls-container{
+    margin-top: 7vh;
 }
 .projects-grid{
     margin-top: 2vh;
