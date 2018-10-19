@@ -55,15 +55,16 @@ const bcrypt = require('bcrypt');
 //         Contact.sync({force:true})
 //         .then(()=>{
 //             Contact.create({
-//                 name: 'First Contact',
+//                 name: 'Super Mario',
 //                 email: 'test@test.com',
 //                 phone: '0526777777',
-//                 company: 'Testing INC'
+//                 company: 'Testing INC',
+//                 user_id: 1
 //             })
 //         }).then(()=>{
 //             Message.sync({force:true})
 //             .then(()=>{
-//                 Message.create({content: "ITS MEE MARIOOO!"})
+//                 Message.create({content: "ITS MEE MARIOOO!", contant_id: 1})
 //             })
 //         })
 //     })
