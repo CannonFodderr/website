@@ -1,6 +1,7 @@
 <% include ../partials/header %>
 <% include ../loader/load %>
-<div class="container">
+<% include ../partials/navbar %>
+<div class="container page-content-container">
     <h1>New project</h1>
     <form action="/admin/projects" method="POST">
         <% include ../forms/newProject %>

@@ -54,8 +54,10 @@ router.get('/admin/projects/:projectid/edit', middleware.isAdmin, (req, res)=>{
 });
 
 router.put('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
+    let feature = req.body.features.split(';');
     let updateData = {
         title: req.body.title,
+        features: {},
         description: req.body.desc,
         category: req.body.category,
         img: req.body.img,
@@ -66,8 +68,6 @@ router.put('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
         id: req.params.projectid
     }})
     .then((project)=>{
-        project.update(updateData);
-        project.save();
         res.redirect('/admin')
     })
     .catch(e => {

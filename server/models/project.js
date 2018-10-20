@@ -36,7 +36,10 @@ const Project = db.define('Project', {
     category: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: 'Web',
+        defaultValue: 'Web Development',
+    },
+    features: {
+        type: Sequelize.ARRAY({ type: Sequelize.STRING })
     }
 }, {
     underscored: true,

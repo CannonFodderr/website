@@ -256,7 +256,7 @@ img{
     50% { border-color: transparent; }
 }
 
-.project-controls-container{
+.page-content-container{
     margin-top: 7vh;
 }
 .projects-grid{
@@ -328,7 +328,10 @@ img{
     font-size: 2em;
     justify-content: flex-end;
 }
-
+.delete-feature-icon{
+    cursor: pointer;
+    
+}
 @media only screen and (max-width: 1200px) {
     .project-card{
         min-width: 100%;
