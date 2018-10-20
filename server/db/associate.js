@@ -17,8 +17,8 @@ db.sync().then(()=>{
     //     console.log(user.contacts[0].name)
     //     console.log(user.projects)
     // })
-    // Project.update({features: db.fn('array_append', db.col('features'), "Third Feature")}, {where: {'id': 3}})
-    // Project.findById(3).then((project)=>{
+    // Project.update({features: db.fn('array_append', db.col('features'), "Third Feature")}, {where: {'id': 6}})
+    // Project.findById(6).then((project)=>{
     //     console.log(project.features.forEach((f)=>{
     //         console.log(f)
     //     }))

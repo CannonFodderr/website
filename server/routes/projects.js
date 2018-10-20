@@ -21,10 +21,12 @@ router.get('/admin/projects/new',middleware.isAdmin, (req, res)=>{
 
 
 router.post('/admin/projects', middleware.isAdmin, (req, res)=>{
-    console.log(req.body)
+    let features = req.body.features.trim().split(';')
+    let filteredFeats = features.filter(feat => feat.length > 0);
     let newProject = {
         title: req.body.title,
         description: req.body.desc,
+        features: filteredFeats,
         category: req.body.category,
         img: req.body.img,
         link: req.body.link,
@@ -45,7 +47,8 @@ router.post('/admin/projects', middleware.isAdmin, (req, res)=>{
 router.get('/admin/projects/:projectid/edit', middleware.isAdmin, (req, res)=>{
     Project.findById(req.params.projectid)
     .then((project)=>{
-        res.render('./projects/edit', {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`});
+        console.log(project.features);
+        res.render('./projects/edit', {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, features: project.features });
     })
     .catch(e =>{ 
         console.log(e)
@@ -54,10 +57,11 @@ router.get('/admin/projects/:projectid/edit', middleware.isAdmin, (req, res)=>{
 });
 
 router.put('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
-    let feature = req.body.features.split(';');
+    let features = req.body.features.trim().split(';')
+    let filteredFeats = features.filter(feat => feat.length > 0);
     let updateData = {
         title: req.body.title,
-        features: {},
+        features: filteredFeats,
         description: req.body.desc,
         category: req.body.category,
         img: req.body.img,
@@ -68,7 +72,8 @@ router.put('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
         id: req.params.projectid
     }})
     .then((project)=>{
-        res.redirect('/admin')
+        console.log(project.features);
+        res.redirect('/admin');
     })
     .catch(e => {
         console.log(e);

@@ -8,13 +8,11 @@ featureList.addEventListener('mouseover', ()=>{
     let allFeatures = document.querySelectorAll('.delete-feature-icon');
     allFeatures.forEach((item)=>{
         item.addEventListener('click', (e)=>{
+            featureInput.value='';
             FeaturesToInput()
             item.parentNode.remove();
-            
         })
-        
     })
-    
 })
 
 
@@ -22,19 +20,21 @@ addFeatureBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     let newFeature = featureInput.value
     if(newFeature.length > 1){
-        featureList.innerHTML += `<li class="list-group-item feature-item"><i class="fas fa-trash delete-feature-icon text-danger"></i>${newFeature}</li>`
+        featureList.innerHTML += `<li class="list-group-item feature-item"><i class="fas fa-trash delete-feature-icon text-danger"></i>${newFeature.trim()}</li>`
         featureInput.value = '';
         FeaturesToInput();
     };
 });
 
 function FeaturesToInput(){
-    featuresSubmit.value = '';
-    let featureString = '';
+    featuresSubmit.value = "";
+    let featureString = "";
     featureList.childNodes.forEach((li)=>{
-        featureString += `${li.textContent};`;
-        featuresSubmit.value = featureString;
+        if(li.textContent.trim().length > 0){
+            featureString += `${li.textContent.trim()};`;
+        }
     });
+    featuresSubmit.value = featureString;
 }
 
 

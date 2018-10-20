@@ -40,8 +40,8 @@
 <h5 class="text-light">Features</h5>
 <div class="input-group-block project-features">
     <ul id="feature-list" class="list-group">
-        <% project.features.forEach((feature)=>{ %>
-            <li class="list-group-item feature-item"><i class="fas fa-trash delete-feature-icon text-danger"></i><%= feature %></li>
+        <% project.features.forEach((feat)=>{ %>
+            <li class="list-group-item feature-item"><i class="fas fa-trash delete-feature-icon text-danger"></i><%= feat.trim() %></li>
         <% }) %>
 
     </ul>  
@@ -52,7 +52,7 @@
         <button class="btn btn-info" id="add-feature">ADD</button>
     </div>        
 </div>
-<input id="featuresInput" name="features" type="hidden" name="features" value=>
+<input id="featuresInput" name="features" type="hidden" name="features" value="<% features.forEach((feat)=>{ %><%= feat.trim() %>;<% }) %>">
 <h5 class="text-light">Content</h5>
 <div class="form-group">
     <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="About the project"><%= project.content %></textarea>
