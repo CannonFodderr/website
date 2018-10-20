@@ -15,7 +15,7 @@ router.get('/', csrfMiddleware, (req, res) => {
 
 router.post('/', csrfMiddleware, (req, res) => {
     let sanitized = sanitizer.sanitizeBody(req)
-    Contact.findOrCreate({where: { email: sanitized.email }, defaults: { name: sanitized.name }})
+    Contact.findOrCreate({where: { email: sanitized.email }, defaults: { name: sanitized.name, phone: sanitized.phone, user_id: 1 }})
     .then((user)=>{
         Message.create({ content: sanitized.content, contact_id:  user[0].dataValues['id'] })
         .then((createdMessage) => {

@@ -26,7 +26,7 @@ body{
     left: 0;
     width: 100%;
     z-index: 100;
-    transition: ease-in-out 0.5s;
+    transition: ease-in-out 0.6s;
 }
 .navbar.navbar-expand-lg.navbar-dark:hover{
     background: #343a40a6;
@@ -168,8 +168,12 @@ img{
     font-size: 1.6rem;
     margin-right: 1vw;
 }
+.social-li{
+    width: fit-content;
+}
 .social-link{
     color: #ccc;
+    transition: 0.6s ease-in-out;
 }
 .menu-title{
     width: 100%;
@@ -179,7 +183,6 @@ img{
 .menu-icon{
     margin-left: 1vw;
     min-width: 4vw;
-    /* width: 5vw; */
     border-left: 1px solid;
 }
 .social-icon{
@@ -227,7 +230,7 @@ img{
 @keyframes blink {
     0% { color: black;opacity: 1;}
     50% {color: #f8f9fa;opacity: 0;}
-
+    
 }
 
 .typewriter{
@@ -247,7 +250,7 @@ img{
     to { width: 100% }
 }
 
-  /* The typewriter cursor effect */
+/* The typewriter cursor effect */
 @keyframes blink-caret {
     from, to { border-color: black }
     50% { border-color: transparent; }
@@ -262,51 +265,72 @@ img{
 .projects-row{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 0;
-    padding: 1vh;
+    padding: 1vh 0 1vh 0;
 }
 .project-col{
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center;
+    /* padding: 1vh 1vw 1vh 0; */
+    justify-content: flex-start;
 }
 .project-grid-img{
-    height: 300px;
+    height: 170px;
     width: 100%;
-    margin: auto;
+    margin: 0;
     border-radius: 0;
 }
 
 .project-card{ 
-    border: none;
-    border-radius: 0;
+    border: 1px solid #202225;
+    display: flex;
     cursor: pointer;
-    width: 100%;
-    height: 300px;
+    width: 300px;
+    min-height: 370px;
+    max-height: 370px;
+    background: #202225;
 }
 .project-card-text{
     max-width: 100%;
     width: max-content;
     overflow: hidden;
-    opacity: 0.9;
-    padding: 0.5vh;
+    opacity: 1;
 }
 
 .project-card-title{
     max-width: 100%;
     width: max-content;
-    opacity: 0.9;
-    padding: 1vh;
-    margin-top: 1vh;
+    opacity: 1;
 }
 
 .card-img-overlay{
     padding: 0;
     background: transparent;
-    transition: ease-in-out 1s linear;
+    transition: ease-in-out 0.3s;
 }
 .card-img-overlay:hover {
     background: #2323233b;
+}
+
+.project-card-body{
+    background: #202225;
+    padding: 5px;
+    height: 200px;
+}
+.card-body-content{
+    height: 80%;
+}
+.card-body-footer{
+    height: 20%;
+    display: flex;
+    font-size: 2em;
+    justify-content: flex-end;
+}
+
+@media only screen and (max-width: 1200px) {
+    .project-card{
+        min-width: 100%;
+    }
 }
