@@ -257,7 +257,7 @@ img{
 }
 
 .page-content-container{
-    margin-top: 7vh;
+    margin-top: 8vh;
 }
 .projects-grid{
     margin-top: 2vh;
@@ -273,20 +273,21 @@ img{
     height: 100%;
     width: 100%;
     display: flex;
-    /* padding: 1vh 1vw 1vh 0; */
     justify-content: flex-start;
 }
 .project-grid-img{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     height: 170px;
     width: 100%;
     margin: 0;
     border-radius: 0;
+    border-bottom: 1px solid var(--textPrimary);
 }
 
 .project-card{ 
-    border: 1px solid #202225;
     display: flex;
-    cursor: pointer;
     width: 300px;
     min-height: 370px;
     max-height: 370px;
@@ -328,9 +329,62 @@ img{
     font-size: 2em;
     justify-content: flex-end;
 }
+.feature-item:hover .delete-feature-icon{
+    width: 15px;
+    opacity: 1;
+    transition: 0.7s ease-in;
+}
+
 .delete-feature-icon{
+    position: relative;
     cursor: pointer;
-    
+    width: 0;
+    opacity: 0;
+}
+
+.project-features{
+    margin-bottom: 1vh;
+}
+
+.project-banner-wrapper{
+    display: flex;
+    justify-content: center;
+    height: 40vh;
+    width: 100%;
+    background: #202225;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.project-banner{
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: auto;
+    margin: auto;  
+}
+
+.project-link{
+    height: 100%;
+    position: relative;
+    width: auto;
+    font-size: 2em;
+    text-align: center;
+    text-decoration: none !important;
+    margin: auto;
+    transition: 0.4s ease-in;
+    color: var(--bgSecondary);
+}
+.project-link:hover{
+    color: #3498db;
+}
+.social-link-icon{
+    margin: auto 1vw auto auto;
+    height: 100%;
+}
+.features-title{
+    margin: 0;
 }
 @media only screen and (max-width: 1200px) {
     .project-card{

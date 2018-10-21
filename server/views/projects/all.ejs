@@ -1,7 +1,5 @@
 <% include ../partials/header %>
-<div class="fluid-container nav-con">
-    <% include ../partials/navbar %>
-</div>
+<% include ../partials/navbar %>
 <div class="container page-content-container">
     <h2 class="text-light"><%= title.toUpperCase() %></h2>
     <form id="projects-filter-form" action="/projects" method="GET">
@@ -32,20 +30,20 @@
         <% include ../loader/transLoad %>
         <% for(var i in projects){ %>
             <div class="col-xs-12 col-xl-3 col-lg-6 col-md-6 col-sm-12 project-col ">        
-                <div class="card project-card bg-light">
-                    <img class="card-img project-grid-img " src="<%= projects[i].img %>" alt="<%=projects[i].title %>" draggable="false">
-                    <div class="card-img-overlay text-light">
-                        <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
-                        
-                    </div>
+                <div class="card project-card">
+                    <a href="/projects/<%= projects[i].id %>" draggable="false">
+                        <div class="card-img project-grid-img" style="background-image:url('<%=projects[i].img %>')" draggable="false"></div>
+                    </a>
                     <div class="card-body project-card-body text-light">
                         <div class="card-body-content">
-                            <h5 class="card-title project-card-title"><%= projects[i].title.toUpperCase() %></h5>
+                            <a class="text-light" href="/projects/<%= projects[i].id %>" draggable="false">
+                                <h5 class="card-title project-card-title"><%= projects[i].title.toUpperCase() %></h5>
+                            </a>
                             <p class="card-text project-card-text text-info"><%= projects[i].category %></p>
                             <p class="card-text text-light"><%= projects[i].description %></p>
                         </div>
                         <div class="card-body-footer">
-                            <a class="text-secondary" href="<%= projects[i].link %>"><div class="card-body-footer-icon"><i class="fab fa-github-square"></i></div></a>
+                            <a class="text-secondary" href="<%= projects[i].link %>" draggable="false"><div class="card-body-footer-icon"><i class="fab fa-github-square" draggable="false"></i></div></a>
                         </div>
                     </div>
                 </div>

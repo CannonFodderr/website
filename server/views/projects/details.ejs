@@ -1,0 +1,64 @@
+<% include ../partials/header %>
+<% include ../partials/navbar %>
+<div class="fluid-container">
+<div class="row">
+    <div class="col-12">
+        <div class="project-banner-wrapper text-center" style="background-image: url('<%= project.img %>')"></div>
+    </div>
+</div>
+    <div class="row text-light no-gutters bg-light text-dark">
+        <div class="col-lg-2 col-md-3 col-sm-2 col-xs-3">
+            <a class="btn btn-lg btn-link bg-light text-dark" href="/projects"><i class="fas fa-arrow-left"></i>Back</a>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-8 col-xs-6 text-center">
+            <a class="text-center project-link" href="<%= project.link %>"><i class="fab fa-github-square social-link-icon"></i>GIT IT</a>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-2 col-xs-3"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 text-center text-light">
+            <h2><%= project.title.toUpperCase() %></h2>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 text-center text-light">
+            <h5><%= project.description %></h5>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-light">
+            <hr>
+            <h4>About this project:</h4>
+            <p><%= project.content %></p>
+        </div>
+    </div>
+</div>
+<div class="fluid-container">
+<div class="row bg-light text-dark">
+    <div class="col">
+        <div class="container">
+        <h3 class="features-title">Features:</h3>
+        </div>
+    </div>
+</div>    
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <ul class="list-group features-list">
+                <li class="list-group-item bg-dark text-light"></li>
+                <% project.features.forEach((feat)=> { %>
+                    <li class="list-group-item feature-item"><%= feat %></li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

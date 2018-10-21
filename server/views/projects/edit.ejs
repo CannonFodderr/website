@@ -1,27 +1,27 @@
 <% include ../partials/header %>
 <% include ../loader/load %>
 <% include ../partials/navbar %>
-<div class="fluid-container page-content-container">
+<div class="container page-content-container">
     <div class="row">
-        <div class="col">
-            <a class="btn btn-info" href="/admin">Back</a>
+        <div class="col-lg-2">
+            <a class="btn btn-outline-info" href="/admin"><i class="fas fa-arrow-left"></i></a>
+        </div>
+        <div class="col col-lg-4 col-md-12">
+            <img class="img-thumbnail" src="<%= project.img %>" alt="<%= project.title %> image">
         </div>
     </div>
     <div class="row">
-        <div class="col col-lg-6">
-    <h1>Edit: <%= project.title %></h1>
-    <form action="/admin/projects/<%= project.id %>?_method=PUT" method="POST">
-        <% include ../forms/editProject.ejs %>
-        <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
-    <form action="/admin/projects/<%= project.id %>?_method=DELETE" method="POST">
-        <input type="hidden" name="_csrf" value="<%=csrf%>">
-        <button class="btn btn-danger del-btn">DELETE</a>
-    </form>
-    </div>
-    <div class="col col-lg-6">
-        <img class="img-thumbnail" src="<%= project.img %>" alt="<%= project.title %> image">
-    </div>
+        <div class="col col-lg-8 col-md-12">
+            <h1 class="text-light">Edit: <%= project.title %></h1>
+            <form action="/admin/projects/<%= project.id %>?_method=PUT" method="POST">
+                <% include ../forms/editProject.ejs %>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+            <form action="/admin/projects/<%= project.id %>?_method=DELETE" method="POST">
+                <input type="hidden" name="_csrf" value="<%=csrf%>">
+                <button class="btn btn-danger del-btn">DELETE</a>
+            </form>
+        </div>
     </div>
 </div>
 <script src="/scripts/project.js"></script>

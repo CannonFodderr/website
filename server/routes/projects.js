@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const middleware = require('../middleware/auth');
 const Project = require('../models/project');
+const Icon = require('../models/icon');
 // New Project routes
 router.get('/projects', (req, res)=>{
     if(req.query.category){
@@ -48,7 +49,7 @@ router.get('/admin/projects/:projectid/edit', middleware.isAdmin, (req, res)=>{
     Project.findById(req.params.projectid)
     .then((project)=>{
         console.log(project.features);
-        res.render('./projects/edit', {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, features: project.features });
+        res.render('./projects/edit', {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}` });
     })
     .catch(e =>{ 
         console.log(e)
@@ -95,6 +96,20 @@ router.delete('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
     .catch(e => {
         console.error(e)
         res.redirect('/admin')
+    })
+});
+
+
+// VIEW PROJECT
+router.get('/projects/:projectid', (req, res)=>{
+    Project.findById(req.params.projectid, 
+        {include: [{ model: Icon, through: 'projectIcons'}]})
+        .then((project)=>{
+        console.log(project.Icons)
+        res.render('./projects/details', {title: project.title, project:project })
+    }).catch(e => {
+        console.error(e);
+        res.redirect('/projects');
     })
 })
 module.exports = router

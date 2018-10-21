@@ -2,6 +2,7 @@ const config = require('../dbconfig')
 const User = require('./models/user');
 const Project = require('./models/project');
 const Message = require('./models/messages');
+const Icon = require('./models/icon');
 const Contact = require('./models/contact');
 const bcrypt = require('bcrypt');
 
@@ -64,7 +65,7 @@ const bcrypt = require('bcrypt');
 //         }).then(()=>{
 //             Message.sync({force:true})
 //             .then(()=>{
-//                 Message.create({content: "ITS MEE MARIOOO!", contant_id: 1})
+//                 Message.create({content: "ITS MEE MARIOOO!", contact_id: 1})
 //             })
 //         })
 //     })
@@ -73,6 +74,25 @@ const bcrypt = require('bcrypt');
 //     })
 // });
 
+
+// Icon.sync({force:true}).then((e)=>{
+//     Icon.create({title:'GitHub', code: '<i class="fab fa-github-square"></i>', phrase: 'git it'})
+//     .catch((e)=>{
+//         console.error(e)
+//     })
+// })
+
+
+
+// Icon.findById(1).then((icon)=>{
+//     Project.findById(1).then((project)=>{
+//         project.addIcon(icon, {through: {project_id: project.id, IconId: 1 }})
+//         console.log(project.projectIcons);
+//     })
+// })
+// .catch(e => {
+//     console.error(e);
+// })
 
 
 

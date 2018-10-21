@@ -2,15 +2,17 @@ const User = require('../models/user');
 const Project = require('../models/project');
 const Contact = require('../models/contact');
 const Message = require('../models/messages');
+const Icon = require('../models/icon');
 const  db = require('./connect');
 
 Project.belongsTo(User);
+Project.belongsToMany(Icon, {through: 'projectIcons'});
+Icon.belongsToMany(Project, {through: 'projectIcons'});
 User.hasMany(Project, {as: 'projects'});
 Contact.belongsTo(User);
 User.hasMany(Contact, {as: 'contacts'});
 Message.belongsTo(Contact);
 Contact.hasMany(Message, {as: 'messages'});
-
 
 db.sync().then(()=>{
     // User.findById(1, {include: ['projects', 'contacts']}).then((user)=>{
