@@ -23,6 +23,7 @@ require('./db/associate');
 const   indexRoute = require('./routes/index'),
         adminRoutes = require('./routes/auth'),
         projectsRoutes = require('./routes/projects');
+        iconsRoutes = require('./routes/icons');
 
 // APP CONFIG
 app.set('view engine', 'ejs');
@@ -79,6 +80,7 @@ passport.deserializeUser((function (user, done) {
 app.use(indexRoute);
 app.use(adminRoutes);
 app.use(projectsRoutes);
+app.use(iconsRoutes);
 
 // Seed DB
 if(process.argv[2] == 'seed'){
