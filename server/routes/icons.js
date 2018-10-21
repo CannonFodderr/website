@@ -1,9 +1,6 @@
 const router = require('express').Router()
-const passport = require('passport');
-const User = require('../models/user');
 const Icon = require('../models/icon');
 const middleware = require('../middleware/auth');
-const csrfMiddleware = require('../middleware/csurf');
 const sanitizer = require('../middleware/sanitizer');
 
 router.get('/admin/icons/new',middleware.isAdmin, (req, res)=>{

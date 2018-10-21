@@ -48,8 +48,10 @@ router.post('/admin/projects', middleware.isAdmin, (req, res)=>{
 router.get('/admin/projects/:projectid/edit', middleware.isAdmin, (req, res)=>{
     Project.findById(req.params.projectid)
     .then((project)=>{
-        console.log(project.features);
-        res.render('./projects/edit', {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}` });
+        Icon.findAll().then((icons)=>{
+            res.render('./projects/edit', 
+            {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons });
+        })
     })
     .catch(e =>{ 
         console.log(e)
@@ -67,6 +69,7 @@ router.put('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
         category: req.body.category,
         img: req.body.img,
         link: req.body.link,
+        link_icon: req.body.link-icon,
         content: req.body.content,
     }
     Project.update(updateData, {where: {
