@@ -33,6 +33,9 @@ const Project = db.define('Project', {
             isUrl:true
         }
     },
+    icon_id: {
+        type: Sequelize.INTEGER
+    },
     category: {
         type: Sequelize.STRING,
         allowNull: false,

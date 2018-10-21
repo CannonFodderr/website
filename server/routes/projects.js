@@ -61,6 +61,7 @@ router.get('/admin/projects/:projectid/edit', middleware.isAdmin, (req, res)=>{
 
 router.put('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
     let features = req.body.features.trim().split(';')
+    console.log(req.body)
     let filteredFeats = features.filter(feat => feat.length > 0);
     let updateData = {
         title: req.body.title,
@@ -69,7 +70,7 @@ router.put('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
         category: req.body.category,
         img: req.body.img,
         link: req.body.link,
-        link_icon: req.body.link-icon,
+        icon_id: req.body.icon,
         content: req.body.content,
     }
     Project.update(updateData, {where: {
@@ -106,10 +107,13 @@ router.delete('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
 // VIEW PROJECT
 router.get('/projects/:projectid', (req, res)=>{
     Project.findById(req.params.projectid, 
-        {include: [{ model: Icon, through: 'projectIcons'}]})
+        {include: [{model: Icon}]})
         .then((project)=>{
-        console.log(project.Icons)
-        res.render('./projects/details', {title: project.title, project:project })
+        if (project.Icon != null) {
+            res.render('./projects/details', {title: project.title, project:project, icon: project.Icon.dataValues })
+        } else{
+            res.render('./projects/details', {title: project.title, project:project, icon: null })
+        }
     }).catch(e => {
         console.error(e);
         res.redirect('/projects');

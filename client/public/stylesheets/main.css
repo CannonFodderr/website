@@ -341,30 +341,38 @@ img{
     width: 0;
     opacity: 0;
 }
-
+.project-content-container{
+    background-color: var(--textSecondary);
+    min-height: 30vh;
+    padding: 1vw;
+}
+.project-description-row{
+    margin-bottom: 2vh;
+}
+.project-features-container{
+    margin-top: 3vh;
+}
 .project-features{
     margin-bottom: 1vh;
 }
-
-.project-banner-wrapper{
+.project-top-header{
+    margin-bottom: 2vh;
+}
+.project-banner{
     display: flex;
     justify-content: center;
     height: 40vh;
     width: 100%;
     background: #202225;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-}
-.project-banner{
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: auto;
-    margin: auto;  
 }
 
+.controls-row{
+    border-top: 1px solid #202225;
+    border-bottom: 1px solid #202225;
+}
 .project-link{
     height: 100%;
     position: relative;
