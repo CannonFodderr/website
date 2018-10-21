@@ -276,7 +276,7 @@ img{
     justify-content: flex-start;
 }
 .project-grid-img{
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 170px;
