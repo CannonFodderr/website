@@ -1,0 +1,65 @@
+<div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-light bg-dark" id="basic-addon1">Title:</span>
+        </div>
+        <input name="title" type="text" class="form-control" placeholder="" aria-label="Title"
+        aria-describedby="basic-addon1" value="<%= job.title %>" autofocus required>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-light bg-dark" id="basic-addon1">Description:</span>
+        </div>
+        <input name="description" type="text" class="form-control" placeholder="" aria-label="Description"
+        aria-describedby="basic-addon1" value="<%= job.description %>">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-light bg-dark" id="basic-addon1">Company:</span>
+        </div>
+        <input name="company" type="text" class="form-control" placeholder="" aria-label="Company"
+        aria-describedby="basic-addon1" value="<%= job.company %>">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text text-light bg-dark" id="basic-addon1">Start:</span>
+                </div>
+                <input name="startDate" type="date" class="form-control" placeholder="" aria-label="Start"
+                aria-describedby="basic-addon1" value="<%= job.start_date %>">
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text text-light bg-dark" id="basic-addon1">End:</span>
+                </div>
+                <input name="endDate" type="date" class="form-control" placeholder="" aria-label="End"
+                aria-describedby="basic-addon1" value="<%= job.end_date %>">
+            </div>
+        </div>
+    </div>
+    <h5 class="text-light">Content:</h5>
+    <div class="form-group">
+        <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="About the project"><%= job.content %></textarea>
+    </div>
+    <h5 class="text-light">Features:</h5>
+    <div class="input-group-block project-features">
+        <ul id="feature-list" class="list-group">
+            <% if(job.features){ %>
+                <% job.features.forEach((feature)=>{ %>
+                    <% if (feature.length > 0) { %> 
+                    <li class="list-group-item feature-item" draggable="false"><i class="fas fa-trash delete-feature-icon text-danger"></i><%= feature.trim() %></li>
+                    <% } %>
+                <% }) %>
+            <% } %>
+        </ul>  
+    </div>
+    <div class="input-group mb-3">
+        <input class="form-control" type="text" name="" id="add-feature-input">
+        <div class="input-group-append">
+            <button class="btn btn-info" id="add-feature">ADD</button>
+        </div>        
+    </div>
+    <input id="featuresInput" name="features" type="hidden" name="features" value="<% if( job.features ) { job.features.forEach((feat)=>{ %><%= feat.trim() %>;<% })} %>">
+    <input type="hidden" name="_csrf" value="<%= csrf %>">

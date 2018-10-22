@@ -1,22 +1,8 @@
 <% include ../partials/header %>
 <% include ../loader/load %>
 <% include ../partials/navbar %>
-<div class="container-fluid page-content-container">
-    <h2 class="admin-title text-dark bg-light">Admin Panel</h2>
-    <p class="text-light">Welcome
-        <% if(user.firstName){ %>
-            <%= user.firstName %>
-            <%} else { %>
-                <%= user.username %>
-                <% } %>
-            </p>
-            <div class="admin-controls">
-                <a href="/admin/<%= user.id %>/edit" class="btn bg-dark text-light">Edit profile</a>
-                <a class="btn bg-dark text-light" href="/admin/projects/new">New Project</a>
-                <a href="/admin/jobs/new" class="btn bg-dark text-light">Add Job</a>
-                <a class="btn bg-dark text-light" href="/admin/icons/new">New Icon</a>
-                <a href="/logout" class="btn bg-dark text-light">Logout</a>
-            </div>
+<div class="container page-content-container">
+    <% include panel %>
                 <div class="container">
                 <h5 class="admin-projects-title bg-light">
                     <strong>PROJECTS:</strong>

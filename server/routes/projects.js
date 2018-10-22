@@ -18,7 +18,7 @@ router.get('/projects', (req, res)=>{
 
 
 router.get('/admin/projects/new',middleware.isAdmin, (req, res)=>{
-    res.render('./projects/new', {csrf: req.csrfToken(), title: 'New project'})
+    res.render('./projects/new', {csrf: req.csrfToken(), title: 'New project', user: req.user})
 })
 
 
@@ -51,7 +51,7 @@ router.get('/admin/projects/:projectid/edit', middleware.isAdmin, (req, res)=>{
     .then((project)=>{
         Icon.findAll().then((icons)=>{
             res.render('./projects/edit', 
-            {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons });
+            {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons, user: req.user });
         })
     })
     .catch(e =>{ 

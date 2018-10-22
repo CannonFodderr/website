@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+<% include ../loader/transLoad %>
+<% include ../partials/navbar %>
+<div class="container page-content-container">
+    <% include ../admin/panel %>
+    <h2 class="text-light">EDIT: <%- job.title %></h2>
+    <!-- DELETE -->
+    <form action="/admin/jobs/<%=job.id %>?_method=DELETE" method="POST">
+        <button class="btn btn-danger del-btn" type="submit">DELETE</button>
+        <input type="hidden" name="_csrf" value="<%= csrf %>">
+    </form>
+    <!-- EDIT -->
+    <form action="/admin/jobs/<%= job.id %>?_method=PUT" method="POST">
+        <% include ../forms/editJob %>
+        <button class="btn btn-success" type="submit">EDIT</button>
+    </form>
+</div>
+<script src="/scripts/admin_controls.js"></script>
+<script src="/scripts/transloader.js"></script>
+<% include ../partials/footer %>

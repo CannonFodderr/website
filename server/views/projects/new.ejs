@@ -1,12 +1,14 @@
 <% include ../partials/header %>
-<% include ../loader/load %>
+<% include ../loader/transLoad %>
 <% include ../partials/navbar %>
 <div class="container page-content-container">
-    <h1>New project</h1>
+    <% include ../admin/panel %>
+    <h2 class="text-light">NEW PROJECT</h2>
     <form action="/admin/projects" method="POST">
         <% include ../forms/newProject %>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Add</button>
     </form>
 </div>
-<script src="/scripts/project.js"></script>
+<script src="/scripts/transloader.js"></script>
+<script src="/scripts/admin_controls.js"></script>
 <% include ../partials/footer %>

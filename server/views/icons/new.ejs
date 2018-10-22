@@ -2,13 +2,12 @@
 <% include ../loader/transLoad %>
 <% include ../partials/navbar %>
 <div class="container page-content-container">
-    <div class="container page-content-container">
-        <h1>New project</h1>
-        <form action="/admin/icons" method="POST">
-            <% include ../forms/newIcon %>
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Add</button>
-        </form>
-    </div>
+    <% include ../admin/panel %>
+    <h2>New project</h2>
+    <form action="/admin/icons" method="POST">
+        <% include ../forms/newIcon %>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Add</button>
+    </form>
 </div>
 
 

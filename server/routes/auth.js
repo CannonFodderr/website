@@ -9,7 +9,7 @@ const sanitizer = require('../middleware/sanitizer');
 // ADMIN ROUTES
 router.get('/admin', middleware.isAdmin, (req, res) => {
     User.findById(req.user.id, {include: ['projects']}).then((user)=>{
-        res.render('./admin/control', {
+        res.render('./admin/main', {
             user: req.user,
             title: `${ process.env.OWNER } - Control Panel`,
             projects: user.projects

@@ -41,7 +41,7 @@ function FeaturesToInput(){
 
 deleteButtons.forEach((btn)=>{
     btn.addEventListener('click', (e)=>{
-        if(!confirm("WARNING! This will delete the project, are you sure?")){
+        if(!confirm("WARNING! are you sure you want to DELETE?")){
             return e.preventDefault()
         }
     })

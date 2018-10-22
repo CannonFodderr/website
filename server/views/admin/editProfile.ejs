@@ -1,9 +1,9 @@
 <% include ../partials/header %>
-<% include ../loader/load %>
+<% include ../loader/transLoad %>
 <% include ../partials/navbar %>
 
 <div class="container page-content-container">
-    <a href="/admin" class="btn btn-secondary">Back</a>
+    <% include panel %>
     <div class="card bg-light mb-3 admin-login">
         <h1>Edit
             <%= user.username %> Profile:</h1>
@@ -13,4 +13,5 @@
         </form>
     </div>
 </div>
+<script src="/scripts/transloader.js"></script>
 <% include ../partials/footer %>

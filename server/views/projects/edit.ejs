@@ -1,11 +1,9 @@
 <% include ../partials/header %>
-<% include ../loader/load %>
+<% include ../loader/transLoad %>
 <% include ../partials/navbar %>
 <div class="container page-content-container">
+    <% include ../admin/panel %>
     <div class="row">
-        <div class="col-lg-2">
-            <a class="btn btn-outline-info" href="/admin"><i class="fas fa-arrow-left"></i></a>
-        </div>
         <div class="col col-lg-4 col-md-12">
             <img class="img-thumbnail" src="<%= project.img %>" alt="<%= project.title %> image">
         </div>
@@ -24,5 +22,6 @@
         </div>
     </div>
 </div>
-<script src="/scripts/project.js"></script>
+<script src="/scripts/transloader.js"></script>
+<script src="/scripts/admin_controls.js"></script>
 <% include ../partials/footer %>

@@ -72,6 +72,7 @@ img{
 .hide{
     opacity: 0;
 }
+
 .btn-back{
     line-height: 100%;
     margin: auto;
@@ -408,10 +409,23 @@ img{
     margin: 0 1vw;
     font-weight: 800;
 }
-
+.admin-panel{
+    margin-bottom: 1vh;
+}
 .admin-title{
     width: fit-content;
     padding: 1vh 1vw;
+}
+
+.title-link{
+    width: fit-content;
+    text-decoration: none !important;
+    color: var(--bgSecondary);
+    transition: 0.4s linear;
+}
+
+.title-link:hover{
+    color: #3498db;
 }
 .admin-controls{
     border-bottom: 1px solid var(--textSecondary);
@@ -421,6 +435,12 @@ img{
     width: fit-content;
     padding: 1vh 1vw;
 }
+
+.del-btn{
+    margin: 1vh 0;
+}
+
+
 @media only screen and (max-width: 1200px) {
     .project-card{
         min-width: 100%;

@@ -4,7 +4,7 @@ const middleware = require('../middleware/auth');
 const sanitizer = require('../middleware/sanitizer');
 
 router.get('/admin/icons/new',middleware.isAdmin, (req, res)=>{
-    res.render('icons/new', { title: 'Add Icon', csrf: req.csrfToken()})
+    res.render('icons/new', { title: 'Add Icon', csrf: req.csrfToken(), user: req.user})
 })
 
 router.post('/admin/icons',middleware.isAdmin, (req, res)=>{
