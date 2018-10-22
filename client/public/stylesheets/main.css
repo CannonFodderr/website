@@ -20,6 +20,7 @@ body{
     overflow-x: hidden;
     overflow-y: auto;
 }
+
 .navbar.navbar-expand-lg.navbar-dark {
     position: absolute;
     top: 0;
@@ -72,33 +73,34 @@ img{
     opacity: 0;
 }
 .btn-back{
+    line-height: 100%;
+    margin: auto;
     width: fit-content;
     height: 100%;
-    display: flex;
+    display: inline-flex;
+    position: relative;
     justify-content: start;
-    font-size: 1.3em;
+    text-decoration: none !important;
+    font-size: 2rem;
     text-align: center;
     border-radius: 0;
+    transition: 0.6s linear;
+}
+.btn-text{
+    margin-left: 2vw;
 }
 .contact-col{
     position: relative;
-    /* z-index: 600; */
     width: 100%;
 }
 .typer{
     min-height: 6vh;
     padding: 1vh;
-    /* font-size: 1em; */
     display: flex;
     line-height: 2.2;
 }
 .paw-icon{
     font-size: 1.5rem;
-}
-.back-icon{
-    height: 100%;
-    width: 100%;
-    font-size: 1.5em;
 }
 #carouselExampleIndicators{
     height: 100%;
@@ -162,12 +164,13 @@ img{
     margin-top: 3vh;
 }
 
-.fas {
+
+/* .fas .fab{
     width: fit-content;
     text-align: center;
     font-size: 1.6rem;
     margin-right: 1vw;
-}
+} */
 .social-li{
     width: fit-content;
 }
@@ -181,8 +184,7 @@ img{
     text-align: center;
 }
 .menu-icon{
-    margin-left: 1vw;
-    min-width: 4vw;
+    padding-left: 1vw;
     border-left: 1px solid;
 }
 .social-icon{
@@ -276,7 +278,7 @@ img{
     justify-content: flex-start;
 }
 .project-grid-img{
-    background-size: cover;
+    background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
     height: 170px;
@@ -292,7 +294,9 @@ img{
     min-height: 370px;
     max-height: 370px;
     background: #202225;
+    margin-top: 2vh;
 }
+
 .project-card-text{
     max-width: 100%;
     width: max-content;
@@ -304,15 +308,6 @@ img{
     max-width: 100%;
     width: max-content;
     opacity: 1;
-}
-
-.card-img-overlay{
-    padding: 0;
-    background: transparent;
-    transition: ease-in-out 0.3s;
-}
-.card-img-overlay:hover {
-    background: #2323233b;
 }
 
 .project-card-body{
@@ -364,7 +359,7 @@ img{
     height: 40vh;
     width: 100%;
     background: #202225;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }

@@ -5,7 +5,7 @@
     <form id="projects-filter-form" action="/projects" method="GET">
         <div class="form-row no-gutters">
             <div class="col-lg-1 col-md-1 col-sm-1">
-                <a class="btn text-info btn-back" href="/"><i class="fas fa-arrow-left back-icon"></i></a>
+                <a class="btn text-light btn-back btn-back" href="/"><i class="fas fa-arrow-left"></i></a>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="input-group">
@@ -43,7 +43,11 @@
                             <p class="card-text text-light"><%= projects[i].description %></p>
                         </div>
                         <div class="card-body-footer">
-                            <a class="text-secondary" href="<%= projects[i].link %>" draggable="false"><div class="card-body-footer-icon"><i class="fab fa-github-square" draggable="false"></i></div></a>
+                            <a class="text-secondary" href="<%= projects[i].link %>" draggable="false"><div class="card-body-footer-icon">
+                                <% if (projects[i].Icon ){ %>
+                                    <%- projects[i].Icon.code %>
+                                <% } %>
+                            </div></a>
                         </div>
                     </div>
                 </div>

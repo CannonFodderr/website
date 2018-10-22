@@ -5,11 +5,12 @@ const Icon = require('../models/icon');
 // New Project routes
 router.get('/projects', (req, res)=>{
     if(req.query.category){
-        Project.findAll({ where: {category: req.query.category }}).then((foundProjects)=>{
-        return res.render('./projects/all', { projects: foundProjects, title: `${req.query.category} projects` })
+        Project.findAll({ where: { category: req.query.category }, include: [{model: Icon}]}).then((foundProjects)=>{
+            console.log(foundProjects)
+            return res.render('./projects/all', { projects: foundProjects, title: `${req.query.category} projects` })
         })
     } else {
-        Project.findAll().then((allProjects)=>{
+        Project.findAll({include: [{model: Icon}]}).then((allProjects)=>{
         return res.render('./projects/all', { projects: allProjects, title: `All projects` })
         })
     }

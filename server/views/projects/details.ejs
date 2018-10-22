@@ -1,5 +1,6 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
+<% include ../loader/transLoad %>
 <!-- Page Header -->
 <div class="fluid-container project-top-header">
 <div class="row">
@@ -9,7 +10,7 @@
 </div>
     <div class="row  controls-row text-light no-gutters bg-light text-dark">
         <div class="col-lg-2 col-md-3 col-sm-2 col-xs-3">
-            <a class="btn btn-lg btn-link bg-light text-dark" href="/projects"><i class="fas fa-arrow-left"></i>Back</a>
+            <a class="btn btn-lg btn-link bg-light text-dark btn-back" href="/projects"><i class="fas fa-arrow-left"></i><span class="btn-text">Back</span></a>
         </div>
         <div class="col-lg-8 col-md-6 col-sm-8 col-xs-6 text-center">
             <% if(icon != null){ %>
@@ -62,4 +63,5 @@
 </div>
 <%}%>
 
+<script src="../../scripts/transloader.js"></script>
 <% include ../partials/footer %>
