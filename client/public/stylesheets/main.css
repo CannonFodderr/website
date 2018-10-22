@@ -379,6 +379,18 @@ img{
     transition: 0.4s ease-in;
     color: var(--bgSecondary);
 }
+.bio-content-container{
+    margin-top: 2vh;
+    background-color: var(--textSecondary);
+    min-height: 30vh;
+    padding: 2vw;
+}
+.cv-jobs{
+    margin-top: 2vh;
+}
+.job-content{
+    padding: 2vw;
+}
 .project-link:hover{
     color: #3498db;
 }
@@ -388,6 +400,13 @@ img{
 }
 .features-title{
     margin: 0;
+}
+.job-card{
+    margin-top: 2vh;
+}
+.job-date-text{
+    margin: 0 1vw;
+    font-weight: 800;
 }
 @media only screen and (max-width: 1200px) {
     .project-card{

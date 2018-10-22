@@ -5,7 +5,7 @@
 <div class="fluid-container project-top-header">
     <div class="row">
         <div class="col-12">
-            <div class="project-banner text-center" style="background-image: url('')"></div>
+            <div class="project-banner text-center" style="background-image: url('images/profileCarousel/p1.jpg')"></div>
         </div>
     </div>
     <div class="row  controls-row text-light no-gutters bg-light text-dark">
@@ -13,13 +13,13 @@
             <a class="btn btn-lg btn-link bg-light text-dark btn-back" href="/"><i class="fas fa-arrow-left"></i></a>
         </div>
         <div class="col-lg-8 col-md-6 col-sm-8 col-xs-6 text-center">
-            <a class="text-center project-link" href="#"><div class="">IDAN IZHAKI</div></a>
+            <a class="text-center project-link" href="#"><div class=""><%= title.toUpperCase() %></div></a>
             
             <div class="col-lg-2 col-md-3 col-sm-2 col-xs-3"></div>
         </div>
     </div>
     <!-- Content & Title -->
-    <div class="container project-content-container">
+    <div class="container bio-content-container">
         <div class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-8 text-center text-dark">
@@ -40,21 +40,30 @@
         </div>
     </div>
     <!-- WORK -->
-    <div class="container cv-jobs bg-light">
-        <h3>Work Experience</h3>
-        <div class="card">
-            <div class="card-header bg-dark text-light">
-                Job title
+    <div class="container cv-jobs bg-dark">
+        <h3 class="text-light">Work Experience</h3>
+        <% jobs.forEach((job)=>{ %>
+        <div class="card job-card">
+            <div class="card-header bg-info text-light">
+                <%- job.title.toUpperCase() %>
             </div>
             <div class="card-body bg-light text-dark">
-                <h5 class="card-title">Job Description</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h4 class="card-title"><strong>@ </strong><%= job.company %></h4>
+                <h5 class="card-text"><strong>TLDR: </strong><%= job.description %></h5>
+                <hr>
+                <p class="card-text job-content"><%= job.content %></p>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             </div>
-            <div class="card-footer text-muted">
-                WHEN? OCT 12 2005
+            <div class="card-footer bg-secondary text-light">
+                <% if (job.start_date) { %>
+                    <span class="job-date-text">FROM</span><%= job.start_date %>  
+                <% } %>
+                <% if (job.end_date) { %>
+                    <span class="job-date-text">TO</span><%= job.end_date %>
+                <% } %>
             </div>
         </div>
+        <% }) %>
     </div>
     <!-- Features -->
     <div class="container project-features-container">

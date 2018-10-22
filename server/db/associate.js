@@ -15,14 +15,7 @@ User.hasMany(Contact, {as: 'contacts'});
 Message.belongsTo(Contact);
 Contact.hasMany(Message, {as: 'messages'});
 
-// Icon.sync({force:true})
-// .then(()=>{
-//     Project.sync({force:true})
-//     .then(()=>{
-//         db.sync()
-//         .catch(e => { console.error(e) })
-//     })
-// })
+
 
 
 db.sync().then(()=>{
