@@ -339,7 +339,7 @@ img{
 .project-content-container{
     background-color: var(--textSecondary);
     min-height: 30vh;
-    padding: 1vw;
+    padding: 2vw;
 }
 .project-description-row{
     margin-bottom: 2vh;
