@@ -22,8 +22,10 @@ require('./db/associate');
 // IMPORT ROUTES
 const   indexRoute = require('./routes/index'),
         adminRoutes = require('./routes/auth'),
-        projectsRoutes = require('./routes/projects');
-        iconsRoutes = require('./routes/icons');
+        projectsRoutes = require('./routes/projects'),
+        iconsRoutes = require('./routes/icons'),
+        cvRoutes = require('./routes/cv'),
+        jobsRoutes = require('./routes/job');
 
 // APP CONFIG
 app.set('view engine', 'ejs');
@@ -81,6 +83,8 @@ app.use(indexRoute);
 app.use(adminRoutes);
 app.use(projectsRoutes);
 app.use(iconsRoutes);
+app.use(cvRoutes);
+app.use(jobsRoutes);
 
 // Seed DB
 if(process.argv[2] == 'seed'){

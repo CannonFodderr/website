@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+<% include ../loader/load %>
+<% include ../partials/navbar %>
+<div class="container page-content-container">
+    <h1 class="text-light">ADD JOB</h1>
+    <form action="/admin/jobs" method="POST">
+        <% include ../forms/newJob %>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Add</button>
+    </form>
+</div>
+<script src="/scripts/project.js"></script>
+<% include ../partials/footer %>

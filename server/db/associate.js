@@ -3,6 +3,7 @@ const Project = require('../models/project');
 const Contact = require('../models/contact');
 const Message = require('../models/messages');
 const Icon = require('../models/icon');
+const Job = require('../models/job');
 const  db = require('./connect');
 
 Icon.hasMany(Project, {foreignKey: 'icon_id', as: 'icons'});

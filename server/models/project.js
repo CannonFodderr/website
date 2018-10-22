@@ -12,7 +12,7 @@ const Project = db.define('Project', {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            len: [10, 150]
+            len: [1, 150]
         }
     },
     description: {
