@@ -43,4 +43,15 @@
 <div class="form-group">
     <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="About the project"></textarea>
 </div>
+<h5 class="text-light">Features</h5>
+<div class="input-group-block project-features">
+    <ul id="feature-list" class="list-group"></ul>  
+</div>
+<div class="input-group mb-3">
+    <input class="form-control" type="text" name="" id="add-feature-input">
+    <div class="input-group-append">
+        <button class="btn btn-info" id="add-feature">ADD</button>
+    </div>        
+</div>
+<input id="featuresInput" name="features" type="hidden" name="features" value="">
 <input type="hidden" name="_csrf" value="<%= csrf %>">

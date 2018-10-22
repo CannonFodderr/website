@@ -30,7 +30,7 @@
         <div class="row project-description-row">
             <div class="col-lg-2"></div>
             <div class="col-lg-8 text-center text-dark">
-                <h5>DESC</h5>
+                <h5>HI!</h5>
             </div>
             <div class="col-lg-2"></div>
         </div>
@@ -51,9 +51,20 @@
                 <h4 class="card-title"><strong>@ </strong><%= job.company %></h4>
                 <h5 class="card-text"><strong>TLDR: </strong><%= job.description %></h5>
                 <hr>
+                <!-- Features -->
+                <% if (job.features) { %>
+                <ul class="list-group">
+                    <% job.features.forEach((feature)=>{ %>
+                        <% if (feature.length > 0) { %>
+                            <li class="list-group-item"><i class="far fa-dot-circle"></i> <%= feature %></li>
+                        <% } %>
+                    <% }) %>
+                </ul>
+                <% } %>
                 <p class="card-text job-content"><%= job.content %></p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             </div>
+            <% if (job.start_date || job.end_date) {%>
             <div class="card-footer bg-secondary text-light">
                 <% if (job.start_date) { %>
                     <span class="job-date-text">FROM</span><%= job.start_date %>  
@@ -62,6 +73,7 @@
                     <span class="job-date-text">TO</span><%= job.end_date %>
                 <% } %>
             </div>
+            <% } %>
         </div>
         <% }) %>
     </div>
@@ -71,10 +83,20 @@
             
         </div>    
         <div class="row">
-            <div class="col-lg-5 col-md-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <ul class="list-group features-list">
-                    <li class="list-group-item feature-item bg-info">FEATURES</li>
-                    <li class="list-group-item feature-item"></li>
+                    <li class="list-group-item feature-item bg-danger text-light">Education</li>
+                    <li class="list-group-item feature-item">Sound School- 3 Years Sound Engineering</li>
+                    <li class="list-group-item feature-item">Udemy -Web Developer Bootcamp</li>
+                    <li class="list-group-item feature-item">Udemy - Python Bootcamp</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <ul class="list-group features-list">
+                    <li class="list-group-item feature-item bg-danger text-light">My Arsenal</li>
+                    <li class="list-group-item feature-item">ProTools, Cubase, Ableton</li>
+                    <li class="list-group-item feature-item">Photoshop, Premire</li>
+                    <li class="list-group-item feature-item">Full Stack NodeJS, Express, MongoDB, Postgres</li>
                 </ul>
             </div>
         </div>

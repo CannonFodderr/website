@@ -408,6 +408,19 @@ img{
     margin: 0 1vw;
     font-weight: 800;
 }
+
+.admin-title{
+    width: fit-content;
+    padding: 1vh 1vw;
+}
+.admin-controls{
+    border-bottom: 1px solid var(--textSecondary);
+}
+.admin-projects-title{
+    margin-top: 1vh;
+    width: fit-content;
+    padding: 1vh 1vw;
+}
 @media only screen and (max-width: 1200px) {
     .project-card{
         min-width: 100%;

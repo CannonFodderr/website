@@ -2,7 +2,7 @@
 <% include ../loader/load %>
 <% include ../partials/navbar %>
 <div class="container-fluid page-content-container">
-    <h2 class="text-dark bg-light">Admin Panel</h2>
+    <h2 class="admin-title text-dark bg-light">Admin Panel</h2>
     <p class="text-light">Welcome
         <% if(user.firstName){ %>
             <%= user.firstName %>
@@ -10,40 +10,39 @@
                 <%= user.username %>
                 <% } %>
             </p>
-            <a href="/admin/<%= user.id %>/edit" class="btn bg-dark text-light">Edit profile</a>
-            <a href="/admin/jobs/new" class="btn bg-dark text-light">Add Job</a>
-            <a href="/logout" class="btn bg-dark text-light">Logout</a>
-            <h5 class="bg-light">
-                <strong>PROJECTS:</strong>
-                <a class="btn btn-outline-dark" href="/admin/projects/new">
-                    <i class="fas fa-plus"></i>
-                    New Project</a>
-                    <a class="btn btn-outline-dark" href="/admin/icons/new">
-                        <i class="fas fa-plus"></i>
-                        New Icon</a>
-                    </h5>
-                    
-                    <div class="row projects-row">
-                        <% projects.forEach((project)=>{ %>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 project-col">
-                                <div class="card project-card">
-                                    <a href="/admin/projects/<%=project.id%>/edit">
-                                        <img class="card-img-top project-grid-img" src="<%= project.img %>" alt="Card image cap">
-                                    </a>
-                                    <div class="card-body project-card-body text-light">
-                                        <h5 class="card-title"><%= project.title.toUpperCase() %></h5>
-                                        <h6>Category: <%= project.category %></h6>
-                                        <p class="card-text project-card-text"><%= project.description %></p>
-                                    </div>
-                                    <div class="card-body-footer">
-                                        <a href="/admin/projects/<%=project.id%>/edit" class="btn btn-info"><i class="fas fa-edit"></i>Edit</a>
-                                    </div>
-                                </div> 
-                            </div>
-                            <% }) %>
+            <div class="admin-controls">
+                <a href="/admin/<%= user.id %>/edit" class="btn bg-dark text-light">Edit profile</a>
+                <a class="btn bg-dark text-light" href="/admin/projects/new">New Project</a>
+                <a href="/admin/jobs/new" class="btn bg-dark text-light">Add Job</a>
+                <a class="btn bg-dark text-light" href="/admin/icons/new">New Icon</a>
+                <a href="/logout" class="btn bg-dark text-light">Logout</a>
+            </div>
+                <div class="container">
+                <h5 class="admin-projects-title bg-light">
+                    <strong>PROJECTS:</strong>
+                </h5>
+                <div class="row projects-row">
+                    <% projects.forEach((project)=>{ %>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 project-col">
+                            <div class="card project-card">
+                                <a href="/admin/projects/<%=project.id%>/edit">
+                                    <img class="card-img-top project-grid-img" src="<%= project.img %>" alt="Card image cap">
+                                </a>
+                                <div class="card-body project-card-body text-light">
+                                    <h5 class="card-title"><%= project.title.toUpperCase() %></h5>
+                                    <h6>Category: <%= project.category %></h6>
+                                    <p class="card-text project-card-text"><%= project.description %></p>
+                                </div>
+                                <div class="card-body-footer">
+                                    <a href="/admin/projects/<%=project.id%>/edit" class="btn bg-dark text-light"><i class="fas fa-edit"></i>Edit</a>
+                                </div>
+                            </div> 
                         </div>
+                        <% }) %>
                     </div>
-                    
-                    
-                    
-                    <% include ../partials/footer %>
+                </div>
+            </div>
+            
+            
+            
+            <% include ../partials/footer %>

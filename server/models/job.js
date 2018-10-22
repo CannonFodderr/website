@@ -23,6 +23,9 @@ const Job = db.define('Job', {
     company: {
         type: Sequelize.STRING,
     },
+    features: {
+        type: Sequelize.ARRAY({ type:Sequelize.STRING })
+    },
     start_date: {
         type: Sequelize.DATEONLY,
         validate: {

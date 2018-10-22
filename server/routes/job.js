@@ -10,10 +10,12 @@ router.get('/admin/jobs/new',middleware.isAdmin, (req, res)=>{
 
 router.post('/admin/jobs', middleware.isAdmin, (req, res)=>{
     let sanitized = sanitizer.sanitizeBody(req)
+    let features = sanitized.features.trim().split(';')
     let newJob = {
         title: sanitized.title,
         description: sanitized.description,
         company: sanitized.company,
+        features: features,
         start_date: sanitized.startDate,
         end_date: sanitized.endDate,
         content: sanitized.content
