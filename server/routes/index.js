@@ -13,6 +13,10 @@ router.get('/', csrfMiddleware, (req, res) => {
     });
 });
 
+router.get('/cv', (req, res)=>{
+    res.render('cv', {title: 'cv'});
+})
+
 router.post('/', csrfMiddleware, (req, res) => {
     let sanitized = sanitizer.sanitizeBody(req)
     Contact.findOrCreate({where: { email: sanitized.email }, defaults: { name: sanitized.name, phone: sanitized.phone, user_id: 1 }})
