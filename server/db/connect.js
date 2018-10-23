@@ -1,9 +1,8 @@
 const env = require('dotenv').config();
 // const config = require('../../dbconfig');
 const Sequelize = require('sequelize');
-let db;
 
-dbAuth = (dbName) => {
+dbAuth = (db, dbName) => {
     db.authenticate()
     .then(() => {
         console.log(`Connected to db: ${dbName}`)
@@ -12,9 +11,11 @@ dbAuth = (dbName) => {
         console.error(`Failed to connect:`, err)
     });
 }
+
+let generalDB = () => {
 // RUN DEVELOPMENT
 if (process.env.DB_STATE == 'dev') {
-    db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+    let devDB = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
         host: process.env.HOST,
         dialect: 'postgres',
         operatorsAliases: false,
@@ -25,18 +26,23 @@ if (process.env.DB_STATE == 'dev') {
             idle: 10000
         }
     });
-    dbAuth(process.env.DB_NAME)
+    dbAuth(devDB, process.env.DB_NAME)
+    return devDB
 }
 // RUN PRODUCTION
 if (process.env.DB_STATE == 'prod') {
-    db = new Sequelize(process.env.PROD_DB_NAME, process.env.PROD_DB_USER, process.env.PROD_DB_PASS, {
+    let prodDB = new Sequelize(process.env.PROD_DB_NAME, process.env.PROD_DB_USER, process.env.PROD_DB_PASS, {
         host: process.env.PROD_DB_HOST,
         dialect: 'postgres',
         dialectOptions: {
             ssl:true
         }
+
     });
-    dbAuth(process.env.DB_NAME)
+    dbAuth(prodDB, process.env.DB_NAME);
+    return prodDB
+}
 }
 
-module.exports = db;
+
+module.exports = generalDB();

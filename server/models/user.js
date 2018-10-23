@@ -1,4 +1,4 @@
-// const config = require('../../dbconfig');
+const env = require('dotenv').config();
 const passportLocalSequelize = require('passport-local-sequelize');
 const Sequelize = require('sequelize');
 const db = require('../db/connect');
