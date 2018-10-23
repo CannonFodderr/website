@@ -8,7 +8,7 @@ router.get('/cv', (req, res)=>{
     User.find({where: { username: 'Admin'}})
     .then((user)=>{
         console.log(user.bio)
-        let bio = user.bio.replace(/\n/g, '<br />')
+        let bio = user.bio
         console.log(bio)
         Job.findAll()
         .then((allJobs)=>{

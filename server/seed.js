@@ -9,6 +9,20 @@ const bcrypt = require('bcrypt');
 // ***********************************
 // Force create table & seed the Admin
 // ***********************************
+User.sync({force:true}).then(()=>{
+    bcrypt.genSalt().then((s)=>{
+        let hashedPassword = bcrypt.hashSync(config.password, s)
+        User.create({ username: 'Admin', password: hashedPassword, salt: s, isAdmin: true}).then((admin)=>{
+            admin.save()
+        })
+    }).then(()=>{
+        Project.sync({force:true})
+        .then(()=>{
+            Project.create({title: "My first project", description:"Nice descriptions ha?", user_id: 1})
+        })
+    })
+})
+
 
 // Project.drop().then(()=>{
 //     User.drop().then(()=>{
