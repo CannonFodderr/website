@@ -15,7 +15,6 @@ User.hasMany(Contact, {as: 'contacts'});
 Message.belongsTo(Contact);
 Contact.hasMany(Message, {as: 'messages'});
 
-
 db.sync().then(()=>{
     
 }).catch(e => { console.error(e) })

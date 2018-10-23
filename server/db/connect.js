@@ -43,6 +43,6 @@ if (process.env.DB_STATE == 'prod') {
     return prodDB
 }
 }
+let db = generalDB()
 
-
-module.exports = generalDB();
+module.exports = db;
