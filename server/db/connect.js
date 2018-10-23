@@ -39,7 +39,7 @@ let generalDB = () => {
             }
             
         });
-        dbAuth(prodDB, process.env.DB_NAME);
+        dbAuth(prodDB, process.env.PROD_DB_NAME);
         return prodDB
     }
 }
