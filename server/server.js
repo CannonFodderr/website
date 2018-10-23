@@ -1,4 +1,6 @@
 require('dotenv').load();
+// DB Associations
+require('./db/associate');
 
 const   express          = require('express'),
         port            = process.env.PORT,
@@ -16,8 +18,7 @@ const   express          = require('express'),
 // CSRF MIDDELWARE
 const csrfMiddleware = require('./middleware/csurf');
 
-// DB Associations
-require('./db/associate');
+
 
 // IMPORT ROUTES
 const   indexRoute = require('./routes/index'),
