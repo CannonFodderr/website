@@ -1,3 +1,4 @@
+// const config = require('../../dbconfig');
 const passportLocalSequelize = require('passport-local-sequelize');
 const Sequelize = require('sequelize');
 const db = require('../db/connect');
@@ -43,7 +44,7 @@ const User = db.define('User', {
     bio: {
         type: Sequelize.TEXT,
     },
-    salt: Sequelize.STRING
+    salt: Sequelize.STRING,
 },
 {
     underscored:true
@@ -51,8 +52,8 @@ const User = db.define('User', {
 
 passportLocalSequelize.attachToUser(User, {
     usernameField: 'username',
-    hashField: process.env.USERNAME,
-    saltField: process.env.PASSWORD,
+    hashField: 'password',
+    saltField: 'salt',
 });
 
 module.exports = User;
