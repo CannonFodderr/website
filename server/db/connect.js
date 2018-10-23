@@ -26,7 +26,7 @@ if (process.env.DB_STATE == 'dev') {
             idle: 10000
         }
     });
-    dbAuth(devDB, process.env.DB_NAME)
+    // dbAuth(devDB, process.env.DB_NAME)
     return devDB
 }
 // RUN PRODUCTION
@@ -39,7 +39,7 @@ if (process.env.DB_STATE == 'prod') {
         }
 
     });
-    dbAuth(prodDB, process.env.DB_NAME);
+    // dbAuth(prodDB, process.env.DB_NAME);
     return prodDB
 }
 }
