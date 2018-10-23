@@ -3,21 +3,31 @@ const passport = require('passport');
 const User = require('../models/user');
 const middleware = require('../middleware/auth');
 const csrfMiddleware = require('../middleware/csurf');
+const Message = require('../models/messages');
+const Contact = require('../models/contact');
 const bcrypt = require('bcrypt');
 const sanitizer = require('../middleware/sanitizer');
 
 // ADMIN ROUTES
 router.get('/admin', middleware.isAdmin, (req, res) => {
     User.findById(req.user.id, {include: ['projects']}).then((user)=>{
-        res.render('./admin/main', {
-            user: req.user,
-            title: `${ process.env.OWNER } - Control Panel`,
-            projects: user.projects
-        });
+        Message.findAll({order: [['created_at', 'DESC']], include: [{ model: Contact }]})
+        .then((allMessages)=>{
+            res.render('./admin/main', {
+                user: req.user,
+                title: `${ process.env.OWNER } - Control Panel`,
+                messages: allMessages
+            });
+        })
+        .catch(e => {
+            console.error(e);
+            res.redirect('back')
+        })
+        
     })
     
 });
-// Admin Edit
+// View Admin Edit Form
 router.get('/admin/:id/edit', (req, res) => {
     User.findById(req.params.id).then((user) => {
         res.render('./admin/editProfile', {
@@ -31,7 +41,8 @@ router.get('/admin/:id/edit', (req, res) => {
     })
 });
 
-router.post('/admin/:id/edit', middleware.isAdmin, (req, res) => {
+// Update Admin
+router.put('/admin/:id/', middleware.isAdmin, (req, res) => {
     let sanitized = sanitizer.sanitizeBody(req)
     User.update(sanitized, {
             where: {

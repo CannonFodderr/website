@@ -3,32 +3,39 @@
 <% include ../partials/navbar %>
 <div class="container page-content-container">
     <% include panel %>
-                <div class="container">
-                <h5 class="admin-projects-title bg-light">
-                    <strong>PROJECTS:</strong>
-                </h5>
-                <div class="row projects-row">
-                    <% projects.forEach((project)=>{ %>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 project-col">
-                            <div class="card project-card">
-                                <a href="/admin/projects/<%=project.id%>/edit">
-                                    <img class="card-img-top project-grid-img" src="<%= project.img %>" alt="Card image cap">
-                                </a>
-                                <div class="card-body project-card-body text-light">
-                                    <h5 class="card-title"><%= project.title.toUpperCase() %></h5>
-                                    <h6>Category: <%= project.category %></h6>
-                                    <p class="card-text project-card-text"><%= project.description %></p>
+    <div class="container">
+        <h5 class="admin-projects-title bg-light">
+            <strong>All Messages</strong>
+        </h5>
+        <div class="row projects-row">
+            <div class="row">
+                <% messages.forEach((message)=>{ %>
+                    <div class="col-12">
+                        <div class="card message-card">
+                            <div class="card-header bg-info text-light">
+                                Received: <%= message.created_at.toDateString() %>
+                            </div>
+                            <div class="card-body bg-light text-dark">
+                                <h5 class="card-title"><strong>From:</strong> <%= message.Contact.name %></h5>
+                                <p class="card-text"><%= message.content %></p>
+                                
+                            </div>
+                            <div class="card-footer bg-dark text-light">
+                                <!-- <a href="mailto:<%= message.Contact.email %>" class="btn btn-secondary">Reply</a> -->
+                                <a class="message-link" href="mailto:<%= message.Contact.email %>"><i class="fas fa-envelope-open social-icon"></i></a>
+                                <% if (message.Contact.phone) { %>
+                                    <!-- <a href="tel:<%= message.Contact.phone %>" class="btn btn-primary">Go somewhere</a> -->
+                                    <a class="message-link" href="tel:<%= message.Contact.phone %>"><i class="fas fa-phone social-icon"></i></a>
+                                    <% } %>
                                 </div>
-                                <div class="card-body-footer">
-                                    <a href="/admin/projects/<%=project.id%>/edit" class="btn bg-dark text-light"><i class="fas fa-edit"></i>Edit</a>
-                                </div>
-                            </div> 
+                            </div>
                         </div>
                         <% }) %>
                     </div>
                 </div>
             </div>
-            
-            
-            
-            <% include ../partials/footer %>
+        </div>
+        
+        
+        
+        <% include ../partials/footer %>

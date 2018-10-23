@@ -2,7 +2,8 @@ const router = require('express').Router()
 const middleware = require('../middleware/auth');
 const Project = require('../models/project');
 const Icon = require('../models/icon');
-// New Project routes
+
+// Visitor Views
 router.get('/projects', (req, res)=>{
     if(req.query.category){
         Project.findAll({ where: { category: req.query.category }, include: [{model: Icon}]}).then((foundProjects)=>{
@@ -15,7 +16,28 @@ router.get('/projects', (req, res)=>{
         })
     }
 })
-
+// VIEW PROJECT
+router.get('/projects/:projectid', (req, res)=>{
+    Project.findById(req.params.projectid, 
+        {include: [{model: Icon}]})
+        .then((project)=>{
+        if (project.Icon != null) {
+            res.render('./projects/details', {title: project.title, project:project, icon: project.Icon.dataValues })
+        } else{
+            res.render('./projects/details', {title: project.title, project:project, icon: null })
+        }
+    }).catch(e => {
+        console.error(e);
+        res.redirect('/projects');
+    })
+})
+// Admin Views
+router.get('/admin/projects', middleware.isAdmin, (req, res)=>{
+    Project.findAll()
+    .then((allProjects)=>{
+        res.render('./projects/adminGrid', {projects: allProjects, title: 'All Projects', user: req.user})
+    })
+})
 
 router.get('/admin/projects/new',middleware.isAdmin, (req, res)=>{
     res.render('./projects/new', {csrf: req.csrfToken(), title: 'New project', user: req.user})
@@ -105,19 +127,5 @@ router.delete('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
 });
 
 
-// VIEW PROJECT
-router.get('/projects/:projectid', (req, res)=>{
-    Project.findById(req.params.projectid, 
-        {include: [{model: Icon}]})
-        .then((project)=>{
-        if (project.Icon != null) {
-            res.render('./projects/details', {title: project.title, project:project, icon: project.Icon.dataValues })
-        } else{
-            res.render('./projects/details', {title: project.title, project:project, icon: null })
-        }
-    }).catch(e => {
-        console.error(e);
-        res.redirect('/projects');
-    })
-})
+
 module.exports = router

@@ -49,7 +49,7 @@
             <% if(job.features){ %>
                 <% job.features.forEach((feature)=>{ %>
                     <% if (feature.length > 0) { %> 
-                    <li class="list-group-item feature-item" draggable="false"><i class="fas fa-trash delete-feature-icon text-danger"></i><%= feature.trim() %></li>
+                    <li class="list-group-item feature-item" draggable="false"><i class="fas fa-trash delete-feature-icon text-danger"></i><%- feature.trim() %></li>
                     <% } %>
                 <% }) %>
             <% } %>

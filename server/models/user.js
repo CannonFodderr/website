@@ -41,6 +41,9 @@ const User = db.define('User', {
         type: Sequelize.TEXT
     },
     birthday: Sequelize.DATEONLY,
+    bio: {
+        type: Sequelize.TEXT,
+    },
     salt: Sequelize.STRING
 },
 {

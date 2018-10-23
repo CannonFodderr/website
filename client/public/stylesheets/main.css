@@ -27,7 +27,8 @@ body{
     left: 0;
     width: 100%;
     z-index: 100;
-    transition: ease-in-out 0.6s;
+    background: #1e22255d;
+    transition: ease-in-out 0.5s;
 }
 .navbar.navbar-expand-lg.navbar-dark:hover{
     background: #343a40a6;
@@ -173,7 +174,7 @@ img{
     margin-right: 1vw;
 } */
 .social-li{
-    width: fit-content;
+    width: 50%;
 }
 .social-link{
     color: #ccc;
@@ -199,6 +200,8 @@ img{
 
 
 .contact-list{
+    display: flex;
+    flex-wrap: wrap;
     list-style: none;
     padding: 0;
 }
@@ -210,6 +213,20 @@ img{
     display: block;
     font-size: 1.2em;
     margin-top: 1vh;
+}
+.message-card{
+    margin-bottom: 2vh;
+}
+.message-link {
+    display: inline-block;
+    width: fit-content;
+    font-size: 1em;
+    margin-top: 1vh;
+    color: #fff;
+    transition: 0.3s linear;
+}
+.message-link:hover {
+    color: #3498db;
 }
 
 .social-link:hover{
@@ -260,7 +277,7 @@ img{
 }
 
 .page-content-container{
-    margin-top: 8vh;
+    margin-top: 10vh;
 }
 .projects-grid{
     margin-top: 2vh;
@@ -384,7 +401,12 @@ img{
     margin-top: 2vh;
     background-color: var(--textSecondary);
     min-height: 30vh;
-    padding: 2vw;
+    padding: 3vw;
+}
+.autograph{
+    font-size: 2rem;
+    font-family: 'Satisfy', cursive;
+    margin: 0;
 }
 .cv-jobs{
     margin-top: 2vh;

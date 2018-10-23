@@ -17,7 +17,7 @@ Contact.hasMany(Message, {as: 'messages'});
 
 
 
-
+// Job.sync({force: true})
 db.sync().then(()=>{
     
 }).catch(e => { console.error(e) })

@@ -3,13 +3,15 @@
 <% include ../partials/navbar %>
 <div class="container page-content-container">
     <% include ../admin/panel %>
-    <h2>ALL JOBS</h2>
+    <h5 class="admin-projects-title bg-light">
+        <strong>All Jobs:</strong>
+    </h5>
     <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action active">All Jobs</a>
         <% jobs.forEach((job)=>{ %>
             <a href="/admin/jobs/<%= job.id %>/edit" class="list-group-item list-group-item-action"><%- job.title %></a>
-        <% }); %>
+            <% }); %>
+        </div>
     </div>
-</div>
-<script src="/scripts/transloader.js"></script>
-<% include ../partials/footer %>
+    <script src="/scripts/transloader.js"></script>
+    <% include ../partials/footer %>
