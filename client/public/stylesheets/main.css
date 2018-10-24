@@ -462,7 +462,16 @@ img{
     margin: 1vh 0;
 }
 
-
+.collapse-header{
+    padding: 1vh;
+    margin-bottom: 0;
+}
+.collapse-wrapper{
+    margin-top: 1vh;
+}
+.job-footer{
+    margin-top: 1vh;
+}
 @media only screen and (max-width: 1200px) {
     .project-card{
         min-width: 100%;
