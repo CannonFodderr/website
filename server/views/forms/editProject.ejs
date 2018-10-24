@@ -37,14 +37,17 @@
     <input name="link" type="url" class="form-control" placeholder="Link to project" aria-label="url" aria-describedby="basic-addon1"
     value="<%= project.link %>">
 </div>
-<div class="input-group input-group-lg mb-3">
+<div class="input-group mb-3">
     <div class="input-group-prepend">
         <label class="input-group-text text-light bg-dark" for="inputGroupSelect01">Link Icon</label>
     </div>
-    <select name="icon" class="custom-select" id="inputGroupSelect01">
-        <option selected>SELECTED</option>
+    <select name="icon" class="custom-select" id="inputGroupSelect01" required>
         <% icons.forEach((icon)=>{ %>
-            <option value="<%= icon.id %>"><%=icon.title.toUpperCase() %></option>
+            <% if (icon.id == project.icon_id) { %>
+                <option selected value="<%= icon.id %>"><%=icon.title.toUpperCase() %></option>  
+            <% } else { %>
+                <option value="<%= icon.id %>"><%=icon.title.toUpperCase() %></option>
+            <% } %>
         <% })%>
     </select>
 </div>
