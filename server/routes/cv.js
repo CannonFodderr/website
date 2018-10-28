@@ -5,6 +5,7 @@ const User = require('../models/user');
 
 // View CV
 router.get('/cv', (req, res)=>{
+    console.log(res.locals)
     User.find({where: { username: 'Admin'}})
     .then((user)=>{
         let bio = user.bio;

@@ -11,6 +11,7 @@ const   express          = require('express'),
         LocalStrategy   = require('passport-local').Strategy,
         bcrypt          = require('bcrypt'),
         cookieParser    = require('cookie-parser'),
+        flash    = require('connect-flash');
         app             = express();
 
 // CSRF MIDDELWARE
@@ -79,6 +80,13 @@ passport.serializeUser((function (user, done) {
 passport.deserializeUser((function (user, done) {
     done(null, user)
 }));
+
+app.use(flash());
+
+app.use('*', (req, res, next)=>{
+    res.locals.message = req.flash();
+    next();
+})
 // USE ROUTES
 app.use(indexRoute);
 app.use(adminRoutes);
@@ -87,6 +95,8 @@ app.use(iconsRoutes);
 app.use(cvRoutes);
 app.use(jobsRoutes);
 app.use(messagesRoutes);
+
+
 
 // Seed DB
 if(process.argv[2] == 'seed'){

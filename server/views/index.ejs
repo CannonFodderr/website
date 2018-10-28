@@ -54,15 +54,22 @@
         <div class="col-md-6 col-lg-5 col-xl-4">
             <div class="card homepage-cards contact-col">
                 <h5 class="card-header typer">
-                    <div class="typewriter">
-                        Hi, Nice to meet you :)
-                    </div>
+                        <% if (message.failure) { %>
+                            <div class="typewriter text-danger">
+                                <%= message.failure %>
+                            </div>
+                        <% } else { %>
+                            <div class="typewriter">
+                                Hi, Nice to meet you :)
+                            </div>
+                        <% } %>
                 </h5>
                 <div class="card-body bg-dark text-light bg">
                     <p class="card-text">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 contact-col">
                                 <ul class="contact-list">
+                                    <li class="social-li"><a  class="social-link" href="/cv"><i class="fas fa-newspaper social-icon"></i>MY CV</a></li>
                                     <li class="social-li"><a class="social-link" href="mailto:izhaki.idan@gmail.com"><i class="fas fa-envelope-open social-icon"></i>E-Mail</a></li>
                                     <li class="social-li"><a class="social-link" href="tel:+972526773370"><i class="fas fa-phone social-icon"></i>Phone</a></li>
                                     <li class="social-li"><a target="_blank" class="social-link" href="https://www.facebook.com/izhaki.idan"><i class="fab fa-facebook-messenger social-icon"></i>Messenger</a></li>

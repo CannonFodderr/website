@@ -33,6 +33,9 @@ body{
 .navbar.navbar-expand-lg.navbar-dark:hover{
     background: #343a40a6;
 }
+.navbar-brand{
+    margin-left: 1rem;
+}
 .nav-container{
     margin-bottom: 6vh;
 }
@@ -96,10 +99,14 @@ img{
     width: 100%;
 }
 .typer{
+    background: #fff;
     min-height: 6vh;
+    width: fit-content;
+    margin: auto;
     padding: 1vh;
     display: flex;
-    line-height: 2.2;
+    /* line-height: 2.2; */
+    justify-content: center;
 }
 .paw-icon{
     font-size: 1.5rem;
@@ -254,15 +261,18 @@ img{
 }
 
 .typewriter{
+    text-align: center;
+    margin: auto;
     height: 100%;
     overflow: hidden; /* Ensures the content is not revealed until the animation */
-    border-right: 1px solid black; /* The typwriter cursor */
+    border-right: 1px solid transparent; /* The typwriter cursor */
     white-space: nowrap; /* Keeps the content on a single line */
-    /* margin: 0 auto; Gives that scrolling effect as the typing happens */
-    letter-spacing: .25em; /* Adjust as needed */
     animation: 
     typing 2.5s steps(20, end),
-    blink-caret .75s step-end 2.5s;
+    blink-caret 0.75s step-end 1.5s,
+    blink-caret 0.75s step-end 2.5s,
+    blink-caret 0.75s step-end 3.5s,
+    blink-caret 0.75s step-end 4.5s;
 }
 
 @keyframes typing {
@@ -272,8 +282,8 @@ img{
 
 /* The typewriter cursor effect */
 @keyframes blink-caret {
-    from, to { border-color: black }
-    50% { border-color: transparent; }
+    from, to { border-color: transparent }
+    50% { border-color: black; }
 }
 
 .page-content-container{
@@ -489,6 +499,15 @@ img{
 .cv-controls-btn{
     width: 100%;
     margin-top: 1vh;
+}
+
+.form-alert{
+    position: relative;
+    z-index: 500;
+    margin: 1vh auto;
+    width: fit-content;
+    text-align: center;
+    padding: 1vh 1vw;
 }
 @media only screen and (max-width: 1200px) {
     .project-card{
