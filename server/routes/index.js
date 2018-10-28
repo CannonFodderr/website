@@ -7,9 +7,6 @@ const nodemailer = require('nodemailer');
 const sanitizer = require('../middleware/sanitizer');
 
 
-
-
-
 router.get('/', csrfMiddleware, (req, res) => {
     res.render('index', {
         messages: mgs,

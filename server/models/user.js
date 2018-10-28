@@ -44,6 +44,9 @@ const User = db.define('User', {
     bio: {
         type: Sequelize.TEXT,
     },
+    skills: {
+        type: Sequelize.ARRAY({type: Sequelize.STRING })
+    },
     salt: Sequelize.STRING,
 },
 {

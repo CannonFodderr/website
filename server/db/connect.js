@@ -1,3 +1,4 @@
+const config = require('./config');
 const env = require('dotenv').config();
 const Sequelize = require('sequelize');
 
@@ -14,10 +15,11 @@ dbAuth = (db, dbName) => {
 let generalDB = () => {
     // RUN DEVELOPMENT
     if (process.env.DB_STATE == 'dev') {
-        let devDB = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
-            host: process.env.HOST,
-            dialect: 'postgres',
+        let devDB = new Sequelize(config.development.database, config.development.username, config.development.password, {
+            host: config.development.host,
+            dialect: config.development.dialect,
             operatorsAliases: false,
+            logging: false,
             pool: {
                 max: 5,
                 min: 0,
@@ -25,21 +27,21 @@ let generalDB = () => {
                 idle: 10000
             }
         });
-        dbAuth(devDB, process.env.DB_NAME);
+        dbAuth(devDB, config.development.database);
         return devDB
     }
     // RUN PRODUCTION
     if (process.env.DB_STATE == 'prod') {
-        let prodDB = new Sequelize(process.env.PROD_DB_NAME, process.env.PROD_DB_USER, process.env.PROD_DB_PASS, {
-            host: process.env.PROD_DB_HOST,
-            dialect: 'postgres',
+        let prodDB = new Sequelize(config.production.database, config.production.username, config.production.password, {
+            host: config.production.host,
+            dialect: config.production.dialect,
             logging: console.log(),
             dialectOptions: {
                 ssl:true
             }
 
         });
-        dbAuth(prodDB, process.env.PROD_DB_NAME);
+        dbAuth(prodDB, config.production.database);
         return prodDB
     }
 }
