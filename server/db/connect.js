@@ -1,19 +1,52 @@
-const config = require('../../dbconfig');
+const config = require('./config');
+const env = require('dotenv').config();
 const Sequelize = require('sequelize');
-const sq = new Sequelize(config.db_name, config.username, config.password, {
-    host: 'localhost',
-    dialect: 'postgres',
-    operatorsAliases: false,
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
+
+dbAuth = (db, dbName) => {
+    db.authenticate()
+    .then(() => {
+        console.log(`Connected to db: ${dbName}`)
+    })
+    .catch((err) => {
+        console.error(`Failed to connect:`, err)
+    });
+}
+
+let generalDB = () => {
+    // RUN DEVELOPMENT
+    if (process.env.DB_STATE == 'dev') {
+        let devDB = new Sequelize(config.development.database, config.development.username, config.development.password, {
+            host: config.development.host,
+            dialect: config.development.dialect,
+            operatorsAliases: false,
+            logging: false,
+            pool: {
+                max: 5,
+                min: 0,
+                acquire: 30000,
+                idle: 10000
+            }
+        });
+        dbAuth(devDB, config.development.database);
+        return devDB
     }
-});
+    // RUN PRODUCTION
+    if (process.env.DB_STATE == 'prod') {
+        let prodDB = new Sequelize(config.production.database, config.production.username, config.production.password, {
+            host: config.production.host,
+            dialect: config.production.dialect,
+            logging: console.log(),
+            dialectOptions: {
+                ssl:true
+            }
 
-sq.authenticate()
-.then(()=> { console.log(`Connected to db: ${config.db_name}`)})
-.catch((err) => { console.error(`Failed to connect:`, err)});
+        });
+        dbAuth(prodDB, config.production.database);
+        return prodDB
+    }
+}
+let db = generalDB()
 
-module.exports = sq;
+
+
+module.exports = db;

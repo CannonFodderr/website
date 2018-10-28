@@ -3,6 +3,7 @@ node_modules
 dbconfig.js
 server/seed.js
 config
-migrations
 seed
 config
+seeders
+/models/

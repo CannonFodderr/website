@@ -2,48 +2,96 @@ const router = require('express').Router()
 const passport = require('passport');
 const User = require('../models/user');
 const middleware = require('../middleware/auth');
+const csrfMiddleware = require('../middleware/csurf');
+const Message = require('../models/messages');
+const Contact = require('../models/contact');
+const bcrypt = require('bcrypt');
+const sanitizer = require('../middleware/sanitizer');
 
 // ADMIN ROUTES
-router.get('/admin', middleware.isAdmin, (req, res)=>{
-    res.render('./admin/control', { user: req.user });
+router.get('/admin', middleware.isAdmin, (req, res) => {
+    res.redirect('/admin/messages')
 });
 
-router.get('/admin/:id/edit', (req, res)=>{
-    User.findById(req.params.id).then((user)=>{
-        res.render('./admin/editProfile', {user:user})
-    }).catch((e)=>{
+// View Admin Edit Form
+router.get('/admin/:id/edit', (req, res) => {
+    User.findById(req.params.id).then((user) => {
+        res.render('./admin/editProfile', {
+            user: user,
+            title: 'Edit profile',
+            csrf: req.csrfToken()
+        })
+    }).catch((e) => {
         console.error(e)
         res.redirect('/admin');
     })
 });
 
-router.post('/admin/:id/edit', middleware.isAdmin, (req, res)=>{
-    console.log(req.body);
-    User.update({username: req.body.username, email: req.body.email, birthday:req.body.birthday, phone:req.body.phone}, {where:{id:req.params.id}})
-    .then(()=>{
-        User.findById(req.params.id).then((user)=>{
-            res.render('./admin/editProfile', {user: user})
+// Update Admin
+router.put('/admin/:id/', middleware.isAdmin, (req, res) => {
+    let sanitized = sanitizer.sanitizeBody(req)
+    User.update(sanitized, {
+            where: {
+                id: req.params.id
+            }
         })
-    })
-    
+        .then(() => {
+            User.findById(req.params.id).then((user) => {
+                res.render('./admin/editProfile', {
+                    user: user,
+                    title: 'Edit profile',
+                    csrf: req.csrfToken()
+                })
+            })
+        }).catch((e) => {
+            console.error('Failed to updated: ', e);
+        })
+
+});
+// Register new admin
+router.post('/admin/register', (req, res) => {
+    if (req.body.password && req.body.username) {
+        let sanitizedData = {
+            username: req.body.username,
+            password: req.body.password
+        }
+        bcrypt.genSalt()
+            .then((s) => {
+                let hashed = bcrypt.hashSync(sanitizedData.password, s)
+                User.create({
+                        username: sanitizedData.username,
+                        password: hashed,
+                        salt: s
+                    })
+                    .then((newAdmin) => {
+                        newAdmin.save();
+                        return res.redirect('/login');
+                    })
+            })
+    }
+    return res.redirect('/login');
 });
 
 // LOG IN/OUT
-router.get('/login', (req, res) => {
-    res.render('./admin/adminLogin')
+router.get('/login', csrfMiddleware, (req, res) => {
+    res.render('./admin/adminLogin', {
+        csrf: req.csrfToken(),
+        title: 'Login'
+    })
 });
 
-router.post('/login', passport.authenticate('local', {
-    successRedirect: '/admin',
+router.post('/login', csrfMiddleware, passport.authenticate('local', {
+    successRedirect: '/admin/messages',
     failureRedirect: '/admin'
 }));
 
-router.get('/logout', (req, res)=>{
-    if (req.user){
+router.get('/logout', (req, res) => {
+    if (req.user) {
         console.log('Loggin out: ', req.user.username)
         req.logout();
     }
     res.redirect('/');
 });
+
 
 module.exports = router

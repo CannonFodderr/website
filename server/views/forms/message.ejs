@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark text-light" id="basic-addon1">Name</span>
+            </div>
+            <input name="name" type="text" class="form-control" id="formGroupExampleInput" placeholder="Jane Smith" required>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark text-light" id="basic-addon1">E-Mail</span>
+            </div>
+            <input name="email" type="email" class="form-control" id="formGroupExampleInput2" placeholder="john@doe.com" required>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text bg-dark text-light" id="basic-addon1">Phone</span>
+            </div>
+            <input name="phone" type="tel" class="form-control" id="phone" placeholder="+972-50-3435555" minlength="9" maxlength="14">
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Say something..."></textarea>
+</div>
+<input type="hidden" name="_csrf" value="<%= csrf %>" />

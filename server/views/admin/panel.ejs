@@ -1,0 +1,20 @@
+<div class="admin-panel">
+    <h2 class="admin-title text-dark bg-light"><a class="title-link" href="/admin">Admin Panel</a></h2>
+    <p class="text-light">Welcome
+        <% if(user.firstName){ %>
+            <%= user.firstName %>
+            <%} else { %>
+                <%= user.username %>
+                <% } %>
+                <a href="/admin/<%= user.id %>/edit" class="btn bg-dark text-light">Edit profile</a>
+                <a href="/logout" class="btn bg-dark text-light">Logout</a>
+            </p>
+            <div class="admin-controls">
+                <a class="btn btn-lg btn-link bg-dark text-light btn-back" href="#"><i class="fas fa-arrow-left" onclick="history.go(-1)"></i></a>
+                <a class="btn bg-dark text-light" href="/admin/messages/">Messages</a>
+                <a class="btn bg-dark text-light" href="/admin/projects/">Projects</a>
+                <a href="/admin/jobs/" class="btn bg-dark text-light">Jobs</a>
+                <a class="btn bg-dark text-light" href="/admin/icons/new">New Icon</a>
+                
+            </div>
+        </div>

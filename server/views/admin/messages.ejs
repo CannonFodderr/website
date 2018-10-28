@@ -1,0 +1,43 @@
+<% include ../partials/header %>
+<% include ../loader/load %>
+<% include ../partials/navbar %>
+<div class="container page-content-container">
+    <% include panel %>
+    <div class="container">
+        <h5 class="admin-projects-title bg-light">
+            <strong>All Messages</strong>
+        </h5>
+        <div class="row">
+                <% messages.forEach((message)=>{ %>
+                    <div class="col-12">
+                        <div class="card message-card">
+                            <div class="card-header bg-info text-light">
+                                Received: <%= message.created_at.toDateString() %>
+                            </div>
+                            <div class="card-body bg-light text-dark">
+                                <h5 class="card-title"><strong>From:</strong> <%= message.Contact.name %></h5>
+                                <p class="card-text"><%= message.content %></p>
+                                
+                            </div>
+                            <div class="card-footer bg-dark text-light">
+                                <!-- <a href="mailto:<%= message.Contact.email %>" class="btn btn-secondary">Reply</a> -->
+                                <a class="message-link" href="mailto:<%= message.Contact.email %>"><i class="fas fa-envelope-open social-icon"></i></a>
+                                <% if (message.Contact.phone) { %>
+                                    <!-- <a href="tel:<%= message.Contact.phone %>" class="btn btn-primary">Go somewhere</a> -->
+                                    <a class="message-link" href="tel:<%= message.Contact.phone %>"><i class="fas fa-phone social-icon"></i></a>
+                                    <% } %>
+                                    <form class="del-message-form" action="/admin/messages/<%= message.id %>?_method=DELETE" method="post">
+                                        <button class="btn btn-danger del-btn" type="submit">DELETE</button>
+                                        <input type="hidden" name="_csrf" value="<%= csrf %>">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+        </div>
+        
+        
+        <script src="/scripts/admin_controls.js"></script>
+        <% include ../partials/footer %>

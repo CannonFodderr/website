@@ -1,10 +1,9 @@
-const config = require('../../dbconfig');
+const env = require('dotenv').config();
 const passportLocalSequelize = require('passport-local-sequelize');
 const Sequelize = require('sequelize');
-const sq = require('../db/connect');
+const db = require('../db/connect');
 
-
-const User = sq.define('User', {
+const User = db.define('User', {
     id: {
         autoIncrement: true,
         primaryKey: true,
@@ -32,14 +31,32 @@ const User = sq.define('User', {
             isEmail: true
         }
     },
-    birthday: Sequelize.DATE,
-    salt: Sequelize.STRING
+    firstName: {
+        type: Sequelize.STRING
+    },
+    lastName: {
+        type: Sequelize.STRING
+    },
+    phone: {
+        type: Sequelize.TEXT
+    },
+    birthday: Sequelize.DATEONLY,
+    bio: {
+        type: Sequelize.TEXT,
+    },
+    skills: {
+        type: Sequelize.ARRAY({type: Sequelize.STRING })
+    },
+    salt: Sequelize.STRING,
+},
+{
+    underscored:true
 });
 
 passportLocalSequelize.attachToUser(User, {
-    usernameField: 'nick',
-    hashField: config.hashField,
-    saltField: config.saltField
+    usernameField: 'username',
+    hashField: 'password',
+    saltField: 'salt',
 });
 
 module.exports = User;

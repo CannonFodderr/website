@@ -1,11 +1,17 @@
 <% include ../partials/header %>
-<div class="container">
+<% include ../loader/transLoad %>
+<% include ../partials/navbar %>
+
+<div class="container page-content-container">
+    <% include panel %>
     <div class="card bg-light mb-3 admin-login">
-        <h1>Edit <%= user.username %> Profile:</h1>
-        <form action="/admin/<%= user.id %>/edit" method="POST">
+        <h1>Edit
+            <%= user.username %> Profile:</h1>
+        <form action="/admin/<%= user.id %>/?_method=PUT" method="POST">
             <% include ../forms/adminEdit %>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Update</button>
         </form>
     </div>
 </div>
+<script src="/scripts/transloader.js"></script>
 <% include ../partials/footer %>
