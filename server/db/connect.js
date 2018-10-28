@@ -33,7 +33,7 @@ let generalDB = () => {
         let prodDB = new Sequelize(process.env.PROD_DB_NAME, process.env.PROD_DB_USER, process.env.PROD_DB_PASS, {
             host: process.env.PROD_DB_HOST,
             dialect: 'postgres',
-            logging: true,
+            logging: console.log(),
             dialectOptions: {
                 ssl:true
             }
