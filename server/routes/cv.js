@@ -7,10 +7,8 @@ const User = require('../models/user');
 router.get('/cv', (req, res)=>{
     User.find({where: { username: 'Admin'}})
     .then((user)=>{
-        console.log(user.bio)
-        let bio = user.bio
-        console.log(bio)
-        Job.findAll()
+        let bio = user.bio;
+        Job.findAll({order: [["start_date", "DESC"]]})
         .then((allJobs)=>{
             res.render('cv/view', { title: `${user.firstName} ${user.lastName} - CV`, jobs: allJobs, user:user, bio:bio, csrf: req.csrfToken() });
         })

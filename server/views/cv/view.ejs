@@ -28,24 +28,24 @@
                 <p class="autograph"><%= user.firstName%> <%= user.lastName%></p>
                 <hr />
                 <div class="row cv-controls">
-                <div class="col">
-                    <a href="/projects" class="btn btn-success">Project Gallery</a>
-                </div>
-                <div class="col">
-                <% if (jobs.length > 0) { %>
-                    <button class="btn btn-info" onclick="document.getElementById('workxp').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Work Experience</button>
-                    <% } %>
-                </div>
-                <div class="col">
-                    <button class="btn btn-danger" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
-                </div>
-                <div class="col">
-                    <!-- CONTACT COLLAPSE -->
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#contactCollapse" aria-expanded="false" aria-controls="contactCollapse">
-                        Contact
-                    </button>
-                </div>
-            </div>
+                    <div class="col">
+                        <a href="/projects" class="cv-controls-btn btn btn-success">Project Gallery</a>
+                    </div>
+                    <div class="col">
+                        <% if (jobs.length > 0) { %>
+                            <button class="cv-controls-btn btn btn-info" onclick="document.getElementById('workxp').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Work Experience</button>
+                            <% } %>
+                        </div>
+                        <div class="col">
+                            <button class="cv-controls-btn btn btn-dark text-light" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
+                        </div>
+                        <div class="col">
+                            <!-- CONTACT COLLAPSE -->
+                            <button class="cv-controls-btn btn btn-primary" type="button" data-toggle="collapse" data-target="#contactCollapse" aria-expanded="false" aria-controls="contactCollapse">
+                                Contact
+                            </button>
+                        </div>
+                    </div>
                     <div class="collapse" id="contactCollapse">
                         <div class="card card-body">
                             <form action="/" method="POST">
@@ -62,11 +62,10 @@
             <% if (jobs.length > 0) { %>
                 <h3 id="workxp" class="text-light">Work Experience</h3>
                 <% jobs.forEach((job)=>{ %>
-                    <div class="card job-card">
+                    <div class="card job-card bg-dark">
                         <div class="card-header bg-info text-light">
                             <%- job.title.toUpperCase() %>
                         </div>
-                        
                         <div class="card-body bg-light text-dark">
                             <h4 class="card-title"><strong>@ </strong><%= job.company %></h4>
                             <h5 class="card-text"><strong>TL;DR</strong></h5>
@@ -88,44 +87,45 @@
                                                             <% }) %>
                                                         </ul>
                                                         <% } %>
-                                                        <h6 class=" collapse-header bg-dark text-light">About</h6>
-                                                        <p class="card-text job-content bg-light text-dark"><%- job.content %></p>
+                                                        <% if (job.content){ %>
+                                                            <h6 class=" collapse-header bg-dark text-light">About</h6>
+                                                            <p class="card-text job-content bg-light text-dark"><%- job.content %></p>
+                                                            <% } %>
+                                                        </div>
+                                                        <button class="btn btn-danger btn-block" data-toggle="collapse" href="#collapse<%= job.id %>" role="button" aria-expanded="false" aria-controls="collapse<%= job.id %>" onclick="setTimeout(()=> {document.getElementById('collapse<%= job.id %>').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'}) }, 300)" >Close</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- DATES -->
-                                        <% if (job.start_date || job.end_date) {%>
-                                            <div class="card-footer bg-secondary text-light job-footer">
-                                                <% if (job.start_date) { %>
-                                                    <span class="job-date-text">FROM</span><%= job.start_date %>  
-                                                    <% } %>
-                                                    <% if (job.end_date) { %>
-                                                        <span class="job-date-text">TO</span><%= job.end_date %>
+                                            <!-- DATES -->
+                                            <% if (job.start_date || job.end_date) {%>
+                                                <div class="card-footer bg-secondary text-light job-footer">
+                                                    <% if (job.start_date) { %>
+                                                        <span class="job-date-text">FROM</span><%= job.start_date %>  
+                                                        <% } %>
+                                                        <% if (job.end_date) { %>
+                                                            <span class="job-date-text">TO</span><%= job.end_date %>
+                                                            <% } %>
+                                                        </div>
                                                         <% } %>
                                                     </div>
-                                                    <% } %>
+                                                    <% }) %>
                                                 </div>
-                                                <% }) %>
+                                                <% } %>
                                             </div>
-                                            <% } %>
-                                            <!-- Education -->
-                                            <div class="container project-features-container">
-                                                <div class="row bg-dark text-light">
-                                                    
-                                                </div>    
+                                            <!-- Education & Skills-->
+                                            <div class="container project-features-container">  
                                                 <div class="row">
-                                                    <div id="education" class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                                         <ul class="list-group features-list">
-                                                            <li class="list-group-item feature-item bg-danger text-light">Education</li>
+                                                            <li id="education" class="list-group-item feature-item bg-dark text-light">Education</li>
                                                             <li class="list-group-item feature-item">Sound School- 3 Years Sound Engineering</li>
                                                             <li class="list-group-item feature-item">Udemy -Web Developer Bootcamp</li>
                                                             <li class="list-group-item feature-item">Udemy - Python Bootcamp</li>
                                                         </ul>
                                                     </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12"> 
                                                         <ul class="list-group features-list">
-                                                            <li class="list-group-item feature-item bg-danger text-light">My Arsenal</li>
+                                                            <li class="list-group-item feature-item bg-danger text-light">Skills</li>
                                                             <li class="list-group-item feature-item">ProTools, Cubase, Ableton</li>
                                                             <li class="list-group-item feature-item">Photoshop, Premire</li>
                                                             <li class="list-group-item feature-item">Full Stack NodeJS, Express, MongoDB, Postgres</li>

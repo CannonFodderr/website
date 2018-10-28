@@ -485,6 +485,11 @@ img{
     display: flex;
     flex-wrap: wrap;
 }
+
+.cv-controls-btn{
+    width: 100%;
+    margin-top: 1vh;
+}
 @media only screen and (max-width: 1200px) {
     .project-card{
         min-width: 100%;
