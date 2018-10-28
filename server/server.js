@@ -27,7 +27,8 @@ const   indexRoute = require('./routes/index'),
         iconsRoutes = require('./routes/icons'),
         cvRoutes = require('./routes/cv'),
         jobsRoutes = require('./routes/job'),
-        messagesRoutes = require('./routes/messages');
+        messagesRoutes = require('./routes/messages'),
+        techRoutes = require('./routes/tech');
 
 // APP CONFIG
 app.set('view engine', 'ejs');
@@ -95,6 +96,7 @@ app.use(iconsRoutes);
 app.use(cvRoutes);
 app.use(jobsRoutes);
 app.use(messagesRoutes);
+app.use(techRoutes);
 
 
 
