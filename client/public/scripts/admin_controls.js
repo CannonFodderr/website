@@ -4,28 +4,32 @@ let featureList = document.getElementById('feature-list');
 let featureInput = document.getElementById('add-feature-input');
 let featuresSubmit = document.getElementById('featuresInput');
 
-featureList.addEventListener('mouseover', ()=>{
-    let allFeatures = document.querySelectorAll('.delete-feature-icon');
-    allFeatures.forEach((item)=>{
-        item.addEventListener('click', (e)=>{
-            featureInput.value='';
-            FeaturesToInput()
-            item.parentNode.remove();
+
+if(featureList){
+    featureList.addEventListener('mouseover', ()=>{
+        let allFeatures = document.querySelectorAll('.delete-feature-icon');
+        allFeatures.forEach((item)=>{
+            item.addEventListener('click', (e)=>{
+                featureInput.value='';
+                FeaturesToInput()
+                item.parentNode.remove();
+            })
         })
     })
-})
-
-
-addFeatureBtn.addEventListener('click', (e)=>{
-    e.preventDefault();
-    let newFeature = featureInput.value
-    if(newFeature.length > 1){
-        featureList.innerHTML += `<li class="list-group-item feature-item"><i class="fas fa-trash delete-feature-icon text-danger"></i>${newFeature.trim()}</li>`
-        featureInput.value = '';
-        FeaturesToInput();
-    };
-});
-
+}
+    
+if(addFeatureBtn){
+    addFeatureBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        let newFeature = featureInput.value
+        if(newFeature.length > 1){
+            featureList.innerHTML += `<li class="list-group-item feature-item"><i class="fas fa-trash delete-feature-icon text-danger"></i>${newFeature.trim()}</li>`
+            featureInput.value = '';
+            FeaturesToInput();
+        };
+    });
+}
+    
 function FeaturesToInput(){
     featuresSubmit.value = "";
     let featureString = "";
@@ -38,11 +42,12 @@ function FeaturesToInput(){
 }
 
 
-
-deleteButtons.forEach((btn)=>{
-    btn.addEventListener('click', (e)=>{
-        if(!confirm("WARNING! are you sure you want to DELETE?")){
-            return e.preventDefault()
-        }
-    })
-});
+if(deleteButtons){
+    deleteButtons.forEach((btn)=>{
+        btn.addEventListener('click', (e)=>{
+            if(!confirm("WARNING! are you sure you want to DELETE?")){
+                return e.preventDefault()
+            }
+        })
+    });
+}

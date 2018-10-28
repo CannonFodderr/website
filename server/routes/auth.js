@@ -10,23 +10,9 @@ const sanitizer = require('../middleware/sanitizer');
 
 // ADMIN ROUTES
 router.get('/admin', middleware.isAdmin, (req, res) => {
-    User.findById(req.user.id, {include: ['projects']}).then((user)=>{
-        Message.findAll({order: [['created_at', 'DESC']], include: [{ model: Contact }]})
-        .then((allMessages)=>{
-            res.render('./admin/main', {
-                user: req.user,
-                title: `${ process.env.OWNER } - Control Panel`,
-                messages: allMessages
-            });
-        })
-        .catch(e => {
-            console.error(e);
-            res.redirect('back')
-        })
-        
-    })
-    
+    res.redirect('/admin/messages')
 });
+
 // View Admin Edit Form
 router.get('/admin/:id/edit', (req, res) => {
     User.findById(req.params.id).then((user) => {
@@ -95,7 +81,7 @@ router.get('/login', csrfMiddleware, (req, res) => {
 });
 
 router.post('/login', csrfMiddleware, passport.authenticate('local', {
-    successRedirect: '/admin',
+    successRedirect: '/admin/messages',
     failureRedirect: '/admin'
 }));
 

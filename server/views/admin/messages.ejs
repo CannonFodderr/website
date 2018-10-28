@@ -7,8 +7,7 @@
         <h5 class="admin-projects-title bg-light">
             <strong>All Messages</strong>
         </h5>
-        <div class="row projects-row">
-            <div class="row">
+        <div class="row">
                 <% messages.forEach((message)=>{ %>
                     <div class="col-12">
                         <div class="card message-card">
@@ -27,15 +26,18 @@
                                     <!-- <a href="tel:<%= message.Contact.phone %>" class="btn btn-primary">Go somewhere</a> -->
                                     <a class="message-link" href="tel:<%= message.Contact.phone %>"><i class="fas fa-phone social-icon"></i></a>
                                     <% } %>
+                                    <form class="del-message-form" action="/admin/messages/<%= message.id %>?_method=DELETE" method="post">
+                                        <button class="btn btn-danger del-btn" type="submit">DELETE</button>
+                                        <input type="hidden" name="_csrf" value="<%= csrf %>">
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         <% }) %>
-                    </div>
                 </div>
             </div>
         </div>
         
         
-        
+        <script src="/scripts/admin_controls.js"></script>
         <% include ../partials/footer %>

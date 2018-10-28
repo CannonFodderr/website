@@ -12,7 +12,7 @@ router.get('/cv', (req, res)=>{
         console.log(bio)
         Job.findAll()
         .then((allJobs)=>{
-            res.render('cv/view', { title: `${process.env.OWNER} - CV`, jobs: allJobs, user:user, bio:bio });
+            res.render('cv/view', { title: `${user.firstName} ${user.lastName} - CV`, jobs: allJobs, user:user, bio:bio, csrf: req.csrfToken() });
         })
     })
     .catch(e => {

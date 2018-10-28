@@ -27,11 +27,33 @@
                 <p>Best Regards,</p>
                 <p class="autograph"><%= user.firstName%> <%= user.lastName%></p>
                 <hr />
-                <a href="/projects" class="btn btn-success">Project Gallery</a>
+                <div class="row cv-controls">
+                <div class="col">
+                    <a href="/projects" class="btn btn-success">Project Gallery</a>
+                </div>
+                <div class="col">
                 <% if (jobs.length > 0) { %>
                     <button class="btn btn-info" onclick="document.getElementById('workxp').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Work Experience</button>
-                    <button class="btn btn-danger" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
                     <% } %>
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
+                </div>
+                <div class="col">
+                    <!-- CONTACT COLLAPSE -->
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#contactCollapse" aria-expanded="false" aria-controls="contactCollapse">
+                        Contact
+                    </button>
+                </div>
+            </div>
+                    <div class="collapse" id="contactCollapse">
+                        <div class="card card-body">
+                            <form action="/" method="POST">
+                                <%  include ../forms/message %>
+                                <button class="btn btn-danger" type="submit">Send</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
