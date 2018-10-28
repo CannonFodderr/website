@@ -51,35 +51,43 @@
                     <% })%>
                 </select>
             </div>
-            <h5 class="text-light">Features</h5>
+            <h5 class="text-light">Features:</h5>
             <div class="input-group-block project-features">
                 <ul id="feature-list" class="list-group">
-                    <%  if( project.features ) { project.features.forEach((feat)=>{ %>
-                        <li class="list-group-item feature-item" draggable="false"><i class="fas fa-trash delete-feature-icon text-danger"></i><%= feat.trim() %></li>
-                        <% })} %>
-                        
-                    </ul>
-                </div>
-                <div class="input-group mb-3">
-                    <input class="form-control" type="text" name="" id="add-feature-input">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-light" id="add-feature">ADD</button>
-                    </div>        
-                </div>
-                <input id="featuresInput" class="bg-dark text-light" type="hidden" name="features" value="<% if( project.features ) { project.features.forEach((feat)=>{ %><%= feat.trim() %>;<% })} %>">
-                <h5 class="text-light">Content</h5>
-                <div class="form-group">
-                    <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="About the project"><%= project.content %></textarea>
-                </div>
-                <div class="input-group mb-3">
-                    <% techs.forEach((tech)=>{ %>
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" name="tech" id="<%=tech.id %>" value="<%= tech.id %>" aria-label="Checkbox for following text input">
-                            </div>
+                    <% if(project.features){ %>
+                        <% project.features.forEach((feature)=>{ %>
+                            <% if (feature.length > 0) { %> 
+                                <div class="input-group mb-3 input-group block">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-light bg-dark" id="basic-addon1"><i class="fas fa-trash delete-feature-icon text-danger"></i></span>
+                                    </div>
+                                    <li class="list-group-item feature-item" draggable="false"><input class="form-control feature-input" type="text" name="" id="" value="<%- feature %>"></li>
+                                </div>
+                                <% } %>
+                                <% }) %>
+                                <% } %>
+                            </ul>  
                         </div>
-                        <input type="text" class="form-control" aria-label="Text input with checkbox" value="<%= tech.title %>" disabled>
-                        <% }) %>
-                    </div>
-                    <input type="hidden" name="_csrf" value="<%= csrf %>" />
-                    
+                        <div class="input-group mb-3">
+                            <input class="form-control" type="text" name="" id="add-feature-input">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-light" id="add-feature">ADD</button>
+                            </div>        
+                        </div>
+                        <input id="featuresInput" class="bg-dark text-light" type="hidden" name="features" value="<% if( project.features ) { project.features.forEach((feat)=>{ %><%= feat.trim() %>;<% })} %>">
+                        <h5 class="text-light">Content</h5>
+                        <div class="form-group">
+                            <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="About the project"><%= project.content %></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <% techs.forEach((tech)=>{ %>
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <input type="checkbox" name="tech" id="<%=tech.id %>" value="<%= tech.id %>" aria-label="Checkbox for following text input">
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Text input with checkbox" value="<%= tech.title %>" disabled>
+                                <% }) %>
+                            </div>
+                            <input type="hidden" name="_csrf" value="<%= csrf %>" />
+                            

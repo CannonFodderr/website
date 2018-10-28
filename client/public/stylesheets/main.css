@@ -352,17 +352,21 @@ img{
     font-size: 2em;
     justify-content: flex-end;
 }
-.feature-item:hover .delete-feature-icon{
+/* .feature-item:hover .delete-feature-icon{
     width: 15px;
     opacity: 1;
     transition: 0.7s ease-in;
+} */
+
+.feature-item{
+    width: 85%;
 }
 
 .delete-feature-icon{
     position: relative;
     cursor: pointer;
-    width: 0;
-    opacity: 0;
+    width: 15%;
+    opacity: 1;
 }
 .project-content-container{
     background-color: var(--textSecondary);
