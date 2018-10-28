@@ -48,6 +48,7 @@ router.get('/admin/jobs', middleware.isAdmin, (req, res)=>{
 router.get('/admin/jobs/:jobId/edit', middleware.isAdmin, (req, res)=>{
     Job.findById(req.params.jobId)
     .then((foundJob)=>{
+        console.log(foundJob);
         res.render('./jobs/edit', {title: `Edit ${foundJob.title}`, job:foundJob, user: req.user, csrf: req.csrfToken() })
     })
     .catch(e => {
