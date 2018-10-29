@@ -80,14 +80,18 @@
                             <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="About the project"><%= project.content %></textarea>
                         </div>
                         <div class="input-group mb-3">
-                            <% techs.forEach((tech)=>{ %>
+                            <% for ( tech of techs) { %>
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
-                                        <input type="checkbox" name="tech" id="<%=tech.id %>" value="<%= tech.id %>" aria-label="Checkbox for following text input">
+                                        <% if (!projectTechs.indexOf(tech.id) ) { %>
+                                            <input type="checkbox" name="tech" id="<%=tech.id %>" value="<%= tech.id %>" aria-label="Checkbox for following text input" checked>
+                                        <% } else { %>
+                                            <input type="checkbox" name="tech" id="<%=tech.id %>" value="<%= tech.id %>" aria-label="Checkbox for following text input">
+                                        <% } %>
                                     </div>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Text input with checkbox" value="<%= tech.title %>" disabled>
-                                <% }) %>
+                                <% } %>
                             </div>
                             <input type="hidden" name="_csrf" value="<%= csrf %>" />
                             

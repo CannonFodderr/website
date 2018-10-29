@@ -60,7 +60,6 @@ router.get('/projects/:projectid', (req, res)=>{
         }
         Project.create(newProject)
         .then((createdProject)=>{
-            console.log(createdProject);
             res.redirect('/admin')
         })
         .catch((e)=>{
@@ -70,12 +69,16 @@ router.get('/projects/:projectid', (req, res)=>{
     });
     // Project Edit Routes
     router.get('/admin/projects/:projectid/edit', middleware.isAdmin, (req, res)=>{
-        Project.findById(req.params.projectid)
+        Project.findById(req.params.projectid, {include: [Icon, Tech]})
         .then((project)=>{
+            let projectTechs = []
+            project.Technologies.forEach((tech)=>{
+                projectTechs.push(tech.dataValues.id)
+            });
             Icon.findAll().then((icons)=>{
                 Tech.findAll().then((allTech)=>{
                     res.render('./projects/edit', 
-                    {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons, techs: allTech, user: req.user });
+                    {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons, techs: allTech,projectTechs: projectTechs, user: req.user });
                 })
             })
         })
@@ -87,7 +90,6 @@ router.get('/projects/:projectid', (req, res)=>{
     
     router.put('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
         let features = req.body.features.trim().split(';')
-        console.log(req.body)
         let filteredFeats = features.filter(feat => feat.length > 0);
         let updateData = {
             title: req.body.title,
@@ -103,14 +105,29 @@ router.get('/projects/:projectid', (req, res)=>{
             id: req.params.projectid
         }})
         .then(()=>{
-            Project.findById(req.params.projectid)
+            Project.findById(req.params.projectid, {include: [Tech]})
             .then((project)=>{
-                res.redirect('/admin');
+                let techIds = []
+                console.log(req.body.tech)
+                if (req.body.tech != undefined && typeof(req.body.tech) == 'array'){
+                    req.body.tech.forEach((t)=>{
+                        techIds.push(Number(t));
+                    })
+                }
+                let projectTechs = []
+                project.Technologies.forEach((tech)=>{
+                    projectTechs.push(tech.dataValues.id)
+                });
+                project.removeTechnologies(projectTechs).then(()=>{
+                    project.addTechnologies(req.body.tech).then(()=>{
+                        res.redirect('/admin/projects');
+                    })
+                })
             })
         })
         .catch(e => {
             console.log(e);
-            res.redirect('/admin');
+            res.redirect('/admin/projects');
         })
     })
     

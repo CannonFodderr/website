@@ -17,15 +17,20 @@ Contact.belongsTo(User);
 User.hasMany(Contact, {as: 'contacts'});
 Message.belongsTo(Contact);
 Contact.hasMany(Message, {as: 'messages'});
-Tech.belongsToMany(Project, {through: 'ProjectTech', foreignKey: 'tech_id'});
-Project.belongsToMany(Tech, {through: 'ProjectTech', foreignKey: 'proj_id'});
+Tech.belongsToMany(Project, {through: 'ProjectTech'});
+Project.belongsToMany(Tech, {through: 'ProjectTech'});
 
-// Project.sync({force:true})
-// .then(()=>{
-//     Tech.sync({force:true})
-// }).catch(e => { console.error(e)})
+Project.sync({})
+.then(()=>{
+    Tech.sync({})
+}).then(()=>{
+    db.sync().then(()=>{
+        console.log("DB SYNC O.K.")
+    })
+})
+.catch(e => { console.error(e)})
 
-db.sync().then(()=>{
-    console.log("DB SYNC O.K.")
-}).catch(e => { console.error(e) })
+// db.sync().then(()=>{
+//     console.log("DB SYNC O.K.")
+// }).catch(e => { console.error(e) })
 
