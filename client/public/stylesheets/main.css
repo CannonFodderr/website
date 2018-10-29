@@ -359,7 +359,7 @@ img{
 } */
 
 .feature-item{
-    width: 85%;
+    width: 100%;
 }
 
 .delete-feature-icon{
@@ -512,6 +512,24 @@ img{
     width: fit-content;
     text-align: center;
     padding: 1vh 1vw;
+}
+.tech-card{
+    margin-top:1vh;
+}
+.tech-card-img{
+    height: 200px;
+    background: #fff;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+}
+
+.admin-tech-img{
+    height: 200px;
+    width: auto;
+    margin: 1vh auto;
+    background: #fff;
 }
 @media only screen and (max-width: 1200px) {
     .project-card{

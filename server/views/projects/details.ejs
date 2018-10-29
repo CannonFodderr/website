@@ -59,28 +59,27 @@
                                 <% }) %>
                             </ul>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <ul class="list-group features-list">
-                                <li class="list-group-item feature-item bg-warning">Name dropping...</li>
+                        <% if (project.Technologies.length > 0) { %>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <li class="list-group-item feature-item bg-warning">SHAMELESS NAME DROPING...</li>
                                 <div class="row">
-                                    <div class="col-6">
-                                        <li><img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-white.png" alt="Card image cap"></li>
-                                    </div>
-                                    <div class="col-6">
-                                        <li><img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-white.png" alt="Card image cap"></li>
-                                    </div>
-                                    <div class="col-6">
-                                        <li><img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-white.png" alt="Card image cap"></li>
-                                    </div>
-                                    <div class="col-6">
-                                        <li><img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-white.png" alt="Card image cap"></li>
+                                    <% project.Technologies.forEach((tech)=>{ %>
+                                        <div class="col-6">
+                                            <a target="_blank" href="<%= tech.link %>">
+                                                <div class="card tech-card bg-dark text-white">
+                                                    <div class="card-header text-center"><%= tech.title %></div>
+                                                    <div class="card-img tech-card-img" style="background-image: url('<%= tech.img %>')" draggable="false"></div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <% }) %>   
                                     </div>
                                 </div>
-                            </ul>
+                                <% } %>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <%}%>
-                
-                <script src="../../scripts/transloader.js"></script>
-                <% include ../partials/footer %>
+                    <%}%>
+                    
+                    <script src="../../scripts/transloader.js"></script>
+                    <% include ../partials/footer %>

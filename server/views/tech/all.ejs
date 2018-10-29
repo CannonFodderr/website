@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+<% include ../loader/transLoad %>
+<% include ../partials/navbar %>
+<div class="container page-content-container">
+    <% include ../admin/panel %>
+    <a class="btn bg-dark text-light" href="/admin/tech/new">New Tech</a>
+    <h5 class="admin-projects-title bg-light">
+            <strong>All Technologies:</strong>
+        </h5>
+    <div class="row">
+    <% allTech.forEach((tech)=>{ %>
+        <div class="col">
+                <a href="/admin/tech/<%= tech.id %>">
+                    <div class="card tech-card bg-dark text-white">
+                        <div class="card-header text-center"><%= tech.title %></div>
+                        <div class="card-img tech-card-img" style="background-image: url('<%= tech.img %>')" draggable="false"></div>
+                    </div>
+                </a>
+            </div>
+    <% }) %>
+    </div>
+</div>
+
+
+<script src="/scripts/transloader.js"></script>
+<% include ../partials/footer %>

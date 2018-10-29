@@ -7,12 +7,12 @@ const Icon = require('../models/icon');
 // Visitor Views
 router.get('/projects', (req, res)=>{
     if(req.query.category){
-        Project.findAll({ where: { category: req.query.category }, include: [{model: Icon}]}).then((foundProjects)=>{
+        Project.findAll({ where: { category: req.query.category }, include: [Icon]}).then((foundProjects)=>{
             console.log(foundProjects)
             return res.render('./projects/all', { projects: foundProjects, title: `${req.query.category} projects` })
         })
     } else {
-        Project.findAll({include: [{model: Icon}]}).then((allProjects)=>{
+        Project.findAll({include: [Icon]}).then((allProjects)=>{
             return res.render('./projects/all', { projects: allProjects, title: `All projects` })
         })
     }
@@ -20,8 +20,10 @@ router.get('/projects', (req, res)=>{
 // VIEW PROJECT
 router.get('/projects/:projectid', (req, res)=>{
     Project.findById(req.params.projectid, 
-        {include: [{model: Icon}]})
+        {include: [Icon, Tech]})
         .then((project)=>{
+            project.Technologies.forEach((i)=>{
+            })
             if (project && project.Icon != null) {
                 res.render('./projects/details', {title: project.title, project:project, icon: project.Icon.dataValues })
             } else{

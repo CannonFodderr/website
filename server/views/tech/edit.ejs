@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+<% include ../loader/transLoad %>
+<% include ../partials/navbar %>
+<div class="container page-content-container">
+    <% include ../admin/panel %>
+    <h2>Edit <%= title %></h2>
+    <form action="/admin/tech/<%=tech.id%>?_method=DELETE" method="POST">
+        <button class="btn del-btn btn-danger" type="submit">DELETE</button>
+    </form>
+    <img src="<%=tech.img %>" alt="<%=tech.title%>" class="admin-tech-img">
+    <form action="/admin/tech/<%=tech.id%>?_method=PUT" method="POST">
+        <% include ../forms/editTech %>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Edit</button>
+    </form>
+    
+</div>
+
+
+<script src="/scripts/transloader.js"></script>
+<% include ../partials/footer %>
