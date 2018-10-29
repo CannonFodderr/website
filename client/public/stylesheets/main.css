@@ -516,9 +516,6 @@ img{
     text-align: center;
     padding: 1vh 1vw;
 }
-.tech-card{
-    /* margin-top:1vh; */
-}
 .tech-card-img-wrapper{
     padding: 1vh 1vw;
 }
@@ -551,6 +548,9 @@ img{
     width: auto;
     margin: 1vh auto;
     background: #fff;
+}
+.admin-feature-item{
+    width: 85%;
 }
 @media only screen and (max-width: 1200px) {
     .project-card{

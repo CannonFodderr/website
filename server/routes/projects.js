@@ -80,7 +80,7 @@ router.get('/projects/:projectid', (req, res)=>{
             Icon.findAll().then((icons)=>{
                 Tech.findAll().then((allTech)=>{
                     res.render('./projects/edit', 
-                    {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons, techs: allTech,projectTechs: projectTechs, user: req.user });
+                    {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons, techs: allTech, projectTechs: projectTechs, user: req.user });
                 })
             })
         })

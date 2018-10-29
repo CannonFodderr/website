@@ -14,7 +14,7 @@
         </div>
         <div class="col-lg-8 col-md-6 col-sm-8 col-xs-6 text-center">
             <% if(icon != null){ %>
-                <a class="text-center project-link" href="<%= project.link %>"><div><%- icon.code %> <%= icon.phrase.toUpperCase() %></div></a>
+                <a target="_blank" class="text-center project-link" href="<%= project.link %>"><div><%- icon.code %> <%= icon.phrase.toUpperCase() %></div></a>
                 <% } %>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-2 col-xs-3"></div>
@@ -64,26 +64,23 @@
                                         <div class="col-lg-4 col-md-6">
                                             <a target="_blank" href="<%= tech.link %>">
                                                 <div class="card tech-card bg-dark text-white">
-                                                    <!-- <div class="card-header text-center"><%= tech.title.toUpperCase() %></div> -->
                                                     <div class="tech-card-img-wrapper bg-light">
                                                         <div class="card-img tech-card-img" style="background-image: url('<%= tech.img %>')" draggable="false"></div>
                                                     </div>
                                                     <div class="card-img-overlay tech-img-overlay">
-                                                            <h5 class="card-title tech-card-title"><%= tech.title.toUpperCase() %></h5>
-                                                            <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                            <p class="card-text">Last updated 3 mins ago</p> -->
-                                                          </div>
-                                                </div>
-                                            </a>
+                                                        <h5 class="card-title tech-card-title"><%= tech.title.toUpperCase() %></h5>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <% }) %>   
                                         </div>
-                                        <% }) %>   
                                     </div>
+                                    <% } %>
                                 </div>
-                                <% } %>
                             </div>
                         </div>
-                    </div>
-                    <%}%>
-                    
-                    <script src="../../scripts/transloader.js"></script>
-                    <% include ../partials/footer %>
+                        <%}%>
+                        
+                        <script src="../../scripts/transloader.js"></script>
+                        <% include ../partials/footer %>

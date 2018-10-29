@@ -61,7 +61,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text text-light bg-dark" id="basic-addon1"><i class="fas fa-trash delete-feature-icon text-danger"></i></span>
                                     </div>
-                                    <li class="list-group-item feature-item" draggable="false"><input class="form-control feature-input" type="text" name="" id="" value="<%- feature %>"></li>
+                                    <li class="list-group-item admin-feature-item" draggable="false"><input class="form-control feature-input" type="text" name="" id="" value="<%- feature %>"></li>
                                 </div>
                                 <% } %>
                                 <% }) %>
@@ -79,19 +79,22 @@
                         <div class="form-group">
                             <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="About the project"><%= project.content %></textarea>
                         </div>
+                        <h5 class="text-light">Technologies</h5>
                         <div class="input-group mb-3">
-                            <% for ( tech of techs) { %>
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <% if (!projectTechs.indexOf(tech.id) ) { %>
-                                            <input type="checkbox" name="tech" id="<%=tech.id %>" value="<%= tech.id %>" aria-label="Checkbox for following text input" checked>
+                            <div class="row no-gutters">
+                            <% for (tech of techs ) { %>
+                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 bg-light">
+                                    <div class="form-check form-check-inline bg-light">
+                                        <% if (projectTechs.indexOf(tech.id) > -1) { %>
+                                            <input name="tech" class="form-check-input" type="checkbox" id="<%= tech.id %>" value="<%= tech.id %>" checked>
                                         <% } else { %>
-                                            <input type="checkbox" name="tech" id="<%=tech.id %>" value="<%= tech.id %>" aria-label="Checkbox for following text input">
+                                            <input name="tech" class="form-check-input" type="checkbox" id="<%= tech.id %>" value="<%= tech.id %>">
                                         <% } %>
+                                        <label class="form-check-label" for="<%= tech.id %>"><%= tech.title %></label>
                                     </div>
                                 </div>
-                                <input type="text" class="form-control" aria-label="Text input with checkbox" value="<%= tech.title %>" disabled>
                                 <% } %>
                             </div>
-                            <input type="hidden" name="_csrf" value="<%= csrf %>" />
+                        </div>
+                        <input type="hidden" name="_csrf" value="<%= csrf %>" />    
                             
