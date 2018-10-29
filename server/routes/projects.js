@@ -5,10 +5,10 @@ const Tech = require('../models/tech');
 const Icon = require('../models/icon');
 
 // Visitor Views
+// ALL PROJECTS
 router.get('/projects', (req, res)=>{
     if(req.query.category){
         Project.findAll({ where: { category: req.query.category }, include: [Icon]}).then((foundProjects)=>{
-            console.log(foundProjects)
             return res.render('./projects/all', { projects: foundProjects, title: `${req.query.category} projects` })
         })
     } else {
@@ -16,7 +16,7 @@ router.get('/projects', (req, res)=>{
             return res.render('./projects/all', { projects: allProjects, title: `All projects` })
         })
     }
-})
+});
 // VIEW PROJECT
 router.get('/projects/:projectid', (req, res)=>{
     Project.findById(req.params.projectid, 
