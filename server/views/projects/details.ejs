@@ -46,12 +46,9 @@
         </div>
         <!-- Features -->
         <% if (project.features && project.features.length > 0){ %>
-            <div class="container project-features-container">
-                <div class="row bg-dark text-light">
-                    
-                </div>    
+            <div class="container">   
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-lg-6 col-md-6 col-sm-12 features-col">
                         <ul class="list-group features-list">
                             <li class="list-group-item feature-item bg-info">FEATURES</li>
                             <% project.features.forEach((feat)=> { %>
@@ -60,15 +57,22 @@
                             </ul>
                         </div>
                         <% if (project.Technologies.length > 0) { %>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12 tech-col">
                                 <li class="list-group-item feature-item bg-warning">SHAMELESS NAME DROPING...</li>
-                                <div class="row">
+                                <div class="row no-gutters">
                                     <% project.Technologies.forEach((tech)=>{ %>
-                                        <div class="col-6">
+                                        <div class="col-lg-4 col-md-6">
                                             <a target="_blank" href="<%= tech.link %>">
                                                 <div class="card tech-card bg-dark text-white">
-                                                    <div class="card-header text-center"><%= tech.title %></div>
-                                                    <div class="card-img tech-card-img" style="background-image: url('<%= tech.img %>')" draggable="false"></div>
+                                                    <!-- <div class="card-header text-center"><%= tech.title.toUpperCase() %></div> -->
+                                                    <div class="tech-card-img-wrapper bg-light">
+                                                        <div class="card-img tech-card-img" style="background-image: url('<%= tech.img %>')" draggable="false"></div>
+                                                    </div>
+                                                    <div class="card-img-overlay tech-img-overlay">
+                                                            <h5 class="card-title tech-card-title"><%= tech.title.toUpperCase() %></h5>
+                                                            <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                                            <p class="card-text">Last updated 3 mins ago</p> -->
+                                                          </div>
                                                 </div>
                                             </a>
                                         </div>
