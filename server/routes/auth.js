@@ -80,14 +80,22 @@ router.get('/login', csrfMiddleware, (req, res) => {
     })
 });
 
+router.get('/login/google', passport.authenticate('google', { scope: ['profile'] }));
+
+router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login'}),
+    (req, res) => {
+        res.redirect('/admin')
+    }
+);
+
 router.post('/login', csrfMiddleware, passport.authenticate('local', {
     successRedirect: '/admin/messages',
-    failureRedirect: '/admin'
+    failureRedirect: '/login'
 }));
 
 router.get('/logout',middleware.isLoggedIn, (req, res) => {
     if (req.user) {
-        console.log('Loggin out: ', req.user.username)
+        console.log('Loggin out:')
         req.logout();
     }
     res.redirect('/');

@@ -9,6 +9,9 @@ const User = db.define('User', {
         primaryKey: true,
         type: Sequelize.INTEGER
     },
+    googleId: {
+        type: Sequelize.STRING
+    },
     username: {
         type: Sequelize.TEXT,
         allowNull: false,
@@ -19,7 +22,6 @@ const User = db.define('User', {
     },
     password: {
         type: Sequelize.STRING,
-        allowNull: false
     },
     isAdmin: {
         type: Sequelize.BOOLEAN,
