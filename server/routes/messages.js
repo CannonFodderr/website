@@ -4,11 +4,10 @@ const User = require('../models/user');
 const Contact = require('../models/contact');
 const Message = require('../models/messages');
 const Sequelize = require('sequelize')
-const Op = Sequelize.Op;
+const options = Sequelize.Op;
 
 router.get('/admin/messages', middleware.isAdmin, (req, res)=>{
-    User.find({where: {[Op.or]: [{id: Number(req.user.id)}, {googleId: req.user.id}]}}, 
-    {include: ['projects']}).then((user)=>{
+    User.findById(req.user.id, {include: ['projects']}).then((user)=>{
         Message.findAll({order: [['created_at', 'DESC']], include: [{ model: Contact }]})
         .then((allMessages)=>{
             res.render('./admin/messages', {

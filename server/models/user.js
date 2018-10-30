@@ -10,7 +10,7 @@ const User = db.define('User', {
         type: Sequelize.INTEGER
     },
     googleId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
     },
     username: {
         type: Sequelize.TEXT,

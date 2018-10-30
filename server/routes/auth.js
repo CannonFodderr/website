@@ -97,7 +97,7 @@ router.post('/login', csrfMiddleware, passport.authenticate('local', {
 
 router.get('/logout', (req, res) => {
     if (req.user) {
-        console.log('Loggin out:')
+        console.log(`Loggin out: ${req.user.username}`)
         req.logout();
     }
     res.redirect('/');

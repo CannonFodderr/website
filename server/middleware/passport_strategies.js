@@ -43,13 +43,27 @@ if(process.env.DB_STATE === 'prod'){
 let googleLoginConfig = {
     clientID: process.env.OAUTH_ID,
     clientSecret: process.env.OAUTH_SECRET,
-    callbackURL: `${cbURL}/login/google/callback`
+    callbackURL: `${cbURL}/login/google/callback`,
+    passReqToCallback: true
 }
 
 
-// LOGIN
+// LOGIN CB
 passport.use( new GoogleStrategy(googleLoginConfig,
-function(accessToken, refreshToken, profile, cb) {
-        return cb(null, profile)
+function(req, accessToken, refreshToken, profile, cb) {
+    // If user is admin register the googleID
+    if ( req.user && req.user.isAdmin ) {
+        User.update({ googleId: profile.id }, {where: {id: req.user.id}})
+        .then((updatedUser)=>{
+            return cb(null, updatedUser)
+        })
+    } else {
+        // Sign in with googleID
+        User.find({where: { googleId: profile.id }})
+        .then((foundUser)=>{
+            return cb(null, foundUser)
+        })
+    }
+        
     }
 ));
