@@ -1,7 +1,9 @@
 window.onload = () => {
     let wrapper = document.getElementsByClassName('load-wrapper');
-    wrapper[0].classList.add('hide');
-    setTimeout(()=>{
-        wrapper[0].style.display = "none";
-    }, 500)
+    if(wrapper.length > 0){
+        wrapper[0].classList.add('hide');
+        setTimeout(()=>{
+            wrapper[0].style.display = "none";
+        }, 500)
+    }
 }

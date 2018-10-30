@@ -550,6 +550,24 @@ img{
 .admin-feature-item{
     width: 85%;
 }
+.brand-login-button{
+    font-family: 'Roboto', sans-serif;
+    color: #3e3e3e;
+    margin: 1vh auto 0 auto;
+    width: fit-content;
+    padding: 0 1vw 0 0;
+    height: 50px;
+    transition: 0.4s ease-in-out;
+}
+.brand-login-button:hover{
+    background: #4285F4;
+    color: #fff;
+}
+.signin-logo{
+    width: auto;
+    height: 100%;
+    margin: 0 1vw 0 0;
+}
 @media only screen and (max-width: 1200px) {
     .project-card{
         min-width: 100%;
