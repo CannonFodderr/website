@@ -85,7 +85,7 @@ router.post('/login', csrfMiddleware, passport.authenticate('local', {
     failureRedirect: '/admin'
 }));
 
-router.get('/logout', (req, res) => {
+router.get('/logout',middleware.isLoggedIn, (req, res) => {
     if (req.user) {
         console.log('Loggin out: ', req.user.username)
         req.logout();

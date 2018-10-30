@@ -22,8 +22,6 @@ router.get('/projects/:projectid', (req, res)=>{
     Project.findById(req.params.projectid, 
         {include: [Icon, Tech]})
         .then((project)=>{
-            project.Technologies.forEach((i)=>{
-            })
             if (project && project.Icon != null) {
                 res.render('./projects/details', {title: project.title, project:project, icon: project.Icon.dataValues })
             } else{
@@ -62,7 +60,7 @@ router.get('/projects/:projectid', (req, res)=>{
         }
         Project.create(newProject)
         .then((createdProject)=>{
-            res.redirect('/admin')
+            res.redirect('/admin/projects')
         })
         .catch((e)=>{
             console.error(e);
@@ -86,7 +84,7 @@ router.get('/projects/:projectid', (req, res)=>{
         })
         .catch(e =>{ 
             console.log(e)
-            res. redirect('/admin')
+            res. redirect('/admin/projects')
         })
     });
     

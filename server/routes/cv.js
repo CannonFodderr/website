@@ -1,12 +1,11 @@
 const router = require('express').Router();
-const middleware = require('../middleware/auth');
 const Job = require('../models/job');
 const User = require('../models/user');
+const Project = require('../models/project');
 
 // View CV
 router.get('/cv', (req, res)=>{
-    console.log(res.locals)
-    User.find({where: { username: 'Admin'}})
+    User.find({include: ['projects'], where: { username: 'Admin'}})
     .then((user)=>{
         let bio = user.bio;
         Job.findAll({order: [["start_date", "DESC"]]})
@@ -18,10 +17,6 @@ router.get('/cv', (req, res)=>{
         console.error(e);
         res.redirect('/')
     })
-    
 });
-
-
-
 
 module.exports = router;

@@ -1,5 +1,3 @@
-console.log('Main Connected!');
-
 window.onload = () => {
     let wrapper = document.getElementsByClassName('load-wrapper');
     wrapper[0].classList.add('hide');
@@ -7,5 +5,3 @@ window.onload = () => {
         wrapper[0].style.display = "none";
     }, 500)
 }
-
-

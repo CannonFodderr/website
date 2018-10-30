@@ -46,9 +46,9 @@
         </div>
         <!-- Features -->
         <% if (project.features && project.features.length > 0){ %>
-            <div class="container">   
+            <div class="container feat-tech-container">   
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 features-col">
+                    <div class="col-lg-8 col-md-6 col-sm-12 features-col">
                         <ul class="list-group features-list">
                             <li class="list-group-item feature-item bg-info">FEATURES</li>
                             <% project.features.forEach((feat)=> { %>
@@ -57,11 +57,11 @@
                             </ul>
                         </div>
                         <% if (project.Technologies.length > 0) { %>
-                            <div class="col-lg-6 col-md-6 col-sm-12 tech-col">
+                            <div class="col-lg-4 col-md-6 col-xs-6 tech-col">
                                 <li class="list-group-item feature-item bg-warning">SHAMELESS NAME DROPING...</li>
                                 <div class="row no-gutters">
                                     <% project.Technologies.forEach((tech)=>{ %>
-                                        <div class="col-lg-4 col-md-6">
+                                        <div class="col-4">
                                             <a target="_blank" href="<%= tech.link %>">
                                                 <div class="card tech-card bg-dark text-white">
                                                     <div class="tech-card-img-wrapper bg-light">

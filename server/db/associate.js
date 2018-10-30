@@ -7,8 +7,6 @@ const Job = require('../models/job');
 const Tech = require('../models/tech');
 const  db = require('./connect');
 
-
-
 Icon.hasMany(Project, {foreignKey: 'icon_id', as: 'icons'});
 Project.belongsTo(Icon);
 Project.belongsTo(User);
@@ -20,17 +18,17 @@ Contact.hasMany(Message, {as: 'messages'});
 Tech.belongsToMany(Project, {through: 'ProjectTech'});
 Project.belongsToMany(Tech, {through: 'ProjectTech'});
 
-Project.sync({})
-.then(()=>{
-    Tech.sync({})
-}).then(()=>{
-    db.sync().then(()=>{
-        console.log("DB SYNC O.K.")
-    })
-})
-.catch(e => { console.error(e)})
+// Project.sync({})
+// .then(()=>{
+//     Tech.sync({})
+// }).then(()=>{
+//     db.sync().then(()=>{
+//         console.log("DB SYNC O.K.")
+//     })
+// })
+// .catch(e => { console.error(e)})
 
-// db.sync().then(()=>{
-//     console.log("DB SYNC O.K.")
-// }).catch(e => { console.error(e) })
+db.sync().then(()=>{
+    console.log("DB SYNC O.K.")
+}).catch(e => { console.error(e) })
 

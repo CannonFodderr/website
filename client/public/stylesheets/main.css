@@ -105,7 +105,6 @@ img{
     margin: auto;
     padding: 1vh;
     display: flex;
-    /* line-height: 2.2; */
     justify-content: center;
 }
 .paw-icon{
@@ -130,22 +129,24 @@ img{
 /* CSS LOADER */
 .load-wrapper{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    justify-items: center;
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: #3e3e3e;
+    background: var(--bgSecondary);
     z-index: 500;
     transition: 0.8s ease-in-out;
 }
 .trans-load-wrapper{
-    display: block;
+    display: flex;
     justify-content: center;
     position: fixed;
     left: 0;
-    top: 40vh;
+    top: 0;
     width: 100%;
     height: 100%;
     background: transparent;
@@ -155,12 +156,14 @@ img{
 .loader{
     position: relative;
     width: 120px;
+    top: 40vh;
     height: 120px;
     border: 16px solid #f3f3f3;
     border-top: 16px solid #3498db;
     border-bottom: 16px solid #3498db;
     border-radius: 50%;
-    margin: auto;
+    margin: 0;
+    padding: 0;
     animation: spin infinite 1s linear;
 }
 
@@ -173,13 +176,6 @@ img{
     margin-top: 3vh;
 }
 
-
-/* .fas .fab{
-    width: fit-content;
-    text-align: center;
-    font-size: 1.6rem;
-    margin-right: 1vw;
-} */
 .social-li{
     width: 50%;
 }
@@ -507,7 +503,9 @@ img{
     width: 100%;
     margin-top: 1vh;
 }
-
+.feat-tech-container{
+    padding: 0;
+}
 .form-alert{
     position: relative;
     z-index: 500;
