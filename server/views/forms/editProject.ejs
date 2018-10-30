@@ -80,7 +80,6 @@
                             <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="About the project"><%= project.content %></textarea>
                         </div>
                         <h5 class="text-light">Technologies</h5>
-                        <div class="input-group mb-3">
                             <div class="row no-gutters">
                             <% for (tech of techs ) { %>
                                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 bg-light">
@@ -95,6 +94,5 @@
                                 </div>
                                 <% } %>
                             </div>
-                        </div>
                         <input type="hidden" name="_csrf" value="<%= csrf %>" />    
                             

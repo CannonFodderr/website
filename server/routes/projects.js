@@ -108,7 +108,6 @@ router.get('/projects/:projectid', (req, res)=>{
             Project.findById(req.params.projectid, {include: [Tech]})
             .then((project)=>{
                 let techIds = []
-                console.log(req.body.tech)
                 if (req.body.tech != undefined && typeof(req.body.tech) == 'array'){
                     req.body.tech.forEach((t)=>{
                         techIds.push(Number(t));

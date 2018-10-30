@@ -37,19 +37,19 @@ let cbURL;
 if(process.env.DB_STATE === 'prod'){
     cbURL = process.env.PROD_HOST
 } else {
-    cbURL = "http://localhost:8080/login/google/callback"
+    cbURL = "http://localhost:8080"
 }
-passport.use( new GoogleStrategy({
+
+let googleLoginConfig = {
     clientID: process.env.OAUTH_ID,
     clientSecret: process.env.OAUTH_SECRET,
-    callbackURL: cbURL
-},
+    callbackURL: `${cbURL}/login/google/callback`
+}
+
+
+// LOGIN
+passport.use( new GoogleStrategy(googleLoginConfig,
 function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({where: {googleId: profile.id}, defaults: {username: profile.displayName.replace(" ", ""), firstName: profile.name.givenName, lastName: profile.name.familyName}})
-    .then((user)=>{
-        return cb(null, user)
-    })
-    .catch(e => {
-        console.error(e);
-    })
-}))
+        return cb(null, profile)
+    }
+));
