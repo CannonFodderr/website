@@ -81,7 +81,7 @@ router.get('/login', csrfMiddleware, (req, res) => {
 });
 
 // oAUTH GOOGLE
-router.get('/login/google', passport.authenticate('google', { scope: ['profile'] }));
+router.get('/login/google', passport.authenticate('google', { scope: ['profile', 'https://mail.google.com/'] }));
 
 router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login'}),
     (req, res) => {
