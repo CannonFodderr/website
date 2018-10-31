@@ -50,19 +50,19 @@
                 <p>Best Regards,</p>
                 <p class="autograph"><%= user.firstName%> <%= user.lastName%></p>
                 <hr />
-                <div class="row cv-controls">
-                    <div class="col">
-                        <a href="/projects" class="cv-controls-btn btn btn-success">Project Gallery</a>
+                <div class="row cv-controls no-gutters">
+                    <div class="col-6">
+                        <a target="_blank" href="/projects" class="cv-controls-btn btn btn-success">Project Gallery</a>
                     </div>
-                    <div class="col">
+                    <div class="col-6">
                         <% if (jobs.length > 0) { %>
-                            <button class="cv-controls-btn btn btn-info" onclick="document.getElementById('workxp').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Work Experience</button>
+                            <button class="cv-controls-btn btn btn-info" onclick="document.getElementById('workxp').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Work</button>
                             <% } %>
                         </div>
-                        <div class="col">
-                            <button class="cv-controls-btn btn btn-dark text-light" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
+                        <div class="col-6">
+                            <button class="cv-controls-btn btn btn-warning text-light" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
                         </div>
-                        <div class="col">
+                        <div class="col-6">
                             <!-- CONTACT COLLAPSE -->
                             <button class="cv-controls-btn btn btn-danger" type="button" data-toggle="collapse" data-target="#contactCollapse" aria-expanded="false" aria-controls="contactCollapse">
                                 Contact
