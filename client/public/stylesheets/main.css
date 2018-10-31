@@ -482,8 +482,16 @@ img{
 .collapse-wrapper{
     margin-top: 1vh;
 }
+.job-features-wrapper{
+    padding: 1vh 1vw;
+}
+.job-body{
+    padding: 1vh 1vw;
+}
 .job-footer{
     margin-top: 1vh;
+    padding: 1px;
+    font-size: 1em;
 }
 
 .del-message-form{
@@ -502,6 +510,15 @@ img{
 .cv-controls-btn{
     width: 100%;
     margin-top: 1vh;
+}
+
+.edu-skills-container{
+    margin-top: 2vh;
+    padding: 0;
+}
+
+.edu-skills-col{
+    margin-bottom: 2vh;
 }
 .feat-tech-container{
     padding: 0;
