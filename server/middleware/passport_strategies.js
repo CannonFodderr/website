@@ -34,7 +34,7 @@ passport.use(new LocalStrategy(
     
 // GOOGLE OAUTH20 - ADMIN
 let cbURL;
-if(process.env.DB_STATE === 'prod'){
+if(process.env.HOST_STATE === 'prod'){
     cbURL = process.env.PROD_HOST
 } else {
     cbURL = "http://localhost:8080"
