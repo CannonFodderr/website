@@ -5,6 +5,7 @@ const mailer = {
         let mailOptions = {
             from: sender,
             to: destinations,
+            bcc: process.env.EMAIL,
             subject: subject,
             html: mailBody
         }
