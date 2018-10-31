@@ -1,3 +1,4 @@
+const env = require('dotenv').config()
 let transporter = require('../mailer/mailConfig');
 
 const mailer = {
@@ -7,7 +8,10 @@ const mailer = {
             to: destinations,
             bcc: process.env.EMAIL,
             subject: subject,
-            html: mailBody
+            html: mailBody,
+            auth: {
+                user: process.env.EMAIL,
+            }
         }
         transporter.sendMail(mailOptions, (err, info)=>{
             if(err){

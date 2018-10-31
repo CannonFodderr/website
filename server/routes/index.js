@@ -19,7 +19,6 @@ router.post('/', csrfMiddleware, (req, res) => {
     let sanitized = sanitizer.sanitizeBody(req)
     Contact.findOrCreate({where: { email: sanitized.email }, defaults: { name: sanitized.name, phone: sanitized.phone, user_id: 1 }})
     .then((user)=>{
-        console.log(user[0].id)
         Message.create({ content: sanitized.content, contact_id:  user[0].id })
         .then((createdMessage) => {
             // Send thank you e-mail
