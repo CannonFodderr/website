@@ -107,7 +107,8 @@ img{
     width: 100%;
 }
 .typer{
-    background: #fff;
+    border: none;
+    background: transparent;
     min-height: 6vh;
     width: fit-content;
     margin: 1vh auto;
@@ -406,6 +407,7 @@ img{
 .controls-row{
     border-top: 1px solid #202225;
     border-bottom: 1px solid #202225;
+    background: url('../images/grit.png')
 }
 .project-link-wrapper{
     display: flex;
