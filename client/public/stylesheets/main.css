@@ -15,19 +15,27 @@ html, body{
 
 body{
     color: var(--textPrimary);
+    /* mask-image: url('../images//grit.png');
+    -webkit-mask-image: url('../images/grit.png');
+    mask-type: luminance; */
     width: 100%;
     background: var(--bgSecondary);
     overflow-x: hidden;
     overflow-y: auto;
 }
 
+.grit{
+    mask-image: url('../images//grit.png');
+    -webkit-mask-image: url('../images/grit.png');
+    mask-type: alpha;
+}
 .navbar.navbar-expand-lg.navbar-dark {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 100;
-    background: #1e22255d;
+    background: #1e22259a;
     transition: ease-in-out 0.5s;
 }
 .navbar.navbar-expand-lg.navbar-dark:hover{
