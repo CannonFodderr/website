@@ -21,7 +21,6 @@ self.addEventListener('install', (e)=>{
 self.addEventListener('fetch', function(event) {
     var ignoreRequests = new RegExp('(http|https):\/\/(localhost:[0-9]+|[a-zA-Z0-9.]+)\/(admin|projects)?')
     let ignoreRoute = ignoreRequests.test(event.request.url)
-    console.log(ignoreRoute);
     if (event.request.method != 'GET' || ignoreRoute) {
         return 
     }
