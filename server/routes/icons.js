@@ -3,10 +3,11 @@ const Icon = require('../models/icon');
 const middleware = require('../middleware/auth');
 const sanitizer = require('../middleware/sanitizer');
 
+// New Icon form
 router.get('/admin/icons/new',middleware.isAdmin, (req, res)=>{
     res.render('icons/new', { title: 'Add Icon', csrf: req.csrfToken(), user: req.user})
 })
-
+// Create new icon
 router.post('/admin/icons',middleware.isAdmin, (req, res)=>{
     let sanitized = sanitizer.sanitizeBody(req)
     console.log(sanitized);
