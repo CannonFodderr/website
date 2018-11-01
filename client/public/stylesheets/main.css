@@ -320,7 +320,9 @@ img{
     border-radius: 0;
     border-bottom: 1px solid var(--textPrimary);
 }
-
+.fa-arrow-left{
+    margin: auto;
+}
 .project-card{ 
     display: flex;
     width: 300px;
