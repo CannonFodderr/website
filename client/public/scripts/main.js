@@ -2,7 +2,6 @@ window.isUpdateAvailable = new Promise((resolve, reject)=>{
     if ('serviceWorker' in navigator ){    
         navigator.serviceWorker.register('/sw.js', {scope: '/'})
         .then((reg)=>{
-            console.log('NEW SW REGISTERED')
             reg.onupdatefound = () =>{
                 const installingWorker = reg.installing;
                 installingWorker.onstatechange = () =>{
@@ -51,4 +50,12 @@ window.onload = () => {
 refreshPage = (reg) =>{
     reg.waiting.postMessage('skipWaiting');
     return window.location.reload()
+}
+
+let filterForm = document.getElementById('projects-filter-form')
+
+if (filterForm){
+    filterForm.addEventListener('submit', (e)=>{
+        e.preventDefault();
+    })
 }
