@@ -60,8 +60,8 @@ self.addEventListener('install', (e)=>{
                         });
                     }
                     return fetch(event.request).then(function(response) {
-                            return response;
-                        });  
+                        return response;
+                    });  
                 })
                 );
             }
