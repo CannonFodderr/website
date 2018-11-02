@@ -53,18 +53,20 @@
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
             <div class="card homepage-cards contact-col">
-                <h5 class="card-header typer">
-                        <% if (message.failure) { %>
-                            <div class="typewriter text-danger">
-                                <%= message.failure %>
-                            </div>
-                        <% } else { %>
-                            <div class="typewriter">
-                                Hi, Nice to meet you :)
-                            </div>
-                        <% } %>
-                </h5>
-                <div class="card-body bg-dark text-light bg">
+                <div class="message-wrapper">
+                    <h5 class="card-header typer">
+                            <% if (message.failure) { %>
+                                <div class="typewriter text-danger">
+                                    <%= message.failure %>
+                                </div>
+                            <% } else { %>
+                                <div class="typewriter">
+                                    Hi, Nice to meet you :)
+                                </div>
+                            <% } %>
+                    </h5>
+                </div>
+                <div class="card-body bg-dark text-light">
                     <p class="card-text">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 contact-col">
@@ -84,7 +86,7 @@
                             <p class="card-text">
                                 <form class="contact-form" action="/" method="post">
                                     <% include forms/message %>
-                                    <button class="btn btn-danger btn-lg btn-block" type="submit"><i class="fas fa-paw paw-icon"></i><span class="btn-text">Send</span></button>
+                                    <button class="btn btn-danger btn-lg btn-block send-form-btn" type="submit"><i class="fas fa-paw paw-icon"></i><span class="btn-text">Send</span></button>
                                 </form>
                             </p>
                         </div>
