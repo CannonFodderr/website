@@ -73,7 +73,6 @@ app.use(messagesRoutes);
 app.use(techRoutes);
 
 
-
 // Seed DB
 if(process.argv[2] == 'seed'){
     require('./seed');
