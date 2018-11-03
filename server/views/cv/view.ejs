@@ -86,8 +86,10 @@
                 <h3 id="workxp" class="text-light">Work Experience</h3>
                 <% jobs.forEach((job)=>{ %>
                     <div class="card job-card bg-dark">
-                        <div class="card-header bg-info text-light">
+                        <div class="card-header bg-info text-light job-card-header grit">
+                            <div class="job-title">
                             <%- job.title.toUpperCase() %>
+                            </div>
                         </div>
                         <div class="card-body bg-light text-dark job-body">
                             <h4 class="card-title"><strong>@ </strong><%- job.company %></h4>
@@ -142,7 +144,7 @@
                                                     <div class="col-lg-6 col-md-6 col-sm-12 edu-skills-col">
                                                         <h3 id="eduction" class="text-light">Education</h3>
                                                         <ul class="list-group features-list">
-                                                            <li id="education" class="list-group-item feature-item bg-warning text-light"></li>
+                                                            <li id="education" class="list-group-item feature-item bg-warning text-light grit"></li>
                                                             <li class="list-group-item feature-item">Sound School- 3 Years Sound Engineering</li>
                                                             <li class="list-group-item feature-item">Udemy -Web Developer Bootcamp</li>
                                                             <li class="list-group-item feature-item">Udemy - Python Bootcamp</li>
@@ -151,7 +153,7 @@
                                                     <div class="col-lg-6 col-md-6 col-sm-12 edu-skills-col">
                                                         <h3 id="skills" class="text-light">Skills</h3> 
                                                         <ul class="list-group features-list">
-                                                            <li class="list-group-item feature-item bg-danger text-light"></li>
+                                                            <li class="list-group-item feature-item bg-danger text-light grit"></li>
                                                             <li class="list-group-item feature-item">ProTools, Cubase, Ableton</li>
                                                             <li class="list-group-item feature-item">Photoshop, Premire</li>
                                                             <li class="list-group-item feature-item">Full Stack NodeJS, Express, MongoDB, Postgres</li>

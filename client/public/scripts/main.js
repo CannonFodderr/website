@@ -1,3 +1,4 @@
+// SERVICE WORKER
 window.isUpdateAvailable = new Promise((resolve, reject)=>{
     if ('serviceWorker' in navigator ){    
         navigator.serviceWorker.register('/sw.js', {scope: '/'})
@@ -25,30 +26,22 @@ window.isUpdateAvailable = new Promise((resolve, reject)=>{
 
 window['isUpdateAvailable']
 .then(reg => {
-    var x = document.getElementById("messageToast");
-    x.innerHTML = "Update is available  <button class='btn btn-danger'>Refresh</button>"
-    x.addEventListener('click', ()=>{
-        notifySW(reg)
-    });
-    x.className = "show";
-    setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
-    return
-    
+    return showNotification(reg)
 })
-window.onload = () => {
-    let wrapper = document.getElementsByClassName('load-wrapper');
-    if(wrapper.length > 0){
-        wrapper[0].classList.add('hide');
-        setTimeout(()=>{
-            wrapper[0].style.display = "none";
-        }, 500)
-    }
-}
 
 navigator.serviceWorker.addEventListener('message', (msg)=>{
     if(msg.data === 'refresh') window.location.reload()
 })
 
+showNotification = (sw) => {
+    var x = document.getElementById("messageToast");
+    x.innerHTML = "New version is available  <button class='btn btn-danger refresh-btn'>Refresh</button>"
+    x.addEventListener('click', ()=>{
+        notifySW(sw)
+    });
+    x.className = "show";
+    // setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
+}
 notifySW = (reg) =>{
     reg.waiting.postMessage('skipWaiting');
 }
@@ -59,4 +52,15 @@ if (filterForm){
     filterForm.addEventListener('submit', (e)=>{
         e.preventDefault();
     })
+}
+
+// LOADING SCREEN
+window.onload = () => {
+    let wrapper = document.getElementsByClassName('load-wrapper');
+    if(wrapper.length > 0){
+        wrapper[0].classList.add('hide');
+        setTimeout(()=>{
+            wrapper[0].style.display = "none";
+        }, 500)
+    }
 }

@@ -50,7 +50,7 @@ body{
 
 .brand-logo{
     font-size: 1.3em;
-    color: #9370db;
+    /* color: #9370db; */
 }
 .home-fluid-con{
     height: 100vh;
@@ -96,8 +96,9 @@ img{
     transition: 0.6s linear;
 }
 .btn-text{
-    margin-left: 2vw;
+    margin-left: 1vw;
 }
+
 .contact-col{
     position: relative;
     width: 100%;
@@ -442,6 +443,13 @@ img{
     font-family: 'Satisfy', cursive;
     margin: 0;
 }
+.job-title{
+    position: relative;
+    z-index: 1000;
+    color: #000;
+    background: transparent;
+    font-weight: 800;
+}
 .cv-jobs{
     margin-top: 2vh;
 }
@@ -611,43 +619,48 @@ img{
 
 #messageToast {
     visibility: hidden;
+    height: 0;
     min-width: 250px;
-    margin-left: -125px;
     background-color: #333;
     color: #fff;
     text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    bottom: 30px;
+    padding: 0;
+    width: 100%;
+    position: absolute;
+    z-index: 1000;
+    bottom: 0;
     font-size: 17px;
 }
 
 #messageToast.show {
+    padding: 1vh 1vw;
+    height: unset;
     visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 10s;
+    -webkit-animation: fadein 0.5s, 2.5s;
+    animation: fadein 0.5s, 10s;
+}
+
+.refresh-btn{
+    margin: 0 0 0 1vw;
 }
 
 @-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;} 
-    to {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 1;}
 }
 
 @keyframes fadein {
     from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
+    from {bottom: 0; opacity: 1;} 
     to {bottom: 0; opacity: 0;}
 }
 
 @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
+    from {bottom: 0; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
 @media only screen and (max-width: 1200px) {
