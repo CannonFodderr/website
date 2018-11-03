@@ -67,7 +67,6 @@ self.addEventListener('fetch', function(event) {
     }
 });
 
-
 // Listen for messages from clients
 self.addEventListener('message', messageEvent => {
     if (messageEvent.data === 'skipWaiting'){
