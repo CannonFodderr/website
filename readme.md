@@ -5,7 +5,8 @@
 * **NodeJS** with **Express** backend.
 * **PostgresDB** with **Sequelize** (incl .sequelizerc file for custom configs).
 * Switch **HOST || DB** state form development to production with .env variables. 
-* **Express Sanitizer** - Sanitized inputs & csrf protection.
+* **Express Sanitizer** - Sanitized inputs.
+* **CSRF Protection** - on all form routes.
 * Client side **serviceWorker** for caching + SW update/refresh notifications.
 * **PassportJS** - local & Google oAuth2.0 strategies.
 * **bycrypt** encryption for users passwords.
