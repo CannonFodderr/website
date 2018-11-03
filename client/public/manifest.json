@@ -10,7 +10,7 @@
         {
             "src": "/images/logos/cf-logo",
             "type": "image/png",
-            "sizes": "500x500"
+            "sizes": "512x512"
         }
     ],
     "start_url": "/?source=pwa",
