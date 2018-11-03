@@ -6,7 +6,10 @@ window.addEventListener('beforeinstallprompt', (e) => {
     deferredPrompt = e;
     showNotification(e)
 });
-
+// Check if PWA app installed
+window.addEventListener('appinstalled', (evt) => {
+    app.logEvent('a2hs', 'installed');
+});
 // SERVICE WORKER
 window.isUpdateAvailable = new Promise((resolve, reject)=>{
     if ('serviceWorker' in navigator ){    
@@ -42,9 +45,7 @@ navigator.serviceWorker.addEventListener('message', (msg)=>{
     if(msg.data === 'refresh') window.location.reload()
 });
 
-window.addEventListener('appinstalled', (evt) => {
-    app.logEvent('a2hs', 'installed');
-});
+
 
 showNotification = (data) => {
     var x = document.getElementById("messageToast");

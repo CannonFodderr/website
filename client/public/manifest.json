@@ -1,12 +1,7 @@
 {
     "short_name": "CV",
     "name": "Idan Izhaki - CV",
-    "icons": [
-        {
-            "src": "/images/logos/CF-logo-sm.png",
-            "type": "image/png",
-            "sizes": "192x192"
-        },
+    "icons": [       
         {
             "src": "/images/logos/cf-logo-md.png",
             "type": "image/png",
