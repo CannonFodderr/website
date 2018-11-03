@@ -5,22 +5,22 @@ const Tech = require('../models/tech');
 const Icon = require('../models/icon');
 
 // Visitor Views
+// ALL PROJECTS
 router.get('/projects', (req, res)=>{
     if(req.query.category){
-        Project.findAll({ where: { category: req.query.category }, include: [{model: Icon}]}).then((foundProjects)=>{
-            console.log(foundProjects)
+        Project.findAll({ where: { category: req.query.category }, include: [Icon]}).then((foundProjects)=>{
             return res.render('./projects/all', { projects: foundProjects, title: `${req.query.category} projects` })
         })
     } else {
-        Project.findAll({include: [{model: Icon}]}).then((allProjects)=>{
+        Project.findAll({include: [Icon]}).then((allProjects)=>{
             return res.render('./projects/all', { projects: allProjects, title: `All projects` })
         })
     }
-})
+});
 // VIEW PROJECT
 router.get('/projects/:projectid', (req, res)=>{
     Project.findById(req.params.projectid, 
-        {include: [{model: Icon}]})
+        {include: [Icon, Tech]})
         .then((project)=>{
             if (project && project.Icon != null) {
                 res.render('./projects/details', {title: project.title, project:project, icon: project.Icon.dataValues })
@@ -60,8 +60,7 @@ router.get('/projects/:projectid', (req, res)=>{
         }
         Project.create(newProject)
         .then((createdProject)=>{
-            console.log(createdProject);
-            res.redirect('/admin')
+            res.redirect('/admin/projects')
         })
         .catch((e)=>{
             console.error(e);
@@ -70,24 +69,27 @@ router.get('/projects/:projectid', (req, res)=>{
     });
     // Project Edit Routes
     router.get('/admin/projects/:projectid/edit', middleware.isAdmin, (req, res)=>{
-        Project.findById(req.params.projectid)
+        Project.findById(req.params.projectid, {include: [Icon, Tech]})
         .then((project)=>{
+            let projectTechs = []
+            project.Technologies.forEach((tech)=>{
+                projectTechs.push(tech.dataValues.id)
+            });
             Icon.findAll().then((icons)=>{
                 Tech.findAll().then((allTech)=>{
                     res.render('./projects/edit', 
-                    {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons, techs: allTech, user: req.user });
+                    {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons, techs: allTech, projectTechs: projectTechs, user: req.user });
                 })
             })
         })
         .catch(e =>{ 
             console.log(e)
-            res. redirect('/admin')
+            res. redirect('/admin/projects')
         })
     });
     
     router.put('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
         let features = req.body.features.trim().split(';')
-        console.log(req.body)
         let filteredFeats = features.filter(feat => feat.length > 0);
         let updateData = {
             title: req.body.title,
@@ -103,14 +105,28 @@ router.get('/projects/:projectid', (req, res)=>{
             id: req.params.projectid
         }})
         .then(()=>{
-            Project.findById(req.params.projectid)
+            Project.findById(req.params.projectid, {include: [Tech]})
             .then((project)=>{
-                res.redirect('/admin');
+                let techIds = []
+                if (req.body.tech != undefined && typeof(req.body.tech) == 'array'){
+                    req.body.tech.forEach((t)=>{
+                        techIds.push(Number(t));
+                    })
+                }
+                let projectTechs = []
+                project.Technologies.forEach((tech)=>{
+                    projectTechs.push(tech.dataValues.id)
+                });
+                project.removeTechnologies(projectTechs).then(()=>{
+                    project.addTechnologies(req.body.tech).then(()=>{
+                        res.redirect('/admin/projects');
+                    })
+                })
             })
         })
         .catch(e => {
             console.log(e);
-            res.redirect('/admin');
+            res.redirect('/admin/projects');
         })
     })
     

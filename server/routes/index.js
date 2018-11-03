@@ -3,9 +3,8 @@ const mgs = require('../media/messages');
 const csrfMiddleware = require('../middleware/csurf');
 const Message = require('../models/messages');
 const Contact = require('../models/contact');
-const nodemailer = require('nodemailer');
 const sanitizer = require('../middleware/sanitizer');
-
+let mailer = require('../mailer/mail')
 
 router.get('/', csrfMiddleware, (req, res) => {
     res.render('index', {
@@ -20,8 +19,11 @@ router.post('/', csrfMiddleware, (req, res) => {
     let sanitized = sanitizer.sanitizeBody(req)
     Contact.findOrCreate({where: { email: sanitized.email }, defaults: { name: sanitized.name, phone: sanitized.phone, user_id: 1 }})
     .then((user)=>{
-        Message.create({ content: sanitized.content, contact_id:  user[0].dataValues['id'] })
+        Message.create({ content: sanitized.content, contact_id:  user[0].id })
         .then((createdMessage) => {
+            // Send thank you e-mail
+            let mailTemplates = require('../mailer/templates')
+            mailer.send(process.env.EMAIL, user[0].email, mailTemplates.thankYou.subject, mailTemplates.thankYou.body );
             req.flash('success', "Thanks, I'll get back to you ASAP :)");
             res.redirect('/cv');
         })

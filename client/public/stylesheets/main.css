@@ -21,23 +21,36 @@ body{
     overflow-y: auto;
 }
 
+.grit{
+    mask-image: url('../images//grit.png');
+    -webkit-mask-image: url('../images/grit.png');
+    mask-type: alpha;
+}
 .navbar.navbar-expand-lg.navbar-dark {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 100;
-    background: #1e22255d;
+    background: #1e22259a;
     transition: ease-in-out 0.5s;
 }
 .navbar.navbar-expand-lg.navbar-dark:hover{
-    background: #343a40a6;
+    background: #0d0e0eb9;
 }
 .navbar-brand{
     margin-left: 1rem;
 }
 .nav-container{
     margin-bottom: 6vh;
+}
+.brand-text{
+    margin-left: 1vh;
+}
+
+.brand-logo{
+    font-size: 1.3em;
+    /* color: #9370db; */
 }
 .home-fluid-con{
     height: 100vh;
@@ -63,16 +76,7 @@ img{
     width: 100%;
     height: 100%;
 }
-.img-wrapper{
-    height: 20vh;
-    background-image: url('/images/profile.jpg');
-    background-position: center;
-    filter: grayscale();
-    transition: 0.8s ease-in-out;
-}
-.img-wrapper:hover{
-    filter: grayscale(0)
-}
+
 .hide{
     opacity: 0;
 }
@@ -92,20 +96,24 @@ img{
     transition: 0.6s linear;
 }
 .btn-text{
-    margin-left: 2vw;
+    margin-left: 1vw;
 }
+
 .contact-col{
     position: relative;
     width: 100%;
 }
+.message-wrapper{
+    background-image: url('../images/grit.png');
+}
 .typer{
-    background: #fff;
+    border: none;
+    background: transparent;
     min-height: 6vh;
     width: fit-content;
     margin: auto;
-    padding: 1vh;
+    padding: 0;
     display: flex;
-    /* line-height: 2.2; */
     justify-content: center;
 }
 .paw-icon{
@@ -130,22 +138,24 @@ img{
 /* CSS LOADER */
 .load-wrapper{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    justify-items: center;
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: #3e3e3e;
+    background: var(--bgSecondary);
     z-index: 500;
     transition: 0.8s ease-in-out;
 }
 .trans-load-wrapper{
-    display: block;
+    display: flex;
     justify-content: center;
     position: fixed;
     left: 0;
-    top: 40vh;
+    top: 0;
     width: 100%;
     height: 100%;
     background: transparent;
@@ -155,12 +165,14 @@ img{
 .loader{
     position: relative;
     width: 120px;
+    top: 40vh;
     height: 120px;
     border: 16px solid #f3f3f3;
     border-top: 16px solid #3498db;
     border-bottom: 16px solid #3498db;
     border-radius: 50%;
-    margin: auto;
+    margin: 0;
+    padding: 0;
     animation: spin infinite 1s linear;
 }
 
@@ -173,13 +185,6 @@ img{
     margin-top: 3vh;
 }
 
-
-/* .fas .fab{
-    width: fit-content;
-    text-align: center;
-    font-size: 1.6rem;
-    margin-right: 1vw;
-} */
 .social-li{
     width: 50%;
 }
@@ -204,7 +209,6 @@ img{
 .img-bg{
     background: var(--textPrimary);
 }
-
 
 .contact-list{
     display: flex;
@@ -315,7 +319,9 @@ img{
     border-radius: 0;
     border-bottom: 1px solid var(--textPrimary);
 }
-
+.fa-arrow-left{
+    margin: auto;
+}
 .project-card{ 
     display: flex;
     width: 300px;
@@ -336,6 +342,8 @@ img{
     max-width: 100%;
     width: max-content;
     opacity: 1;
+    height: 4vh;
+    font-size: 1rem;
 }
 
 .project-card-body{
@@ -352,14 +360,17 @@ img{
     font-size: 2em;
     justify-content: flex-end;
 }
-/* .feature-item:hover .delete-feature-icon{
-    width: 15px;
-    opacity: 1;
-    transition: 0.7s ease-in;
-} */
-
+.features-col{
+    margin: 1vh auto;
+}
+.tech-col{
+    margin: 1vh auto;
+}
+.features-list{
+    height: 100%;
+}
 .feature-item{
-    width: 85%;
+    width: 100%;
 }
 
 .delete-feature-icon{
@@ -399,17 +410,27 @@ img{
 .controls-row{
     border-top: 1px solid #202225;
     border-bottom: 1px solid #202225;
+    background: url('../images/grit.png')
+}
+.project-link-wrapper{
+    display: flex;
+    justify-content: center;
 }
 .project-link{
+    display: flex;
+    justify-content: center;
     height: 100%;
     position: relative;
     width: auto;
-    font-size: 2em;
+    font-size: 1.3em;
     text-align: center;
     text-decoration: none !important;
     margin: auto;
     transition: 0.4s ease-in;
     color: var(--bgSecondary);
+}
+.project-link-text{
+    margin: auto;
 }
 .bio-content-container{
     margin-top: 2vh;
@@ -421,6 +442,13 @@ img{
     font-size: 2rem;
     font-family: 'Satisfy', cursive;
     margin: 0;
+}
+.job-title{
+    position: relative;
+    z-index: 1000;
+    color: #000;
+    background: transparent;
+    font-weight: 800;
 }
 .cv-jobs{
     margin-top: 2vh;
@@ -483,8 +511,16 @@ img{
 .collapse-wrapper{
     margin-top: 1vh;
 }
+.job-features-wrapper{
+    padding: 1vh 1vw;
+}
+.job-body{
+    padding: 1vh 1vw;
+}
 .job-footer{
     margin-top: 1vh;
+    padding: 1px;
+    font-size: 1em;
 }
 
 .del-message-form{
@@ -501,10 +537,21 @@ img{
 }
 
 .cv-controls-btn{
-    width: 100%;
+    width: 90%;
     margin-top: 1vh;
 }
 
+.edu-skills-container{
+    margin-top: 2vh;
+    padding: 0;
+}
+
+.edu-skills-col{
+    margin-bottom: 2vh;
+}
+.feat-tech-container{
+    padding: 0;
+}
 .form-alert{
     position: relative;
     z-index: 500;
@@ -512,6 +559,109 @@ img{
     width: fit-content;
     text-align: center;
     padding: 1vh 1vw;
+}
+.tech-card-img-wrapper{
+    padding: 1vh 1vw;
+}
+.tech-card-img{
+    height: 150px;
+    background: #fff;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+}
+.tech-img-overlay{
+    padding: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    background: var(--bgSecondary);
+    opacity: 0;
+    transition: 0.4s ease-in-out;
+}
+.tech-img-overlay:hover{
+    opacity: 1;
+}
+.tech-card-title{
+    background: var(--bgSecondary);
+    margin: auto;
+    width: 100%;
+    font-size: 10px;
+}
+.admin-tech-img{
+    height: 200px;
+    width: auto;
+    margin: 1vh auto;
+    background: #fff;
+}
+.admin-feature-item{
+    width: 85%;
+}
+.brand-login-button{
+    font-family: 'Roboto', sans-serif;
+    color: #3e3e3e;
+    margin: 1vh auto 0 auto;
+    width: fit-content;
+    padding: 0 1vw 0 0;
+    height: 50px;
+    transition: 0.4s ease-in-out;
+}
+.brand-login-button:hover{
+    background: #4285F4;
+    color: #fff;
+}
+.signin-logo{
+    width: auto;
+    height: 100%;
+    margin: 0 1vw 0 0;
+}
+
+#messageToast {
+    visibility: hidden;
+    height: 0;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 0;
+    width: 100%;
+    position: absolute;
+    z-index: 1000;
+    bottom: 0;
+    font-size: 17px;
+}
+
+#messageToast.show {
+    padding: 1vh 1vw;
+    height: unset;
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, 2.5s;
+    animation: fadein 0.5s, 10s;
+}
+
+.refresh-btn{
+    margin: 0 0 0 1vw;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 0; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 0; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 0; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 0; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }
 @media only screen and (max-width: 1200px) {
     .project-card{

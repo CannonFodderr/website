@@ -39,7 +39,6 @@ let generalDB = () => {
             dialectOptions: {
                 ssl:true
             }
-
         });
         dbAuth(prodDB, config.production.database);
         return prodDB

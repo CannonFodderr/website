@@ -3,6 +3,8 @@ const middleware = require('../middleware/auth');
 const User = require('../models/user');
 const Contact = require('../models/contact');
 const Message = require('../models/messages');
+const Sequelize = require('sequelize')
+const options = Sequelize.Op;
 
 router.get('/admin/messages', middleware.isAdmin, (req, res)=>{
     User.findById(req.user.id, {include: ['projects']}).then((user)=>{

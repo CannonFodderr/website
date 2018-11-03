@@ -80,14 +80,24 @@ router.get('/login', csrfMiddleware, (req, res) => {
     })
 });
 
+// oAUTH GOOGLE
+router.get('/login/google', passport.authenticate('google', { scope: ['profile', 'https://mail.google.com/'] }));
+
+router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login'}),
+    (req, res) => {
+        res.redirect('/admin/messages');
+    }
+);
+
+// AUTH LOCAL
 router.post('/login', csrfMiddleware, passport.authenticate('local', {
     successRedirect: '/admin/messages',
-    failureRedirect: '/admin'
+    failureRedirect: '/login'
 }));
 
 router.get('/logout', (req, res) => {
     if (req.user) {
-        console.log('Loggin out: ', req.user.username)
+        console.log(`Loggin out: ${req.user.username}`)
         req.logout();
     }
     res.redirect('/');
