@@ -1,3 +1,12 @@
+// PWA
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt = e;
+    showNotification(e)
+});
+
 // SERVICE WORKER
 window.isUpdateAvailable = new Promise((resolve, reject)=>{
     if ('serviceWorker' in navigator ){    
@@ -31,16 +40,44 @@ window['isUpdateAvailable']
 
 navigator.serviceWorker.addEventListener('message', (msg)=>{
     if(msg.data === 'refresh') window.location.reload()
-})
+});
 
-showNotification = (sw) => {
+window.addEventListener('appinstalled', (evt) => {
+    app.logEvent('a2hs', 'installed');
+});
+
+showNotification = (data) => {
     var x = document.getElementById("messageToast");
-    x.innerHTML = "New version is available  <button class='btn btn-danger refresh-btn'>Refresh</button>"
-    x.addEventListener('click', ()=>{
-        notifySW(sw)
-    });
-    x.className = "show";
-    // setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
+    if(data.type === "beforeinstallprompt"){
+        setTimeout(()=>{
+            x.innerHTML = "Best Expirience  <button class='btn btn-primary refresh-btn'>Install Web App</button>"
+            x.addEventListener('click', (e)=>{
+                x.className = x.className.replace("show", "");
+                deferredPrompt.prompt()
+                deferredPrompt.userChoice
+                .then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Installing PWA...');
+                    } else {
+                        console.log('Dismissed');
+                    }
+                    deferredPrompt = null;
+                });
+            });
+            x.className = "show";
+            return setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
+        }, 5000)
+        
+    }
+    if(data.active){
+        x.innerHTML = "New version is available  <button class='btn btn-danger refresh-btn'>Refresh</button>"
+        x.addEventListener('click', ()=>{
+            notifySW(data)
+        });
+        x.className = "show";
+    }
+    
+    
 }
 notifySW = (reg) =>{
     reg.waiting.postMessage('skipWaiting');
