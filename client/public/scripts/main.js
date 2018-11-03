@@ -28,14 +28,13 @@ window['isUpdateAvailable']
     var x = document.getElementById("messageToast");
     x.innerHTML = "Update is available  <button class='btn btn-danger'>Refresh</button>"
     x.addEventListener('click', ()=>{
-        refreshPage(reg)
+        notifySW(reg)
     });
     x.className = "show";
     setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
     return
     
 })
-
 window.onload = () => {
     let wrapper = document.getElementsByClassName('load-wrapper');
     if(wrapper.length > 0){
@@ -46,10 +45,12 @@ window.onload = () => {
     }
 }
 
+navigator.serviceWorker.addEventListener('message', (msg)=>{
+    if(msg.data === 'refresh') window.location.reload()
+})
 
-refreshPage = (reg) =>{
+notifySW = (reg) =>{
     reg.waiting.postMessage('skipWaiting');
-    return window.location.reload()
 }
 
 let filterForm = document.getElementById('projects-filter-form')
