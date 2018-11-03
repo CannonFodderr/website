@@ -1,15 +1,15 @@
 require('dotenv').load();
 
-const   express          = require('express'),
-        port            = process.env.PORT || 8080,
-        bodyParser      = require('body-parser'),
-        expressSanitizer = require('express-sanitizer'),
-        methodOverride  = require('method-override'),
-        expressSession  = require('express-session'),
-        passport        = require('passport'),
-        cookieParser    = require('cookie-parser'),
-        flash    = require('connect-flash');
-        app             = express();
+const   express             = require('express'),
+        port                = process.env.PORT || 8080,
+        bodyParser          = require('body-parser'),
+        expressSanitizer    = require('express-sanitizer'),
+        methodOverride      = require('method-override'),
+        expressSession      = require('express-session'),
+        passport            = require('passport'),
+        cookieParser        = require('cookie-parser'),
+        flash               = require('connect-flash');
+        app                 = express();
 
 // CSRF MIDDELWARE
 const csrfMiddleware = require('./middleware/csurf');
@@ -18,14 +18,15 @@ const allStratgies = require('./middleware/passport_strategies');
 require('./db/associate');
 
 // IMPORT ROUTES
-const   indexRoute = require('./routes/index'),
-        adminRoutes = require('./routes/auth'),
-        projectsRoutes = require('./routes/projects'),
-        iconsRoutes = require('./routes/icons'),
-        cvRoutes = require('./routes/cv'),
-        jobsRoutes = require('./routes/job'),
-        messagesRoutes = require('./routes/messages'),
-        techRoutes = require('./routes/tech');
+const   indexRoute      = require('./routes/index'),
+        adminRoutes     = require('./routes/auth'),
+        projectsRoutes  = require('./routes/projects'),
+        iconsRoutes     = require('./routes/icons'),
+        cvRoutes        = require('./routes/cv'),
+        jobsRoutes      = require('./routes/job'),
+        messagesRoutes  = require('./routes/messages'),
+        techRoutes      = require('./routes/tech'),
+        serviceRoutes   = require('./routes/service');
 
 // APP CONFIG
 app.set('view engine', 'ejs');
@@ -61,7 +62,7 @@ app.use(flash());
 app.use('*', (req, res, next)=>{
     res.locals.message = req.flash();
     next();
-})
+});
 // USE ROUTES
 app.use(indexRoute);
 app.use(adminRoutes);
@@ -71,6 +72,7 @@ app.use(cvRoutes);
 app.use(jobsRoutes);
 app.use(messagesRoutes);
 app.use(techRoutes);
+app.use(serviceRoutes);
 
 
 // Seed DB
