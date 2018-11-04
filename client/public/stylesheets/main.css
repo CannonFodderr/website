@@ -638,7 +638,7 @@ img{
     font-size: 17px;
 }
 #install-btn-wrapper.show{
-    display: block;
+    /* display: block; */
     height: auto;
     visibility: visible;
     -webkit-animation: fadein 0.5s, 2.5s;
