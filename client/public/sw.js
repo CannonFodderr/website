@@ -26,6 +26,9 @@ self.addEventListener('install', (e)=>{
 })
     
 self.addEventListener('fetch', function(event) {
+    if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+        return;
+    }
     var autherizedExt = new RegExp('bootstrap|fontawesome|googleapis')
     if (event.request.method != 'GET') {
         return
