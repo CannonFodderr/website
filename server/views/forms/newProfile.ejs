@@ -3,61 +3,20 @@
             <span class="input-group-text text-light bg-dark" id="basic-addon1">Username:</span>
         </div>
         <input name="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
-        aria-describedby="basic-addon1" value="<%= user.username %>">
+        aria-describedby="basic-addon1" value="" required autofocus>
     </div>
-    <div class="input-group mb-3">
+<div class="input-group mb-3">
         <div class="input-group-prepend">
-            <span class="input-group-text text-light bg-dark" id="basic-addon1">First Name:</span>
+            <span class="input-group-text text-light bg-dark" id="basic-addon1">Password:</span>
         </div>
-        <input name="firstName" type="text" class="form-control" placeholder="First Name" aria-label="lastName"
-        aria-describedby="basic-addon1" value="<%= user.firstName %>">
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text text-light bg-dark" id="basic-addon1">Last Name:</span>
-        </div>
-        <input name="lastName" type="text" class="form-control" placeholder="Last Name" aria-label="lastName"
-        aria-describedby="basic-addon1" value="<%= user.lastName %>">
+        <input name="password" type="text" class="form-control" placeholder="Password" aria-label="Password"
+        aria-describedby="basic-addon1" value="" required>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text text-light bg-dark" id="basic-addon1">E-Mail:</span>
         </div>
-        <input name="email" type="email" class="form-control" placeholder="" aria-label="email" aria-describedby="basic-addon1"
-        value="<%= user.email %>">
-    </div>
-    
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text text-light bg-dark" id="basic-addon1">Phone:</span>
-        </div>
-        <input name="phone" type="text" class="form-control" placeholder="" aria-label="text" aria-describedby="basic-addon1"
-        value="<%= user.phone %>">
+        <input name="email" type="email" class="form-control" placeholder="E-Mail" aria-label="email" aria-describedby="basic-addon1"
+        value="" required>
     </div>
     <input type="hidden" name="_csrf" value="<%= csrf %>" />
-    
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text text-light bg-dark" id="basic-addon1">Birthday:</span>
-        </div>
-        <input name="birthday" type="date" class="form-control" placeholder="<%=user.birthday %>" aria-label="date"
-        aria-describedby="basic-addon1" value="<%= user.birthday %>">
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text text-light bg-dark" id="basic-addon1">Profile Image:</span>
-        </div>
-        <input name="avatar" type="url" class="form-control" placeholder="<%=user.avatar %>" aria-label="date"
-        aria-describedby="basic-addon1" value="<%= user.avatar %>">
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text text-light bg-dark" id="basic-addon1">Cover Image:</span>
-        </div>
-        <input name="cover" type="url" class="form-control" placeholder="<%=user.cover_image %>" aria-label="date"
-        aria-describedby="basic-addon1" value="<%= user.cover_image %>">
-    </div>
-    <h5 class="text-dark">Bio:</h5>
-    <div class="form-group">
-        <textarea name="bio" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="About me"><%= user.bio %></textarea>
-    </div>

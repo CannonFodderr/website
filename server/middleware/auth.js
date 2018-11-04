@@ -12,6 +12,6 @@ module.exports = {
         if (req.user && req.user != 'undefined') {
             return next();
         }
-        return res.redirect('back');
+        return res.redirect('/login');
     },
 }

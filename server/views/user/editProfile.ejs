@@ -7,7 +7,7 @@
     <div class="card bg-light mb-3 admin-login">
         <h1>Edit
             <%= user.username %> Profile:</h1>
-        <form action="/admin/<%= user.id %>/?_method=PUT" method="POST">
+        <form action="/user/<%= user.id %>/?_method=PUT" method="POST">
             <% include ../forms/adminEdit %>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Update</button>
         </form>

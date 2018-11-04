@@ -8,36 +8,37 @@ const Contact = require('../models/contact');
 const bcrypt = require('bcrypt');
 const sanitizer = require('../middleware/sanitizer');
 
-// ADMIN ROUTES
-router.get('/admin', middleware.isAdmin, (req, res) => {
-    res.redirect('/admin/messages')
+// User ROUTES
+router.get('/user', middleware.isLoggedIn, (req, res) => {
+    console.log(req.user)
+    res.redirect("/user/"+ req.user.id + "/edit")
 });
 
-// View Admin Edit Form
-router.get('/admin/:id/edit', (req, res) => {
+// View User Edit Form
+router.get('/user/:id/edit', (req, res) => {
     User.findById(req.params.id).then((user) => {
-        res.render('./admin/editProfile', {
+        res.render('./user/editProfile', {
             user: user,
             title: 'Edit profile',
             csrf: req.csrfToken()
         })
     }).catch((e) => {
         console.error(e)
-        res.redirect('/admin');
+        res.redirect('/user');
     })
 });
 
-// Update Admin
-router.put('/admin/:id/', middleware.isAdmin, (req, res) => {
+// Update User
+router.put('/user/:id/', middleware.isLoggedIn, (req, res) => {
     let sanitized = sanitizer.sanitizeBody(req)
     User.update(sanitized, {
             where: {
-                id: req.params.id
+                id: req.user.id
             }
         })
         .then(() => {
             User.findById(req.params.id).then((user) => {
-                res.render('./admin/editProfile', {
+                res.render('./user/editProfile', {
                     user: user,
                     title: 'Edit profile',
                     csrf: req.csrfToken()
@@ -48,33 +49,42 @@ router.put('/admin/:id/', middleware.isAdmin, (req, res) => {
         })
 
 });
-// Register new admin
-router.post('/admin/register', (req, res) => {
+// New User Form
+router.get('/register', (req, res) => {
+    res.render('./user/newProfile', {title: 'Register new profile', csrf: req.csrfToken() })
+});
+// Register new user
+router.post('/register', (req, res) => {
     if (req.body.password && req.body.username) {
         let sanitizedData = {
             username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
+            email: req.body.email
         }
         bcrypt.genSalt()
             .then((s) => {
                 let hashed = bcrypt.hashSync(sanitizedData.password, s)
                 User.create({
                         username: sanitizedData.username,
+                        email: sanitizedData.email,
                         password: hashed,
                         salt: s
                     })
-                    .then((newAdmin) => {
-                        newAdmin.save();
+                    .then((newUser) => {
+                        console.log(`Created new user: ${sanitizedData.username}`);
                         return res.redirect('/login');
                     })
+            }).catch(e => {
+                console.error(e);
+                return res.redirect('/login');
             })
     }
-    return res.redirect('/login');
+    
 });
 
 // LOG IN/OUT
 router.get('/login', csrfMiddleware, (req, res) => {
-    res.render('./admin/adminLogin', {
+    res.render('./user/userLogin', {
         csrf: req.csrfToken(),
         title: 'Login'
     })
@@ -85,13 +95,13 @@ router.get('/login/google', passport.authenticate('google', { scope: ['profile',
 
 router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login'}),
     (req, res) => {
-        res.redirect('/admin/messages');
+        res.redirect('/user/<%= req.user.id %>/projects');
     }
 );
 
 // AUTH LOCAL
 router.post('/login', csrfMiddleware, passport.authenticate('local', {
-    successRedirect: '/admin/messages',
+    successRedirect: `/user`,
     failureRedirect: '/login'
 }));
 

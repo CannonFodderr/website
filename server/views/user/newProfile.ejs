@@ -3,10 +3,9 @@
 <% include ../partials/navbar %>
 
 <div class="container page-content-container">
-    <% include panel %>
     <div class="card bg-light mb-3 admin-login">
         <h1><%= title %></h1>
-        <form action="/admin/<%= user.id %>" method="POST">
+        <form action="/register" method="POST">
             <% include ../forms/newProfile %>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
         </form>

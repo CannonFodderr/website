@@ -3,6 +3,7 @@ const middleware = require('../middleware/auth');
 const Project = require('../models/project');
 const Tech = require('../models/tech');
 const Icon = require('../models/icon');
+const User = require('../models/user');
 
 // Visitor Views
 // ALL PROJECTS
@@ -32,20 +33,25 @@ router.get('/projects/:projectid', (req, res)=>{
             res.redirect('/projects');
         })
     })
-    // Admin Views
-    router.get('/admin/projects', middleware.isAdmin, (req, res)=>{
-        Project.findAll()
-        .then((allProjects)=>{
-            res.render('./projects/adminGrid', {projects: allProjects, title: 'All Projects', user: req.user})
+    // User Views
+    router.get('/user/:id/projects', middleware.isLoggedIn, (req, res)=>{
+        User.findById(req.user.id, {include: ['projects']})
+        .then((user)=>{
+            console.log(user)
+            res.render('./projects/userGrid', {projects: user.projects, title: `User Projects`, user: user})
+        })
+        .catch(e => {
+            console.error(e);
+            res.redirect('back');
         })
     })
     
-    router.get('/admin/projects/new',middleware.isAdmin, (req, res)=>{
+    router.get('/user/:id/projects/new',middleware.isLoggedIn, (req, res)=>{
         res.render('./projects/new', {csrf: req.csrfToken(), title: 'New project', user: req.user})
     })
     
     
-    router.post('/admin/projects', middleware.isAdmin, (req, res)=>{
+    router.post('/user/:id/projects', middleware.isLoggedIn, (req, res)=>{
         let features = req.body.features.trim().split(';')
         let filteredFeats = features.filter(feat => feat.length > 0);
         let newProject = {
@@ -61,7 +67,7 @@ router.get('/projects/:projectid', (req, res)=>{
         }
         Project.create(newProject)
         .then((createdProject)=>{
-            res.redirect('/admin/projects')
+            res.redirect(`/user/${req.user.id}/projects`)
         })
         .catch((e)=>{
             console.error(e);
@@ -69,9 +75,10 @@ router.get('/projects/:projectid', (req, res)=>{
         })
     });
     // Project Edit Routes
-    router.get('/admin/projects/:projectid/edit', middleware.isAdmin, (req, res)=>{
-        Project.findById(req.params.projectid, {include: [Icon, Tech]})
+    router.get('/user/:id/projects/:projectid/edit', middleware.isLoggedIn, (req, res)=>{
+        Project.findById(req.params.projectid, {include: [Icon, Tech, User]})
         .then((project)=>{
+            console.log(project)
             let projectTechs = []
             project.Technologies.forEach((tech)=>{
                 projectTechs.push(tech.dataValues.id)
@@ -79,17 +86,17 @@ router.get('/projects/:projectid', (req, res)=>{
             Icon.findAll().then((icons)=>{
                 Tech.findAll().then((allTech)=>{
                     res.render('./projects/edit', 
-                    {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons, techs: allTech, projectTechs: projectTechs, user: req.user });
+                    {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons, techs: allTech, projectTechs: projectTechs, user: project.User });
                 })
             })
         })
         .catch(e =>{ 
             console.log(e)
-            res. redirect('/admin/projects')
+            res. redirect(`/user/${req.user.id}/projects`)
         })
     });
     
-    router.put('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
+    router.put('/user/:id/projects/:projectid', middleware.isLoggedIn, (req, res)=>{
         let features = req.body.features.trim().split(';')
         let filteredFeats = features.filter(feat => feat.length > 0);
         let updateData = {
@@ -121,18 +128,18 @@ router.get('/projects/:projectid', (req, res)=>{
                 });
                 project.removeTechnologies(projectTechs).then(()=>{
                     project.addTechnologies(req.body.tech).then(()=>{
-                        res.redirect('/admin/projects');
+                        res.redirect(`/user/${req.user.id}/projects`);
                     })
                 })
             })
         })
         .catch(e => {
             console.log(e);
-            res.redirect('/admin/projects');
+            res.redirect(`/user/${req.user.id}/projects`);
         })
     })
     
-    router.delete('/admin/projects/:projectid', middleware.isAdmin, (req, res)=>{
+    router.delete('/user/:id/projects/:projectid', middleware.isLoggedIn, (req, res)=>{
         Project.findById(req.params.projectid)
         .then((project)=>{
             if(project.user_id != req.user.id){
@@ -141,11 +148,11 @@ router.get('/projects/:projectid', (req, res)=>{
             }
             console.log(`PROJECT DELETED: ${project} by ${req.user.username}`);
             project.destroy();
-            res.redirect('/admin')
+            res.redirect('/user')
         })
         .catch(e => {
             console.error(e)
-            res.redirect('/admin')
+            res.redirect('/user')
         })
     });
     

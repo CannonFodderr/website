@@ -19,7 +19,7 @@ require('./db/associate');
 
 // IMPORT ROUTES
 const   indexRoute      = require('./routes/index'),
-        adminRoutes     = require('./routes/auth'),
+        userRoutes      = require('./routes/user'),
         projectsRoutes  = require('./routes/projects'),
         iconsRoutes     = require('./routes/icons'),
         cvRoutes        = require('./routes/cv'),
@@ -65,7 +65,7 @@ app.use('*', (req, res, next)=>{
 });
 // USE ROUTES
 app.use(indexRoute);
-app.use(adminRoutes);
+app.use(userRoutes);
 app.use(projectsRoutes);
 app.use(iconsRoutes);
 app.use(cvRoutes);
