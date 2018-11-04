@@ -4,25 +4,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     // Stash the event so it can be triggered later.
     deferredPrompt = e;
-    // Install prompt button
-    var installBtn = document.getElementById("install-btn-wrapper");
-    var toastRefresh = document.getElementById("messageToast");
-        installBtn.innerHTML = "<button class='btn btn-primary install-btn'>Install App</button>"
-        installBtn.addEventListener('click', (e)=>{
-            installBtn.className = installBtn.className.repeat("show", "");
-            installPrompt()
-        })
-        installBtn.className = "show"
-        // Install prompt notification
-        setTimeout(()=>{
-            toastRefresh.innerHTML = "USE APP  <button class='btn btn-primary install-btn'>INSTALL</button>"
-            toastRefresh.addEventListener('click', (e)=>{
-                toastRefresh.className = toastRefresh.className.replace("show", "");
-                installPrompt()
-            });
-            toastRefresh.className = "show";
-            return setTimeout(() => { toastRefresh.className = toastRefresh.className.replace("show", ""); }, 10000);
-        }, 10000)
+    showNotification(e)
 });
 // Check if PWA app installed
 window.addEventListener('appinstalled', (evt) => {
@@ -77,14 +59,38 @@ installPrompt = () => {
 }
 
 showNotification = (data) => {
-    
+    // Install prompt button
+    if(data.type === "beforeinstallprompt"){
+        var installBtn = document.getElementById("install-btn-wrapper");
+        setTimeout(()=>{
+            installBtn.innerHTML = "<button class='btn btn-primary install-btn'>Install App</button>"
+            installBtn.addEventListener('click', (e)=>{
+                installBtn.className = installBtn.className.repeat("show", "");
+                installPrompt()
+            })
+            installBtn.className = "show"
+        }, 2000);
+        // Install prompt notification
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            setTimeout(()=>{
+                var toastRefresh = document.getElementById("messageToast");
+                toastRefresh.innerHTML = "USE APP  <button class='btn btn-primary install-btn'>INSTALL</button>"
+                toastRefresh.addEventListener('click', (e)=>{
+                    toastRefresh.className = toastRefresh.className.replace("show", "");
+                    installPrompt()
+                });
+                toastRefresh.className = "show";
+                return setTimeout(() => { toastRefresh.className = toastRefresh.className.replace("show", ""); }, 10000);
+            }, 15000)
+        }
+    }
     if(data.active){
-        var refreshBtn = document.getElementById("messageToast");
-        refreshBtn.innerHTML = "New version is available  <button class='btn btn-danger refresh-btn'>Refresh</button>"
-        refreshBtn.addEventListener('click', ()=>{
+        var x = document.getElementById("messageToast");
+        x.innerHTML = "New version is available  <button class='btn btn-danger refresh-btn'>Refresh</button>"
+        x.addEventListener('click', ()=>{
             notifySW(data)
         });
-        refreshBtn.className = "show";
+        x.className = "show";
     }
 }
 notifySW = (reg) =>{
