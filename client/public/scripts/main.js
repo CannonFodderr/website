@@ -80,7 +80,7 @@ showNotification = (data) => {
                     installPrompt()
                 });
                 x.className = "show";
-                // return setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
+                return setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
             }, 10000)
         }
         
