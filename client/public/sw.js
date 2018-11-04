@@ -6,7 +6,10 @@ STATICFILESLIST = () => {
         '/images/ecommerce.jpg',
         '/stylesheets/main.css',
         '/scripts/main.js',
-        '/scripts/transLoader.js'
+        '/scripts/transLoader.js',
+        '/',
+        '/cv',
+        '/projects'
     ]
     return staticFiles
 }
