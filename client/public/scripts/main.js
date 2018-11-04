@@ -5,19 +5,16 @@ window.addEventListener('beforeinstallprompt', (e) => {
     // Stash the event so it can be triggered later.
     deferredPrompt = e;
     // Install prompt button
-        var installBtn = document.getElementById("install-btn-wrapper");
-        var toastRefresh = document.getElementById("messageToast");
-        setTimeout(()=>{
-            installBtn.innerHTML = "<button class='btn btn-primary install-btn'>Install App</button>"
-            installBtn.addEventListener('click', (e)=>{
-                installBtn.className = installBtn.className.repeat("show", "");
-                installPrompt()
-            })
-            installBtn.className = "show"
-        }, 2000);
+    var installBtn = document.getElementById("install-btn-wrapper");
+    var toastRefresh = document.getElementById("messageToast");
+        installBtn.innerHTML = "<button class='btn btn-primary install-btn'>Install App</button>"
+        installBtn.addEventListener('click', (e)=>{
+            installBtn.className = installBtn.className.repeat("show", "");
+            installPrompt()
+        })
+        installBtn.className = "show"
         // Install prompt notification
         setTimeout(()=>{
-            
             toastRefresh.innerHTML = "USE APP  <button class='btn btn-primary install-btn'>INSTALL</button>"
             toastRefresh.addEventListener('click', (e)=>{
                 toastRefresh.className = toastRefresh.className.replace("show", "");
