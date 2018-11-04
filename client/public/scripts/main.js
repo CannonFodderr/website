@@ -59,7 +59,7 @@ installPrompt = () => {
 }
 
 showNotification = (data) => {
-    var x = document.getElementById("messageToast");
+    console.log(data)
     var installBtn = document.getElementById("install-btn-wrapper");
     // Install prompt button
     if(data.type === "beforeinstallprompt"){
@@ -72,25 +72,25 @@ showNotification = (data) => {
             installBtn.className = "show"
         }, 2000);
         // Install prompt notification
-            // setTimeout(()=>{
-            //     x.innerHTML = "USE APP  <button class='btn btn-primary refresh-btn'>INSTALL</button>"
-            //     x.addEventListener('click', (e)=>{
-            //         x.className = x.className.replace("show", "");
-            //         installPrompt()
-            //     });
-            //     x.className = "show";
-            //     return setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
-            // }, 10000)
+            setTimeout(()=>{
+                var toastRefresh = document.getElementById("messageToast");
+                toastRefresh.innerHTML = "USE APP  <button class='btn btn-primary install-btn'>INSTALL</button>"
+                toastRefresh.addEventListener('click', (e)=>{
+                    toastRefresh.className = x.className.replace("show", "");
+                    installPrompt()
+                });
+                toastRefresh.className = "show";
+                return setTimeout(() => { toastRefresh.className = toastRefresh.className.replace("show", ""); }, 10000);
+            }, 10000)
     }
     if(data.active){
+        var x = document.getElementById("messageToast");
         x.innerHTML = "New version is available  <button class='btn btn-danger refresh-btn'>Refresh</button>"
         x.addEventListener('click', ()=>{
             notifySW(data)
         });
         x.className = "show";
     }
-    
-    
 }
 notifySW = (reg) =>{
     reg.waiting.postMessage('skipWaiting');
