@@ -43,6 +43,11 @@
                             <p class="card-text text-light"><%= projects[i].description %></p>
                         </div>
                         <div class="card-body-footer">
+                            <% if (projects[i].live_demo){ %>
+                                <a target="_blank" class="text-secondary" href="<%= projects[i].live_demo %>" draggable="false"><div class="card-body-footer-icon">
+                                        <i class="fas fa-link"></i>
+                                </div>
+                            <% } %>
                             <% if (projects[i].Icon ){ %>
                                 <a target="_blank" class="text-secondary" href="<%= projects[i].link %>" draggable="false"><div class="card-body-footer-icon">
                                     <%- projects[i].Icon.code %>

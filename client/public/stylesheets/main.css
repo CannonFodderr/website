@@ -359,8 +359,12 @@ img{
 .card-body-footer{
     height: 20%;
     display: flex;
-    font-size: 2em;
+    font-size: 1.9em;
     justify-content: flex-end;
+}
+.card-body-footer-icon{
+    height: 100%;
+    margin: 0 0.5vw;
 }
 .features-col{
     margin: 1vh auto;
