@@ -4,6 +4,7 @@ STATICFILESLIST = () => {
         '/images/sound.jpg',
         '/images/webdev.jpg',
         '/images/ecommerce.jpg',
+        '/stylesheets/main.css',
         '/',
         '/cv',
         '/projects'
