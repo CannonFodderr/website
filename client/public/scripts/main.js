@@ -8,7 +8,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 // Check if PWA app installed
 window.addEventListener('appinstalled', (evt) => {
-    app.logEvent()
+    app.logEvent('a2hs', 'installed');
 });
 // SERVICE WORKER
 window.isUpdateAvailable = new Promise((resolve, reject)=>{
