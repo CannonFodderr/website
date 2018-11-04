@@ -55,6 +55,7 @@ router.get('/projects/:projectid', (req, res)=>{
             category: req.body.category,
             img: req.body.img,
             link: req.body.link,
+            live_demo: req.body.demo,
             content: req.body.content,
             user_id: req.user.id
         }
@@ -98,6 +99,7 @@ router.get('/projects/:projectid', (req, res)=>{
             category: req.body.category,
             img: req.body.img,
             link: req.body.link,
+            live_demo: req.body.demo,
             icon_id: req.body.icon,
             content: req.body.content,
         }

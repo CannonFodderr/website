@@ -375,6 +375,10 @@ img{
     width: 100%;
 }
 
+.bold{
+    font-weight: 800;
+}
+
 .delete-feature-icon{
     position: relative;
     cursor: pointer;
@@ -513,7 +517,9 @@ img{
 .del-btn{
     margin: 1vh 0;
 }
-
+.live-demo-btn{
+    margin: 1vh auto;
+}
 .collapse-header{
     padding: 1vh;
     margin-bottom: 0;
@@ -694,7 +700,7 @@ img{
 }
 @media only screen and (max-width: 1200px) {
     .project-col{
-        padding: 0;
+        padding: 1vh 1vw;
     }
     .project-card{
         min-width: 100%;
