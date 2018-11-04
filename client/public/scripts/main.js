@@ -8,7 +8,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 // Check if PWA app installed
 window.addEventListener('appinstalled', (evt) => {
-    console.log("")
+    app.logEvent()
 });
 // SERVICE WORKER
 window.isUpdateAvailable = new Promise((resolve, reject)=>{
@@ -59,6 +59,7 @@ installPrompt = () => {
 }
 
 showNotification = (data) => {
+    var x = document.getElementById("messageToast");
     // Install prompt button
     if(data.type === "beforeinstallprompt"){
         setTimeout(()=>{
@@ -72,7 +73,6 @@ showNotification = (data) => {
         }, 2000);
         // Install prompt notification
             setTimeout(()=>{
-                var x = document.getElementById("messageToast");
                 x.innerHTML = "USE APP  <button class='btn btn-primary refresh-btn'>INSTALL</button>"
                 x.addEventListener('click', (e)=>{
                     x.className = x.className.replace("show", "");
