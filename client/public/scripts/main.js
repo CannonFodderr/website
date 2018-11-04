@@ -70,8 +70,7 @@ showNotification = (data) => {
             })
             installBtn.className = "show"
         }, 2000);
-        // Install prompt notification on mobile
-        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        // Install prompt notification
             setTimeout(()=>{
                 var x = document.getElementById("messageToast");
                 x.innerHTML = "USE APP  <button class='btn btn-primary refresh-btn'>INSTALL</button>"
@@ -82,9 +81,6 @@ showNotification = (data) => {
                 x.className = "show";
                 return setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
             }, 10000)
-        }
-        
-        
     }
     if(data.active){
         x.innerHTML = "New version is available  <button class='btn btn-danger refresh-btn'>Refresh</button>"
