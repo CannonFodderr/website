@@ -115,3 +115,5 @@ window.onload = () => {
         }, 500)
     }
 }
+
+console.log('%c░░░░░░░░░░░░░░░░░\n░░░░░▀▄░░░▄▀░░░░░\n░░░░▄█▀███▀█▄░░░░\n░░░█▀███████▀█░░░\n░░░█░█▀▀▀▀▀█░█░░░\n░░░░░░▀▀░▀▀░░░░░░\n░░░░░░░░░░░░░░░░░\n  Hello Invader! ', 'color: green;background:black; font-size:30px; padding:0;margin:0')

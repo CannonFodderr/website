@@ -85,3 +85,4 @@ self.addEventListener('message', messageEvent => {
 async function swSkipWait() {
     await skipWaiting()
 }
+
