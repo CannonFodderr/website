@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+<% include ../loader/transLoad %>
+<% include ../partials/navbar %>
+
+<div class="container page-content-container">
+    <% include panel %>
+    <div class="card bg-light mb-3 admin-login">
+        <h1><%= title %></h1>
+        <form action="/admin/<%= user.id %>" method="POST">
+            <% include ../forms/newProfile %>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+        </form>
+        <!-- <a class="btn brand-login-button google" href="/login/google">
+            <img class="signin-logo" src="/images/logos/g-logo.png" alt="Google sign in logo">
+            Sign in with google
+        </a> -->
+    </div>
+</div>
+<script src="/scripts/transloader.js"></script>
+<% include ../partials/footer %>

@@ -49,6 +49,18 @@ const User = db.define('User', {
     skills: {
         type: Sequelize.ARRAY({type: Sequelize.STRING })
     },
+    cover_image:{
+        type: Sequelize.STRING,
+        validate: {
+            isUrl: true
+        }
+    },
+    avatar: {
+        type: Sequelize.STRING,
+        validate: {
+            isUrl: true
+        }
+    },
     salt: Sequelize.STRING,
 },
 {
