@@ -18,6 +18,7 @@
 * CSS loading screen until document loads.
 * CSS Typewriter animations on index and cv views.
 * Seeding file execution with CLI args - ```node server.js seed```
+* **PWA** manifest & Install notifications.
 
 ## SETUP
 * git clone
