@@ -74,7 +74,7 @@ showNotification = (data) => {
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
             setTimeout(()=>{
                 var toastRefresh = document.getElementById("messageToast");
-                toastRefresh.innerHTML = "USE APP  <button class='btn btn-primary install-btn'>INSTALL</button>"
+                toastRefresh.innerHTML = "<button class='btn btn-primary install-btn'>INSTALL APP</button>"
                 toastRefresh.addEventListener('click', (e)=>{
                     toastRefresh.className = toastRefresh.className.replace("show", "");
                     installPrompt()
