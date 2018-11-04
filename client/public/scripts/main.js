@@ -60,11 +60,11 @@ installPrompt = () => {
 
 showNotification = (data) => {
     var x = document.getElementById("messageToast");
+    var installBtn = document.getElementById("install-btn-wrapper");
     // Install prompt button
     if(data.type === "beforeinstallprompt"){
         setTimeout(()=>{
-            var installBtn = document.getElementById("install-btn-wrapper");
-            installBtn.innerHTML = "<button class='btn btn-primary refresh-btn'>Install App</button>"
+            installBtn.innerHTML = "<button class='btn btn-primary install-btn'>Install App</button>"
             installBtn.addEventListener('click', (e)=>{
                 installBtn.className = installBtn.className.repeat("show", "");
                 installPrompt()
@@ -72,15 +72,15 @@ showNotification = (data) => {
             installBtn.className = "show"
         }, 2000);
         // Install prompt notification
-            setTimeout(()=>{
-                x.innerHTML = "USE APP  <button class='btn btn-primary refresh-btn'>INSTALL</button>"
-                x.addEventListener('click', (e)=>{
-                    x.className = x.className.replace("show", "");
-                    installPrompt()
-                });
-                x.className = "show";
-                return setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
-            }, 10000)
+            // setTimeout(()=>{
+            //     x.innerHTML = "USE APP  <button class='btn btn-primary refresh-btn'>INSTALL</button>"
+            //     x.addEventListener('click', (e)=>{
+            //         x.className = x.className.replace("show", "");
+            //         installPrompt()
+            //     });
+            //     x.className = "show";
+            //     return setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
+            // }, 10000)
     }
     if(data.active){
         x.innerHTML = "New version is available  <button class='btn btn-danger refresh-btn'>Refresh</button>"
