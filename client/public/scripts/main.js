@@ -8,7 +8,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 // Check if PWA app installed
 window.addEventListener('appinstalled', (evt) => {
-    app.logEvent('a2hs', 'installed');
+    console.log("")
 });
 // SERVICE WORKER
 window.isUpdateAvailable = new Promise((resolve, reject)=>{
@@ -45,29 +45,45 @@ navigator.serviceWorker.addEventListener('message', (msg)=>{
     if(msg.data === 'refresh') window.location.reload()
 });
 
-
+installPrompt = () => {
+    deferredPrompt.prompt()
+    deferredPrompt.userChoice
+    .then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+            console.log('Installing PWA...');
+        } else {
+            console.log('Dismissed');
+        }
+        deferredPrompt = null;
+    });
+}
 
 showNotification = (data) => {
-    var x = document.getElementById("messageToast");
+    // Install prompt button
     if(data.type === "beforeinstallprompt"){
         setTimeout(()=>{
-            x.innerHTML = "Best Expirience  <button class='btn btn-primary refresh-btn'>Install Web App</button>"
-            x.addEventListener('click', (e)=>{
-                x.className = x.className.replace("show", "");
-                deferredPrompt.prompt()
-                deferredPrompt.userChoice
-                .then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('Installing PWA...');
-                    } else {
-                        console.log('Dismissed');
-                    }
-                    deferredPrompt = null;
+            var installBtn = document.getElementById("install-btn-wrapper");
+            installBtn.innerHTML = "<button class='btn btn-primary refresh-btn'>Install App</button>"
+            installBtn.addEventListener('click', (e)=>{
+                installBtn.className = installBtn.className.repeat("show", "");
+                installPrompt()
+            })
+            installBtn.className = "show"
+        }, 2000);
+        // Install prompt notification on mobile
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            setTimeout(()=>{
+                var x = document.getElementById("messageToast");
+                x.innerHTML = "USE APP  <button class='btn btn-primary refresh-btn'>INSTALL</button>"
+                x.addEventListener('click', (e)=>{
+                    x.className = x.className.replace("show", "");
+                    installPrompt()
                 });
-            });
-            x.className = "show";
-            return setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
-        }, 5000)
+                x.className = "show";
+                // return setTimeout(() => { x.className = x.className.replace("show", ""); }, 10000);
+            }, 10000)
+        }
+        
         
     }
     if(data.active){
