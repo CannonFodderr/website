@@ -83,7 +83,6 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
     router.get('/user/:userId/projects/:projectid/edit', middleware.isLoggedIn, (req, res)=>{
         Project.findById(req.params.projectid, {include: [Icon, Tech, User]})
         .then((project)=>{
-            console.log(project)
             let projectTechs = []
             project.Technologies.forEach((tech)=>{
                 projectTechs.push(tech.dataValues.id)

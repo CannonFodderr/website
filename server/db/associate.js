@@ -11,8 +11,8 @@ Icon.hasMany(Project, {foreignKey: 'icon_id', as: 'icons'});
 Project.belongsTo(Icon);
 Project.belongsTo(User);
 User.hasMany(Project, {as: 'projects'});
-Contact.belongsTo(User);
-User.hasMany(Contact, {as: 'contacts'});
+Contact.belongsToMany(User, {through: 'UserContact'});
+User.belongsToMany(Contact, {through: 'UserContact'});
 Message.belongsTo(Contact);
 Contact.hasMany(Message, {as: 'messages'});
 Tech.belongsToMany(Project, {through: 'ProjectTech'});
@@ -20,7 +20,14 @@ Project.belongsToMany(Tech, {through: 'ProjectTech'});
 Job.belongsTo(User);
 User.hasMany(Job, {as: 'jobs'})
 
-
+// Message.sync({force: true})
+// .then(()=>{
+//     Contact.sync({force: true})
+//     .then((db.sync()
+//     .then(()=>{
+//         console.log("MESSAGE CONTACT DB SYNC")
+//     })))
+// })
 
 db.sync().then(()=>{
     console.log("DB SYNC O.K.")
