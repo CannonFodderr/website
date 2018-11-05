@@ -15,7 +15,7 @@ router.get('/user', middleware.isLoggedIn, (req, res) => {
 });
 
 // View User Edit Form
-router.get('/user/:id/edit', (req, res) => {
+router.get('/user/:id/edit',middleware.isLoggedIn, (req, res) => {
     User.findById(req.params.id).then((user) => {
         res.render('./user/editProfile', {
             user: user,

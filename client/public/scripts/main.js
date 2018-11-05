@@ -107,12 +107,19 @@ if (filterForm){
 
 // LOADING SCREEN
 window.onload = () => {
-    let wrapper = document.getElementsByClassName('load-wrapper');
-    if(wrapper.length > 0){
-        wrapper[0].classList.add('hide');
+    let wrapper = document.getElementById('load-wrapper');
+    if(wrapper){
+        wrapper.classList.add('hide');
         setTimeout(()=>{
-            wrapper[0].style.display = "none";
+            wrapper.style.display = "none";
         }, 500)
+    }
+    let transWrapper = document.getElementById('trans-load-wrapper');
+    if(transWrapper){
+        transWrapper.classList.add('hide');
+        setTimeout(()=>{
+            transWrapper.style.display = "none";
+        }, 1000)
     }
 }
 

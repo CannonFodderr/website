@@ -47,7 +47,10 @@ const User = db.define('User', {
         type: Sequelize.TEXT,
     },
     skills: {
-        type: Sequelize.ARRAY({type: Sequelize.STRING })
+        type: Sequelize.ARRAY({ type: Sequelize.STRING })
+    },
+    education: {
+        type: Sequelize.ARRAY({ type: Sequelize.STRING })
     },
     cover_image:{
         type: Sequelize.STRING,

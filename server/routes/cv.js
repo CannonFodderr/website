@@ -4,8 +4,8 @@ const User = require('../models/user');
 const Project = require('../models/project');
 
 // View CV
-router.get('/cv', (req, res)=>{
-    User.find({include: ['projects'], where: { username: 'Admin'}})
+router.get('/profile/:id/cv', (req, res)=>{
+    User.find({where: { id: req.params.id }})
     .then((user)=>{
         let bio = user.bio;
         Job.findAll({order: [["start_date", "DESC"]]})

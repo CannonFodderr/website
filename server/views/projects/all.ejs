@@ -31,12 +31,12 @@
         <% for(var i in projects){ %>
             <div class="col-xs-12 col-xl-3 col-lg-6 col-md-6 col-sm-12 project-col ">        
                 <div class="card project-card">
-                    <a href="/projects/<%= projects[i].id %>" draggable="false">
+                    <a href="/profile/<%= user.id %>/projects/<%= projects[i].id %>" draggable="false">
                         <div class="card-img project-grid-img" style="background-image:url('<%=projects[i].img %>')" draggable="false"></div>
                     </a>
                     <div class="card-body project-card-body text-light">
                         <div class="card-body-content">
-                            <a class="text-light" href="/projects/<%= projects[i].id %>" draggable="false">
+                            <a class="text-light" href="/profile/<%= user.id %>/projects/<%= projects[i].id %>" draggable="false">
                                 <h5 class="card-title project-card-title"><%= projects[i].title.toUpperCase() %></h5>
                             </a>
                             <p class="card-text project-card-text text-info"><%= projects[i].category %></p>
@@ -60,5 +60,4 @@
                 <%}%>
             </div>
         </div>
-        <script src="scripts/transloader.js"></script>
         <% include ../partials/footer %>

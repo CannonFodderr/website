@@ -4,29 +4,34 @@ const Project = require('../models/project');
 const Tech = require('../models/tech');
 const Icon = require('../models/icon');
 const User = require('../models/user');
+const Op = require('sequelize').Op
 
 // Visitor Views
 // ALL PROJECTS
-router.get('/projects', (req, res)=>{
+router.get('/profile/:userId/projects', (req, res)=>{
     if(req.query.category){
-        Project.findAll({ where: { category: req.query.category }, include: [Icon]}).then((foundProjects)=>{
-            return res.render('./projects/all', { projects: foundProjects, title: `${req.query.category} projects` })
+        Project.findAll({ where: Op.and(
+            { category: req.query.category},
+            {user_id: req.params.user_id }
+        ), include: [Icon, User]})
+        .then((foundProjects)=>{
+            return res.render('./projects/all', { projects: foundProjects, title: `${req.query.category} projects`, user: foundProjects[0].User })
         })
     } else {
-        Project.findAll({include: [Icon]}).then((allProjects)=>{
-            return res.render('./projects/all', { projects: allProjects, title: `All projects` })
+        Project.findAll({where: { user_id: req.params.userId}, include: [User, Icon]}).then((allProjects)=>{
+            return res.render('./projects/all', { projects: allProjects, title: `All projects`, user: allProjects[0].User })
         })
     }
 });
 // VIEW PROJECT
-router.get('/projects/:projectid', (req, res)=>{
+router.get('/profile/:userId/projects/:projectid', (req, res)=>{
     Project.findById(req.params.projectid, 
-        {include: [Icon, Tech]})
+        {include: [Icon, Tech, User]})
         .then((project)=>{
             if (project && project.Icon != null) {
-                res.render('./projects/details', {title: project.title, project:project, icon: project.Icon.dataValues })
+                res.render('./projects/details', {title: project.title, project:project, icon: project.Icon.dataValues, user: project.User })
             } else{
-                res.render('./projects/details', {title: project.title, project:project, icon: null })
+                res.render('./projects/details', {title: project.title, project:project, icon: null, user: project.User })
             }
         }).catch(e => {
             console.error(e);

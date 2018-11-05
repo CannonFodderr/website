@@ -5,7 +5,7 @@
 <div class="fluid-container project-top-header">
     <div class="row header-image">
         <div class="col-12 header-image-col">
-            <div class="project-banner text-center" style="background-image: url('images/profileCarousel/p1.jpg')"></div>
+            <div class="project-banner text-center" style="background-image: url('<%= user.cover_image %>')"></div>
         </div>
     </div>
     <div class="row  controls-row text-light no-gutters bg-light text-dark">
@@ -32,7 +32,7 @@
             <% } else { %>
                 <h5 class="card-header typer">
                         <div class="text-center typewriter">
-                            <%= title.toUpperCase() %>
+                            <%= user.firstName.toUpperCase() %> <%= user.lastName.toUpperCase() %> CV
                         </div>
                     </h5>
                 
@@ -52,7 +52,7 @@
                 <hr />
                 <div class="row cv-controls no-gutters">
                     <div class="col-6">
-                        <a target="_blank" href="/projects" class="cv-controls-btn btn btn-success grit">Project Gallery</a>
+                        <a target="_blank" href="/profile/<%= user.id %>/projects" class="cv-controls-btn btn btn-success grit">Project Gallery</a>
                     </div>
                     <div class="col-6">
                         <% if (jobs.length > 0) { %>
@@ -162,5 +162,4 @@
                                                 </div>
                                             </div>
                                             
-<script src="../../scripts/transloader.js"></script>
 <% include ../partials/footer %>

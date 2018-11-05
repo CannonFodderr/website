@@ -146,7 +146,7 @@ img{
     background: #343a4091;
 }
 /* CSS LOADER */
-.load-wrapper{
+#load-wrapper{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -160,7 +160,7 @@ img{
     z-index: 500;
     transition: 0.8s ease-in-out;
 }
-.trans-load-wrapper{
+#trans-load-wrapper{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
