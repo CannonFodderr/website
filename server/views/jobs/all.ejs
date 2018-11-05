@@ -2,15 +2,15 @@
 <% include ../loader/transLoad %>
 <% include ../partials/navbar %>
 <div class="container page-content-container">
-    <% include ../admin/panel %>
-    <a href="/admin/jobs/new" class="btn bg-dark text-light">Add Job</a>
-    <h5 class="admin-projects-title bg-light">
+    <% include ../user/panel %>
+    <a href="/user/<%=user.id %>/jobs/new" class="btn bg-dark text-light">Add Job</a>
+    <h5 class="user-projects-title bg-light">
         <strong>All Jobs:</strong>
     </h5>
     <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action active">All Jobs</a>
         <% jobs.forEach((job)=>{ %>
-            <a href="/admin/jobs/<%= job.id %>/edit" class="list-group-item list-group-item-action"><%- job.title %></a>
+            <a href="/user/<%= user.id %>/jobs/<%= job.id %>/edit" class="list-group-item list-group-item-action"><%- job.title %></a>
             <% }); %>
         </div>
     </div>

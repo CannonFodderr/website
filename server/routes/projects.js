@@ -39,7 +39,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
         })
     })
     // User Views
-    router.get('/user/:id/projects', middleware.isLoggedIn, (req, res)=>{
+    router.get('/user/:userId/projects', middleware.isLoggedIn, (req, res)=>{
         User.findById(req.user.id, {include: ['projects']})
         .then((user)=>{
             console.log(user)
@@ -51,12 +51,12 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
         })
     })
     
-    router.get('/user/:id/projects/new',middleware.isLoggedIn, (req, res)=>{
+    router.get('/user/:userId/projects/new',middleware.isLoggedIn, (req, res)=>{
         res.render('./projects/new', {csrf: req.csrfToken(), title: 'New project', user: req.user})
     })
     
     
-    router.post('/user/:id/projects', middleware.isLoggedIn, (req, res)=>{
+    router.post('/user/:userId/projects', middleware.isLoggedIn, (req, res)=>{
         let features = req.body.features.trim().split(';')
         let filteredFeats = features.filter(feat => feat.length > 0);
         let newProject = {
@@ -80,7 +80,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
         })
     });
     // Project Edit Routes
-    router.get('/user/:id/projects/:projectid/edit', middleware.isLoggedIn, (req, res)=>{
+    router.get('/user/:userId/projects/:projectid/edit', middleware.isLoggedIn, (req, res)=>{
         Project.findById(req.params.projectid, {include: [Icon, Tech, User]})
         .then((project)=>{
             console.log(project)
@@ -101,7 +101,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
         })
     });
     
-    router.put('/user/:id/projects/:projectid', middleware.isLoggedIn, (req, res)=>{
+    router.put('/user/:userId/projects/:projectid', middleware.isLoggedIn, (req, res)=>{
         let features = req.body.features.trim().split(';')
         let filteredFeats = features.filter(feat => feat.length > 0);
         let updateData = {
@@ -144,7 +144,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
         })
     })
     
-    router.delete('/user/:id/projects/:projectid', middleware.isLoggedIn, (req, res)=>{
+    router.delete('/user/:userId/projects/:projectid', middleware.isLoggedIn, (req, res)=>{
         Project.findById(req.params.projectid)
         .then((project)=>{
             if(project.user_id != req.user.id){

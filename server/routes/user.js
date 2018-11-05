@@ -15,8 +15,8 @@ router.get('/user', middleware.isLoggedIn, (req, res) => {
 });
 
 // View User Edit Form
-router.get('/user/:id/edit',middleware.isLoggedIn, (req, res) => {
-    User.findById(req.params.id).then((user) => {
+router.get('/user/:userId/edit',middleware.isLoggedIn, (req, res) => {
+    User.findById(req.params.userId).then((user) => {
         res.render('./user/editProfile', {
             user: user,
             title: 'Edit profile',
@@ -29,7 +29,7 @@ router.get('/user/:id/edit',middleware.isLoggedIn, (req, res) => {
 });
 
 // Update User
-router.put('/user/:id/', middleware.isLoggedIn, (req, res) => {
+router.put('/user/:userId/', middleware.isLoggedIn, (req, res) => {
     let sanitized = sanitizer.sanitizeBody(req)
     User.update(sanitized, {
             where: {
@@ -37,17 +37,17 @@ router.put('/user/:id/', middleware.isLoggedIn, (req, res) => {
             }
         })
         .then(() => {
-            User.findById(req.params.id).then((user) => {
+            User.findById(req.params.userId).then((user) => {
                 res.render('./user/editProfile', {
                     user: user,
                     title: 'Edit profile',
                     csrf: req.csrfToken()
                 })
             })
-        }).catch((e) => {
+        })
+        .catch((e) => {
             console.error('Failed to updated: ', e);
         })
-
 });
 // New User Form
 router.get('/register', (req, res) => {

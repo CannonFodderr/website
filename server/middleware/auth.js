@@ -14,8 +14,8 @@ module.exports = {
         }
         return res.redirect('/login');
     },
-    isOwner(itemOwnerId, req, res, next){
-        if(req.user && req.user.id == itemOwnerId){
+    isOwner(req, res, next){
+        if(req.user && req.user.id == req.params.userId){
             return next();
         }
         return res.redirect('/user');

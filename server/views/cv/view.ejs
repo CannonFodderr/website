@@ -54,20 +54,24 @@
                     <div class="col-6">
                         <a target="_blank" href="/profile/<%= user.id %>/projects" class="cv-controls-btn btn btn-success grit">Project Gallery</a>
                     </div>
+                    <% if ( jobs.length > 0) { %>
                     <div class="col-6">
-                        <% if (jobs.length > 0) { %>
-                            <button class="cv-controls-btn btn btn-info grit" onclick="document.getElementById('workxp').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Work</button>
-                            <% } %>
-                        </div>
-                        <div class="col-6">
-                            <button class="cv-controls-btn btn btn-warning text-light grit" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
-                        </div>
+                        <button class="cv-controls-btn btn btn-info grit" onclick="document.getElementById('workxp').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Work</button>
+                    </div>
+                    <% } %>
+                    <% if( user.education || user.skills){ %>
+                    <div class="col-6">
+                        <button class="cv-controls-btn btn btn-warning text-light grit" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
+                    </div>
+                    <% } %>
+                    <% if(user.isAdmin ) {%>
                         <div class="col-6">
                             <!-- CONTACT COLLAPSE -->
                             <button class="cv-controls-btn btn btn-danger grit" type="button grit" data-toggle="collapse" data-target="#contactCollapse" aria-expanded="false" aria-controls="contactCollapse">
                                 Contact
                             </button>
                         </div>
+                    <% } %>
                     </div>
                     <div class="collapse" id="contactCollapse">
                         <div class="card card-body">
@@ -139,17 +143,22 @@
                                             </div>
                                             <!-- Education & Skills-->
                                             <div class="container edu-skills-container">
-                                                
                                                 <div class="row">
+                                                    <% if (user.education) { %>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 edu-skills-col">
                                                         <h3 id="eduction" class="text-light">Education</h3>
                                                         <ul class="list-group features-list">
                                                             <li id="education" class="list-group-item feature-item bg-warning text-light grit"></li>
-                                                            <li class="list-group-item feature-item">Sound School- 3 Years Sound Engineering</li>
+                                                            <!-- <li class="list-group-item feature-item">Sound School- 3 Years Sound Engineering</li>
                                                             <li class="list-group-item feature-item">Udemy -Web Developer Bootcamp</li>
-                                                            <li class="list-group-item feature-item">Udemy - Python Bootcamp</li>
+                                                            <li class="list-group-item feature-item">Udemy - Python Bootcamp</li> -->
+                                                            <% user.education.forEach((item)=> { %>
+                                                                <li class="list-group-item feature-item"><%= item %></li>
+                                                            <% }) %>
                                                         </ul>
                                                     </div>
+                                                    <% } %>
+                                                    <% if (user.skills) { %>
                                                     <div class="col-lg-6 col-md-6 col-sm-12 edu-skills-col">
                                                         <h3 id="skills" class="text-light">Skills</h3> 
                                                         <ul class="list-group features-list">
@@ -159,6 +168,7 @@
                                                             <li class="list-group-item feature-item">Full Stack NodeJS, Express, MongoDB, Postgres</li>
                                                         </ul>
                                                     </div>
+                                                    <% } %>
                                                 </div>
                                             </div>
                                             
