@@ -18,6 +18,6 @@ module.exports = {
         if(req.user && req.user.id == req.params.userId){
             return next();
         }
-        return res.redirect('/user');
+        return res.redirect('/logout');
     }
 }

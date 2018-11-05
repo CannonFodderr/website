@@ -10,11 +10,9 @@ const Sequelize = require('sequelize')
 const options = Sequelize.Op;
 
 // View User Messages
-router.get('/user/:userId/messages', middleware.isLoggedIn, (req, res)=>{
-    Message.findAll({where: {destination_id: req.user.id }},{order: [['created_at', 'DESC']], 
-    include: [Contact, {include: [Message]}]})
+router.get('/user/:userId/messages', middleware.isOwner, (req, res)=>{
+    Message.findAll({where: {destination_id: req.user.id}, include: [Contact]},{order: [['created_at', 'DESC']]})
         .then((allMessages)=>{
-            console.log(allMessages)
             res.render('./user/messages', {
                 user: req.user,
                 title: `My Messages`,

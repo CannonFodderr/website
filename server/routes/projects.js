@@ -42,7 +42,6 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
     router.get('/user/:userId/projects', middleware.isLoggedIn, (req, res)=>{
         User.findById(req.user.id, {include: ['projects']})
         .then((user)=>{
-            console.log(user)
             res.render('./projects/userGrid', {projects: user.projects, title: `User Projects`, user: user})
         })
         .catch(e => {
@@ -143,7 +142,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
         })
     })
     
-    router.delete('/user/:userId/projects/:projectid', middleware.isLoggedIn, (req, res)=>{
+    router.delete('/user/:userId/projects/:projectid', middleware.isOwner, (req, res)=>{
         Project.findById(req.params.projectid)
         .then((project)=>{
             if(project.user_id != req.user.id){
