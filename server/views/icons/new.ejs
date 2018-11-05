@@ -2,9 +2,9 @@
 <% include ../loader/transLoad %>
 <% include ../partials/navbar %>
 <div class="container page-content-container">
-    <% include ../admin/panel %>
+    <% include ../user/panel %>
     <h2>New project</h2>
-    <form action="/admin/icons" method="POST">
+    <form action="/user/<%=user.id %>/icons" method="POST">
         <% include ../forms/newIcon %>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Add</button>
     </form>

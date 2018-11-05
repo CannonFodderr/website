@@ -11,7 +11,11 @@ router.get('/user/:userId/jobs/new',middleware.isLoggedIn, (req, res)=>{
 // ADD New Job
 router.post('/user/:userId/jobs', middleware.isLoggedIn, (req, res)=>{
     let sanitized = sanitizer.sanitizeBody(req)
-    let features = sanitized.features.trim().split(';')
+    console.log(sanitized)
+    let features = null;
+    if(sanitized.features){
+        features = sanitized.features.trim().split(';')
+    }
     let newJob = {
         user_id: req.user.id,
         title: sanitized.title,
@@ -24,11 +28,11 @@ router.post('/user/:userId/jobs', middleware.isLoggedIn, (req, res)=>{
     };
     Job.create(newJob)
     .then((createdJob)=>{
-        res.redirect('/admin/jobs');
+        res.redirect(`/user/${req.user.id}/jobs`);
     })
     .catch(e => {
         console.error(e);
-        res.redirect('/admin/jobs');
+        res.redirect(`/user/${req.user.id}/jobs/new`);
     })
 });
 

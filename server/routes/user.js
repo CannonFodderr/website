@@ -10,8 +10,8 @@ const sanitizer = require('../middleware/sanitizer');
 
 // User ROUTES
 router.get('/user', middleware.isLoggedIn, (req, res) => {
-    console.log(req.user)
-    res.redirect("/user/"+ req.user.id + "/edit")
+    console.log(req.user.id)
+    res.redirect(`/user/${req.user.id}/edit`);
 });
 
 // View User Edit Form
@@ -95,7 +95,7 @@ router.get('/login/google', passport.authenticate('google', { scope: ['profile',
 
 router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login'}),
     (req, res) => {
-        res.redirect('/user/<%= req.user.id %>/projects');
+        res.redirect(`/user/${req.user.id}/projects`);
     }
 );
 

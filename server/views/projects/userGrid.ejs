@@ -4,8 +4,10 @@
 <div class="container page-content-container">
     <% include ../user/panel %>
     <a class="btn bg-dark text-light" href="/user/<%= user.id %>/projects/new">New Project</a>
+    <% if( user.isAdmin ){ %>
     <a class="btn bg-dark text-light" href="/user/<%= user.id %>/icons/new">New Icon</a>
     <a class="btn bg-dark text-light" href="/user/<%= user.id %>/tech">Tech</a>
+    <% } %>
     <div class="container">
             <h5 class="user-projects-title bg-light">
                 <strong>All Projects:</strong>
@@ -32,5 +34,4 @@
             </div>
         </div>
 </div>
-<script src="/scripts/transloader.js"></script>
 <% include ../partials/footer %>

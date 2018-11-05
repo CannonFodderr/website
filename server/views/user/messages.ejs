@@ -4,7 +4,7 @@
 <div class="container page-content-container">
     <% include panel %>
     <div class="container">
-        <h5 class="admin-projects-title bg-light">
+        <h5 class="user-projects-title bg-light">
             <strong>All Messages</strong>
         </h5>
         <div class="row">
@@ -26,7 +26,7 @@
                                     <!-- <a href="tel:<%= message.Contact.phone %>" class="btn btn-primary">Go somewhere</a> -->
                                     <a class="message-link" href="tel:<%= message.Contact.phone %>"><i class="fas fa-phone social-icon"></i></a>
                                     <% } %>
-                                    <form class="del-message-form" action="/admin/messages/<%= message.id %>?_method=DELETE" method="post">
+                                    <form class="del-message-form" action="/user/<%= user.id %>messages/<%= message.id %>?_method=DELETE" method="post">
                                         <button class="btn btn-danger del-btn" type="submit">DELETE</button>
                                         <input type="hidden" name="_csrf" value="<%= csrf %>">
                                     </form>
@@ -39,5 +39,5 @@
         </div>
         
         
-        <script src="/scripts/admin_controls.js"></script>
+        <script src="/scripts/user_controls.js"></script>
         <% include ../partials/footer %>

@@ -6,13 +6,14 @@ const Message = require('../models/messages');
 const Sequelize = require('sequelize')
 const options = Sequelize.Op;
 
-router.get('/admin/messages', middleware.isAdmin, (req, res)=>{
-    User.findById(req.user.id, {include: ['projects']}).then((user)=>{
-        Message.findAll({order: [['created_at', 'DESC']], include: [{ model: Contact }]})
+router.get('/user/:userId/messages', middleware.isLoggedIn, (req, res)=>{
+        Message.findAll({order: [['created_at', 'DESC']], 
+        include: [{ model: Contact, 
+            where: {user_id: req.user.id}}]})
         .then((allMessages)=>{
-            res.render('./admin/messages', {
+            res.render('./user/messages', {
                 user: req.user,
-                title: `${ process.env.OWNER } - Control Panel`,
+                title: `My Messages`,
                 messages: allMessages,
                 csrf: req.csrfToken()
             });
@@ -21,13 +22,11 @@ router.get('/admin/messages', middleware.isAdmin, (req, res)=>{
             console.error(e);
             res.redirect('back')
         })
-        
-    })
 })
 
 
 // DELETE Message
-router.delete('/admin/messages/:msgId',middleware.isAdmin, (req, res)=>{
+router.delete('/user/:userId/messages/:msgId',middleware.isAdmin, (req, res)=>{
     Message.findById(req.params.msgId)
     .then((foundMessage)=>{
         console.log("DELETE MESSAGE", foundMessage)

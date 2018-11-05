@@ -20,21 +20,7 @@ Project.belongsToMany(Tech, {through: 'ProjectTech'});
 Job.belongsTo(User);
 User.hasMany(Job, {as: 'jobs'})
 
-// Project.sync({})
-// .then(()=>{
-//     Tech.sync({})
-// }).then(()=>{
-//     db.sync().then(()=>{
-//         console.log("DB SYNC O.K.")
-//     })
-// })
-// .catch(e => { console.error(e)})
-// Job.sync().then(()=>{
-//     console.log("Jobs synced")
-//     db.sync().then(()=>{
-//         console.log("DB SYNC O.K.")
-//     }).catch(e => { console.error(e) })
-// })
+
 
 db.sync().then(()=>{
     console.log("DB SYNC O.K.")
