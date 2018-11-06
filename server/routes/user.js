@@ -10,14 +10,15 @@ const sanitizer = require('../middleware/sanitizer');
 
 // User ROUTES
 router.get('/user', middleware.isLoggedIn, (req, res) => {
-    res.redirect(`/user/${req.user.id}/edit`);
+    res.redirect(`/user/${req.user.id}`);
 });
 
 // View User Edit Form
-router.get('/user/:userId/edit',middleware.isLoggedIn, (req, res) => {
+router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
     User.findById(req.params.userId).then((user) => {
         res.render('./user/editProfile', {
             user: user,
+            bio: user.bio.replace(/<br\s*[\/]?>/gi, "\n"),
             title: 'Edit profile',
             csrf: req.csrfToken()
         })
@@ -30,6 +31,7 @@ router.get('/user/:userId/edit',middleware.isLoggedIn, (req, res) => {
 // Update User
 router.put('/user/:userId/', middleware.isLoggedIn, (req, res) => {
     let sanitized = sanitizer.sanitizeBody(req)
+    sanitized.bio = sanitized.bio.replace(/\r?\n/g, '<br />');
     User.update(sanitized, {
             where: {
                 id: req.user.id

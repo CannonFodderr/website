@@ -20,6 +20,10 @@ body{
     overflow-x: hidden;
     overflow-y: auto;
 }
+textarea{
+    white-space: pre-wrap;
+    line-break: auto;
+}
 
 .grit{
     mask-image: url('../images//grit.png');
@@ -196,7 +200,10 @@ img{
     padding: 2vh 2vw;
     margin-top: 6vh;
 }
-
+.user-profile-card{
+    margin-top: 2vh;
+    padding: 2vh 2vw; 
+}
 .social-li{
     width: 50%;
 }
@@ -521,6 +528,7 @@ img{
 }
 .user-controls{
     border-bottom: 1px solid var(--textSecondary);
+    padding: 1vh 1vw;
 }
 .user-projects-title{
     margin-top: 1vh;

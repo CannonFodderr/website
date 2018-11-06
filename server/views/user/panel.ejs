@@ -6,12 +6,13 @@
             <%} else { %>
                 <%= user.username %>
                 <% } %>
-                <a href="/user/<%= user.id %>/edit" class="btn bg-dark text-light">Edit profile</a>
+                <a href="/user/<%= user.id %>" class="btn bg-dark text-light">Edit profile</a>
                 <a href="/logout" class="btn bg-dark text-light">Logout</a>
             </p>
             <div class="user-controls">
-                <a class="btn btn-lg btn-link bg-dark text-light btn-back" href="#"><i class="fas fa-arrow-left" onclick="history.go(-1)"></i></a>
-                <a class="btn bg-dark text-light" href="/user/<%= user.id %>/messages/">Messages</a>
-                <a class="btn bg-dark text-light" href="/user/<%= user.id %>/projects/">Projects</a>
+                <!-- <a class="btn btn-lg btn-link bg-dark text-light btn-back" href="#"><i class="fas fa-arrow-left" onclick="history.go(-1)"></i></a> -->
+                <a class="btn btn-outline-light" href="/user/<%= user.id %>/messages/">Messages</a>
+                <a class="btn btn-outline-light" href="/user/<%= user.id %>/projects/">Projects</a>
+                <a class="btn btn-outline-light" href="/user/<%= user.id %>/jobs/">Jobs</a>
             </div>
         </div>
