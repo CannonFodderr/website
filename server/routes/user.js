@@ -5,21 +5,27 @@ const middleware = require('../middleware/auth');
 const csrfMiddleware = require('../middleware/csurf');
 // const Message = require('../models/messages');
 // const Contact = require('../models/contact');
-const multer = require('multer');
 const bcrypt = require('bcrypt');
 const sanitizer = require('../middleware/sanitizer');
-
-let storage = multer.diskStorage({
+// Multer
+const multer = require('multer');
+const fileFilter =  (req, file, cb) => {
+    let authorizedExt = new RegExp((/\.(gif|jpg|jpeg|tiff|png)$/i));
+    if(!authorizedExt.test(file.originalname)){
+        return cb(new Error('Only image files allowed...'))
+    }
+    cb(null, true);
+}
+const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'server/uploads/')
     },
     filename: (req, file, cb) => {
         let ext = file.originalname.split((/\.(gif|jpg|jpeg|tiff|png)$/i))
-        console.log(ext)
         cb(null, `${req.user.username}-${file.fieldname}.${ext[1]}`)
-    }
+    },
 });   
-const upload = multer({storage: storage});
+const upload = multer({storage: storage, fileFilter: fileFilter});
 // User ROUTES
 router.get('/user', middleware.isLoggedIn, (req, res) => {
     res.redirect(`/user/${req.user.id}`);
