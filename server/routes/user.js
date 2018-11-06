@@ -3,11 +3,23 @@ const passport = require('passport');
 const User = require('../models/user');
 const middleware = require('../middleware/auth');
 const csrfMiddleware = require('../middleware/csurf');
-const Message = require('../models/messages');
-const Contact = require('../models/contact');
+// const Message = require('../models/messages');
+// const Contact = require('../models/contact');
+const multer = require('multer');
 const bcrypt = require('bcrypt');
 const sanitizer = require('../middleware/sanitizer');
 
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'server/uploads/')
+    },
+    filename: (req, file, cb) => {
+        let ext = file.originalname.split((/\.(gif|jpg|jpeg|tiff|png)$/i))
+        console.log(ext)
+        cb(null, `${req.user.username}-${file.fieldname}.${ext[1]}`)
+    }
+});   
+const upload = multer({storage: storage});
 // User ROUTES
 router.get('/user', middleware.isLoggedIn, (req, res) => {
     res.redirect(`/user/${req.user.id}`);
@@ -29,20 +41,21 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
 });
 
 // Update User
-router.put('/user/:userId/', middleware.isLoggedIn, (req, res) => {
+router.put('/user/:userId/', middleware.isOwner, upload.single('cover'), (req, res) => {
+    console.log(req.file);
     let sanitized = sanitizer.sanitizeBody(req)
     sanitized.bio = sanitized.bio.replace(/\r?\n/g, '<br />');
     User.update(sanitized, {
-            where: {
-                id: req.user.id
-            }
-        })
-        .then(() => {
-                res.redirect(`/user/${req.params.userId}`);
-        })
-        .catch((e) => {
-            console.error('Failed to updated: ', e);
-        })
+        where: {
+            id: req.user.id
+        }
+    })
+    .then(() => {
+        res.redirect(`/user/${req.params.userId}`);
+    })
+    .catch((e) => {
+        console.error('Failed to updated: ', e);
+    })
 });
 // User Education
 router.get('/user/:userId/education', middleware.isOwner, (req, res)=>{
@@ -57,26 +70,26 @@ router.get('/user/:userId/education', middleware.isOwner, (req, res)=>{
     
 })
 router.put('/user/:userId/education', middleware.isOwner, (req, res)=>{
-        User.findById(req.user.id)
-        .then((foundUser)=>{
-            let sanitizedBody = sanitizer.sanitizeBody(req);
-            let eduFeatures = [];
-            if(sanitizedBody.features){
-                let featuresArr = sanitizedBody.features.trim().split(';');
-                featuresArr.forEach((feat)=>{
-                    if(feat.length > 1){
-                        eduFeatures.push(feat);
-                    }
-                })
-            }
-            foundUser.education = eduFeatures;
-            foundUser.save();
-            res.redirect('back')
-        })
-        .catch(e => {
-            console.log(e);
-            res.redirect('back') 
-        })   
+    User.findById(req.user.id)
+    .then((foundUser)=>{
+        let sanitizedBody = sanitizer.sanitizeBody(req);
+        let eduFeatures = [];
+        if(sanitizedBody.features){
+            let featuresArr = sanitizedBody.features.trim().split(';');
+            featuresArr.forEach((feat)=>{
+                if(feat.length > 1){
+                    eduFeatures.push(feat);
+                }
+            })
+        }
+        foundUser.education = eduFeatures;
+        foundUser.save();
+        res.redirect('back')
+    })
+    .catch(e => {
+        console.log(e);
+        res.redirect('back') 
+    })   
 })
 // User skills
 router.get('/user/:userId/skills', middleware.isOwner, (req, res)=>{
@@ -91,26 +104,26 @@ router.get('/user/:userId/skills', middleware.isOwner, (req, res)=>{
     
 })
 router.put('/user/:userId/skills', middleware.isOwner, (req, res)=>{
-        User.findById(req.user.id)
-        .then((foundUser)=>{
-            let sanitizedBody = sanitizer.sanitizeBody(req);
-            let skillFeatures = [];
-            if(sanitizedBody.features){
-                let featuresArr = sanitizedBody.features.trim().split(';');
-                featuresArr.forEach((feat)=>{
-                    if(feat.length > 1){
-                        skillFeatures.push(feat);
-                    }
-                })
-            }
-            foundUser.skills = skillFeatures;
-            foundUser.save();
-            res.redirect('back')
-        })
-        .catch(e => {
-            console.log(e);
-            res.redirect('back') 
-        })   
+    User.findById(req.user.id)
+    .then((foundUser)=>{
+        let sanitizedBody = sanitizer.sanitizeBody(req);
+        let skillFeatures = [];
+        if(sanitizedBody.features){
+            let featuresArr = sanitizedBody.features.trim().split(';');
+            featuresArr.forEach((feat)=>{
+                if(feat.length > 1){
+                    skillFeatures.push(feat);
+                }
+            })
+        }
+        foundUser.skills = skillFeatures;
+        foundUser.save();
+        res.redirect('back')
+    })
+    .catch(e => {
+        console.log(e);
+        res.redirect('back') 
+    })   
 })
 // New User Form
 router.get('/register', (req, res) => {
@@ -125,22 +138,22 @@ router.post('/register', (req, res) => {
             email: req.body.email
         }
         bcrypt.genSalt()
-            .then((s) => {
-                let hashed = bcrypt.hashSync(sanitizedData.password, s)
-                User.create({
-                        username: sanitizedData.username,
-                        email: sanitizedData.email,
-                        password: hashed,
-                        salt: s
-                    })
-                    .then((newUser) => {
-                        console.log(`Created new user: ${sanitizedData.username}`);
-                        return res.redirect('/login');
-                    })
-            }).catch(e => {
-                console.error(e);
+        .then((s) => {
+            let hashed = bcrypt.hashSync(sanitizedData.password, s)
+            User.create({
+                username: sanitizedData.username,
+                email: sanitizedData.email,
+                password: hashed,
+                salt: s
+            })
+            .then((newUser) => {
+                console.log(`Created new user: ${sanitizedData.username}`);
                 return res.redirect('/login');
             })
+        }).catch(e => {
+            console.error(e);
+            return res.redirect('/login');
+        })
     }
     
 });
@@ -157,9 +170,9 @@ router.get('/login', csrfMiddleware, (req, res) => {
 router.get('/login/google', passport.authenticate('google', { scope: ['profile', 'https://mail.google.com/'] }));
 
 router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login'}),
-    (req, res) => {
-        res.redirect(`/user/${req.user.id}/projects`);
-    }
+(req, res) => {
+    res.redirect(`/user/${req.user.id}/projects`);
+}
 );
 
 

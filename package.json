@@ -22,6 +22,7 @@
     "express-session": "^1.15.6",
     "googleapis": "^34.0.0",
     "method-override": "^3.0.0",
+    "multer": "^1.4.1",
     "nodemailer": "^4.6.8",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
