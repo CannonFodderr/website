@@ -5,8 +5,7 @@
 <div class="container page-content-container">
     <% include panel %>
     <div class="card bg-light mb-3 user-profile-card">
-        <h1>Edit
-            <%= user.username %> Profile:</h1>
+        <h1><%= user.username %>'s Profile:</h1>
             <form action="/user/<%= user.id %>/?_method=PUT" method="POST">
                 <% include ../forms/userEdit %>
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Update</button>
@@ -16,8 +15,7 @@
             <div class="col-lg-6 col-md-12">
                 <!-- EDUCATION -->
                 <div class="card bg-light mb-3">
-                    <h5 class="user-title text-dark bg-light">Education</h5>
-                    <a href="/user/<%= user.id %>/education" class="btn bg-warning text-light grit bold">Edit</a>
+                    <a href="/user/<%= user.id %>/education" class="btn bg-warning text-light grit bold"><h5 class="user-title text-light bg-dark">Edit Education</h5></a>
                     <div class="input-group-block project-features">
                         <% if (user.education) { %>
                             <ul id="feature-list" class="list-group">
@@ -32,8 +30,7 @@
                     <div class="col-lg-6 col-md-12">
                         <!-- SKILLS -->
                         <div class="card bg-light mb-3">
-                            <h5 class="user-title text-dark bg-light">Skills</h5>
-                            <a href="/user/<%= user.id %>/skills" class="btn btn-large bg-danger text-light bold grit">Edit</a>
+                            <a href="/user/<%= user.id %>/skills" class="btn btn-large bg-danger text-light bold grit"><h5 class="user-title text-light bg-dark">Edit Skills</h5></a>
                             <div class="input-group-block project-features">
                                 <% if (user.skills) { %>
                                     <ul id="feature-list" class="list-group">
