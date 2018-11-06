@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+<% include ../partials/navbar %>
+
+<div class="container page-content-container">
+    <% include panel %>
+    <div class="card bg-light mb-3 admin-login">
+        <h1><%= user.username %> Profile:</h1>
+        <form action="/user/<%= user.id %>/education?_method=PUT" method="POST">
+            <% include ../forms/eduEdit %>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Update</button>
+        </form>
+    </div>
+</div>
+<script src="/scripts/user_controls.js"></script>
+<% include ../partials/footer %>

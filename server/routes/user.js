@@ -10,7 +10,6 @@ const sanitizer = require('../middleware/sanitizer');
 
 // User ROUTES
 router.get('/user', middleware.isLoggedIn, (req, res) => {
-    console.log(req.user.id)
     res.redirect(`/user/${req.user.id}/edit`);
 });
 
@@ -49,6 +48,74 @@ router.put('/user/:userId/', middleware.isLoggedIn, (req, res) => {
             console.error('Failed to updated: ', e);
         })
 });
+// User Education
+router.get('/user/:userId/education', middleware.isOwner, (req, res)=>{
+    User.findById(req.user.id)
+    .then((foundUser)=>{
+        res.render('./user/education', {
+            title: 'Add Education',
+            csrf: req.csrfToken(),
+            user: foundUser
+        })
+    })
+    
+})
+router.put('/user/:userId/education', middleware.isOwner, (req, res)=>{
+        User.findById(req.user.id)
+        .then((foundUser)=>{
+            let sanitizedBody = sanitizer.sanitizeBody(req);
+            let eduFeatures = [];
+            if(sanitizedBody.features){
+                let featuresArr = sanitizedBody.features.trim().split(';');
+                featuresArr.forEach((feat)=>{
+                    if(feat.length > 1){
+                        eduFeatures.push(feat);
+                    }
+                })
+            }
+            foundUser.education = eduFeatures;
+            foundUser.save();
+            res.redirect('back')
+        })
+        .catch(e => {
+            console.log(e);
+            res.redirect('back') 
+        })   
+})
+// User skills
+router.get('/user/:userId/skills', middleware.isOwner, (req, res)=>{
+    User.findById(req.user.id)
+    .then((foundUser)=>{
+        res.render('./user/skills', {
+            title: 'Add Skills',
+            csrf: req.csrfToken(),
+            user: foundUser
+        })
+    })
+    
+})
+router.put('/user/:userId/skills', middleware.isOwner, (req, res)=>{
+        User.findById(req.user.id)
+        .then((foundUser)=>{
+            let sanitizedBody = sanitizer.sanitizeBody(req);
+            let skillFeatures = [];
+            if(sanitizedBody.features){
+                let featuresArr = sanitizedBody.features.trim().split(';');
+                featuresArr.forEach((feat)=>{
+                    if(feat.length > 1){
+                        skillFeatures.push(feat);
+                    }
+                })
+            }
+            foundUser.skills = skillFeatures;
+            foundUser.save();
+            res.redirect('back')
+        })
+        .catch(e => {
+            console.log(e);
+            res.redirect('back') 
+        })   
+})
 // New User Form
 router.get('/register', (req, res) => {
     res.render('./user/newProfile', {title: 'Register new profile', csrf: req.csrfToken() })
@@ -98,6 +165,7 @@ router.get('/login/google/callback', passport.authenticate('google', { failureRe
         res.redirect(`/user/${req.user.id}/projects`);
     }
 );
+
 
 // AUTH LOCAL
 router.post('/login', csrfMiddleware, passport.authenticate('local', {

@@ -4,17 +4,60 @@
 
 <div class="container page-content-container">
     <% include panel %>
-    <div class="card bg-light mb-3 admin-login">
+    <div class="card bg-light mb-3 user-login">
         <h1>Edit
             <%= user.username %> Profile:</h1>
-        <form action="/user/<%= user.id %>/?_method=PUT" method="POST">
-            <% include ../forms/adminEdit %>
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Update</button>
-        </form>
-        <a class="btn brand-login-button google" href="/login/google">
-            <img class="signin-logo" src="/images/logos/g-logo.png" alt="Google sign in logo">
-            Sign in with google
-        </a>
-    </div>
-</div>
-<% include ../partials/footer %>
+            <form action="/user/<%= user.id %>/?_method=PUT" method="POST">
+                <% include ../forms/userEdit %>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Update</button>
+            </form>
+        </div>
+        <!-- JOBS -->
+        <a href="/user/10/jobs/" class="btn btn-large user-title text-light bg-info">Your Jobs</a>
+        <div class="row no-gutters">
+            <div class="col-6">
+                <!-- EDUCATION -->
+                <div class="card bg-light mb-3">
+                    <h5 class="user-title text-dark bg-light">Education</h5>
+                    <a href="/user/10/education" class="btn bg-warning text-light grit bold">Edit</a>
+                    <div class="input-group-block project-features">
+                        <% if (user.education) { %>
+                            <ul id="feature-list" class="list-group">
+                                <% user.education.forEach((item)=>{ %>
+                                    <li class="list-group-item feature-list-item"><%= item %></li>
+                                    <% }) %>
+                                </ul>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <!-- SKILLS -->
+                        <div class="card bg-light mb-3">
+                            <h5 class="user-title text-dark bg-light">Skills</h5>
+                            <a href="/user/10/skills" class="btn btn-large bg-danger text-light bold grit">Edit</a>
+                            <div class="input-group-block project-features">
+                                <% if (user.skills) { %>
+                                    <ul id="feature-list" class="list-group">
+                                        <% user.skills.forEach((item)=>{ %>
+                                            <li class="list-group-item feature-list-item"><%= item %></li>
+                                            <% }) %>
+                                        </ul>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row bg-light no-gutters">
+                            <div class="col">
+                                <h5 class="user-title text-light bg-dark">Sign in options:</h5>
+                                <a class="btn brand-login-button google" href="/login/google">
+                                    <img class="signin-logo" src="/images/logos/g-logo.png" alt="Google sign in logo">
+                                    Sign in with google
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <script src="/scripts/user_controls.js"></script>
+                    <% include ../partials/footer %>
