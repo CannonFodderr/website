@@ -10,9 +10,8 @@ const   express             = require('express'),
         cookieParser        = require('cookie-parser'),
         flash               = require('connect-flash');
         app                 = express();
-// MULTER MIDDLEWARE
-const multer = require('multer');
-const upload = multer({dest: 'server/uploads/'})
+
+
 // CSRF MIDDELWARE
 const csrfMiddleware = require('./middleware/csurf');
 const allStratgies = require('./middleware/passport_strategies');
@@ -40,7 +39,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(expressSanitizer())
 app.use(cookieParser());
-// app.use(upload.single('file'));
 app.use(csrfMiddleware);
 app.use(methodOverride('_method'));
 app.use(expressSession({

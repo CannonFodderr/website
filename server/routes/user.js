@@ -3,29 +3,12 @@ const passport = require('passport');
 const User = require('../models/user');
 const middleware = require('../middleware/auth');
 const csrfMiddleware = require('../middleware/csurf');
-// const Message = require('../models/messages');
-// const Contact = require('../models/contact');
+const fs = require('fs');
+const fsMiddleware = require('../middleware/uploads');
 const bcrypt = require('bcrypt');
 const sanitizer = require('../middleware/sanitizer');
-// Multer
-const multer = require('multer');
-const fileFilter =  (req, file, cb) => {
-    let authorizedExt = new RegExp((/\.(gif|jpg|jpeg|tiff|png)$/i));
-    if(!authorizedExt.test(file.originalname)){
-        return cb(new Error('Only image files allowed...'))
-    }
-    cb(null, true);
-}
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'server/uploads/')
-    },
-    filename: (req, file, cb) => {
-        let ext = file.originalname.split((/\.(gif|jpg|jpeg|tiff|png)$/i))
-        cb(null, `${req.user.username}-${file.fieldname}.${ext[1]}`)
-    },
-});   
-const upload = multer({storage: storage, fileFilter: fileFilter});
+const upload = require('../multerConfig');
+
 // User ROUTES
 router.get('/user', middleware.isLoggedIn, (req, res) => {
     res.redirect(`/user/${req.user.id}`);
@@ -47,8 +30,7 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
 });
 
 // Update User
-router.put('/user/:userId/', middleware.isOwner, upload.single('cover'), (req, res) => {
-    console.log(req.file);
+router.put('/user/:userId/', middleware.isOwner, fsMiddleware.preUpload, upload.fields([{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}]), (req, res) => {
     let sanitized = sanitizer.sanitizeBody(req)
     sanitized.bio = sanitized.bio.replace(/\r?\n/g, '<br />');
     User.update(sanitized, {
