@@ -11,7 +11,6 @@ router.get('/user/:userId/jobs/new',middleware.isLoggedIn, (req, res)=>{
 // ADD New Job
 router.post('/user/:userId/jobs', middleware.isLoggedIn, (req, res)=>{
     let sanitized = sanitizer.sanitizeBody(req)
-    console.log(sanitized)
     let features = null;
     if(sanitized.features){
         features = sanitized.features.trim().split(';')

@@ -13,13 +13,13 @@
             </form>
         </div>
         <!-- JOBS -->
-        <a href="/user/10/jobs/" class="btn btn-large user-title text-light bg-info">Your Jobs</a>
+        <a href="/user/<%= user.id %>/jobs/" class="btn btn-large user-title text-light bg-info">Your Jobs</a>
         <div class="row no-gutters">
             <div class="col-6">
                 <!-- EDUCATION -->
                 <div class="card bg-light mb-3">
                     <h5 class="user-title text-dark bg-light">Education</h5>
-                    <a href="/user/10/education" class="btn bg-warning text-light grit bold">Edit</a>
+                    <a href="/user/<%= user.id %>/education" class="btn bg-warning text-light grit bold">Edit</a>
                     <div class="input-group-block project-features">
                         <% if (user.education) { %>
                             <ul id="feature-list" class="list-group">
@@ -35,7 +35,7 @@
                         <!-- SKILLS -->
                         <div class="card bg-light mb-3">
                             <h5 class="user-title text-dark bg-light">Skills</h5>
-                            <a href="/user/10/skills" class="btn btn-large bg-danger text-light bold grit">Edit</a>
+                            <a href="/user/<%= user.id %>/skills" class="btn btn-large bg-danger text-light bold grit">Edit</a>
                             <div class="input-group-block project-features">
                                 <% if (user.skills) { %>
                                     <ul id="feature-list" class="list-group">
