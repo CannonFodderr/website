@@ -38,13 +38,7 @@ router.put('/user/:userId/', middleware.isLoggedIn, (req, res) => {
             }
         })
         .then(() => {
-            User.findById(req.params.userId).then((user) => {
-                res.render('./user/editProfile', {
-                    user: user,
-                    title: 'Edit profile',
-                    csrf: req.csrfToken()
-                })
-            })
+                res.redirect(`/user/${req.params.userId}`);
         })
         .catch((e) => {
             console.error('Failed to updated: ', e);
