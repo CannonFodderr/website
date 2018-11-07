@@ -6,8 +6,9 @@ const csrfMiddleware = require('../middleware/csurf');
 const fsMiddleware = require('../middleware/uploads');
 const bcrypt = require('bcrypt');
 const sanitizer = require('../middleware/sanitizer');
-const upload = require('../multerConfig');
+const uploadImage = require('../multerConfig');
 const cloudinary = require('cloudinary');
+const fs = require('fs-extra');
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME, 
@@ -36,7 +37,7 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
 });
 
 // Update User
-router.put('/user/:userId/', middleware.isOwner, fsMiddleware.preUpload, upload.fields([{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}]), (req, res) => {
+router.put('/user/:userId/', middleware.isOwner, fsMiddleware.preUpload, uploadImage.localStorage().fields([{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}]), (req, res) => {
     console.log(req.files);
     let sanitized = sanitizer.sanitizeBody(req)
     function cloudUploadGetUrl(filePath){

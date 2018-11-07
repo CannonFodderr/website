@@ -8,14 +8,31 @@ const fileFilter =  (req, file, cb) => {
     cb(null, true);
 }
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, `server/uploads/${req.user.id}/`)
+const multerImageSetup = {
+    localStorage: () => {
+        const storage = multer.diskStorage({
+            destination: (req, file, cb) => {
+                cb(null, `server/uploads/${req.user.id}/`)
+            },
+            filename: (req, file, cb) => {
+                let ext = file.originalname.split((/\.(gif|jpg|jpeg|tiff|png)$/i))
+                cb(null, `${req.user.username}-${file.fieldname}.${ext[1]}`)
+            }
+        });
+        return multer({storage: storage, fileFilter: fileFilter});
     },
-    filename: (req, file, cb) => {
-        let ext = file.originalname.split((/\.(gif|jpg|jpeg|tiff|png)$/i))
-        cb(null, `${req.user.username}-${file.fieldname}.${ext[1]}`)
-    },
-});
+    memoryStorage: () => {
+        const storage = multer.memoryStorage({
+            filename: (req, file, cb) => {
+                let ext = file.originalname.split((/\.(gif|jpg|jpeg|tiff|png)$/i))
+                cb(null, `${req.user.username}-${file.fieldname}.${ext[1]}`)
+            }
+        });
+        return multer({storage: storage, fileFilter: fileFilter});
+    }
+}
 
-module.exports = multer({storage: storage, fileFilter: fileFilter});  
+
+
+
+module.exports = multerImageSetup
