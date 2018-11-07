@@ -3,11 +3,17 @@ const passport = require('passport');
 const User = require('../models/user');
 const middleware = require('../middleware/auth');
 const csrfMiddleware = require('../middleware/csurf');
-const fs = require('fs');
 const fsMiddleware = require('../middleware/uploads');
 const bcrypt = require('bcrypt');
 const sanitizer = require('../middleware/sanitizer');
 const upload = require('../multerConfig');
+const cloudinary = require('cloudinary');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME, 
+    api_key: process.env.CLOUDINARY_API_KEY, 
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 // User ROUTES
 router.get('/user', middleware.isLoggedIn, (req, res) => {
@@ -31,18 +37,55 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
 
 // Update User
 router.put('/user/:userId/', middleware.isOwner, fsMiddleware.preUpload, upload.fields([{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}]), (req, res) => {
+    console.log(req.files);
     let sanitized = sanitizer.sanitizeBody(req)
-    sanitized.bio = sanitized.bio.replace(/\r?\n/g, '<br />');
-    User.update(sanitized, {
-        where: {
-            id: req.user.id
+    function cloudUploadGetUrl(filePath){
+        return new Promise((resolve, reject)=> {
+            cloudinary.v2.uploader.upload(filePath, {folder: `cv/users/${req.user.id}/images`}, (err, data)=>{
+                if(err){
+                    reject(err)   
+                }
+                else {
+                    resolve(data.secure_url)
+                } 
+            })
+        })
+    }
+    async function checkUploads(){
+        if(req.files && req.files.avatar){
+            await cloudUploadGetUrl(req.files.avatar[0].path)
+            .then((data)=>{
+                console.log("FROM ASYNC: ", data)
+                sanitized.avatar = data;
+            }).catch(e=>{
+                console.error(e)
+            })
         }
-    })
-    .then(() => {
-        res.redirect(`/user/${req.params.userId}`);
-    })
-    .catch((e) => {
-        console.error('Failed to updated: ', e);
+        if(req.files && req.files.cover){
+            await cloudUploadGetUrl(req.files.cover[0].path)
+            .then((data)=>{
+                console.log("FROM ASYNC: ", data)
+                sanitized.cover_image = data;
+            }).catch(e => {
+                console.error(e);
+            })
+        }
+    }
+    checkUploads()
+    .then(()=>{
+        fsMiddleware.uploadCleanup(req);
+        sanitized.bio = sanitized.bio.replace(/\r?\n/g, '<br />');
+        User.update(sanitized, {
+            where: {
+                id: req.user.id
+            }
+        })
+        .then(() => {
+            res.redirect(`/user/${req.params.userId}`);
+        })
+        .catch((e) => {
+            console.error('Failed to updated: ', e);
+        })
     })
 });
 // User Education
