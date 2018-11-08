@@ -38,14 +38,21 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
 
 // Update User
 router.put('/user/:userId/', middleware.isOwner, fsMiddleware.preUpload, uploadImage.state().fields([{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}]), (req, res) => {
-    console.log(req.files);
-    fs.readFile(req.files.avatar[0].path, 'utf8').then((fileData)=> {
-        fs.writeFile('server/uploads/data.txt', fileData, 'utf8').then((wroteFile)=>{
-            console.log("DONE")
+    async function testUploadedFiles (file) {
+        return new Promise((resolve, reject)=>{
+            fs.readFile(file.path, 'utf8').then((fileData)=> {
+                let imgRegex = new RegExp(/JFIF|PNG|JPEG/)
+                let regIndex = imgRegex.exec(fileData);
+                let imgRegexRepeats = fileData.split(imgRegex).length;
+                if(!regIndex || imgRegexRepeats > 2 || regIndex.index > 6){
+                    reject("userid: " + req.user.id + " - Uploaded BAD file! " + file.originalname)
+                } else {
+                    resolve("File is O.K.", file)
+                }
+            })
         })
-    })
-    let sanitized = sanitizer.sanitizeBody(req)
-    function cloudUploadGetUrl(filePath){
+    }
+    async function cloudUploadGetUrl(filePath){
         return new Promise((resolve, reject)=> {
             cloudinary.v2.uploader.upload(filePath, {folder: `cv/users/${req.user.id}/images`}, (err, data)=>{
                 if(err){
@@ -57,29 +64,25 @@ router.put('/user/:userId/', middleware.isOwner, fsMiddleware.preUpload, uploadI
             })
         })
     }
+    let sanitized = sanitizer.sanitizeBody(req)
     async function checkUploads(){
-        if(req.files && req.files.avatar){
-            await cloudUploadGetUrl(req.files.avatar[0].path)
-            .then((data)=>{
-                console.log("FROM ASYNC: ", data)
-                sanitized.avatar = data;
-            }).catch(e=>{
-                console.error(e)
+        let uploadedFiles = [];
+        let fileKeys = Object.keys(req.files);
+        fileKeys.forEach(function(key) {
+            uploadedFiles.push(req.files[key]);
+        });
+        await uploadedFiles.forEach((uploadedFile)=>{
+            testUploadedFiles(uploadedFile[0]).then(()=>{
+                cloudUploadGetUrl(uploadedFile[0].path).then((data)=> {
+                    console.log("FROM ASYNC: ", data)
+                })
             })
-        }
-        if(req.files && req.files.cover){
-            await cloudUploadGetUrl(req.files.cover[0].path)
-            .then((data)=>{
-                console.log("FROM ASYNC: ", data)
-                sanitized.cover_image = data;
-            }).catch(e => {
-                console.error(e);
-            })
-        }
+            .catch(e => { console.error(e)})
+        })
     }
     checkUploads()
     .then(()=>{
-        fsMiddleware.uploadCleanup(req);
+        fsMiddleware.uploadCleanup(`server/uploads/${req.user.id}`);
         sanitized.bio = sanitized.bio.replace(/\r?\n/g, '<br />');
         User.update(sanitized, {
             where: {

@@ -9,10 +9,10 @@ const fsMiddleware = {
         }
         return next()
     },
-    uploadCleanup: (req) => {
-        if(fs.existsSync(`server/uploads/${req.user.id}`)){
-            fs.removeSync(`server/uploads/${req.user.id}`);
-        }
+    uploadCleanup: (dirPath) => {
+        fs.remove(dirPath)
+        .then(() => {console.log("Removed DIR: ", dirPath)})
+        .catch(e => {console.error(e)});
     }
 }
 
