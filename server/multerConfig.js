@@ -1,35 +1,42 @@
 // Multer
 const multer = require('multer');
-const fileFilter =  (req, file, cb) => {
-    let authorizedExt = new RegExp((/\.(gif|jpg|jpeg|tiff|png)$/i));
-    if(!authorizedExt.test(file.originalname)){
-        return cb(new Error('Only image files allowed...'))
-    }
-    cb(null, true);
-}
 
 const multerImageSetup = {
+    fileFilter: () => {
+        return fileFilter =  (req, file, cb) => {
+            let authorizedExt = new RegExp((/\.(gif|jpg|jpeg|tiff|png)$/i));
+            if(!authorizedExt.test(file.originalname)){
+                return cb(null, false)
+            }
+            cb(null, true);
+        }
+    },
+    imageFileName: () => {
+        return filename = (req, file, cb) => {
+            let ext = file.originalname.split((/\.(gif|jpg|jpeg|tiff|png)$/i))
+            cb(null, `${req.user.username}-${file.fieldname}.${ext[1]}`)
+        }
+    },
     localStorage: () => {
-        const storage = multer.diskStorage({
+        return multer.diskStorage({
             destination: (req, file, cb) => {
                 cb(null, `server/uploads/${req.user.id}/`)
             },
-            filename: (req, file, cb) => {
-                let ext = file.originalname.split((/\.(gif|jpg|jpeg|tiff|png)$/i))
-                cb(null, `${req.user.username}-${file.fieldname}.${ext[1]}`)
-            }
+            filename: multerImageSetup.imageFileName(), 
         });
-        return multer({storage: storage, fileFilter: fileFilter});
     },
     memoryStorage: () => {
-        const storage = multer.memoryStorage({
-            filename: (req, file, cb) => {
-                let ext = file.originalname.split((/\.(gif|jpg|jpeg|tiff|png)$/i))
-                cb(null, `${req.user.username}-${file.fieldname}.${ext[1]}`)
-            }
+        return  memStorage = multer.memoryStorage({
+            filename: multerImageSetup.imageFileName()
         });
-        return multer({storage: storage, fileFilter: fileFilter});
-    }
+    },
+    state: (storageState) => {
+        let storage = multerImageSetup.localStorage()
+        if(storageState === 'mem'){
+            storage = multerImageSetup.memoryStorage()
+        }
+        return multer({storage: storage, fileFilter: multerImageSetup.fileFilter()});
+    },
 }
 
 

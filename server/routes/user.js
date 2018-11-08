@@ -37,7 +37,7 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
 });
 
 // Update User
-router.put('/user/:userId/', middleware.isOwner, fsMiddleware.preUpload, uploadImage.localStorage().fields([{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}]), (req, res) => {
+router.put('/user/:userId/', middleware.isOwner, fsMiddleware.preUpload, uploadImage.state().fields([{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}]), (req, res) => {
     console.log(req.files);
     let sanitized = sanitizer.sanitizeBody(req)
     function cloudUploadGetUrl(filePath){
