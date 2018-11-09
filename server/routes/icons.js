@@ -1,14 +1,14 @@
 const router = require('express').Router()
 const Icon = require('../models/icon');
-const middleware = require('../middleware/auth');
-const sanitizer = require('../middleware/sanitizer');
+const utilities = require('../utilities/auth');
+const sanitizer = require('../utilities/sanitizer');
 
 // New Icon form
-router.get('/user/:userId/icons/new',middleware.isAdmin, (req, res)=>{
+router.get('/user/:userId/icons/new',utilities.isAdmin, (req, res)=>{
     res.render('icons/new', { title: 'Add Icon', csrf: req.csrfToken(), user: req.user})
 })
 // Create new icon
-router.post('/user/:userId/icons',middleware.isAdmin, (req, res)=>{
+router.post('/user/:userId/icons',utilities.isAdmin, (req, res)=>{
     let sanitized = sanitizer.sanitizeBody(req)
     Icon.findOrCreate(
         {where: { title: sanitized.title }, 

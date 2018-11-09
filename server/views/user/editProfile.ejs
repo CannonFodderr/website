@@ -4,6 +4,9 @@
 
 <div class="container page-content-container">
     <% include panel %>
+    <% if(message.length > 0){ %>
+        <p><%= message %></p>
+    <% } %>
     <div class="card bg-light mb-3 user-profile-card">
         <h1><%= user.username %>'s Profile:</h1>
             <form action="/user/<%= user.id %>/?_method=PUT&_csrf=<%= csrf %>" method="POST" enctype="multipart/form-data">

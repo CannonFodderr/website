@@ -42,12 +42,13 @@
     aria-describedby="basic-addon1" value="<%= user.birthday %>">
 </div>
 <div class="input-group mb-3">
+    
     <div class="input-group-prepend">
         <span class="btn btn-dark" id="basic-addon1">Profile Image:</span>
     </div>
     <input name="avatar" type="url" class="form-control" placeholder="<%=user.avatar %>" aria-label="date"
     aria-describedby="basic-addon1" value="<%= user.avatar %>">
-    <input class="btn btn-outline-secondary" id="avatarFile" type="file" name="avatar" />
+    <input class="btn btn-outline-secondary" id="avatarFile" type="file" name="avatar" accept="image"/>
 </div>
 <div class="input-group mb-3">
     <div class="input-group-prepend">
@@ -55,8 +56,9 @@
     </div>
     <input name="cover_image" type="url" class="form-control" placeholder="<%=user.cover_image %>" aria-label="date"
     aria-describedby="basic-addon1" value="<%= user.cover_image %>">
-    <input id="coverFile" class="btn btn-outline-secondary" type="file" name="cover" />
+    <input id="coverFile" class="btn btn-outline-secondary" type="file" name="cover" accept="image"/>
 </div>
+<p>JPG/PNG only, max size for images 500Kb</p>
     <h5 class="text-dark">Bio:</h5>
     <div class="form-group">
         <textarea name="bio" class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" placeholder="About me"><%= bio %></textarea>

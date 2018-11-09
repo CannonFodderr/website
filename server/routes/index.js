@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const mgs = require('../media/messages');
-const csrfMiddleware = require('../middleware/csurf');
+const csrfMiddleware = require('../utilities/csurf');
 const Message = require('../models/messages');
 const Contact = require('../models/contact');
-const sanitizer = require('../middleware/sanitizer');
+const sanitizer = require('../utilities/sanitizer');
 let mailer = require('../mailer/mail')
 
 router.get('/', csrfMiddleware, (req, res) => {

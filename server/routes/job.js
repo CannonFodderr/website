@@ -1,15 +1,15 @@
 const router = require('express').Router();
-const middleware = require('../middleware/auth');
-const sanitizer = require('../middleware/sanitizer');
+const utilities = require('../utilities/auth');
+const sanitizer = require('../utilities/sanitizer');
 const Job = require('../models/job');
 
 // New Job Form
-router.get('/user/:userId/jobs/new',middleware.isLoggedIn, (req, res)=>{
+router.get('/user/:userId/jobs/new',utilities.isLoggedIn, (req, res)=>{
     res.render('./jobs/new', { title: `Add New Job`, csrf: req.csrfToken(), user: req.user });
 });
 
 // ADD New Job
-router.post('/user/:userId/jobs', middleware.isLoggedIn, (req, res)=>{
+router.post('/user/:userId/jobs', utilities.isLoggedIn, (req, res)=>{
     let sanitized = sanitizer.sanitizeBody(req)
     let features = null;
     if(sanitized.features){
@@ -36,7 +36,7 @@ router.post('/user/:userId/jobs', middleware.isLoggedIn, (req, res)=>{
 });
 
 // View all Jobs
-router.get('/user/:userId/jobs', middleware.isLoggedIn, (req, res)=>{
+router.get('/user/:userId/jobs', utilities.isLoggedIn, (req, res)=>{
     Job.findAll({ where: {user_id: req.user.id }})
     .then((allJobs)=>{
         res.render('./jobs/all', {title: 'All Jobs', jobs: allJobs, user: req.user })
@@ -47,7 +47,7 @@ router.get('/user/:userId/jobs', middleware.isLoggedIn, (req, res)=>{
     })
 })
 // Edit Job Form
-router.get('/user/:userId/jobs/:jobId/edit', middleware.isOwner, (req, res)=>{
+router.get('/user/:userId/jobs/:jobId/edit', utilities.isOwner, (req, res)=>{
     Job.findById(req.params.jobId)
     .then((foundJob)=>{
         res.render('./jobs/edit', {title: `Edit ${foundJob.title}`, job:foundJob, user: req.user, csrf: req.csrfToken() })
@@ -58,7 +58,7 @@ router.get('/user/:userId/jobs/:jobId/edit', middleware.isOwner, (req, res)=>{
     })
 })
 // Job Update Route
-router.put('/user/:userId/jobs/:jobId', middleware.isOwner, (req, res)=>{
+router.put('/user/:userId/jobs/:jobId', utilities.isOwner, (req, res)=>{
     let sanitized = sanitizer.sanitizeBody(req)
     let features = sanitized.features.trim().split(';')
     let updateData = {
@@ -80,7 +80,7 @@ router.put('/user/:userId/jobs/:jobId', middleware.isOwner, (req, res)=>{
     })
 });
 
-router.delete('/user/:userId/jobs/:jobId', middleware.isOwner, (req, res)=>{
+router.delete('/user/:userId/jobs/:jobId', utilities.isOwner, (req, res)=>{
     Job.findById(req.params.jobId)
     .then((foundJob)=>{
         console.log("DELETING JOB:", foundJob)

@@ -1,20 +1,14 @@
 const router = require('express').Router()
 const passport = require('passport');
 const User = require('../models/user');
-const middleware = require('../middleware/auth');
-const csrfMiddleware = require('../middleware/csurf');
-const fsMiddleware = require('../middleware/uploads');
+const middleware = require('../utilities/auth');
+const csrfMiddleware = require('../utilities/csurf');
 const bcrypt = require('bcrypt');
-const sanitizer = require('../middleware/sanitizer');
-const uploadImage = require('../multerConfig');
-const cloudinary = require('cloudinary');
-const fs = require('fs-extra');
+const sanitizer = require('../utilities/sanitizer');
+const uploadImage = require('../utilities/multerMemUploader');
+const updateUser = require('../utilities/userUpdate');
+const checkGetUrl = require('../utilities/fileUploadRoutine');
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME, 
-    api_key: process.env.CLOUDINARY_API_KEY, 
-    api_secret: process.env.CLOUDINARY_API_SECRET
-});
 
 // User ROUTES
 router.get('/user', middleware.isLoggedIn, (req, res) => {
@@ -28,7 +22,8 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
             user: user,
             bio: user.bio.replace(/<br\s*[\/]?>/gi, "\n"),
             title: 'Edit profile',
-            csrf: req.csrfToken()
+            csrf: req.csrfToken(),
+            message: req.flash
         })
     }).catch((e) => {
         console.error(e)
@@ -37,88 +32,28 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
 });
 
 // Update User
-router.put('/user/:userId/', middleware.isOwner, uploadImage.state('mem').fields([{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}]), (req, res) => {
-    const testUploads = (buffer) => {
-        return new Promise((resolve, reject)=>{
-            console.log("GOT TO FS")
-            let fileString = buffer.toString('utf8')
-            let imgRegex = new RegExp(/JFIF|PNG|JPEG/)
-            let regIndex = imgRegex.exec(fileString);
-            let imgRegexRepeats = fileString.split(imgRegex).length;
-            if(!regIndex || imgRegexRepeats > 2 || regIndex.index > 6){
-                reject("userid: " + req.user.id + " - Uploaded BAD file! " + file.originalname)
+router.put('/user/:userId/', middleware.isOwner, uploadImage, (req, res) => {
+    // IF USER UPLOADED A FILE RUN TESTS
+    if(Object.keys(req.files).length > 0){
+        checkGetUrl(req).then((imgUrls)=>{
+            console.log(imgUrls)
+            if(imgUrls){
+                updateUser(req, imgUrls)
+                .then(()=>{
+                    res.redirect(`/user/${req.params.userId}`);
+                })
             } else {
-                resolve("File is O.K.")
+                res.redirect('back')
             }
         })
-    }
-    const getCloudUrl = (file) => {
-        return new Promise((resolve, reject)=> {
-            cloudinary.v2.uploader.upload_stream({folder: `cv/${req.user.id}/images`}, (err, result)=>{
-                if(err){
-                    console.error(err)
-                    reject(err)
-                } else {
-                    resolve(result)
-                }
-            }).end(file.buffer)
-            
-        })
-    }
-    let sanitized = sanitizer.sanitizeBody(req)
-    const updateUser = () => {
-        sanitized.bio = sanitized.bio.replace(/\r?\n/g, '<br />');
-        console.log(sanitized)
-        User.update(sanitized, {
-            where: {
-                id: req.user.id
-            }
-        })
-        .then(() => {
+        // IF NOT UPDATE USER
+    } else {
+        console.log("No uploaded files found")
+        updateUser(req, null)
+        .then(()=>{
             res.redirect(`/user/${req.params.userId}`);
         })
-        .catch((e) => {
-            console.error('Failed to updated: ', e);
-        })
     }
-    const checkGetUrl = async () => {
-        let uploadedFiles = [];
-        let fileKeys = Object.keys(req.files);
-        fileKeys.forEach(function(key) {
-            uploadedFiles.push(req.files[key]);
-        });
-        let uploadDone = await new Promise((resolve, reject)=>{
-            uploadedFiles.forEach((uploadedFile, index)=>{
-                testUploads(uploadedFile[0].buffer).then((result)=>{
-                    console.log("FS CHECK: ", result)
-                    getCloudUrl(uploadedFile[0]).then((data)=> {
-                        console.log("FROM Cloudinary: ", data)
-                        if(uploadedFile[0].fieldname === 'avatar'){
-                            sanitized.avatar = data.secure_url;
-                        } else if(uploadedFile[0].fieldname === 'cover'){
-                            sanitized.cover_image = data.secure_url;
-                        }
-                        if(index === uploadedFiles.length -1) resolve(true)
-                    })
-                }) 
-            })
-        })
-        .catch(e => { console.error(e)})
-        console.log(uploadDone)
-        return uploadDone;
-    }
-    if(Object.keys(req.files).length == 0){
-        updateUser()
-    }
-    checkGetUrl().then((isDone)=>{
-        console.log(isDone);
-        if(isDone === true){
-            updateUser()
-        }
-    })
-    
-    
-    
 });
 // User Education
 router.get('/user/:userId/education', middleware.isOwner, (req, res)=>{

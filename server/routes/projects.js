@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const middleware = require('../middleware/auth');
+const utilities = require('../utilities/auth');
 const Project = require('../models/project');
 const Tech = require('../models/tech');
 const Icon = require('../models/icon');
@@ -39,7 +39,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
         })
     })
     // User Views
-    router.get('/user/:userId/projects', middleware.isLoggedIn, (req, res)=>{
+    router.get('/user/:userId/projects', utilities.isLoggedIn, (req, res)=>{
         User.findById(req.user.id, {include: ['projects']})
         .then((user)=>{
             res.render('./projects/userGrid', {projects: user.projects, title: `User Projects`, user: user})
@@ -50,12 +50,12 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
         })
     })
     
-    router.get('/user/:userId/projects/new',middleware.isLoggedIn, (req, res)=>{
+    router.get('/user/:userId/projects/new',utilities.isLoggedIn, (req, res)=>{
         res.render('./projects/new', {csrf: req.csrfToken(), title: 'New project', user: req.user})
     })
     
     
-    router.post('/user/:userId/projects', middleware.isLoggedIn, (req, res)=>{
+    router.post('/user/:userId/projects', utilities.isLoggedIn, (req, res)=>{
         let features = req.body.features.trim().split(';')
         let filteredFeats = features.filter(feat => feat.length > 0);
         let newProject = {
@@ -79,7 +79,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
         })
     });
     // Project Edit Routes
-    router.get('/user/:userId/projects/:projectid/edit', middleware.isLoggedIn, (req, res)=>{
+    router.get('/user/:userId/projects/:projectid/edit', utilities.isLoggedIn, (req, res)=>{
         Project.findById(req.params.projectid, {include: [Icon, Tech, User]})
         .then((project)=>{
             let projectTechs = []
@@ -99,7 +99,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
         })
     });
     
-    router.put('/user/:userId/projects/:projectid', middleware.isLoggedIn, (req, res)=>{
+    router.put('/user/:userId/projects/:projectid', utilities.isLoggedIn, (req, res)=>{
         let features = req.body.features.trim().split(';')
         let filteredFeats = features.filter(feat => feat.length > 0);
         let updateData = {
@@ -142,7 +142,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
         })
     })
     
-    router.delete('/user/:userId/projects/:projectid', middleware.isOwner, (req, res)=>{
+    router.delete('/user/:userId/projects/:projectid', utilities.isOwner, (req, res)=>{
         Project.findById(req.params.projectid)
         .then((project)=>{
             if(project.user_id != req.user.id){

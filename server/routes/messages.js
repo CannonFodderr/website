@@ -1,16 +1,16 @@
 const router = require('express').Router();
-const middleware = require('../middleware/auth');
+const utilities = require('../utilities/auth');
 const User = require('../models/user');
 const Contact = require('../models/contact');
 const Message = require('../models/messages');
-const csrfMiddleware = require('../middleware/csurf')
-const sanitizer = require('../middleware/sanitizer');
+const csrfMiddleware = require('../utilities/csurf')
+const sanitizer = require('../utilities/sanitizer');
 
 const Sequelize = require('sequelize')
 const options = Sequelize.Op;
 
 // View User Messages
-router.get('/user/:userId/messages', middleware.isOwner, (req, res)=>{
+router.get('/user/:userId/messages', utilities.isOwner, (req, res)=>{
     Message.findAll({where: {destination_id: req.user.id}, include: [Contact]},{order: [['created_at', 'DESC']]})
         .then((allMessages)=>{
             res.render('./user/messages', {
@@ -57,7 +57,7 @@ router.get('/user/:userId/messages', middleware.isOwner, (req, res)=>{
         });
         
         // DELETE Message
-        router.delete('/user/:userId/messages/:msgId',middleware.isAdmin, (req, res)=>{
+        router.delete('/user/:userId/messages/:msgId',utilities.isAdmin, (req, res)=>{
             Message.findById(req.params.msgId)
             .then((foundMessage)=>{
                 console.log("DELETE MESSAGE", foundMessage)

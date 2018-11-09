@@ -13,8 +13,8 @@ const   express             = require('express'),
 
 
 // CSRF MIDDELWARE
-const csrfMiddleware = require('./middleware/csurf');
-const allStratgies = require('./middleware/passport_strategies');
+const csrfMiddleware = require('./utilities/csurf');
+const allStratgies = require('./utilities/passport_strategies');
 // DB Associations
 require('./db/associate');
 
