@@ -37,53 +37,38 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
 });
 
 // Update User
-router.put('/user/:userId/', middleware.isOwner, fsMiddleware.preUpload, uploadImage.state().fields([{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}]), (req, res) => {
-    async function testUploadedFiles (file) {
+router.put('/user/:userId/', middleware.isOwner, uploadImage.state('mem').fields([{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}]), (req, res) => {
+    const testUploads = (buffer) => {
         return new Promise((resolve, reject)=>{
-            fs.readFile(file.path, 'utf8').then((fileData)=> {
-                let imgRegex = new RegExp(/JFIF|PNG|JPEG/)
-                let regIndex = imgRegex.exec(fileData);
-                let imgRegexRepeats = fileData.split(imgRegex).length;
-                if(!regIndex || imgRegexRepeats > 2 || regIndex.index > 6){
-                    reject("userid: " + req.user.id + " - Uploaded BAD file! " + file.originalname)
-                } else {
-                    resolve("File is O.K.", file)
-                }
-            })
+            console.log("GOT TO FS")
+            let fileString = buffer.toString('utf8')
+            let imgRegex = new RegExp(/JFIF|PNG|JPEG/)
+            let regIndex = imgRegex.exec(fileString);
+            let imgRegexRepeats = fileString.split(imgRegex).length;
+            if(!regIndex || imgRegexRepeats > 2 || regIndex.index > 6){
+                reject("userid: " + req.user.id + " - Uploaded BAD file! " + file.originalname)
+            } else {
+                resolve("File is O.K.")
+            }
         })
     }
-    async function cloudUploadGetUrl(filePath){
+    const getCloudUrl = (file) => {
         return new Promise((resolve, reject)=> {
-            cloudinary.v2.uploader.upload(filePath, {folder: `cv/users/${req.user.id}/images`}, (err, data)=>{
+            cloudinary.v2.uploader.upload_stream({folder: `cv/${req.user.id}/images`}, (err, result)=>{
                 if(err){
-                    reject(err)   
+                    console.error(err)
+                    reject(err)
+                } else {
+                    resolve(result)
                 }
-                else {
-                    resolve(data.secure_url)
-                } 
-            })
+            }).end(file.buffer)
+            
         })
     }
     let sanitized = sanitizer.sanitizeBody(req)
-    async function checkUploads(){
-        let uploadedFiles = [];
-        let fileKeys = Object.keys(req.files);
-        fileKeys.forEach(function(key) {
-            uploadedFiles.push(req.files[key]);
-        });
-        await uploadedFiles.forEach((uploadedFile)=>{
-            testUploadedFiles(uploadedFile[0]).then(()=>{
-                cloudUploadGetUrl(uploadedFile[0].path).then((data)=> {
-                    console.log("FROM ASYNC: ", data)
-                })
-            })
-            .catch(e => { console.error(e)})
-        })
-    }
-    checkUploads()
-    .then(()=>{
-        fsMiddleware.uploadCleanup(`server/uploads/${req.user.id}`);
+    const updateUser = () => {
         sanitized.bio = sanitized.bio.replace(/\r?\n/g, '<br />');
+        console.log(sanitized)
         User.update(sanitized, {
             where: {
                 id: req.user.id
@@ -95,7 +80,45 @@ router.put('/user/:userId/', middleware.isOwner, fsMiddleware.preUpload, uploadI
         .catch((e) => {
             console.error('Failed to updated: ', e);
         })
+    }
+    const checkGetUrl = async () => {
+        let uploadedFiles = [];
+        let fileKeys = Object.keys(req.files);
+        fileKeys.forEach(function(key) {
+            uploadedFiles.push(req.files[key]);
+        });
+        let uploadDone = await new Promise((resolve, reject)=>{
+            uploadedFiles.forEach((uploadedFile, index)=>{
+                testUploads(uploadedFile[0].buffer).then((result)=>{
+                    console.log("FS CHECK: ", result)
+                    getCloudUrl(uploadedFile[0]).then((data)=> {
+                        console.log("FROM Cloudinary: ", data)
+                        if(uploadedFile[0].fieldname === 'avatar'){
+                            sanitized.avatar = data.secure_url;
+                        } else if(uploadedFile[0].fieldname === 'cover'){
+                            sanitized.cover_image = data.secure_url;
+                        }
+                        if(index === uploadedFiles.length -1) resolve(true)
+                    })
+                }) 
+            })
+        })
+        .catch(e => { console.error(e)})
+        console.log(uploadDone)
+        return uploadDone;
+    }
+    if(Object.keys(req.files).length == 0){
+        updateUser()
+    }
+    checkGetUrl().then((isDone)=>{
+        console.log(isDone);
+        if(isDone === true){
+            updateUser()
+        }
     })
+    
+    
+    
 });
 // User Education
 router.get('/user/:userId/education', middleware.isOwner, (req, res)=>{

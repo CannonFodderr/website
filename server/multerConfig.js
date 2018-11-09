@@ -35,7 +35,7 @@ const multerImageSetup = {
         if(storageState === 'mem'){
             storage = multerImageSetup.memoryStorage()
         }
-        return multer({storage: storage, fileFilter: multerImageSetup.fileFilter()});
+        return multer({storage: storage, fileFilter: multerImageSetup.fileFilter(), limits: { fileSize: 300000}});
     },
 }
 
