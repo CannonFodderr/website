@@ -23,7 +23,7 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
             bio: user.bio.replace(/<br\s*[\/]?>/gi, "\n"),
             title: 'Edit profile',
             csrf: req.csrfToken(),
-            message: req.flash
+            message: req.flash()
         })
     }).catch((e) => {
         console.error(e)

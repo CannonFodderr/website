@@ -47,8 +47,8 @@
         <div class="row cv-bio-row">
             <div class="col-12 text-dark">
                 <p><%- user.bio %></p>
-                <p>Best Regards,</p>
-                <p class="autograph"><%= user.firstName%> <%= user.lastName%></p>
+                <p class="text-center">Best Regards,</p>
+                <p class="autograph text-center"><%= user.firstName%> <%= user.lastName%></p>
                 <% if(user.avatar){ %>
                     <div class="cv-profile-avatar-wrapper">
                         <img class="cv-profile-avatar" src="<%= user.avatar %>" alt="<%=user.username%> profile picture" height="200" width="200">

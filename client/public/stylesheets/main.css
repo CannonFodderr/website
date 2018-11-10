@@ -203,16 +203,25 @@ img{
     margin-top: 2vh;
     padding: 2vh 2vw; 
 }
+.fileInput{
+    display: none;
+    width: 100%;
+    background: var(--bgSecondary);
+    color: var(--textSecondary)
+}
 .cv-profile-avatar-wrapper{
     display: flex;
     justify-content: center;
     height: 200px;
-    width: 200px;
+    
 }
+
 .cv-profile-avatar{
     margin: auto;
     height: 200px;
     width: 200px;
+    border: 1px solid var(--bgSecondary);
+    border-radius: 50%;
 
 }
 .social-li{
