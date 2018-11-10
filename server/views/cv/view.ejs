@@ -15,168 +15,168 @@
         <div class="col-8 text-center">
             <% if (messages.success || messages.failure) { %>
                 <% if (messages.success) { %>
-                        <h5 class="text-center text-success card-header typer">
-                                <div class="typewriter">
-                                    <%= messages.success %>
-                                </div>
-                            </h5>
+                    <h5 class="text-center text-success card-header typer">
+                        <div class="typewriter">
+                            <%= messages.success %>
+                        </div>
+                    </h5>
                     
                     <% } %>
                     <% if (messages.failure) { %>
                         <h5 class="card-header typer">
-                                <div class="text-center typewriter text-danger">
-                                    <%= messages.failure %>
+                            <div class="text-center typewriter text-danger">
+                                <%= messages.failure %>
+                            </div>
+                        </h5>
+                        <% } %>
+                        <% } else { %>
+                            <h5 class="card-header typer">
+                                <div class="text-center typewriter">
+                                    <%= user.firstName.toUpperCase() %> <%= user.lastName.toUpperCase() %> CV
                                 </div>
                             </h5>
-                        <% } %>
-            <% } else { %>
-                <h5 class="card-header typer">
-                        <div class="text-center typewriter">
-                            <%= user.firstName.toUpperCase() %> <%= user.lastName.toUpperCase() %> CV
+                            
+                            <% } %>
                         </div>
-                    </h5>
-                
-            <% } %>
-        </div>
-            <div class="col-2"></div>
-        </div>
-    </div>
-    <!-- Content & Title -->
-    <div class="container bio-content-container">
-        <h5>HI!</h5>
-        <div class="row cv-bio-row">
-            <div class="col-12 text-dark">
-                <p><%- user.bio %></p>
-                <p class="text-center">Best Regards,</p>
-                <p class="autograph text-center"><%= user.firstName%> <%= user.lastName%></p>
-                <% if(user.avatar){ %>
-                    <div class="cv-profile-avatar-wrapper">
-                        <img class="cv-profile-avatar" src="<%= user.avatar %>" alt="<%=user.username%> profile picture" height="200" width="200">
+                        
                     </div>
-                <% } %>
-                <hr />
-                <div class="row cv-controls no-gutters text-center">
-                    <div class="col-6">
-                        <a href="/profile/<%= user.id %>/projects" class="cv-controls-btn btn btn-success grit">Project Gallery</a>
-                    </div>
-                    <% if ( jobs.length > 0) { %>
-                    <div class="col-6">
-                        <button class="cv-controls-btn btn btn-info grit" onclick="document.getElementById('workxp').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Work</button>
-                    </div>
-                    <% } %>
-                    <% if( user.education || user.skills){ %>
-                    <div class="col-6">
-                        <button class="cv-controls-btn btn btn-warning text-light grit" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
-                    </div>
-                    <% } %>
-                    <% if( user.email ) {%>
-                        <div class="col-6">
-                            <!-- CONTACT COLLAPSE -->
-                            <button class="cv-controls-btn btn btn-danger grit" type="button grit" data-toggle="collapse" data-target="#contactCollapse" aria-expanded="false" aria-controls="contactCollapse">
-                                Contact <%= user.firstName %>
-                            </button>
-                        </div>
-                    <% } %>
-                    </div>
-                    <% if( user.email ) {%>
-                    <div class="collapse" id="contactCollapse">
-                        <div class="card card-body">
-                            <form action="/profile/<%= user.id %>/message" method="POST">
-                                <%  include ../forms/message %>
-                                <button class="btn btn-danger" type="submit">Send</button>
-                            </form>
-                        </div>
-                    </div>
-                    <% } %>
                 </div>
-            </div>
-        </div>
-        <!-- WORK -->
-        <div class="container cv-jobs bg-dark">
-            <% if (jobs.length > 0) { %>
-                <h3 id="workxp" class="text-light">Work Experience</h3>
-                <% jobs.forEach((job)=>{ %>
-                    <div class="card job-card bg-dark">
-                        <div class="card-header bg-info text-light job-card-header grit">
-                            <div class="job-title">
-                            <%- job.title.toUpperCase() %>
-                            </div>
-                        </div>
-                        <div class="card-body bg-light text-dark job-body">
-                            <h4 class="card-title"><strong>@ </strong><%- job.company %></h4>
-                            <h5 class="card-text"><strong>TL;DR</strong></h5>
-                            <p><%- job.description %></p>
-                            <!-- COLLAPSE -->
-                            <button class="btn btn-info" data-toggle="collapse" href="#collapse<%= job.id %>" role="button" aria-expanded="false" aria-controls="collapse<%= job.id %>" onclick="setTimeout(()=> {document.getElementById('collapse<%= job.id %>').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'}) }, 300)" >More...</button>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="collapse multi-collapse collapse-wrapper" id="collapse<%= job.id %>">
-                                        <div class="card card-body job-features-wrapper">
-                                            <!-- Features -->
-                                            <h6 class="collapse-header bg-dark text-light">Features</h6>
-                                            <% if (job.features) { %>
-                                                <ul class="list-group">
-                                                    <% job.features.forEach((feature)=>{ %>
-                                                        <% if (feature.length > 0) { %>
-                                                            <li class="list-group-item"><%- feature %></li>
-                                                            <% } %>
-                                                            <% }) %>
-                                                        </ul>
-                                                        <% } %>
-                                                        <% if (job.content){ %>
-                                                            <h6 class=" collapse-header bg-dark text-light">About</h6>
-                                                            <p class="card-text job-content bg-light text-dark"><%- job.content %></p>
-                                                            <% } %>
-                                                        </div>
-                                                        <button class="btn btn-danger btn-block" data-toggle="collapse" href="#collapse<%= job.id %>" role="button" aria-expanded="false" aria-controls="collapse<%= job.id %>" onclick="setTimeout(()=> {document.getElementById('collapse<%= job.id %>').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'}) }, 300)" >Close</button>
-                                                    </div>
-                                                </div>
+                <!-- Content & Title -->
+                <div class="container bio-content-container">
+                    <h5>HI!</h5>
+                    <div class="row cv-bio-row">
+                        <div class="col-12 text-dark">
+                            <p><%- user.bio %></p>
+                            <p class="text-center">Best Regards,</p>
+                            <p class="autograph text-center"><%= user.firstName%> <%= user.lastName%></p>
+                            <% if(user.avatar){ %>
+                                <div class="cv-profile-avatar-wrapper">
+                                    <img class="cv-profile-avatar" src="<%= user.avatar %>" alt="<%=user.username%> profile picture" height="200" width="200">
+                                </div>
+                                <% } %>
+                                <hr />
+                                <div class="row cv-controls no-gutters text-center">
+                                    <div class="col-6">
+                                        <a href="/profile/<%= user.id %>/projects" class="cv-controls-btn btn btn-success grit">Project Gallery</a>
+                                    </div>
+                                    <% if ( jobs.length > 0) { %>
+                                        <div class="col-6">
+                                            <button class="cv-controls-btn btn btn-info grit" onclick="document.getElementById('workxp').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Work</button>
+                                        </div>
+                                        <% } %>
+                                        <% if( user.education || user.skills){ %>
+                                            <div class="col-6">
+                                                <button class="cv-controls-btn btn btn-warning text-light grit" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
                                             </div>
-                                            <!-- DATES -->
-                                            <% if (job.start_date || job.end_date) {%>
-                                                <div class="card-footer bg-secondary text-light job-footer">
-                                                    <% if (job.start_date) { %>
-                                                        <span class="job-date-text">FROM</span><%= job.start_date %>  
-                                                        <% } %>
-                                                        <% if (job.end_date) { %>
-                                                            <span class="job-date-text">TO</span><%= job.end_date %>
-                                                            <% } %>
-                                                        </div>
-                                                        <% } %>
-                                                    </div>
-                                                    <% }) %>
+                                            <% } %>
+                                            <% if( user.email ) {%>
+                                                <div class="col-6">
+                                                    <!-- CONTACT COLLAPSE -->
+                                                    <button class="cv-controls-btn btn btn-danger grit" type="button grit" data-toggle="collapse" data-target="#contactCollapse" aria-expanded="false" aria-controls="contactCollapse">
+                                                        Contact <%= user.firstName %>
+                                                    </button>
                                                 </div>
                                                 <% } %>
                                             </div>
-                                            <!-- Education & Skills-->
-                                            <div class="container edu-skills-container">
-                                                <div class="row">
-                                                    <% if (user.education) { %>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12 edu-skills-col">
-                                                        <h3 id="eduction" class="text-light">Education</h3>
-                                                        <ul class="list-group features-list">
-                                                            <li id="education" class="list-group-item feature-item bg-warning text-light grit"></li>
-                                                            <!-- <li class="list-group-item feature-item">Sound School- 3 Years Sound Engineering</li>
-                                                            <li class="list-group-item feature-item">Udemy -Web Developer Bootcamp</li>
-                                                            <li class="list-group-item feature-item">Udemy - Python Bootcamp</li> -->
-                                                            <% user.education.forEach((item)=> { %>
-                                                                <li class="list-group-item feature-item"><%= item %></li>
-                                                            <% }) %>
-                                                        </ul>
+                                            <% if( user.email ) {%>
+                                                <div class="collapse" id="contactCollapse">
+                                                    <div class="card card-body">
+                                                        <form action="/profile/<%= user.id %>/message" method="POST">
+                                                            <%  include ../forms/message %>
+                                                            <button class="btn btn-danger" type="submit">Send</button>
+                                                        </form>
                                                     </div>
-                                                    <% } %>
-                                                    <% if (user.skills) { %>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12 edu-skills-col">
-                                                        <h3 id="skills" class="text-light">Skills</h3> 
-                                                        <ul class="list-group features-list">
-                                                            <li class="list-group-item feature-item bg-danger text-light grit"></li>
-                                                            <li class="list-group-item feature-item">ProTools, Cubase, Ableton</li>
-                                                            <li class="list-group-item feature-item">Photoshop, Premire</li>
-                                                            <li class="list-group-item feature-item">Full Stack NodeJS, Express, MongoDB, Postgres</li>
-                                                        </ul>
-                                                    </div>
-                                                    <% } %>
                                                 </div>
+                                                <% } %>
                                             </div>
-                                            
-<% include ../partials/footer %>
+                                        </div>
+                                    </div>
+                                    <!-- WORK -->
+                                    <div class="container cv-jobs bg-dark">
+                                        <% if (jobs.length > 0) { %>
+                                            <h3 id="workxp" class="text-light">Work Experience</h3>
+                                            <% jobs.forEach((job)=>{ %>
+                                                <div class="card job-card bg-dark">
+                                                    <div class="card-header bg-info text-light job-card-header grit">
+                                                        <div class="job-title">
+                                                            <%- job.title.toUpperCase() %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body bg-light text-dark job-body">
+                                                        <h4 class="card-title"><strong>@ </strong><%- job.company %></h4>
+                                                        <h5 class="card-text"><strong>TL;DR</strong></h5>
+                                                        <p><%- job.description %></p>
+                                                        <!-- COLLAPSE -->
+                                                        <button class="btn btn-info" data-toggle="collapse" href="#collapse<%= job.id %>" role="button" aria-expanded="false" aria-controls="collapse<%= job.id %>" onclick="setTimeout(()=> {document.getElementById('collapse<%= job.id %>').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'}) }, 300)" >More...</button>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <div class="collapse multi-collapse collapse-wrapper" id="collapse<%= job.id %>">
+                                                                    <div class="card card-body job-features-wrapper">
+                                                                        <!-- Features -->
+                                                                        <h6 class="collapse-header bg-dark text-light">Features</h6>
+                                                                        <% if (job.features) { %>
+                                                                            <ul class="list-group">
+                                                                                <% job.features.forEach((feature)=>{ %>
+                                                                                    <% if (feature.length > 0) { %>
+                                                                                        <li class="list-group-item"><%- feature %></li>
+                                                                                        <% } %>
+                                                                                        <% }) %>
+                                                                                    </ul>
+                                                                                    <% } %>
+                                                                                    <% if (job.content){ %>
+                                                                                        <h6 class=" collapse-header bg-dark text-light">About</h6>
+                                                                                        <p class="card-text job-content bg-light text-dark"><%- job.content %></p>
+                                                                                        <% } %>
+                                                                                    </div>
+                                                                                    <button class="btn btn-danger btn-block" data-toggle="collapse" href="#collapse<%= job.id %>" role="button" aria-expanded="false" aria-controls="collapse<%= job.id %>" onclick="setTimeout(()=> {document.getElementById('collapse<%= job.id %>').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'}) }, 300)" >Close</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- DATES -->
+                                                                        <% if (job.start_date || job.end_date) {%>
+                                                                            <div class="card-footer bg-secondary text-light job-footer">
+                                                                                <% if (job.start_date) { %>
+                                                                                    <span class="job-date-text">FROM</span><%= job.start_date %>  
+                                                                                    <% } %>
+                                                                                    <% if (job.end_date) { %>
+                                                                                        <span class="job-date-text">TO</span><%= job.end_date %>
+                                                                                        <% } %>
+                                                                                    </div>
+                                                                                    <% } %>
+                                                                                </div>
+                                                                                <% }) %>
+                                                                            </div>
+                                                                            <% } %>
+                                                                        </div>
+                                                                        <!-- Education & Skills-->
+                                                                        <div class="container edu-skills-container">
+                                                                            <div class="row">
+                                                                                <% if (user.education) { %>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12 edu-skills-col">
+                                                                                        <h3 id="eduction" class="text-light">Education</h3>
+                                                                                        <ul class="list-group features-list">
+                                                                                            <li id="education" class="list-group-item feature-item bg-warning text-light grit"></li>
+                                                                                            <!-- <li class="list-group-item feature-item">Sound School- 3 Years Sound Engineering</li>
+                                                                                                <li class="list-group-item feature-item">Udemy -Web Developer Bootcamp</li>
+                                                                                                <li class="list-group-item feature-item">Udemy - Python Bootcamp</li> -->
+                                                                                                <% user.education.forEach((item)=> { %>
+                                                                                                    <li class="list-group-item feature-item"><%= item %></li>
+                                                                                                    <% }) %>
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                            <% } %>
+                                                                                            <% if (user.skills) { %>
+                                                                                                <div class="col-lg-6 col-md-6 col-sm-12 edu-skills-col">
+                                                                                                    <h3 id="skills" class="text-light">Skills</h3> 
+                                                                                                    <ul class="list-group features-list">
+                                                                                                        <li class="list-group-item feature-item bg-danger text-light grit"></li>
+                                                                                                        <li class="list-group-item feature-item">ProTools, Cubase, Ableton</li>
+                                                                                                        <li class="list-group-item feature-item">Photoshop, Premire</li>
+                                                                                                        <li class="list-group-item feature-item">Full Stack NodeJS, Express, MongoDB, Postgres</li>
+                                                                                                    </ul>
+                                                                                                </div>
+                                                                                                <% } %>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        
+                                                                                        <% include ../partials/footer %>

@@ -217,7 +217,6 @@ img{
     display: flex;
     justify-content: center;
     height: 200px;
-    
 }
 
 .cv-profile-avatar{
@@ -610,14 +609,11 @@ img{
     width: 100%;
     height: auto;
 }
-.image-upload-inputs-col{
-    /* margin: auto; */
-}
+
 .image-upload-img-col{
     display: flex;
     justify-content: center;
     max-height: 200px;
-    /* padding-left: 0; */
 }
 .edu-skills-container{
     margin-top: 2vh;
@@ -726,7 +722,6 @@ img{
 #messageToast {
     visibility: hidden;
     height: 0;
-    /* min-width: 250px; */
     background-color: #333;
     color: #fff;
     text-align: center;
@@ -734,8 +729,10 @@ img{
     width: 100%;
     position: fixed;
     z-index: 1000;
-    left: 10;
+    left: 0;
     bottom: 0;
+    display: flex;
+    justify-content: center;
     font-size: 17px;
 }
 

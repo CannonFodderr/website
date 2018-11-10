@@ -18,35 +18,33 @@
                 <a class="btn btn-outline-light" href="/user/<%= user.id %>/jobs/">Jobs</a>
             </div>
             <div class="row  controls-row text-light no-gutters bg-light text-dark">
-                    <div class="col-2">
-                        <a class="btn btn-lg btn-link text-dark btn-back" href="#" onclick="history.go(-1)"><i class="fas fa-arrow-left"></i></a>
-                    </div>
-                    <div class="col-8 text-center">
-                        <% if (messages.success || messages.failure) { %>
-                            <% if (messages.success) { %>
-                                    <h5 class="text-center text-success card-header typer">
-                                            <div class="typewriter">
-                                                <%= messages.success %>
-                                            </div>
-                                        </h5>
-                                
-                                <% } %>
-                                <% if (messages.failure) { %>
-                                    <h5 class="card-header typer">
-                                            <div class="text-center typewriter text-danger">
-                                                <%= messages.failure %>
-                                            </div>
-                                        </h5>
-                                    <% } %>
-                        <% } else { %>
-                            <h5 class="card-header typer">
-                                    <div class="text-center typewriter">
-                                            <%= title.toUpperCase() %>
+                <div class="col-2">
+                    <a class="btn btn-lg btn-link text-dark btn-back" href="#" onclick="history.go(-1)"><i class="fas fa-arrow-left"></i></a>
+                </div>
+                <div class="col-8 text-center">
+                    <% if (messages.success || messages.failure) { %>
+                        <% if (messages.success) { %>
+                            <h5 class="text-center text-success card-header typer">
+                                <div class="typewriter">
+                                    <%= messages.success %>
+                                </div>
+                            </h5>
+                            
+                            <% } %>
+                            <% if (messages.failure) { %>
+                                <h5 class="card-header typer">
+                                    <div class="text-center typewriter text-danger">
+                                        <%= messages.failure %>
                                     </div>
                                 </h5>
-                            
-                        <% } %>
-                    </div>
-                        <div class="col-2"></div>
-                    </div>
-        </div>
+                                <% } %>
+                                <% } else { %>
+                                    <h5 class="card-header typer">
+                                        <div class="text-center typewriter">
+                                            <%= title.toUpperCase() %>
+                                        </div>
+                                    </h5>
+                                    
+                                    <% } %>
+                                </div>
+                            </div>
