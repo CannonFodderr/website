@@ -611,7 +611,13 @@ img{
     height: auto;
 }
 .image-upload-inputs-col{
-    margin: auto;
+    /* margin: auto; */
+}
+.image-upload-img-col{
+    display: flex;
+    justify-content: center;
+    max-height: 200px;
+    /* padding-left: 0; */
 }
 .edu-skills-container{
     margin-top: 2vh;

@@ -13,7 +13,7 @@ const getCloudUrl = (file, reqUserId) => {
         cloudinary.v2.uploader.upload_stream({folder: `cv/${reqUserId}/images`}, (err, result)=>{
             if(err){
                 console.error(err)
-                reject(null, err)
+                reject(err)
             } else {
                 resolve(result)
             }

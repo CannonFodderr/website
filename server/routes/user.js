@@ -35,8 +35,8 @@ router.put('/user/:userId/', middleware.isOwner, uploadImage, (req, res) => {
     if(Object.keys(req.files).length > 0){
         checkGetUrl(req)
         .then((imgUrls)=>{
-            if(imgUrls !== null){
-                console.log(imgUrls);
+            if(Object.keys(req.files).length === Object.keys(imgUrls).length){
+                console.log("Before update: ", imgUrls);
                 updateUser(req, imgUrls)
                 .then(()=>{
                     res.redirect(`/user/${req.params.userId}`);

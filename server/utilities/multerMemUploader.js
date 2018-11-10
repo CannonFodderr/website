@@ -10,11 +10,7 @@ module.exports = (req, res, next) => {
             }
             cb(null, true)
         }, 
-        limits: { fileSize: 500000},
-        onerror: (err, next) => {
-            console.log("From multer uploader: ", err)
-            next(err)
-        }
+        limits: { fileSize: 1000000, files: 2},
     }).fields( [{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}])(req, res, (err)=>{
         if (err instanceof multer.MulterError) {
             console.error(err.message)

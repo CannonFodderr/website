@@ -11,21 +11,20 @@ const checkGetUrl = async (req) => {
     
     let cloudinaryUrls = await new Promise((resolve, reject)=>{
         uploadedFiles.forEach((uploadedFile, index)=>{
-            console.log("All files:", uploadedFile)
             testUploads(uploadedFile[0].buffer).then((result)=>{
+                console.log("File passed Check:", result)
                 if(result !== true){
                     req.flash('failure', 'File check failed')
                     console.error(new Error("File check failed"))
-                    resolve(false)
+                    reject(false)
                 } else {
                     getCloudUrl(uploadedFile[0], req.user.id).then((data)=> {
-                        console.log(data)
                         if(uploadedFile[0].fieldname === 'avatar'){
                             imgUrls.avatar = data.secure_url;
                         } else if(uploadedFile[0].fieldname === 'cover'){
                             imgUrls.cover_image = data.secure_url;
                         }
-                        if(index === uploadedFiles.length -1) {
+                        if(Object.keys(imgUrls).length === Object.keys(req.files).length) {
                             resolve(imgUrls)
                         }
                     })
@@ -37,7 +36,7 @@ const checkGetUrl = async (req) => {
         return imgUrls
     })
     .catch(e => { console.error(e)})
-    console.log()
+    console.log(cloudinaryUrls)
     return cloudinaryUrls;
 }
 

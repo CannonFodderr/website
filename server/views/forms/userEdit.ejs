@@ -41,42 +41,42 @@
     <input name="birthday" type="date" class="form-control" placeholder="<%=user.birthday %>" aria-label="date"
     aria-describedby="basic-addon1" value="<%= user.birthday %>">
 </div>
-<div class="row">
-    <div class="col image-upload-inputs-col">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="btn btn-dark" id="basic-addon1">Profile Image:</span>
-            </div>
-            <input name="avatar" type="url" class="form-control" placeholder="<%=user.avatar %>" aria-label="date"
-            aria-describedby="basic-addon1" value="<%= user.avatar %>">
-            <input class="btn btn-outline-secondary fileInput" id="avatarFile" type="file" name="avatar" accept="image"/>
-            <label class="btn btn-outline-dark btn-block grit" for="avatarFile"><strong>UPLOAD</strong> - JPG/PNG only, max size: 500Kb</label>
-        </div>
-    </div>
-    <div class="col image-upload-inputs-col">
-        <% if(user.avatar){ %>
-            <div class="cv-profile-avatar-wrapper">
-                <img class="cv-user-avatar" src="<%= user.avatar %>" alt="<%=user.username%> profile picture" height="200" width="200">
-            </div>
-            <% } %>
-        </div>
-    </div>
+<div class="input-group mb-3">
     <div class="row">
         <div class="col image-upload-inputs-col">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="btn btn-dark text-light bg-dark" id="basic-addon1">Cover Image:</span>
+                    <span class="btn btn-dark" id="basic-addon1">Profile Image:</span>
                 </div>
-                <input name="cover_image" type="url" class="form-control" placeholder="<%=user.cover_image %>" aria-label="date"
-                aria-describedby="basic-addon1" value="<%= user.cover_image %>">
-                <input id="coverFile" class="btn btn-outline-secondary fileInput" type="file" name="cover" accept="image"/>
-                <label class="btn btn-outline-dark btn-block grit" for="coverFile"><strong>UPLOAD</strong> - JPG/PNG only, max size: 500Kb</label>
+                <input name="avatar" type="url" class="form-control" placeholder="<%=user.avatar %>" aria-label="date"
+                aria-describedby="basic-addon1" value="<%= user.avatar %>">
+                <input class="btn btn-outline-secondary fileInput" id="avatarFile" type="file" name="avatar" accept="image"/>
+                <label class="btn btn-outline-info btn-block grit" for="avatarFile"><strong>UPLOAD</strong> - JPG/PNG only, max size: 500Kb</label>
             </div>
         </div>
-        <div class="col image-upload-inputs-col">
+        <div class="col image-upload-img-col ">
+            <% if(user.avatar){ %>
+                <img class="cv-profile-avatar" src="<%= user.avatar %>" alt="<%=user.username%> profile picture" draggable="false">
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <div class="row">
+            <div class="col image-upload-inputs-col">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="btn btn-dark text-light bg-dark" id="basic-addon1">Cover Image:</span>
+                    </div>
+                    <input name="cover_image" type="url" class="form-control" placeholder="<%=user.cover_image %>" aria-label="date"
+                    aria-describedby="basic-addon1" value="<%= user.cover_image %>">
+                    <input id="coverFile" class="btn btn-outline-secondary fileInput" type="file" name="cover" accept="image"/>
+                    <label class="btn btn-outline-info btn-block grit" for="coverFile"><strong>UPLOAD</strong> - JPG/PNG only, max size: 500Kb</label>
+                </div>
+            </div>
             <% if(user.cover_image){ %>
-                <div class="cv-profile-avatar-wrapper">
-                    <img class="cv-user-cover" src="<%= user.cover_image %>" alt="<%=user.username%> profile picture" height="200" width="200">
+                <div class="col image-upload-img-col">
+                    <img class="cv-user-cover" src="<%= user.cover_image %>" alt="<%=user.username%> profile picture" draggable="false">
                 </div>
                 <% } %>
             </div>
