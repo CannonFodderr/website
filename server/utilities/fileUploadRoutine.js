@@ -19,6 +19,7 @@ const checkGetUrl = async (req) => {
                     resolve(false)
                 } else {
                     getCloudUrl(uploadedFile[0], req.user.id).then((data)=> {
+                        console.log(data)
                         if(uploadedFile[0].fieldname === 'avatar'){
                             imgUrls.avatar = data.secure_url;
                         } else if(uploadedFile[0].fieldname === 'cover'){
