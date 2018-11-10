@@ -1,8 +1,6 @@
 const router = require('express').Router()
-const passport = require('passport');
 const User = require('../models/user');
 const middleware = require('../utilities/auth');
-const csrfMiddleware = require('../utilities/csurf');
 const bcrypt = require('bcrypt');
 const sanitizer = require('../utilities/sanitizer');
 const uploadImage = require('../utilities/multerMemUploader');
@@ -35,8 +33,8 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
 router.put('/user/:userId/', middleware.isOwner, uploadImage, (req, res) => {
     // IF USER UPLOADED A FILE RUN TESTS
     if(Object.keys(req.files).length > 0){
-        checkGetUrl(req).then((imgUrls)=>{
-            console.log(imgUrls)
+        checkGetUrl(req)
+        .then((imgUrls)=>{
             if(imgUrls){
                 updateUser(req, imgUrls)
                 .then(()=>{
@@ -66,7 +64,7 @@ router.get('/user/:userId/education', middleware.isOwner, (req, res)=>{
         })
     })
     
-})
+});
 router.put('/user/:userId/education', middleware.isOwner, (req, res)=>{
     User.findById(req.user.id)
     .then((foundUser)=>{
@@ -153,40 +151,9 @@ router.post('/register', (req, res) => {
             return res.redirect('/login');
         })
     }
-    
 });
 
-// LOG IN/OUT
-router.get('/login', csrfMiddleware, (req, res) => {
-    res.render('./user/userLogin', {
-        csrf: req.csrfToken(),
-        title: 'Login'
-    })
-});
 
-// oAUTH GOOGLE
-router.get('/login/google', passport.authenticate('google', { scope: ['profile', 'https://mail.google.com/'] }));
-
-router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login'}),
-(req, res) => {
-    res.redirect(`/user/${req.user.id}/projects`);
-}
-);
-
-
-// AUTH LOCAL
-router.post('/login', csrfMiddleware, passport.authenticate('local', {
-    successRedirect: `/user`,
-    failureRedirect: '/login'
-}));
-
-router.get('/logout', (req, res) => {
-    if (req.user) {
-        console.log(`Loggin out: ${req.user.username}`)
-        req.logout();
-    }
-    res.redirect('/');
-});
 
 
 module.exports = router

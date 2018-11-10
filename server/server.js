@@ -27,7 +27,8 @@ const   indexRoute      = require('./routes/index'),
         jobsRoutes      = require('./routes/job'),
         messagesRoutes  = require('./routes/messages'),
         techRoutes      = require('./routes/tech'),
-        serviceRoutes   = require('./routes/service');
+        serviceRoutes   = require('./routes/service'),
+        authRoutes      = require('./routes/auth');
 
 // APP CONFIG
 app.set('view engine', 'ejs');
@@ -74,6 +75,7 @@ app.use(jobsRoutes);
 app.use(messagesRoutes);
 app.use(techRoutes);
 app.use(serviceRoutes);
+app.use(authRoutes);
 
 
 // Seed DB
