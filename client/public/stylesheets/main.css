@@ -116,13 +116,17 @@ img{
     position: relative;
     width: 100%;
 }
+.message-wrapper-nav{
+    min-height: 6vh;
+    display: flex;
+}
 .message-wrapper{
     background-image: url('../images/grit.png');
 }
 .typer{
     border: none;
     background: transparent;
-    min-height: 6vh;
+    min-height: 100%;
     width: fit-content;
     margin: auto;
     padding: 0;
@@ -547,7 +551,6 @@ img{
     color: #3498db;
 }
 .user-controls{
-    border-bottom: 1px solid var(--textSecondary);
     padding: 1vh 1vw;
 }
 .user-projects-title{
@@ -598,7 +601,18 @@ img{
     width: 90%;
     margin-top: 1vh;
 }
-
+.cv-user-avatar{
+    padding: 1vh 1vw;
+    width: 200px;
+    height: 200px;
+}
+.cv-user-cover{
+    width: 100%;
+    height: auto;
+}
+.image-upload-inputs-col{
+    margin: auto;
+}
 .edu-skills-container{
     margin-top: 2vh;
     padding: 0;
@@ -693,19 +707,29 @@ img{
     -webkit-animation: fadein 0.5s, 2.5s;
     animation: fadein 0.5s, 10s;
 }
+.messageToast-wrapper{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+
+}
+.messageToast-text{
+    margin: auto
+}
 #messageToast {
     visibility: hidden;
     height: 0;
-    min-width: 250px;
+    /* min-width: 250px; */
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 0;
+    padding: 5px;
     width: 100%;
     position: fixed;
     z-index: 1000;
+    left: 10;
     bottom: 0;
-    left: 0;
     font-size: 17px;
 }
 

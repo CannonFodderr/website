@@ -17,15 +17,16 @@ module.exports = (req, res, next) => {
         }
     }).fields( [{name: 'avatar', maxCount: 1}, {name: 'cover', maxCount: 1}])(req, res, (err)=>{
         if (err instanceof multer.MulterError) {
-            console.log(err.message)
-            req.flash('Error', err.message)
-            res.redirect(`/user/${req.user.id}`)
+            console.error(err.message)
+            req.flash('failure', err.message)
+            res.redirect(`/user/${req.user.id}`);
         } else if (err) {
-            console.log(err)
-            req.flash('Error', err.message)
-            res.redirect(`/user/${req.user.id}`)
+            console.error(err)
+            req.flash('failure', err.message)
+            res.redirect(`/user/${req.user.id}`);
         } else{
-            next()
+            req.flash('success', 'Profile updated!')
+            next();
         }
     })
 }

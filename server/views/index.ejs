@@ -13,7 +13,7 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <a href="/projects?category=Web+Development">
+                            <a href="profile/1/projects?category=Web+Development">
                                 <img class="d-block w-100" src="images/webdev.jpg" alt="Web Development" draggable="false">
                             </a>
                             <div class="carousel-caption">
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <a href="/projects?category=Sound+Design">
+                            <a href="profile/1/projects?category=Sound+Design">
                                 <img class="d-block w-100" src="images/sound.jpg" alt="Sound Design" draggable="false">
                             </a>
                             <div class="carousel-caption">
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <a href="/projects?category=E-Commerce">
+                            <a href="profile/1/projects?category=E-Commerce">
                                 <img class="d-block w-100" src="images/ecommerce.jpg" alt="E-Commrece" draggable="false">
                             </a>
                             <div class="carousel-caption">
@@ -53,11 +53,11 @@
         </div>
         <div class="col-md-6 col-lg-5 col-xl-4">
             <div class="card homepage-cards contact-col">
-                <div class="message-wrapper">
+                <div class="message-wrapper message-wrapper-nav">
                     <h5 class="card-header typer">
-                            <% if (message.failure) { %>
+                            <% if (messages.failure) { %>
                                 <div class="typewriter text-danger">
-                                    <%= message.failure %>
+                                    <%= messages.failure %>
                                 </div>
                             <% } else { %>
                                 <div class="typewriter">

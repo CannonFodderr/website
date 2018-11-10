@@ -3,6 +3,7 @@ const sanitizer = require('./sanitizer');
 const User = require('../models/user');
 
 const updateUser = async (req, imgsUrls) => {
+    console.log("FROM UPDATE FUNC:", imgsUrls)
     let sanitized = sanitizer.sanitizeBody(req)
     if(imgsUrls !== null){
         if(imgsUrls.avatar){

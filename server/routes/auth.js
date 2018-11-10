@@ -30,6 +30,7 @@ router.get('/logout', (req, res) => {
         console.log(`Loggin out: ${req.user.username}`)
         req.logout();
     }
+    req.flash('success', 'Logged out')
     res.redirect('/');
 });
 

@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const mgs = require('../media/messages');
 const csrfMiddleware = require('../utilities/csurf');
 const Message = require('../models/messages');
 const Contact = require('../models/contact');
@@ -8,7 +7,6 @@ let mailer = require('../mailer/mail')
 
 router.get('/', csrfMiddleware, (req, res) => {
     res.render('index', {
-        messages: mgs,
         title: process.env.OWNER,
         csrf: req.csrfToken()
     });
@@ -28,9 +26,9 @@ router.post('/', csrfMiddleware, (req, res) => {
             res.redirect('/cv');
         })
     }).catch(e => {
-        req.flash('failure', `Error, ${e.errors[0].path}:${e.errors[0].value}`);
         console.error(e);
-        res.redirect('/')
+        req.flash('failure', `Error in ${e.errors[0].path}: ${e.errors[0].value}`);
+        res.redirect('back')
     })
 });
 

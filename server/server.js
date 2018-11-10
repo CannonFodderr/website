@@ -58,11 +58,10 @@ passport.serializeUser((function (user, done) {
 passport.deserializeUser((function (user, done) {
     done(null, user)
 }));
-
 app.use(flash());
 
 app.use('*', (req, res, next)=>{
-    res.locals.message = req.flash();
+    res.locals.messages = req.flash();
     next();
 });
 // USE ROUTES
@@ -74,8 +73,9 @@ app.use(cvRoutes);
 app.use(jobsRoutes);
 app.use(messagesRoutes);
 app.use(techRoutes);
-app.use(serviceRoutes);
 app.use(authRoutes);
+// KEEP LAST
+app.use(serviceRoutes);
 
 
 // Seed DB

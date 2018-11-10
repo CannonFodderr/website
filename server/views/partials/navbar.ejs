@@ -15,7 +15,11 @@
             </ul>
             <!-- PWA INSTALL BUTTON -->
             <li id="install-btn-wrapper"></li>
-            
         </div>
         </nav>
+        <% if( messages > 0){ %>
+            <div class="fluid-container">
+            <div class="alert"><%= messages.message %></div>
+            </div>
+        <% } %>
         

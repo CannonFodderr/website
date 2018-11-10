@@ -13,19 +13,19 @@
             <a class="btn btn-lg btn-link text-dark btn-back" href="#" onclick="history.go(-1)"><i class="fas fa-arrow-left"></i></a>
         </div>
         <div class="col-8 text-center">
-            <% if (message.success || message.failure) { %>
-                <% if (message.success) { %>
-                        <h5 class="text-center card-header typer">
+            <% if (messages.success || messages.failure) { %>
+                <% if (messages.success) { %>
+                        <h5 class="text-center text-success card-header typer">
                                 <div class="typewriter">
-                                    <%= message.success %>
+                                    <%= messages.success %>
                                 </div>
                             </h5>
                     
                     <% } %>
-                    <% if (message.failure) { %>
+                    <% if (messages.failure) { %>
                         <h5 class="card-header typer">
-                                <div class="text-center typewriter bg-danger">
-                                    <%= message.failure %>
+                                <div class="text-center typewriter text-danger">
+                                    <%= messages.failure %>
                                 </div>
                             </h5>
                         <% } %>

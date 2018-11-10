@@ -21,7 +21,7 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
             bio: user.bio.replace(/<br\s*[\/]?>/gi, "\n"),
             title: 'Edit profile',
             csrf: req.csrfToken(),
-            message: req.flash()
+            flash: req.flash()
         })
     }).catch((e) => {
         console.error(e)
@@ -35,12 +35,14 @@ router.put('/user/:userId/', middleware.isOwner, uploadImage, (req, res) => {
     if(Object.keys(req.files).length > 0){
         checkGetUrl(req)
         .then((imgUrls)=>{
-            if(imgUrls){
+            if(imgUrls !== null){
+                console.log(imgUrls);
                 updateUser(req, imgUrls)
                 .then(()=>{
                     res.redirect(`/user/${req.params.userId}`);
                 })
             } else {
+                req.flash('faliure', 'Sorry, unable to update');
                 res.redirect('back')
             }
         })
