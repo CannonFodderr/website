@@ -125,7 +125,7 @@ router.put('/user/:userId/skills', middleware.isOwner, (req, res)=>{
 })
 // New User Form
 router.get('/register', (req, res) => {
-    res.render('./user/newProfile', {title: 'Register new profile', csrf: req.csrfToken() })
+    res.render('./user/newProfile', {title: 'GET YOUR CV', csrf: req.csrfToken(), flash: req.flash() })
 });
 // Register new user
 router.post('/register', (req, res) => {
@@ -147,7 +147,11 @@ router.post('/register', (req, res) => {
             .then((newUser) => {
                 console.log(`Created new user: ${sanitizedData.username}`);
                 return res.redirect('/login');
-            })
+            }).catch(e => {    
+                console.error(e);
+                req.flash('faliure', `Error, ${e.path} : ${e.value}`)
+                res.redirect('/register');
+            });
         }).catch(e => {
             console.error(e);
             return res.redirect('/login');

@@ -2,21 +2,21 @@
         <div class="input-group-prepend">
             <span class="input-group-text text-light bg-dark" id="basic-addon1">Username:</span>
         </div>
-        <input name="username" type="text" class="form-control" placeholder="Username" aria-label="Username"
-        aria-describedby="basic-addon1" value="" required autofocus>
+        <input name="username" type="text" class="form-control" placeholder="8+ Charachters" aria-label="Username"
+        aria-describedby="basic-addon1" value="" minlength="8" required autofocus>
     </div>
 <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text text-light bg-dark" id="basic-addon1">Password:</span>
         </div>
-        <input name="password" type="password" class="form-control" placeholder="Password" aria-label="Password"
-        aria-describedby="basic-addon1" value="" required>
+        <input name="password" type="password" class="form-control" placeholder="8+ Charachters" aria-label="Password"
+        aria-describedby="basic-addon1" value="" minlength="8" required>
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text text-light bg-dark" id="basic-addon1">E-Mail:</span>
         </div>
-        <input name="email" type="email" class="form-control" placeholder="E-Mail" aria-label="email" aria-describedby="basic-addon1"
+        <input name="email" type="email" class="form-control" placeholder="your@email.com" aria-label="email" aria-describedby="basic-addon1"
         value="" required>
     </div>
     <input type="hidden" name="_csrf" value="<%= csrf %>" />

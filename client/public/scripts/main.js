@@ -63,7 +63,7 @@ showNotification = (data) => {
     if(data.type === "beforeinstallprompt"){
         var installBtn = document.getElementById("install-btn-wrapper");
         setTimeout(()=>{
-            installBtn.innerHTML = "<button class='btn btn-primary install-btn'>Install App</button>"
+            installBtn.innerHTML = "<button class='btn btn-primary btn-block'>Install App</button>"
             installBtn.addEventListener('click', (e)=>{
                 installBtn.className = installBtn.className.repeat("show", "");
                 installPrompt()
