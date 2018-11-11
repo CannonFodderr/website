@@ -12,6 +12,12 @@ module.exports = {
         if (req.user && req.user != 'undefined') {
             return next();
         }
-        return res.redirect('back');
+        return res.redirect('/login');
     },
+    isOwner(req, res, next){
+        if(req.user && req.user.id == req.params.userId){
+            return next();
+        }
+        return res.redirect('/logout');
+    }
 }

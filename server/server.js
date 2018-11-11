@@ -11,22 +11,24 @@ const   express             = require('express'),
         flash               = require('connect-flash');
         app                 = express();
 
+
 // CSRF MIDDELWARE
-const csrfMiddleware = require('./middleware/csurf');
-const allStratgies = require('./middleware/passport_strategies');
+const csrfMiddleware = require('./utilities/csurf');
+const allStratgies = require('./utilities/passport_strategies');
 // DB Associations
 require('./db/associate');
 
 // IMPORT ROUTES
 const   indexRoute      = require('./routes/index'),
-        adminRoutes     = require('./routes/auth'),
+        userRoutes      = require('./routes/user'),
         projectsRoutes  = require('./routes/projects'),
         iconsRoutes     = require('./routes/icons'),
         cvRoutes        = require('./routes/cv'),
         jobsRoutes      = require('./routes/job'),
         messagesRoutes  = require('./routes/messages'),
         techRoutes      = require('./routes/tech'),
-        serviceRoutes   = require('./routes/service');
+        serviceRoutes   = require('./routes/service'),
+        authRoutes      = require('./routes/auth');
 
 // APP CONFIG
 app.set('view engine', 'ejs');
@@ -56,22 +58,23 @@ passport.serializeUser((function (user, done) {
 passport.deserializeUser((function (user, done) {
     done(null, user)
 }));
-
 app.use(flash());
 
 app.use('*', (req, res, next)=>{
-    res.locals.message = req.flash();
+    res.locals.messages = req.flash();
     next();
 });
 // USE ROUTES
 app.use(indexRoute);
-app.use(adminRoutes);
+app.use(userRoutes);
 app.use(projectsRoutes);
 app.use(iconsRoutes);
 app.use(cvRoutes);
 app.use(jobsRoutes);
 app.use(messagesRoutes);
 app.use(techRoutes);
+app.use(authRoutes);
+// KEEP LAST
 app.use(serviceRoutes);
 
 

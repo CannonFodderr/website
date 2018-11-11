@@ -19,7 +19,7 @@ let generalDB = () => {
             host: config.development.host,
             dialect: config.development.dialect,
             operatorsAliases: false,
-            logging: false,
+            logging: console.log(),
             pool: {
                 max: 5,
                 min: 0,

@@ -5,11 +5,13 @@ STATICFILESLIST = () => {
         '/images/webdev.jpg',
         '/images/ecommerce.jpg',
         '/stylesheets/main.css',
-        '/scripts/main.js',
-        '/scripts/transLoader.js'
+        '/',
+        '/cv',
+        '/projects'
     ]
     return staticFiles
 }
+
 
 self.addEventListener('install', (e)=>{
     e.waitUntil(
@@ -24,6 +26,9 @@ self.addEventListener('install', (e)=>{
 })
     
 self.addEventListener('fetch', function(event) {
+    if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+        return;
+    }
     var autherizedExt = new RegExp('bootstrap|fontawesome|googleapis')
     if (event.request.method != 'GET') {
         return
@@ -83,3 +88,4 @@ self.addEventListener('message', messageEvent => {
 async function swSkipWait() {
     await skipWaiting()
 }
+

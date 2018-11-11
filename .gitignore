@@ -7,3 +7,4 @@ seed
 config
 seeders
 /models/
+server/uploads/*

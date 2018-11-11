@@ -36,6 +36,12 @@ const Project = db.define('Project', {
     icon_id: {
         type: Sequelize.INTEGER
     },
+    live_demo: {
+        type: Sequelize.STRING,
+        validate: {
+            isUrl: true
+        }
+    },
     category: {
         type: Sequelize.STRING,
         allowNull: false,

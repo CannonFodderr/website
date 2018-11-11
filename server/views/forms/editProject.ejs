@@ -34,8 +34,15 @@
     <div class="input-group-prepend">
         <span class="input-group-text text-light bg-dark" id="basic-addon1">Link</span>
     </div>
-    <input name="link" type="url" class="form-control" placeholder="Link to project" aria-label="url" aria-describedby="basic-addon1"
+    <input name="link" type="url" class="form-control" placeholder="Link to project repository" aria-label="url" aria-describedby="basic-addon1"
     value="<%= project.link %>">
+</div>
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text text-light bg-dark" id="basic-addon1">Live Demo</span>
+    </div>
+    <input name="demo" type="url" class="form-control" placeholder="Link to project" aria-label="url" aria-describedby="basic-addon1"
+    value="<%= project.live_demo %>">
 </div>
 <div class="input-group mb-3">
     <div class="input-group-prepend">

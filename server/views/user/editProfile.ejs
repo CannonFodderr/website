@@ -1,0 +1,56 @@
+<% include ../partials/header %>
+<% include ../loader/transLoad %>
+<% include ../partials/navbar %>
+<div class="container page-content-container">
+    <% include panel %>
+    <div class="card bg-light mb-3 user-profile-card">
+        <form action="/user/<%= user.id %>/?_method=PUT&_csrf=<%= csrf %>" method="POST" enctype="multipart/form-data">
+            <% include ../forms/userEdit %>
+            <input type="hidden" name="_csrf" value="<%= csrf%>">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">UPDATE</button>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <!-- EDUCATION -->
+            <div class="card bg-light mb-3">
+                <a href="/user/<%= user.id %>/education" class="bg-warning text-light  bold"><h5 class="user-title text-light bg-dark">Edit Education</h5></a>
+                <div class="input-group-block project-features">
+                    <% if (user.education) { %>
+                        <ul id="feature-list" class="list-group">
+                            <% user.education.forEach((item)=>{ %>
+                                <li class="list-group-item feature-list-item"><%= item %></li>
+                                <% }) %>
+                            </ul>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <!-- SKILLS -->
+                    <div class="card bg-light mb-3">
+                        <a href="/user/<%= user.id %>/skills" class="bg-danger text-light bold "><h5 class="user-title text-light bg-dark">Edit Skills</h5></a>
+                        <div class="input-group-block project-features">
+                            <% if (user.skills) { %>
+                                <ul id="feature-list" class="list-group">
+                                    <% user.skills.forEach((item)=>{ %>
+                                        <li class="list-group-item feature-list-item"><%= item %></li>
+                                        <% }) %>
+                                    </ul>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bg-light no-gutters">
+                        <div class="col">
+                            <h5 class="user-title text-light bg-dark">Sign in options:</h5>
+                            <a class="btn brand-login-button google" href="/login/google">
+                                <img class="signin-logo" src="/images/logos/g-logo.png" alt="Google sign in logo">
+                                Sign in with google
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <script src="/scripts/user_controls.js"></script>
+                <% include ../partials/footer %>

@@ -1,10 +1,10 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
 <div class="container page-content-container">
-    <div class="card bg-light mb-3 admin-login">
+    <div class="card bg-light mb-3 user-login">
         <h5 class="card-title">Login</h5>
         <form action="/login" method="POST">
-            <% include ../forms/adminLogin %>
+            <% include ../forms/userLogin %>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
         </form>
             <a class="btn brand-login-button google" href="/login/google">

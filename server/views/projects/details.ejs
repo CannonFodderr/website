@@ -10,7 +10,7 @@
     </div>
     <div class="row  controls-row text-light no-gutters bg-light text-dark">
         <div class="col-2">
-            <a class="btn btn-lg btn-link text-dark btn-back" href="/projects"><i class="fas fa-arrow-left"></i></a>
+            <a class="btn btn-lg btn-link text-dark btn-back" onclick="history.go(-1)"><i class="fas fa-arrow-left"></i></a>
         </div>
         <div class="col-8 text-center project-link-wrapper">
             <% if(icon != null){ %>
@@ -28,6 +28,13 @@
                 <h2><%= project.title.toUpperCase() %></h2>
             </div>
             <div class="col-lg-2"></div>
+        </div>
+        <div class="row text-center">
+            <div class="col">
+                    <% if(project.live_demo) { %>
+                        <a target="_blank" rel="noopener" class="btn btn-success live-demo-btn grit" href="<%= project.live_demo %>">Live Demo</a>
+                    <% } %>
+            </div>
         </div>
         <div class="row project-description-row">
             <div class="col-lg-2"></div>
@@ -50,7 +57,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-6 col-sm-12 features-col">
                         <ul class="list-group features-list">
-                            <li class="list-group-item feature-item bg-info">FEATURES</li>
+                            <li class="list-group-item feature-item bg-info grit bold">FEATURES</li>
                             <% project.features.forEach((feat)=> { %>
                                 <li class="list-group-item feature-item"><%= feat %></li>
                                 <% }) %>
@@ -58,7 +65,7 @@
                         </div>
                         <% if (project.Technologies.length > 0) { %>
                             <div class="col-lg-4 col-md-6 col-xs-6 tech-col">
-                                <li class="list-group-item feature-item bg-warning">SHAMELESS NAME DROPING...</li>
+                                <li class="list-group-item feature-item bg-warning grit bold">SHAMELESS NAME DROPING...</li>
                                 <div class="row no-gutters">
                                     <% project.Technologies.forEach((tech)=>{ %>
                                         <div class="col-4">
@@ -80,5 +87,4 @@
                         </div>
                         <%}%>
                         
-                        <script src="../../scripts/transloader.js"></script>
                         <% include ../partials/footer %>

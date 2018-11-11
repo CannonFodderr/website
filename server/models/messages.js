@@ -7,6 +7,9 @@ const Message = sq.define('Message', {
         autoIncrement: true,
         primaryKey: true
     },
+    destination_id: {
+        type: Sequelize.INTEGER
+    },
     content: {
         type: Sequelize.TEXT
     },

@@ -1,16 +1,15 @@
 const router = require('express').Router();
-const mgs = require('../media/messages');
-const csrfMiddleware = require('../middleware/csurf');
+const csrfMiddleware = require('../utilities/csurf');
 const Message = require('../models/messages');
 const Contact = require('../models/contact');
-const sanitizer = require('../middleware/sanitizer');
+const sanitizer = require('../utilities/sanitizer');
 let mailer = require('../mailer/mail')
 
 router.get('/', csrfMiddleware, (req, res) => {
     res.render('index', {
-        messages: mgs,
         title: process.env.OWNER,
-        csrf: req.csrfToken()
+        csrf: req.csrfToken(),
+        user: req.user
     });
 });
 
@@ -25,12 +24,12 @@ router.post('/', csrfMiddleware, (req, res) => {
             let mailTemplates = require('../mailer/templates')
             mailer.send(process.env.EMAIL, user[0].email, mailTemplates.thankYou.subject, mailTemplates.thankYou.body );
             req.flash('success', "Thanks, I'll get back to you ASAP :)");
-            res.redirect('/cv');
+            res.redirect('/profile/1/cv');
         })
     }).catch(e => {
-        req.flash('failure', `Error, ${e.errors[0].path}:${e.errors[0].value}`);
         console.error(e);
-        res.redirect('/')
+        req.flash('failure', `Error in ${e.errors[0].path}: ${e.errors[0].value}`);
+        res.redirect('back')
     })
 });
 
