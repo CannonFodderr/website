@@ -220,6 +220,24 @@ img{
     margin-top: 2vh;
     padding: 2vh 2vw; 
 }
+.profile-col{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1vh auto;
+}
+.profile-card{
+    display: flex;
+    justify-content: center;
+    border: none;
+}
+.profile-card:hover{
+    filter: grayscale()
+}
+.profile-img-overlay{
+    padding: 1vh 1vw;
+}
 .fileInput{
     display: none;
     width: 100%;
@@ -238,7 +256,18 @@ img{
     width: 200px;
     border: 1px solid var(--bgSecondary);
     border-radius: 50%;
-
+    transition: 0.4s ease-in-out;
+}
+.cv-profile-avatar-grid{
+    margin: auto;
+    height: 200px;
+    width: 200px;
+    border: 1px solid var(--bgSecondary);
+    border-radius: 50%;
+    transition: 0.4s ease-in-out;
+}
+.cv-profile-avatar-grid:hover{
+    filter: grayscale();
 }
 .social-li{
     width: 50%;

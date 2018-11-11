@@ -1,21 +1,26 @@
 const router = require('express').Router();
 const User = require('../models/user');
 const Op = require('sequelize').Op;
+const sanitizer = require('express-sanitizer');
 
 // Search profiles
 router.get('/profile', (req, res)=> {
-    let query = req.query.search
-    console.log(query);
-    User.findAll({where: {[Op.or]:[{username: query}, {firstName: query}, {lastName: query}]}})
+    if(!req.query.search){
+        User.findAll()
+        .then((allUsers)=>{
+            res.render('cv/all', {users: allUsers, user: req.user, csrf: req.csrfToken(), title: "All Users"})
+        })
+    } else {
+        let query = req.sanitize(req.query.search)
+        User.findAll({where: {[Op.or]:[{username:{[Op.like]: `%${query}%`}}, {firstName:  {[Op.like]: `%${query}%`}}, {lastName:  {[Op.like]: `%${query}%`}}, {email:  {[Op.like]: `%${query}%`}}]}})
     .then((foundUsers)=>{
-        console.log(foundUsers);
-        res.send("Users Found")
+        res.render('cv/all', {users: foundUsers, user: req.user, csrf: req.csrfToken(), title: "Found Users"})
     })
     .catch(e => {
         console.error(e);
         res.send(e);
     })
-    
+    }
 })
 
 

@@ -1,0 +1,47 @@
+<% include ../partials/header %>
+<% include ../partials/navbar %>
+<div class="container page-content-container">
+    <h2 class="text-light"><%= title.toUpperCase() %></h2>
+</div>
+<div class="container projects-grid bg-dark">
+        <div class="row text-center">
+                <div class="col-lg-3 col-sm-12">
+                    <a href="/register" class="btn btn-success btn-lg btn-block grit">GET YOUR OWN CV</a>
+                </div>
+                <div class="col-12">
+                    <form class="form-inline my-2 my-lg-0 search-form bg-dark" method="GET" action="/profile">
+                        <div class="input-group text-center search-group">
+                            <input name="search" type="search" class="form-control bg-dark text-light" placeholder="Find CVs" aria-label="search-form" aria-describedby="button-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-block btn-primary" type="submit" id="button-addon2">GO</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    <div class="row projects-row text-center">
+        <% include ../loader/transLoad %>
+        <% for(var i in users){ %>
+            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 profile-col">
+                <div class="card bg-dark text-white profile-card">
+                    <a class="text-light" href="/profile/<%= users[i].id %>/cv"" draggable="false">
+                        <% if(users[i].avatar) { %>
+                            <img src="<%= users[i].avatar %>" alt="<%= users[i].username %>" class="card-img cv-profile-avatar-grid">
+                            <% } else { %>
+                                <img src="images/default-avatar.png" alt="<%= users[i].username %>" class="card-img cv-profile-avatar-grid">
+                            <% } %>
+                            <div class="card-img-overlay profile-img-overlay">
+                                <h5 class="card-title bg-dark text-center"><% if(users[i].firstName && users[i].lastName) { %>
+                                    <%= users[i].firstName %> <%= users[i].lastName %>  
+                                    <% } else { %>
+                                        <%= users[i].username %>
+                                        <% } %></h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+            <% include ../partials/footer %>
