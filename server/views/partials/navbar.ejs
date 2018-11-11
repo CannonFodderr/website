@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-xl navbar-dark">
         <button class="navbar-toggler bg-dark text-light" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -13,14 +13,16 @@
                     <a class="nav-link text-light" href="/profile/1/projects"><i class="fas fa-network-wired menu-icon"></i><span class="btn-text">Projects Gallery</span></a>
                 </li>            
             </ul>
-            
-            <!-- PWA INSTALL BUTTON -->
-            <div id="install-btn-wrapper"></div>
+            <div class="nav-item">
+            <div class="input-group text-center search-group">
+                    <form class="form-inline my-2 my-lg-0 search-form" method="GET" action="/profile">
+                    <input name="search" type="search" class="form-control bg-dark text-light search-input" placeholder="Find CVs" aria-label="search-form" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-block btn-primary" type="submit" id="button-addon2">GO</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
         </div>
         </nav>
-        <% if( messages > 0){ %>
-            <div class="fluid-container">
-            <div class="alert"><%= messages.message %></div>
-            </div>
-        <% } %>
         

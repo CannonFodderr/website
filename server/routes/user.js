@@ -16,16 +16,20 @@ router.get('/user', middleware.isLoggedIn, (req, res) => {
 // View User Edit Form
 router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
     User.findById(req.params.userId).then((user) => {
+        let bio = "";
+        if(user.bio){
+            user.bio.replace(/<br\s*[\/]?>/gi, "\n")
+        }
         res.render('./user/editProfile', {
             user: user,
-            bio: user.bio.replace(/<br\s*[\/]?>/gi, "\n"),
+            bio: bio,
             title: 'Edit profile',
             csrf: req.csrfToken(),
             flash: req.flash()
         })
     }).catch((e) => {
         console.error(e)
-        res.redirect('/user');
+        res.redirect('back');
     })
 });
 

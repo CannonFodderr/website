@@ -28,14 +28,14 @@ textarea{
     width: 100%;
 }
 .gap{
-    margin: 1vh 1vw;
+    margin: 1vh auto;
 }
 .grit{
     mask-image: url('../images//grit.png');
     -webkit-mask-image: url('../images/grit.png');
     mask-type: alpha;
 }
-.navbar.navbar-expand-lg.navbar-dark {
+.navbar.navbar-expand-xl.navbar-dark {
     position: absolute;
     top: 0;
     left: 0;
@@ -44,7 +44,7 @@ textarea{
     background: #1e22259a;
     transition: ease-in-out 0.5s;
 }
-.navbar.navbar-expand-lg.navbar-dark:hover{
+.navbar.navbar-expand-xl.navbar-dark:hover{
     background: #0d0e0ee1;
 }
 .navbar-brand{
@@ -66,9 +66,11 @@ textarea{
     width: 100%;
 }
 .search-group{
-    background-image: url('../images/grit.png');
-    width: 100% !important;
+    width: 100%;
     /* margin: 1vh auto; */
+}
+.search-input{
+    width: 80%;
 }
 .page-404-container{
     display: flex;
@@ -224,16 +226,20 @@ img{
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     margin: 1vh auto;
 }
 .profile-card{
     display: flex;
     justify-content: center;
     border: none;
+    border-radius: 50%;
+    background: transparent;
+    transition: 0.4s ease-in-out;
 }
 .profile-card:hover{
-    filter: grayscale()
+    filter: grayscale();
+    transform: scale(0.9)
 }
 .profile-img-overlay{
     padding: 1vh 1vw;
@@ -304,6 +310,7 @@ a.nav-link:hover{
 
 .contact-list{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     list-style: none;
     padding: 0;
@@ -315,7 +322,7 @@ a.nav-link:hover{
 .social-link{
     display: block;
     font-size: 1.2em;
-    margin-top: 1vh;
+    margin: 1vh auto;
 }
 .message-card{
     margin-bottom: 2vh;
@@ -747,7 +754,7 @@ a.nav-link:hover{
     height: 0;
     color: #fff;
     text-align: center;
-    margin: 0;
+    margin: auto;
     padding: 0;
     bottom: 0;
     font-size: 17px;
@@ -828,5 +835,8 @@ a.nav-link:hover{
     }
     .project-card{
         min-width: 100%;
+    }
+    a.nav-link{
+        text-align: left;
     }
 }

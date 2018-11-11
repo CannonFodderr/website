@@ -24,7 +24,7 @@ router.post('/', csrfMiddleware, (req, res) => {
             let mailTemplates = require('../mailer/templates')
             mailer.send(process.env.EMAIL, user[0].email, mailTemplates.thankYou.subject, mailTemplates.thankYou.body );
             req.flash('success', "Thanks, I'll get back to you ASAP :)");
-            res.redirect('/cv');
+            res.redirect('/profile/1/cv');
         })
     }).catch(e => {
         console.error(e);

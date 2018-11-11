@@ -20,10 +20,9 @@ router.get('/login/google/callback', passport.authenticate('google', { failureRe
 );
 
 // AUTH LOCAL
-router.post('/login', csrfMiddleware, passport.authenticate('local', {
-    successRedirect: `/user`,
-    failureRedirect: '/login'
-}));
+router.post('/login', csrfMiddleware, passport.authenticate('local', {failureRedirect: '/'}), (req, res)=>{
+     res.redirect(`/user/${req.user.id}`);
+});
 
 router.get('/logout', (req, res) => {
     if (req.user) {
