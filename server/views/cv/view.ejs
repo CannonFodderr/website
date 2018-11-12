@@ -43,6 +43,7 @@
                     </div>
                     <!-- Content & Title -->
                     <div class="container bio-content-container">
+                        <div id="install-btn-wrapper"></div>
                         <h5>HI!</h5>
                         <div class="row cv-bio-row">
                             <div class="col-12 text-dark">
@@ -165,7 +166,7 @@
                                                                                     <% if (user.education) { %>
                                                                                         <div class="col-lg-6 col-md-6 col-sm-12 edu-skills-col">
                                                                                             <h3 id="eduction" class="text-light">Education</h3>
-                                                                                            <ul class="list-group features-list">
+                                                                                            <ul class="list-group">
                                                                                                 <li id="education" class="list-group-item feature-item bg-warning text-light grit"></li>
                                                                                                 <!-- <li class="list-group-item feature-item">Sound School- 3 Years Sound Engineering</li>
                                                                                                     <li class="list-group-item feature-item">Udemy -Web Developer Bootcamp</li>
@@ -179,7 +180,7 @@
                                                                                                 <% if (user.skills) { %>
                                                                                                     <div class="col-lg-6 col-md-6 col-sm-12 edu-skills-col">
                                                                                                         <h3 id="skills" class="text-light">Skills</h3> 
-                                                                                                        <ul class="list-group features-list">
+                                                                                                        <ul class="list-group">
                                                                                                             <li class="list-group-item feature-item bg-danger text-light grit"></li>
                                                                                                             <% user.skills.forEach((skill)=> { %>
                                                                                                                 <li class="list-group-item feature-item"><%- skill %></li>
