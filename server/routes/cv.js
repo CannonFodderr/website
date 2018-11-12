@@ -28,7 +28,6 @@ router.get('/profile', (req, res)=> {
 router.get('/profile/:userId/cv', (req, res)=>{
     User.find({where: { id: req.params.userId },include: ['jobs'], order: [['jobs', 'start_date', 'DESC']]})
     .then((user)=>{
-        console.log(user)
         res.render('cv/view', { title: `${user.firstName} ${user.lastName} - CV`, jobs: user.jobs, user:user, bio:user.bio, csrf: req.csrfToken() });
     })
     .catch(e => {
