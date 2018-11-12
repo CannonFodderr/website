@@ -315,6 +315,15 @@ a.nav-link:hover{
     list-style: none;
     padding: 0;
 }
+
+.contact-list-cv{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 .details-list{
     list-style: none;
     padding: 0;
@@ -645,7 +654,8 @@ a.nav-link:hover{
 }
 
 #contactCollapse{
-    margin-top: 1vh;
+    margin: 1vh;
+    padding: 2vh 2vw;
 }
 
 .cv-controls{

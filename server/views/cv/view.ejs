@@ -36,7 +36,6 @@
                                         <% } %> 
                                     </div>
                                 </h5>
-                                
                                 <% } %>
                             </div>
                             
@@ -79,13 +78,24 @@
                                                     </div>
                                                     <% } %>
                                                 </div>
-                                                <% if( user.email ) {%>
-                                                    <div class="collapse" id="contactCollapse">
-                                                        <div class="card card-body">
+                                                <% if( user.email ) { %>
+                                                    <div class="collapse bg-dark" id="contactCollapse">
+                                                            <% if(user.isAdmin) { %>
+                                                                <div class="container">
+                                                                        <ul class="contact-list-cv">
+                                                                            <li class="social-li"><a rel="noreferrer" class="social-link" href="tel:+972526773370"><i class="fas fa-phone social-icon"></i>Phone</a></li>
+                                                                            <li class="social-li text-success"><a rel="noreferrer" class="social-link" href="mailto:izhaki.idan@gmail.com"><i class="fas fa-envelope-open social-icon"></i>E-Mail</a></li>
+                                                                            <li class="social-li"><a rel="noreferrer" target="_blank" class="social-link" href="https://www.facebook.com/izhaki.idan"><i class="fab fa-facebook-messenger social-icon"></i>Messenger</a></li>
+                                                                            <li class="social-li"><a rel="noreferrer" target="_blank" class="social-link" href="https://github.com/CannonFodderr"><i class="fab fa-github-square social-icon"></i>GitHub</a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                            <% } %>
+                                                        <div class="card card-body text-center contact-cv">
                                                             <form action="/profile/<%= user.id %>/message" method="POST">
                                                                 <%  include ../forms/message %>
-                                                                <button class="btn btn-danger" type="submit">Send</button>
+                                                                <button class="btn btn-danger grit" type="submit">Send</button>
                                                             </form>
+                                                            
                                                         </div>
                                                     </div>
                                                     <% } %>
@@ -99,9 +109,9 @@
                                                 <% jobs.forEach((job)=>{ %>
                                                     <div class="card job-card bg-dark">
                                                         <div class="card-header bg-info text-light job-card-header grit">
-                                                            <div class="job-title text-light">
+                                                            <h4 class="job-title text-light">
                                                                 <%- job.title.toUpperCase() %>
-                                                            </div>
+                                                            </h4>
                                                         </div>
                                                         <div class="card-body bg-light text-dark job-body">
                                                             <h4 class="card-title"><strong>@ </strong><%- job.company %></h4>
