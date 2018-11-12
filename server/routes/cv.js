@@ -13,21 +13,22 @@ router.get('/profile', (req, res)=> {
     } else {
         let query = req.sanitize(req.query.search)
         User.findAll({where: {[Op.or]:[{username:{[Op.like]: `%${query}%`}}, {firstName:  {[Op.like]: `%${query}%`}}, {lastName:  {[Op.like]: `%${query}%`}}, {email:  {[Op.like]: `%${query}%`}}]}})
-    .then((foundUsers)=>{
-        res.render('cv/all', {users: foundUsers, user: req.user, csrf: req.csrfToken(), title: "Found Users"})
-    })
-    .catch(e => {
-        console.error(e);
-        res.send(e);
-    })
+        .then((foundUsers)=>{
+            res.render('cv/all', {users: foundUsers, user: req.user, csrf: req.csrfToken(), title: "Found Users"})
+        })
+        .catch(e => {
+            console.error(e);
+            res.send(e);
+        })
     }
 })
 
 
 // View CV
 router.get('/profile/:userId/cv', (req, res)=>{
-    User.find({where: { id: req.params.userId }, include: ['jobs']})
+    User.find({where: { id: req.params.userId },include: ['jobs'], order: [['jobs', 'start_date', 'DESC']]})
     .then((user)=>{
+        console.log(user)
         res.render('cv/view', { title: `${user.firstName} ${user.lastName} - CV`, jobs: user.jobs, user:user, bio:user.bio, csrf: req.csrfToken() });
     })
     .catch(e => {
