@@ -1,0 +1,116 @@
+<% include ../partials/header %>
+<!-- <% include ../partials/navbar %> -->
+<% include ../loader/transLoad %>
+<!-- Page Header -->
+<style>
+    body{
+        background: #fff;
+    }
+</style>
+<div class="fluid-container project-top-header">
+    <div class="row controls-row text-light no-gutters bg-light text-dark">
+        <div class="col-2">
+            <!-- <a class="btn btn-lg btn-link text-dark btn-back" href="#" onclick="history.go(-1)"><i class="fas fa-arrow-left"></i></a> -->
+        </div>
+        <div class="col-9 text-center">
+            <h1 class="card-header typer">
+                <div class="text-center">
+                    <%if (user.firstName && user.lastName ) { %>
+                        <%= user.firstName.toUpperCase() %> <%= user.lastName.toUpperCase() %>
+                        <% } %> 
+                    </div>
+                </h1>
+            </div>
+        </div>
+        <div class="fluid-container text-center">
+            <h3><strong>PDF IS BORING:</strong> <a href="https://idanprofile.herokuapp.com/profile/1/cv">GET MY ONLINE CV!</h3></a>
+        </div>
+        <!-- Content & Title -->
+        <div class="fluid-container bio-content-container">
+            <div class="row cv-bio-row">
+                <div class="col-8 text-dark">
+                    <p class=""><%- user.bio %></p>
+                    <p>Best Regards,</p>
+                    <p class="autograph"><%= user.firstName%> <%= user.lastName%></p>
+                </div>
+                <div class="col-3 print-contact-box">
+                    <div class="fluid-container">
+                        <% if(user.avatar){ %>
+                            <div class="cv-profile-avatar-wrapper">
+                                <img class="cv-profile-avatar" src="<%= user.avatar %>" alt="<%=user.username%> profile picture" height="200" width="200">
+                            </div>
+                            <% } %>
+                            <% if(user.isAdmin) { %>
+                                    <ul class="contact-list-cv text-center">
+                                        <li class="print-social-li text-dark"><a rel="noreferrer" class="social-link text-dark" href="tel:+972526773370"><%= user.phone %></a></li>
+                                        <li class="print-social-li text-dark"><a rel="noreferrer" class="social-link text-dark" href="mailto:izhaki.idan@gmail.com"><%= user.email %></a></li>
+                                        <li class="print-social-li text-dark"><a rel="noreferrer" target="_blank" class="social-link text-dark" href="https://idanprofile.herokuapp.com/">Visit my Website</a></li>
+                                        <li class="print-social-li text-dark"><a rel="noreferrer" target="_blank" class="social-link text-dark" href="https://idanprofile.herokuapp.com/profile/1/projects">Projects Gallery</a></li>
+                                        <li class="print-social-li text-dark"><a rel="noreferrer" target="_blank" class="social-link text-dark" href="https://www.facebook.com/izhaki.idan"><i class="fab fa-facebook-messenger social-icon"></i></a></li>
+                                        <li class="print-social-li text-dark"><a rel="noreferrer" target="_blank" class="social-link text-dark" href="https://github.com/CannonFodderr"><i class="fab fa-github-square social-icon"></i></a></li>
+                                    </ul>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Jobs & Education & Skills-->
+                <div class="fluid-container bg-light">
+                    <div class="row">
+                        <% if (jobs.length > 0) { %>
+                            <div class="col-12">                            
+                                <ul class="list-group features-list">
+                                    <li class="list-group-item print-feature-item bg-dark text-light ">
+                                        <h3 id="workxp" class="text-light">Work Experience</h3> 
+                                    </li>
+                                    <% jobs.forEach((job)=> { %>
+                                        <li class="list-group-item print-feature-item">
+                                            <h5><strong><%- job.title.toUpperCase() %></strong> </h5>
+                                            <p>@ <%- job.company %></p>
+                                            <p><%- job.description %></p>
+                                            <% if(job.start_date || job.end_date) { %>
+                                                <div class="bg-dark text-light">
+                                                    <% if (job.start_date) { %>
+                                                        <span class="job-date-text">FROM</span><%= job.start_date %>  
+                                                        <% } %>
+                                                        <% if (job.end_date) { %>
+                                                            <span class="job-date-text">TO</span><%= job.end_date %>
+                                                            <% } %>
+                                                            <% } %>
+                                                        </div>
+                                                    </li>
+                                                    <% }) %>
+                                                </ul>
+                                            </div>
+                                            <% } %>
+                                        </div>
+                                        <div class="row no-gutters gap">
+                                            <% if (user.skills) { %>
+                                                <div class="col-6">
+                                                    <ul class="list-group features-list">
+                                                        <li class="list-group-item feature-item bg-dark text-light ">
+                                                            <h3 id="skills" class="text-light">SKILLS</h3></li>
+                                                            <% user.skills.forEach((skill)=> { %>
+                                                                <li class="list-group-item feature-item"><%- skill %></li>
+                                                                <% }) %>
+                                                            </ul>
+                                                        </div>
+                                                        <% } %>
+                                                        <% if (user.education) { %>
+                                                            <div class="col-6">
+                                                                <ul class="list-group features-list">
+                                                                    <li id="education" class="list-group-item feature-item bg-dark text-light ">
+                                                                        <h3 id="eduction" class="text-light">EDUCATION</h3>
+                                                                    </li>
+                                                                    <% user.education.forEach((item)=> { %>
+                                                                        <li class="list-group-item feature-item"><%= item %></li>
+                                                                        <% }) %>
+                                                                    </ul>
+                                                                </div>
+                                                                <% } %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <% include ../partials/footer %>

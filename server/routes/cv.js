@@ -36,4 +36,15 @@ router.get('/profile/:userId/cv', (req, res)=>{
     })
 });
 
+router.get('/profile/:userId/print', (req, res)=>{
+    User.find({where: { id: req.params.userId },include: ['jobs'], order: [['jobs', 'start_date', 'DESC']]})
+    .then((user)=>{
+        res.render('cv/print', { title: `${user.firstName} ${user.lastName} - CV`, jobs: user.jobs, user:user, bio:user.bio, csrf: req.csrfToken() });
+    })
+    .catch(e => {
+        console.error(e);
+        res.redirect('/')
+    })
+})
+
 module.exports = router;
