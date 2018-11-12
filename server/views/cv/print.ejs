@@ -6,9 +6,8 @@
         background: #fff;
     }
 </style>
-<div class="fluid-container project-top-header">
+<div class="fluid-container print-top-header">
     <div class="row controls-row text-light no-gutters bg-light text-dark">
-        
         <div class="col-12 text-center">
             <h1 class="card-header typer">
                 <div class="text-center">
@@ -22,7 +21,7 @@
         <div class="fluid-container text-center">
             <h3><strong>PDF IS BORING:</strong> <a href="https://idanprofile.herokuapp.com/profile/1/cv">GET MY ONLINE CV!</h3></a>
         </div>
-        <div class="container print-avatar-links">
+        <div class="fluid-container print-avatar-links">
             <div class="row">
                 <div class="col-6">
                     <% if(user.avatar){ %>
@@ -61,10 +60,10 @@
                     <% if (user.skills) { %>
                         <div class="col-6">
                             <ul class="list-group features-list">
-                                <li class="list-group-item feature-item bg-dark text-light ">
-                                    <h3 id="skills" class="text-light">SKILLS</h3></li>
+                                <li class="list-group-item print-feature-item bg-dark text-light ">
+                                    <h3 id="skills" class="print-part-header text-light">SKILLS</h3></li>
                                     <% user.skills.forEach((skill)=> { %>
-                                        <li class="list-group-item feature-item"><%- skill %></li>
+                                        <li class="list-group-item print-feature-item"><%- skill %></li>
                                         <% }) %>
                                     </ul>
                                 </div>
@@ -78,11 +77,9 @@
                                 <div class="col-12">                            
                                     <ul class="list-group">
                                         <li class="list-group-item print-feature-item bg-dark text-light ">
-                                            <h3 id="workxp" class="text-light">Work Experience</h3> 
+                                            <h3 id="workxp" class="text-light print-part-header">Work Experience</h3> 
                                         </li>
-                                        
                                         <% if (jobs.length > 0) { %>
-                                            
                                             <div class="row no-gutters">
                                                 <% jobs.forEach((job)=> { %>
                                                     <div class="col-6 print-feature-item">
@@ -114,7 +111,7 @@
                                                         <div class="col-12">
                                                             <ul class="list-group features-list">
                                                                 <li id="education" class="list-group-item feature-item bg-dark text-light ">
-                                                                    <h3 id="eduction" class="text-light">EDUCATION</h3>
+                                                                    <h3 id="eduction" class="print-part-header text-light">EDUCATION</h3>
                                                                 </li>
                                                                 <div class="row no-gutters">
                                                                 <% user.education.forEach((item)=> { %>
@@ -126,7 +123,6 @@
                                                                 </ul>
                                                             </div>
                                                             <% } %>
-                                                            
                                                         </div>
                                                     </div>
                                                 </div>

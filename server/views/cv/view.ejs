@@ -109,7 +109,7 @@
                                                 <h3 id="workxp" class="text-light">Work Experience</h3>
                                                 <% jobs.forEach((job)=>{ %>
                                                     <div class="card job-card bg-dark">
-                                                        <div class="card-header bg-info text-light job-card-header grit">
+                                                        <div class="card-header bg-info text-light job-card-header job-card-header">
                                                             <h4 class="job-title text-light">
                                                                 <%- job.title.toUpperCase() %>
                                                             </h4>
@@ -136,7 +136,7 @@
                                                                                         </ul>
                                                                                         <% } %>
                                                                                         <% if (job.content){ %>
-                                                                                            <h6 class=" collapse-header bg-dark text-light">About</h6>
+                                                                                            <h6 class="collapse-header bg-dark text-light">About</h6>
                                                                                             <p class="card-text job-content bg-light text-dark"><%- job.content %></p>
                                                                                             <% } %>
                                                                                         </div>
@@ -160,8 +160,10 @@
                                                                                 </div>
                                                                                 <% } %>
                                                                             </div>
+                                                                        </div>
+                                                                    </div>
                                                                             <!-- Education & Skills-->
-                                                                            <div class="container edu-skills-container">
+                                                                            <div class="fluid-container edu-skills-container">
                                                                                 <div class="row">
                                                                                     <% if (user.education) { %>
                                                                                         <div class="col-lg-6 col-md-6 col-sm-12 edu-skills-col">

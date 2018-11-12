@@ -524,12 +524,22 @@ a.nav-link:hover{
     width: 100%;
     border: 1px solid #000;
 }
+.print-feature-item{
+    width: 100%;
+    border: 1px solid #000;
+}
+
 .print-education-item{
     height: 100%;
+    border: 1px solid #000;
+}
+.print-part-header{
+    margin: 0;
 }
 .print-job-item{
-    padding: 0;
+    padding: 1vh 1vw;
     height: 100%;
+
 }
 .bold{
     font-weight: 800;
@@ -557,6 +567,9 @@ a.nav-link:hover{
 }
 .project-top-header{
     margin-bottom: 2vh;
+}
+.print-top-header{
+    margin: 0
 }
 .project-banner{
     display: flex;
@@ -618,7 +631,8 @@ a.nav-link:hover{
     z-index: 1000;
     color: #000;
     background: transparent;
-    font-weight: 800;
+    font-weight: 400;
+    margin: 0;
 }
 .cv-jobs{
     margin-top: 2vh;
@@ -638,6 +652,12 @@ a.nav-link:hover{
 }
 .job-card{
     margin-top: 2vh;
+}
+.job-card-header{
+    padding: 1vh 1vw;
+    background-image: url('./images/grit.png');
+    background-position: center;
+    background-size: cover;
 }
 .job-card-header {
     padding: 1vh 1vw;
