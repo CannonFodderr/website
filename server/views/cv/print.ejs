@@ -114,17 +114,20 @@
                                                                     <h3 id="eduction" class="print-part-header text-light">EDUCATION</h3>
                                                                 </li>
                                                                 <div class="row no-gutters">
-                                                                <% user.education.forEach((item)=> { %>
-                                                                    <div class="col-4">
-                                                                        <li class="list-group-item print-education-item"><%= item %></li>
+                                                                    <% user.education.forEach((item)=> { %>
+                                                                        <div class="col-4">
+                                                                            <li class="list-group-item print-education-item"><%= item %></li>
+                                                                        </div>
+                                                                        <% }) %>
                                                                     </div>
-                                                                    <% }) %>
-                                                                </div>
                                                                 </ul>
                                                             </div>
                                                             <% } %>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <script>
+                                                window.print()
+                                                </script>
                                                 
                                                 <% include ../partials/printFooter %>
