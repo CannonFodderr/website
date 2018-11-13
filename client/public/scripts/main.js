@@ -40,10 +40,12 @@ window['isUpdateAvailable']
 .then(reg => {
     return showNotification(reg)
 })
+if(navigator.serviceWorker){
+    navigator.serviceWorker.addEventListener('message', (msg)=>{
+        if(msg.data === 'refresh') window.location.reload()
+    });
+}
 
-navigator.serviceWorker.addEventListener('message', (msg)=>{
-    if(msg.data === 'refresh') window.location.reload()
-});
 
 installPrompt = () => {
     deferredPrompt.prompt()
