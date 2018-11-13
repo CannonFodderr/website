@@ -5,16 +5,15 @@
 </div>
 <div class="container projects-grid bg-dark">
         <div class="row text-center">
-                <div class="col-lg-3 col-sm-12">
+                <div class="col-lg-4 col-sm-12">
                     <a href="/register" class="btn btn-success btn-lg btn-block grit">GET YOUR OWN CV</a>
                 </div>
 
             </div>
-    <div class="row projects-row text-center">
-        <% include ../loader/transLoad %>
+            <% include ../loader/transLoad %>
+    <div class="row projects-row">
         <% for(var i in users){ %>
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 profile-col">
-                <div class="card bg-dark text-white profile-card">
+            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-3 profile-col">
                     <a class="text-light" href="/profile/<%= users[i].id %>/cv"" draggable="false">
                         <% if(users[i].avatar) { %>
                             <img src="<%= users[i].avatar %>" alt="<%= users[i].username %>" class="card-img cv-profile-avatar-grid">
@@ -29,7 +28,6 @@
                                         <% } %></h5>
                                     </div>
                                 </a>
-                            </div>
                         </div>
                         <%}%>
                     </div>

@@ -99,6 +99,9 @@ textarea{
 .contact-col{
     padding: 0;
 }
+.contact-col-footer{
+    border: none;
+}
 .contact-form{
     padding: 2vh;
 }
@@ -125,7 +128,7 @@ img{
     transition: 0.6s linear;
 }
 .btn-text{
-    margin-left: 1vw;
+    margin-left: 0.5vw;
 }
 
 .contact-col{
@@ -278,8 +281,8 @@ img{
 }
 .cv-profile-avatar-grid{
     margin: auto;
-    height: 200px;
-    width: 200px;
+    height: auto;
+    /* width: 100%; */
     border: 1px solid var(--bgSecondary);
     border-radius: 50%;
     transition: 0.4s ease-in-out;
@@ -314,10 +317,7 @@ img{
     margin-left: 0vw;
     text-align: center;
 }
-.menu-icon{
-    padding-left: 1vw;
-    border-left: 1px solid;
-}
+
 a.nav-link{
     color: #fff;
     transition: 0.5s ease-in-out !important;
@@ -835,12 +835,11 @@ a.nav-link:hover{
     visibility: hidden;
     height: 0;
     color: #fff;
-    text-align: center;
-    margin: auto;
+    margin: auto 1vw;
     padding: 0;
     bottom: 0;
     font-size: 17px;
-    width: fit-content;
+    /* width: fit-content; */
 }
 #install-btn-wrapper.show{
     display: block;
