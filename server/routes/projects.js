@@ -73,7 +73,8 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
             link: req.body.link,
             live_demo: req.body.demo,
             content: req.body.content,
-            user_id: req.user.id
+            user_id: req.user.id,
+            order: req.body.order
         }
         Project.create(newProject)
         .then((createdProject)=>{
@@ -118,6 +119,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
             live_demo: req.body.demo,
             icon_id: req.body.icon,
             content: req.body.content,
+            order: req.body.order
         }
         Project.update(updateData, {where: {
             id: req.params.projectid
