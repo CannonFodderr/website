@@ -19,6 +19,7 @@
 * CSS Typewriter animations on index and cv views.
 * Seeding file execution with CLI args - ```node server.js seed```
 * **PWA** manifest & Install notifications.
+* **Image file uploads** with Multer & cloudify + Custom file checkups on server side.
 
 ## SETUP
 * git clone
