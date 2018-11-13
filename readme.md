@@ -21,6 +21,7 @@
 * **PWA** manifest & Install notifications.
 * **Image file uploads** with Multer & cloudify + Custom file checkups on server side.
 
+
 ## SETUP
 * git clone
 * npm install
