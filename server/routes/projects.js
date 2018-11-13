@@ -12,7 +12,7 @@ router.get('/profile/:userId/projects', (req, res)=>{
     if(req.query.category){
         Project.findAll({ where: 
         {user_id: req.params.userId, category: req.query.category }
-        , include: [Icon, User]})
+        ,order: [['order', 'asc']], include: [Icon, User]})
         .then((foundProjects)=>{
             return res.render('./projects/all', { projects: foundProjects, title: `${req.query.category} projects`, user: foundProjects[0].User })
         })
@@ -21,7 +21,7 @@ router.get('/profile/:userId/projects', (req, res)=>{
             res.redirect('back');
         })
     } else {
-        Project.findAll({where: { user_id: req.params.userId}, include: [User, Icon]}).then((allProjects)=>{
+        Project.findAll({where: { user_id: req.params.userId},order: [['order', 'asc']], include: [User, Icon]}).then((allProjects)=>{
             return res.render('./projects/all', { projects: allProjects, title: `All projects`, user: allProjects[0].User })
         }).catch(e => {
             console.error(e);
