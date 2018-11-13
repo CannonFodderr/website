@@ -57,11 +57,17 @@ function(req, accessToken, refreshToken, profile, cb) {
         .then((updatedUser)=>{
             return cb(null, updatedUser)
         })
+        .catch(e => {
+            console.error(e);
+        })
     } else {
         // Sign in with googleID
         User.find({where: { googleId: profile.id }})
         .then((foundUser)=>{
             return cb(null, foundUser)
+        })
+        .catch(e => {
+            console.error(e);
         })
     }
         

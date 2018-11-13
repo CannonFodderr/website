@@ -920,7 +920,7 @@ a.nav-link:hover{
     }
 }
 
-@media only screen and (max-width: 370px) {
+@media only screen and (max-width: 350px) {
     .social-li{
         width: 100%;
     }
