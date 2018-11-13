@@ -40,10 +40,12 @@ window['isUpdateAvailable']
 .then(reg => {
     return showNotification(reg)
 })
+if(navigator.serviceWorker){
+    navigator.serviceWorker.addEventListener('message', (msg)=>{
+        if(msg.data === 'refresh') window.location.reload()
+    });
+}
 
-navigator.serviceWorker.addEventListener('message', (msg)=>{
-    if(msg.data === 'refresh') window.location.reload()
-});
 
 installPrompt = () => {
     deferredPrompt.prompt()
@@ -71,18 +73,18 @@ showNotification = (data) => {
             installBtn.className = "show"
         }, 2000);
         // Install prompt notification
-        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-            setTimeout(()=>{
-                var toastRefresh = document.getElementById("messageToast");
-                toastRefresh.innerHTML = "<button class='btn btn-primary install-btn'>INSTALL APP</button>"
-                toastRefresh.addEventListener('click', (e)=>{
-                    toastRefresh.className = toastRefresh.className.replace("show", "");
-                    installPrompt()
-                });
-                toastRefresh.className = "show";
-                return setTimeout(() => { toastRefresh.className = toastRefresh.className.replace("show", ""); }, 10000);
-            }, 15000)
-        }
+        // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        //     setTimeout(()=>{
+        //         var toastRefresh = document.getElementById("messageToast");
+        //         toastRefresh.innerHTML = "<button class='btn btn-primary install-btn'>INSTALL APP</button>"
+        //         toastRefresh.addEventListener('click', (e)=>{
+        //             toastRefresh.className = toastRefresh.className.replace("show", "");
+        //             installPrompt()
+        //         });
+        //         toastRefresh.className = "show";
+        //         return setTimeout(() => { toastRefresh.className = toastRefresh.className.replace("show", ""); }, 10000);
+        //     }, 15000)
+        // }
     }
     if(data.active){
         var x = document.getElementById("messageToast");

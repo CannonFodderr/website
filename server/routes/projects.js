@@ -12,7 +12,7 @@ router.get('/profile/:userId/projects', (req, res)=>{
     if(req.query.category){
         Project.findAll({ where: 
         {user_id: req.params.userId, category: req.query.category }
-        , include: [Icon, User]})
+        ,order: [['order', 'asc']], include: [Icon, User]})
         .then((foundProjects)=>{
             return res.render('./projects/all', { projects: foundProjects, title: `${req.query.category} projects`, user: foundProjects[0].User })
         })
@@ -21,7 +21,7 @@ router.get('/profile/:userId/projects', (req, res)=>{
             res.redirect('back');
         })
     } else {
-        Project.findAll({where: { user_id: req.params.userId}, include: [User, Icon]}).then((allProjects)=>{
+        Project.findAll({where: { user_id: req.params.userId},order: [['order', 'asc']], include: [User, Icon]}).then((allProjects)=>{
             return res.render('./projects/all', { projects: allProjects, title: `All projects`, user: allProjects[0].User })
         }).catch(e => {
             console.error(e);
@@ -73,7 +73,8 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
             link: req.body.link,
             live_demo: req.body.demo,
             content: req.body.content,
-            user_id: req.user.id
+            user_id: req.user.id,
+            order: req.body.order
         }
         Project.create(newProject)
         .then((createdProject)=>{
@@ -118,6 +119,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
             live_demo: req.body.demo,
             icon_id: req.body.icon,
             content: req.body.content,
+            order: req.body.order
         }
         Project.update(updateData, {where: {
             id: req.params.projectid

@@ -18,7 +18,7 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
     User.findById(req.params.userId).then((user) => {
         let bio = "";
         if(user.bio){
-            user.bio.replace(/<br\s*[\/]?>/gi, "\n")
+            bio = user.bio.replace(/<br\s*[\/]?>/gi, "\n")
         }
         res.render('./user/editProfile', {
             user: user,

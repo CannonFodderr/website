@@ -49,6 +49,10 @@ const Project = db.define('Project', {
     },
     features: {
         type: Sequelize.ARRAY({ type: Sequelize.STRING })
+    },
+    order: {
+        type: Sequelize.INTEGER,
+        defaultValue: 999
     }
 }, {
     underscored: true,

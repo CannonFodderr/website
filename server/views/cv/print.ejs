@@ -1,0 +1,133 @@
+<% include ../partials/printHeader %>
+
+<!-- Page Header -->
+<style>
+    body{
+        background: #fff;
+    }
+</style>
+<div class="fluid-container print-top-header">
+    <div class="row controls-row text-light no-gutters bg-light text-dark">
+        <div class="col-12 text-center">
+            <h1 class="card-header typer">
+                <div class="text-center">
+                    <%if (user.firstName && user.lastName ) { %>
+                        <%= user.firstName.toUpperCase() %> <%= user.lastName.toUpperCase() %>
+                        <% } %> 
+                    </div>
+                </h1>
+            </div>
+        </div>
+        <div class="fluid-container text-center">
+            <h3><strong>PDF IS BORING:</strong> <a href="https://idanprofile.herokuapp.com/profile/1/cv">GET MY ONLINE CV!</h3></a>
+        </div>
+        <div class="fluid-container print-avatar-links">
+            <div class="row">
+                <div class="col-6">
+                    <% if(user.avatar){ %>
+                        <div class="print-profile-avatar-wrapper">
+                            <img class="print-profile-avatar" src="<%= user.avatar %>" alt="<%=user.username%> profile picture" height="200" width="200">
+                        </div>
+                        <% } %>
+                    </div>
+                    <% if(user.isAdmin) { %>
+                        <div class="col-6">
+                            <ul class="contact-list-print">
+                                <li class="print-social-li text-dark"><a rel="noreferrer" class="print-social-link text-dark" href="mailto:izhaki.idan@gmail.com"><%= user.email %></a></li>
+                                <li class="print-social-li text-dark"><a rel="noreferrer" class="print-social-link text-dark" href="tel:+972526773370"><%= user.phone %></a></li>
+                                <li class="print-social-li text-dark"><a rel="noreferrer" target="_blank" class="print-social-link text-dark" href="https://idanprofile.herokuapp.com/">Visit my Website</a></li>
+                                <li class="print-social-li text-dark"><a rel="noreferrer" target="_blank" class="print-social-link text-dark" href="https://idanprofile.herokuapp.com/profile/1/projects">Projects Gallery</a></li>
+                                <li class="small-social-li text-dark"><a rel="noreferrer" target="_blank" class="print-social-link text-dark" href="https://www.facebook.com/izhaki.idan"><i class="fab fa-facebook-messenger social-icon"></i></a></li>
+                                <li class="small-social-li text-dark"><a rel="noreferrer" target="_blank" class="print-social-link text-dark" href="https://github.com/CannonFodderr"><i class="fab fa-github-square social-icon"></i></a></li>
+                                <li class="small-social-li"><a rel="noreferrer" target="_blank" class="print-social-link text-dark" href="https://www.instagram.com/idanizhaki"><i class="fab fa-instagram social-icon"></i></a></li>
+                                <li class="small-social-li"><a rel="noreferrer" target="_blank" class="print-social-link text-dark" href="https://discordapp.com/users/131703957260206080"><i class="fab fa-discord social-icon"></i></a></li>
+                                <li class="small-social-li"><a rel="noreferrer" target="_blank" class="print-social-link text-dark" href="https://www.linkedin.com/in/idan-izhaki/"><i class="fab fa-linkedin social-icon"></i></a></li>
+                            </ul>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content & Title -->
+            <div class="fluid-container">
+                <div class="row cv-bio-row">
+                    <div class="col-6 text-dark">
+                        <p class=""><%- user.bio %></p>
+                        <p>Best Regards,</p>
+                        <p class="autograph"><%= user.firstName%> <%= user.lastName%></p>
+                    </div>
+                    <% if (user.skills) { %>
+                        <div class="col-6">
+                            <ul class="list-group features-list">
+                                <li class="list-group-item print-feature-item bg-dark text-light ">
+                                    <h3 id="skills" class="print-part-header text-light">SKILLS</h3></li>
+                                    <% user.skills.forEach((skill)=> { %>
+                                        <li class="list-group-item print-feature-item"><%- skill %></li>
+                                        <% }) %>
+                                    </ul>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        
+                        <!-- Jobs & Education & Skills-->
+                        <div class="fluid-container bg-light">
+                            <div class="row">
+                                <div class="col-12">                            
+                                    <ul class="list-group">
+                                        <li class="list-group-item print-feature-item bg-dark text-light ">
+                                            <h3 id="workxp" class="text-light print-part-header">Work Experience</h3> 
+                                        </li>
+                                        <% if (jobs.length > 0) { %>
+                                            <div class="row no-gutters">
+                                                <% jobs.forEach((job)=> { %>
+                                                    <div class="col-6 print-feature-item">
+                                                        <li class="list-group-item print-job-item">
+                                                            <% if(job.start_date || job.end_date) { %>
+                                                                <div class="bg-dark text-light">
+                                                                    <% if (job.start_date) { %>
+                                                                        <span class="job-date-text">FROM</span><%= job.start_date %>  
+                                                                        <% } %>
+                                                                        <% if (job.end_date) { %>
+                                                                            <span class="job-date-text">TO</span><%= job.end_date %>
+                                                                            <% } %>
+                                                                        </div>
+                                                                        <% } %>
+                                                                        <h5><strong><%- job.title.toUpperCase() %></strong> </h5>
+                                                                        <p>@ <%- job.company %></p>
+                                                                        <p><%- job.description %></p>
+                                                                    </div>
+                                                                </li>
+                                                                <% }) %>
+                                                            </div>
+                                                        </ul>
+                                                    </div>
+                                                    <% } %>
+                                                    
+                                                </div>
+                                                <div class="row no-gutters gap">
+                                                    <% if (user.education) { %>
+                                                        <div class="col-12">
+                                                            <ul class="list-group features-list">
+                                                                <li id="education" class="list-group-item feature-item bg-dark text-light ">
+                                                                    <h3 id="eduction" class="print-part-header text-light">EDUCATION</h3>
+                                                                </li>
+                                                                <div class="row no-gutters">
+                                                                    <% user.education.forEach((item)=> { %>
+                                                                        <div class="col-4">
+                                                                            <li class="list-group-item print-education-item"><%= item %></li>
+                                                                        </div>
+                                                                        <% }) %>
+                                                                    </div>
+                                                                </ul>
+                                                            </div>
+                                                            <% } %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <script>
+                                                window.print()
+                                                </script>
+                                                
+                                                <% include ../partials/printFooter %>
