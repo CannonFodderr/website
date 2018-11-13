@@ -290,6 +290,9 @@ img{
 .social-li{
     width: 50%;
 }
+.cv-social-li{
+    width: 50%;
+}
 .print-social-li{
     width: 100%;
     margin: 0;
@@ -920,8 +923,19 @@ a.nav-link:hover{
     }
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 330px) {
     .social-li{
         width: 100%;
+        margin: auto;
+    }
+}
+@media only screen and (max-width: 375px) {
+    .cv-social-li{
+        width: 100%;
+    }
+}
+@media only screen and (max-height: 375px) {
+    .message-wrapper-nav{
+        min-height: 10vh;
     }
 }
