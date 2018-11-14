@@ -16,9 +16,6 @@ const User = db.define('User', {
         type: Sequelize.TEXT,
         allowNull: false,
         unique: true,
-        validate: {
-            is: /^[a-z0-9\_\-]+$/i,
-        }
     },
     password: {
         type: Sequelize.STRING,

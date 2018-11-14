@@ -24,6 +24,18 @@
                 <button class="btn btn-danger btn-lg grit" type="submit">Submit</button>
             </div>
         </form>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <h4 class="gap">OR</h4>
+                </div>
+            </div>
+            
+        </div>
+        <a class="btn brand-login-button google" href="/login/google">
+            <img class="signin-logo" src="images/logos/g-logo.png" alt="Google sign in logo">
+            Sign in with google
+        </a>
         <hr>
         <div class="text-center">
             <button class="cv-controls-btn btn-lg btn-outline-dark grit" type="button grit" data-toggle="collapse" data-target="#contactCollapse" aria-expanded="false" aria-controls="contactCollapse">
@@ -31,14 +43,15 @@
             </button>
         </div>
         <div class="collapse" id="contactCollapse">
-            <div class="card card-body">
-                <h2 class="text-light">LOGIN</h2>
+            <div class="card card-body bg-light">
+                <h2 class="text-dark">LOGIN</h2>
                 <form action="/login" method="POST">
                     <% include ../forms/userLogin %>
                     <div class="text-center">
                         <button class="btn btn-primary btn-lg grit" type="submit">GO!</button>
                     </div>
                 </form>
+                
             </div>
         </div>
         

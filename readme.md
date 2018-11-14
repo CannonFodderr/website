@@ -20,6 +20,8 @@
 * Seeding file execution with CLI args - ```node server.js seed```
 * **PWA** manifest & Install notifications.
 * **Image file uploads** with Multer & cloudify + Custom file checkups on server side.
+* **CV Print version**
+
 
 ## SETUP
 * git clone

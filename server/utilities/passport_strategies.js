@@ -1,10 +1,11 @@
-const env = require('dotenv').config();
-const passport  = require('passport');
-const User            = require('../models/user');
-const LocalStrategy   = require('passport-local').Strategy;
-const GoogleStrategy  = require('passport-google-oauth20');
-const bcrypt          = require('bcrypt');
-
+const env               = require('dotenv').config();
+const passport          = require('passport');
+const User              = require('../models/user');
+const LocalStrategy     = require('passport-local').Strategy;
+const GoogleStrategy    = require('passport-google-oauth20');
+const bcrypt            = require('bcrypt');
+const passwordGenerator = require('generate-password');
+const encrypt = require('./bcrypt');
 
 // LOCAL STRATEGY
 passport.use(new LocalStrategy(
@@ -51,19 +52,56 @@ let googleLoginConfig = {
 // LOGIN CB
 passport.use( new GoogleStrategy(googleLoginConfig,
 function(req, accessToken, refreshToken, profile, cb) {
-    // If user is admin register the googleID
-    if ( req.user && req.user.isAdmin ) {
-        User.update({ googleId: profile.id }, {where: {id: req.user.id}})
+    // If logged user has a registered googleID
+    if ( req.user ) {
+        User.update({ googleId: profile.id }, {where: {id: req.user.id }})
         .then((updatedUser)=>{
             return cb(null, updatedUser)
+        })
+        .catch(e => {
+            console.error(e);
         })
     } else {
         // Sign in with googleID
         User.find({where: { googleId: profile.id }})
         .then((foundUser)=>{
-            return cb(null, foundUser)
+            // Create user if not found
+            if(foundUser === null){
+                let userAvatarArr = profile.photos[0].value.split('?');
+                let userAvatar = userAvatarArr[0];
+                let password = passwordGenerator.generate({
+                    length: 10,
+                    numbers: true,
+                    uppercase: false
+                })
+                encrypt.hashed(password)
+                .then((passData)=>{
+                    username = `${profile.name.givenName}${profile.name.familyName}`
+                User.create({ 
+                    googleId: profile.id,
+                    username: username,
+                    password: passData.hashedPassword,
+                    salt: passData.salt,
+                    email: profile.emails[0].value,
+                    firstName: profile.name.givenName, 
+                    lastName: profile.name.familyName,
+                    isAdmin: false,
+                    bio: profile._json.aboutMe,
+                    avatar: userAvatar
+                })
+                .then((createdUser)=>{
+                    return cb(null, createdUser);
+                })
+                .catch(e => { console.error(e); })
+                })
+                // Sign In
+            } else {
+                return cb(null, foundUser)
+            }
         })
-    }
-        
+        .catch(e => {
+            console.error(e);
+        })
+    } 
     }
 ));
