@@ -26,7 +26,7 @@
                                     <!-- <a href="tel:<%= message.Contact.phone %>" class="btn btn-primary">Go somewhere</a> -->
                                     <a class="message-link" href="tel:<%= message.Contact.phone %>"><i class="fas fa-phone social-icon"></i></a>
                                     <% } %>
-                                    <form class="del-message-form" action="/user/<%= user.id %>messages/<%= message.id %>?_method=DELETE" method="post">
+                                    <form class="del-message-form" action="/user/<%= user.id %>/messages/<%= message.id %>?_method=DELETE" method="post">
                                         <button class="btn btn-danger del-btn" type="submit">DELETE</button>
                                         <input type="hidden" name="_csrf" value="<%= csrf %>">
                                     </form>

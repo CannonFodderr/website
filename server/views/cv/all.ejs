@@ -13,7 +13,7 @@
             <% include ../loader/transLoad %>
     <div class="row projects-row">
         <% for(var i in users){ %>
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-3 profile-col">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6">
                     <a class="text-light" href="/profile/<%= users[i].id %>/cv"" draggable="false">
                         <% if(users[i].avatar) { %>
                             <img src="<%= users[i].avatar %>" alt="<%= users[i].username %>" class="card-img cv-profile-avatar-grid">

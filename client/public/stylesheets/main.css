@@ -288,7 +288,7 @@ img{
 .cv-profile-avatar-grid{
     margin: auto;
     height: auto;
-    /* width: 100%; */
+    width: 100%;
     border: 1px solid var(--bgSecondary);
     border-radius: 50%;
     transition: 0.4s ease-in-out;
@@ -927,7 +927,11 @@ a.nav-link:hover{
         text-align: left;
     }
 }
-
+/* @media only screen and (max-width: 768px) {
+    .cv-profile-avatar-grid{
+        width: 100px;
+    }
+} */
 @media only screen and (max-width: 330px) {
     .social-li{
         width: 100%;
@@ -938,6 +942,7 @@ a.nav-link:hover{
     .cv-social-li{
         width: 100%;
     }
+    
 }
 @media only screen and (max-height: 375px) {
     .message-wrapper-nav{

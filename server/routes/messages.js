@@ -57,12 +57,12 @@ router.get('/user/:userId/messages', utilities.isOwner, (req, res)=>{
         });
         
         // DELETE Message
-        router.delete('/user/:userId/messages/:msgId',utilities.isAdmin, (req, res)=>{
+        router.delete('/user/:userId/messages/:msgId',utilities.isLoggedIn, (req, res)=>{
             Message.findById(req.params.msgId)
             .then((foundMessage)=>{
                 console.log("DELETE MESSAGE", foundMessage)
                 foundMessage.destroy()
-                res.redirect('/admin')
+                res.redirect(`/user/${req.user.id}/messages`);
             })
             .catch(e => {
                 console.error(e);
