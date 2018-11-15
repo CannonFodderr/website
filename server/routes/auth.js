@@ -21,9 +21,9 @@ router.get('/login/google/callback', passport.authenticate('google', { failureRe
 );
 router.get('/login/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
-router.get('/login/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/login'}),
+router.get('/login/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/register'}),
 (req, res) => {
-    res.redirect(`/register`);
+    res.redirect(`/user/${req.user.id}`);
 }
 )
 

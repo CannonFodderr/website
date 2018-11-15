@@ -151,15 +151,15 @@ passport.use(new FacebookStrategy(facebookLoginConfig,
                         username: username,
                         password: passData.hashedPassword,
                         salt: passData.salt,
-                        // email: profile.emails[0].value,
-                        // firstName: nameArr[0],
-                        // lastName: nameArr[1],
+                        email: profile.emails[0].value,
+                        firstName: nameArr[0],
+                        lastName: nameArr[1],
                         isAdmin: false,
                     }
                     console.log(newUser);
                 User.create(newUser)
                 .then((createdUser)=>{
-                    return cb(null, createdUser);
+                    return done(null, createdUser);
                 })
                 .catch(e => { console.error(e); })
                 })
