@@ -120,10 +120,11 @@ let facebookLoginConfig = {
 passport.use(new FacebookStrategy(facebookLoginConfig, 
     (req, accessToken, refreshToken, profile, done)=>{
     console.log(profile)
+    let facebookId = Number(profile.id)
     let jsonData = profile._json;
     // 
     if( req.user ){
-        User.update({ facebookId: profile.id }, {where: {id: req.user.id }})
+        User.update({ facebookId: facebookId }, { where: {id: req.user.id }})
         .then((updatedUser)=>{
             return done(null, updatedUser)
         })
@@ -131,9 +132,10 @@ passport.use(new FacebookStrategy(facebookLoginConfig,
             console.error(e);
         })
     } else {
-        User.find({where: { facebookId: profile.id }})
+        User.find({where: { facebookId: facebookId }})
         .then((foundUser)=>{
             // Create user if not found
+            console.log(foundUser);
             if(foundUser === null){
                 let password = passwordGenerator.generate({
                     length: 10,
@@ -142,24 +144,27 @@ passport.use(new FacebookStrategy(facebookLoginConfig,
                 })
                 encrypt.hashed(password)
                 .then((passData)=>{
-                    username = profile.displayName.replace(" ", "");
-                User.create({ 
-                    googleId: profile.id,
-                    username: username,
-                    password: passData.hashedPassword,
-                    salt: passData.salt,
-                    email: profile.emails[0].value,
-                    firstName: profile.name.givenName, 
-                    lastName: profile.name.familyName,
-                    isAdmin: false,
-                })
+                    let username = profile.displayName.replace(" ", "");
+                    let nameArr = profile.displayName.split(' ');
+                    let newUser = { 
+                        facebookId: facebookId,
+                        username: username,
+                        password: passData.hashedPassword,
+                        salt: passData.salt,
+                        // email: profile.emails[0].value,
+                        // firstName: nameArr[0],
+                        // lastName: nameArr[1],
+                        isAdmin: false,
+                    }
+                    console.log(newUser);
+                User.create(newUser)
                 .then((createdUser)=>{
                     return cb(null, createdUser);
                 })
                 .catch(e => { console.error(e); })
                 })
     } else {
-        done(null, profile);
+        done(null, foundUser);
     }
 })
 .catch(e => {
