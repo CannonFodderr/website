@@ -19,6 +19,13 @@ router.get('/login/google/callback', passport.authenticate('google', { failureRe
     res.redirect(`/user/${req.user.id}`);
 }
 );
+router.get('/login/facebook', passport.authenticate('facebook', {scope: ['email']}));
+
+router.get('/login/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/login'}),
+(req, res) => {
+    res.redirect(`/register`);
+}
+)
 
 // AUTH LOCAL
 router.post('/login', csrfMiddleware, passport.authenticate('local', {failureRedirect: '/'}), (req, res)=>{

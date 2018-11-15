@@ -3,6 +3,7 @@ const passport          = require('passport');
 const User              = require('../models/user');
 const LocalStrategy     = require('passport-local').Strategy;
 const GoogleStrategy    = require('passport-google-oauth20');
+const FacebookStrategy  = require('passport-facebook').Strategy;
 const bcrypt            = require('bcrypt');
 const passwordGenerator = require('generate-password');
 const encrypt = require('./bcrypt');
@@ -104,4 +105,66 @@ function(req, accessToken, refreshToken, profile, cb) {
         })
     } 
     }
+));
+
+// FACEBOOK
+
+let facebookLoginConfig = {
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: `${cbURL}/login/facebook/callback`,
+    enableProof: true,
+    passReqToCallback: true,
+    profileFields: ['id', 'displayName', 'photos', 'email']
+}
+passport.use(new FacebookStrategy(facebookLoginConfig, 
+    (req, accessToken, refreshToken, profile, done)=>{
+    console.log(profile)
+    let jsonData = profile._json;
+    // 
+    if( req.user ){
+        User.update({ facebookId: profile.id }, {where: {id: req.user.id }})
+        .then((updatedUser)=>{
+            return done(null, updatedUser)
+        })
+        .catch(e => {
+            console.error(e);
+        })
+    } else {
+        User.find({where: { facebookId: profile.id }})
+        .then((foundUser)=>{
+            // Create user if not found
+            if(foundUser === null){
+                let password = passwordGenerator.generate({
+                    length: 10,
+                    numbers: true,
+                    uppercase: false
+                })
+                encrypt.hashed(password)
+                .then((passData)=>{
+                    username = profile.displayName.replace(" ", "");
+                User.create({ 
+                    googleId: profile.id,
+                    username: username,
+                    password: passData.hashedPassword,
+                    salt: passData.salt,
+                    email: profile.emails[0].value,
+                    firstName: profile.name.givenName, 
+                    lastName: profile.name.familyName,
+                    isAdmin: false,
+                })
+                .then((createdUser)=>{
+                    return cb(null, createdUser);
+                })
+                .catch(e => { console.error(e); })
+                })
+    } else {
+        done(null, profile);
+    }
+})
+.catch(e => {
+    console.error(e);
+})
+} 
+}
 ));
