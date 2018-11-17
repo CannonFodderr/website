@@ -54,13 +54,23 @@ textarea{
 .navbar-brand{
     margin-left: 1rem;
 }
+.nav-item{
+    display: block;
+}
 .nav-container{
     margin-bottom: 6vh;
+}
+.nav-sign-logo{
+    height: 50px;
+    width: auto;
 }
 .brand-text{
     margin-left: 1vh;
 }
-
+.btn-toggle{
+    border: none;
+    outline: none;
+}
 .brand-logo{
     font-size: 1.3em;
     /* color: #9370db; */
@@ -68,6 +78,9 @@ textarea{
 .search-form{
     margin: auto;
     width: 100%;
+}
+.form-drop{
+    width: 300px;
 }
 .search-group{
     width: 100%;
