@@ -14,10 +14,8 @@ router.get('/user/:userId/messages', utilities.isOwner, (req, res)=>{
     Message.findAll({where: {destination_id: req.user.id}, include: [Contact]},{order: [['created_at', 'DESC']]})
         .then((allMessages)=>{
             res.render('./user/messages', {
-                user: req.user,
                 title: `My Messages`,
                 messages: allMessages,
-                csrf: req.csrfToken()
             });
         })
         .catch(e => {

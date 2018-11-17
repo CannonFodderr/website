@@ -4,7 +4,7 @@
 <div class="container page-content-container">
     <% include panel %>
     <div class="card bg-light mb-3 user-profile-card">
-        <form action="/user/<%= user.id %>/?_method=PUT&_csrf=<%= csrf %>" method="POST" enctype="multipart/form-data">
+        <form action="/user/<%= loggedUser.id %>/?_method=PUT&_csrf=<%= csrf %>" method="POST" enctype="multipart/form-data">
             <% include ../forms/userEdit %>
             <input type="hidden" name="_csrf" value="<%= csrf%>">
             <button class="btn btn-primary btn-lg btn-block" type="submit">UPDATE</button>
@@ -14,7 +14,7 @@
         <div class="col-lg-6 col-md-12">
             <!-- EDUCATION -->
             <div class="card bg-light mb-3">
-                <a href="/user/<%= user.id %>/education" class="bg-warning text-light  bold"><h5 class="user-title text-light bg-dark">Edit Education</h5></a>
+                <a href="/user/<%= loggedUser.id %>/education" class="bg-warning text-light  bold"><h5 class="user-title text-light bg-dark">Edit Education</h5></a>
                 <div class="input-group-block project-features">
                     <% if (user.education) { %>
                         <ul id="feature-list" class="list-group">
@@ -29,7 +29,7 @@
                 <div class="col-lg-6 col-md-12">
                     <!-- SKILLS -->
                     <div class="card bg-light mb-3">
-                        <a href="/user/<%= user.id %>/skills" class="bg-danger text-light bold "><h5 class="user-title text-light bg-dark">Edit Skills</h5></a>
+                        <a href="/user/<%= loggedUser.id %>/skills" class="bg-danger text-light bold "><h5 class="user-title text-light bg-dark">Edit Skills</h5></a>
                         <div class="input-group-block project-features">
                             <% if (user.skills) { %>
                                 <ul id="feature-list" class="list-group">

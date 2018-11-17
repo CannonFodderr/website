@@ -5,7 +5,7 @@ const sanitizer = require('../utilities/sanitizer');
 
 // New tech form
 router.get('/user/tech/new',utilities.isAdmin, (req, res)=>{
-    res.render('tech/new', {title: 'Add Technology', csrf: req.csrfToken(), user: req.user })
+    res.render('tech/new', {title: 'Add Technology' })
 });
 
 // Create new tech
@@ -30,7 +30,7 @@ router.post('/user/tech', utilities.isAdmin, (req, res)=>{
 router.get('/user/:userId/tech', utilities.isAdmin, (req, res) =>{
     Tech.findAll()
     .then((allTech)=>{
-        res.render('tech/all', {title: 'All Technologies', csrf: req.csrfToken(), user: req.user, allTech:allTech })
+        res.render('tech/all', {title: 'All Technologies', allTech:allTech })
     })
     .catch(e => {
         console.error(e);
@@ -42,7 +42,7 @@ router.get('/user/:userId/tech', utilities.isAdmin, (req, res) =>{
 router.get('/user/tech/:techId', utilities.isAdmin, (req, res)=>{
     Tech.findById(req.params.techId)
     .then((foundTech)=>{
-        res.render('tech/edit', {title: `Edit ${foundTech.title}`, csrf: req.csrfToken(), user: req.user, tech:foundTech })
+        res.render('tech/edit', {title: `Edit ${foundTech.title}`, tech:foundTech })
     })
     .catch(e => {
         console.error(e);

@@ -3,7 +3,7 @@
 <% include ../partials/navbar %>
 <div class="container page-content-container">
     <% include ../user/panel %>
-    <a class="btn bg-dark text-light" href="/user/<%= user.id %>/projects/new">New Project</a>
+    <a class="btn btn-info grit" href="/user/<%= user.id %>/projects/new">Add Project</a>
     <% if( user.isAdmin ){ %>
     <a class="btn bg-dark text-light" href="/user/<%= user.id %>/icons/new">New Icon</a>
     <a class="btn bg-dark text-light" href="/user/<%= user.id %>/tech">Tech</a>

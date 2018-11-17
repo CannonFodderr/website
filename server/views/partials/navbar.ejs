@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse text-light" id="navbarToggler1">
         
         <div class="btn-group dropdown nav-item">
-            <button type="button" class="btn btn-outline-dark dropdown-toggle text-light btn-toggle navbar-brand" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="owner-btn">
+            <button type="button" class="btn btn-outline-dark btn-sm dropdown-toggle text-light btn-toggle navbar-brand" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="owner-btn">
                 <i class="fas fa-cat brand-logo"></i><span class="brand-text">Idan Izhaki</span></button>
                 <div class="dropdown-menu bg-dark">
                     <a class="nav-link text-light" href="/"><i class="fas fa-home menu-icon"></i><span class="btn-text">Home</span></a>
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="btn-group dropdown nav-item">
-                <button type="button" class="btn btn-outline-success dropdown-toggle text-light btn-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="user-btn">
+                <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle text-light btn-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="user-btn">
                     <i class="fas fa-newspaper menu-icon"></i><span class="brand-text">GET YOUR CV</span></button>
                     <div class="dropdown-menu p-4 bg-dark text-light form-drop">
                         <% if (!loggedUser) { %>
@@ -27,7 +27,6 @@
                                             <img class="signin-logo" src="/images/logos/g-logo.png" alt="Google sign in logo">
                                             Sign in with Google
                                         </a>
-                                        
                                     </div>
                                     <div class="col-12 text-center">
                                         <a class="dropdown-item btn brand-login-button google text-light" href="/login/facebook">
@@ -61,8 +60,7 @@
                                     </div>
                                 </div> 
                             </form> 
-                            
-                            
+
                             <% } else { %>
                                 <a class="text-light nav-link" href="/profile/<%= loggedUser.id %>/cv"><i class="fas fa-user"></i><span class="btn-text">CV</span></a>
                                 <a class="text-light nav-link" href="/profile/<%= loggedUser.id %>/projects"><i class="fas fa-user"></i><span class="btn-text">Projects</span></a>

@@ -65,7 +65,6 @@ router.get('/user/:userId/education', middleware.isOwner, (req, res)=>{
     .then((foundUser)=>{
         res.render('./user/education', {
             title: 'Add Education',
-            csrf: req.csrfToken(),
             user: foundUser
         })
     })
@@ -99,7 +98,6 @@ router.get('/user/:userId/skills', middleware.isOwner, (req, res)=>{
     .then((foundUser)=>{
         res.render('./user/skills', {
             title: 'Add Skills',
-            csrf: req.csrfToken(),
             user: foundUser
         })
     })
@@ -129,7 +127,7 @@ router.put('/user/:userId/skills', middleware.isOwner, (req, res)=>{
 })
 // New User Form
 router.get('/register', (req, res) => {
-    res.render('./user/newProfile', {title: 'GET YOUR CV', csrf: req.csrfToken(), flash: req.flash() })
+    res.render('./user/newProfile', {title: 'GET YOUR CV', flash: req.flash() })
 });
 // Register new user
 router.post('/register', (req, res) => {
@@ -162,8 +160,5 @@ router.post('/register', (req, res) => {
         })
     }
 });
-
-
-
 
 module.exports = router
