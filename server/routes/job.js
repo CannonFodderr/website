@@ -13,7 +13,7 @@ router.post('/user/:userId/jobs', utilities.isLoggedIn, (req, res)=>{
     let sanitized = sanitizer.sanitizeBody(req)
     let features = null;
     if(sanitized.features){
-        features = sanitized.features.trim().split(';')
+        features = sanitized.features.split(';')
     }
     let newJob = {
         user_id: req.user.id,
@@ -59,8 +59,12 @@ router.get('/user/:userId/jobs/:jobId/edit', utilities.isOwner, (req, res)=>{
 })
 // Job Update Route
 router.put('/user/:userId/jobs/:jobId', utilities.isOwner, (req, res)=>{
-    let sanitized = sanitizer.sanitizeBody(req)
-    let features = sanitized.features.trim().split(';')
+    let sanitized = sanitizer.sanitizeBody(req);
+    let features = null;
+    if(sanitized.features){
+        console.log(sanitized.features);
+        features = sanitized.features.split(';');
+    }
     let updateData = {
         title: sanitized.title,
         description: sanitized.description,

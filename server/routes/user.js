@@ -160,5 +160,29 @@ router.post('/register', (req, res) => {
         })
     }
 });
-
+// Admin Users view
+router.get('/user/:userId/allProfiles', middleware.isAdmin, (req, res)=>{
+    User.findAll()
+    .then(allUsers => {
+        res.render('admin/allProfiles', { title: "All Profiles", users: allUsers })
+    })
+    .catch(e => {
+        console.error(e);
+        res.redirect('back');
+    })
+    
+})
+// DELETE USER
+router.delete('/user/:userId', middleware.isAdminOrOwner, (req, res)=>{
+    User.destroy({where: {id: req.user.id}})
+    .then(deletedUser => {
+        console.log("User removed from db by: ", req.user.username);
+        res.redirect('back');
+    })
+    .catch(e => {
+        req.flash('failure', "Could not delete user");
+        console.error(e);
+        res.redirect('/logout')
+    })
+})
 module.exports = router

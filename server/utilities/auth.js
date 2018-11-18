@@ -22,5 +22,11 @@ module.exports = {
         }
         req.flash('failure', "Sorry, you can't edit that")
         return res.redirect('/logout');
+    },
+    isAdminOrOwner(req, res, next){
+        if(req.user.isAdmin === true || req.user && req.user.id == req.params.userId){
+            return next()
+        }
+        return res.redirect('/logout')
     }
 }

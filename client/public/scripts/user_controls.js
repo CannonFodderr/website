@@ -28,7 +28,7 @@ if(addFeatureBtn){
         e.preventDefault();
         let newFeature = featureInput.value
         if(newFeature.length > 1){
-            featureList.innerHTML += `<div class="input-group input-group-block"><div class="input-group-prepend"><span class="input-group-text text-light bg-dark" id="basic-addon1"><i class="fas fa-trash delete-feature-icon text-danger"></i></span></div><li class="list-group-item user-feature-item"></i><input class="form-control feature-input" type="text" value="${newFeature.trim()}"></li></div>`
+            featureList.innerHTML += `<div class="input-group input-group-block"><div class="input-group-prepend"><span class="input-group-text text-light bg-dark" id="basic-addon1"><i class="fas fa-trash delete-feature-icon text-danger"></i></span></div><li class="list-group-item user-feature-item"></i><input class="form-control feature-input" type="text" value="${newFeature}"></li></div>`
             featureInput.value = '';
             FeaturesToInput();
         };
@@ -39,8 +39,8 @@ function FeaturesToInput(){
     let featureString = "";
     let currentFeatures = document.querySelectorAll('.feature-input');
     currentFeatures.forEach((feat)=>{
-        if(feat.value.trim().length > 0){
-            featureString += `${feat.value.trim()};`;
+        if(feat.value.length > 0){
+            featureString += `${feat.value};`;
         }
     });
     featuresSubmit.value = featureString;
