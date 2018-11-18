@@ -15,13 +15,6 @@
                         <% } else { %>
                             <img src="/images/default-avatar.png" alt="<%= users[i].username %>" class="card-img cv-profile-avatar-grid">
                             <% } %>
-                            <!-- <div class="card-img-overlay profile-img-overlay">
-                                <h5 class="card-title bg-dark text-center"><% if(users[i].firstName && users[i].lastName) { %>
-                                    <%= users[i].firstName %> <%= users[i].lastName %>  
-                                    <% } else { %>
-                                        <%= users[i].username %>
-                                        <% } %></h5>
-                                    </div> -->
                                 </a>
                                 <div class="card-footer">
                                     <form action="/user/<%= users[i].id %>?_method=DELETE" method="POST">

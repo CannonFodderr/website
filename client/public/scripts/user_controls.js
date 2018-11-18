@@ -39,8 +39,8 @@ function FeaturesToInput(){
     let featureString = "";
     let currentFeatures = document.querySelectorAll('.feature-input');
     currentFeatures.forEach((feat)=>{
-        if(feat.value.length > 0){
-            featureString += `${feat.value};`;
+        if(feat.value.trim().length > 0){
+            featureString += `${feat.value.trim()};`;
         }
     });
     featuresSubmit.value = featureString;

@@ -19,7 +19,7 @@
                     <% if (user.education) { %>
                         <ul id="feature-list" class="list-group">
                             <% user.education.forEach((item)=>{ %>
-                                <li class="list-group-item feature-list-item"><%= item %></li>
+                                <li class="list-group-item feature-list-item"><%- item %></li>
                                 <% }) %>
                             </ul>
                             <% } %>
@@ -34,7 +34,7 @@
                             <% if (user.skills) { %>
                                 <ul id="feature-list" class="list-group">
                                     <% user.skills.forEach((item)=>{ %>
-                                        <li class="list-group-item feature-list-item"><%= item %></li>
+                                        <li class="list-group-item feature-list-item"><%- item %></li>
                                         <% }) %>
                                     </ul>
                                     <% } %>
@@ -42,15 +42,31 @@
                             </div>
                         </div>
                     </div>
+                    <% if(loggedUser.googleId && loggedUser.facebookId) { %>
+                    <% } else { %>
                     <div class="row bg-light no-gutters">
-                        <div class="col">
+                        <div class="col-12">
                             <h5 class="user-title text-light bg-dark">Sign in options:</h5>
+                            <p class="user-title">Click to add login option to you account</p>
+                        </div>
+                        <% if(!loggedUser.googleId) { %>
+                        <div class="col text-center">
                             <a class="btn brand-login-button google" href="/login/google">
                                 <img class="signin-logo" src="/images/logos/g-logo.png" alt="Google sign in logo">
                                 Sign in with google
                             </a>
                         </div>
+                        <% } %>
+                        <% if(!loggedUser.facebookId) { %>
+                        <div class="col text-center">
+                            <a class="dropdown-item btn brand-login-button google text-dark" href="/login/facebook">
+                                <img class="signin-logo" src="/images/logos/fb.png" alt="Google sign in logo">
+                                Sign in with Facebook
+                            </a>
+                        </div>
+                        <% } %>
                     </div>
+                    <% } %>
                 </div>
                 <script src="/scripts/user_controls.js"></script>
                 <% include ../partials/footer %>

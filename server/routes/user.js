@@ -76,20 +76,22 @@ router.put('/user/:userId/education', middleware.isOwner, (req, res)=>{
         let sanitizedBody = sanitizer.sanitizeBody(req);
         let eduFeatures = [];
         if(sanitizedBody.features){
-            let featuresArr = sanitizedBody.features.trim().split(';');
+            let featuresArr = req.body.features.trim().split(';');
             featuresArr.forEach((feat)=>{
                 if(feat.length > 1){
-                    eduFeatures.push(feat);
+                    let sanitizedFeat = req.sanitize(feat)
+                    eduFeatures.push(sanitizedFeat);
                 }
             })
         }
         foundUser.education = eduFeatures;
         foundUser.save();
-        res.redirect('back')
+        console.log("Updated")
+        res.redirect(`/user/${req.user.id}/education`)
     })
     .catch(e => {
         console.log(e);
-        res.redirect('back') 
+        res.redirect(`/user/${req.user.id}/education`) 
     })   
 })
 // User skills
@@ -109,20 +111,21 @@ router.put('/user/:userId/skills', middleware.isOwner, (req, res)=>{
         let sanitizedBody = sanitizer.sanitizeBody(req);
         let skillFeatures = [];
         if(sanitizedBody.features){
-            let featuresArr = sanitizedBody.features.trim().split(';');
+            let featuresArr = req.body.features.trim().split(';');
             featuresArr.forEach((feat)=>{
                 if(feat.length > 1){
-                    skillFeatures.push(feat);
+                    let sanitizedFeat = req.sanitize(feat)
+                    skillFeatures.push(sanitizedFeat);
                 }
             })
         }
         foundUser.skills = skillFeatures;
         foundUser.save();
-        res.redirect('back')
+        res.redirect(`/user/${req.user.id}/skills`)
     })
     .catch(e => {
         console.log(e);
-        res.redirect('back') 
+        res.redirect(`/user/${req.user.id}/skills`) 
     })   
 })
 // New User Form

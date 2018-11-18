@@ -60,9 +60,8 @@ router.get('/user/:userId/jobs/:jobId/edit', utilities.isOwner, (req, res)=>{
 // Job Update Route
 router.put('/user/:userId/jobs/:jobId', utilities.isOwner, (req, res)=>{
     let sanitized = sanitizer.sanitizeBody(req);
-    let features = null;
+    let features = '';
     if(sanitized.features){
-        console.log(sanitized.features);
         features = sanitized.features.split(';');
     }
     let updateData = {
