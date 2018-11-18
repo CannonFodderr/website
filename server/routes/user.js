@@ -174,7 +174,7 @@ router.get('/user/:userId/allProfiles', middleware.isAdmin, (req, res)=>{
 })
 // DELETE USER
 router.delete('/user/:userId', middleware.isAdminOrOwner, (req, res)=>{
-    User.destroy({where: {id: req.user.id}})
+    User.destroy({where: {id: req.params.userId }})
     .then(deletedUser => {
         console.log("User removed from db by: ", req.user.username);
         res.redirect('back');
