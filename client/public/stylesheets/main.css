@@ -39,6 +39,18 @@ textarea{
     -webkit-mask-image: url('../images/grit.png');
     mask-type: alpha;
 }
+#scrollTop{
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s linear;
+    border: none;
+    font-size: 1.2em;
+}
+#scrollTop.show{
+    opacity: 1;
+    visibility: visible;
+    transition: 0.4s linear;
+}
 .navbar.navbar-expand-xl.navbar-dark {
     position: absolute;
     top: 0;
@@ -88,6 +100,11 @@ textarea{
 }
 .search-input{
     width: 80%;
+}
+.footer-controls{
+    position: fixed;
+    bottom: 2vh;
+    right: 0;
 }
 .page-404-container{
     display: flex;
@@ -863,6 +880,7 @@ a.nav-link:hover{
 #install-btn-wrapper.show{
     display: block;
     height: auto;
+    margin: 0.5vh 0.5vw;
     visibility: visible;
     -webkit-animation: fadein 0.5s, 2.5s;
     animation: fadein 0.5s, 10s;

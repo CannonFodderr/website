@@ -65,7 +65,7 @@ showNotification = (data) => {
     if(data.type === "beforeinstallprompt"){
         var installBtn = document.getElementById("install-btn-wrapper");
         setTimeout(()=>{
-            installBtn.innerHTML = "<button class='btn btn-primary'>Install App</button>"
+            installBtn.innerHTML = "<button class='btn btn-sm btn-primary'>Install App</button>"
             installBtn.addEventListener('click', (e)=>{
                 installBtn.className = installBtn.className.repeat("show", "");
                 installPrompt()
@@ -124,5 +124,13 @@ window.onload = () => {
         }, 1000)
     }
 }
+
+window.addEventListener('scroll', (e)=>{
+    if(pageYOffset > window.innerHeight){
+        document.getElementById('scrollTop').classList.add('show');
+    } else {
+        document.getElementById('scrollTop').classList.remove('show')
+    }
+});
 
 console.log('%c░░░░░░░░░░░░░░░░░\n░░░░░▀▄░░░▄▀░░░░░\n░░░░▄█▀███▀█▄░░░░\n░░░█▀███████▀█░░░\n░░░█░█▀▀▀▀▀█░█░░░\n░░░░░░▀▀░▀▀░░░░░░\n░░░░░░░░░░░░░░░░░\n  Hello Invader! ', 'color: green;background:black; font-size:30px; padding:0;margin:0')

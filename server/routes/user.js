@@ -29,7 +29,7 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
         })
     }).catch((e) => {
         console.error(e)
-        res.redirect('back');
+        res.redirect('/register');
     })
 });
 

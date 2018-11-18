@@ -1,22 +1,22 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-xl navbar-dark">
+    
     <button class="navbar-toggler bg-dark text-light" type="button" data-toggle="collapse" data-target="#navbarToggler1" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- <a class="navbar-brand text-light" href="/"><i class="fas fa-cat brand-logo"></i><span class="brand-text">Idan Izhaki</span></a> -->
+    <a class="navbar-brand text-light" href="/"><i class="fas fa-home brand-logo"></i></a>
     <div class="collapse navbar-collapse text-light" id="navbarToggler1">
-        
         <div class="btn-group dropdown nav-item">
-            <button type="button" class="btn btn-outline-dark btn-sm dropdown-toggle text-light btn-toggle navbar-brand" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="owner-btn">
-                <i class="fas fa-cat brand-logo"></i><span class="brand-text">Idan Izhaki</span></button>
+            <button type="button" class="btn btn-outline-info btn-sm dropdown-toggle text-light btn-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="owner-btn">
+                <i class="fas fa-cat brand-logo"></i><span class="brand-text">IDAN IZHAKI</span></button>
                 <div class="dropdown-menu bg-dark">
-                    <a class="nav-link text-light" href="/"><i class="fas fa-home menu-icon"></i><span class="btn-text">Home</span></a>
+                    <a class="nav-link text-light" href="/"><i class="fas fa-user menu-icon"></i><span class="btn-text">Contact</span></a>
                     <a class="text-light nav-link" href="/profile/1/cv"><i class="fas fa-newspaper menu-icon"></i><span class="btn-text">CV</span></a>
                     <a class="nav-link text-light" href="/profile/1/projects"><i class="fas fa-network-wired menu-icon"></i><span class="btn-text">Projects</span></a>
                 </div>
             </div>
             <div class="btn-group dropdown nav-item">
-                <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle text-light btn-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="user-btn">
+                <button type="button" class="btn btn-outline-info btn-sm dropdown-toggle text-light btn-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="user-btn">
                     <i class="fas fa-newspaper menu-icon"></i><span class="brand-text">GET YOUR CV</span></button>
                     <div class="dropdown-menu p-4 bg-dark text-light form-drop">
                         <% if (!loggedUser) { %>
@@ -48,11 +48,11 @@
                             </form>
                             <hr>
                             <form action="/login" method="POST">
-                            <button class="btn btn-block btn-primary" type="button" data-toggle="collapse" data-target="#logcollapse" aria-expanded="false" aria-controls="collapseExample">
-                                Login
-                            </button>
-                            <div class="collapse" id="logcollapse">
-                                <div class="">
+                                <button class="btn btn-block btn-primary" type="button" data-toggle="collapse" data-target="#logcollapse" aria-expanded="false" aria-controls="collapseExample">
+                                    Login
+                                </button>
+                                <div class="collapse" id="logcollapse">
+                                    <div class="">
                                         <% include ../forms/userLogin %>
                                         <div class="text-center">
                                             <button class="btn btn-success btn-block grit" type="submit">GO!</button>
@@ -60,10 +60,9 @@
                                     </div>
                                 </div> 
                             </form> 
-
                             <% } else { %>
-                                <a class="text-light nav-link" href="/profile/<%= loggedUser.id %>/cv"><i class="fas fa-user"></i><span class="btn-text">CV</span></a>
-                                <a class="text-light nav-link" href="/profile/<%= loggedUser.id %>/projects"><i class="fas fa-user"></i><span class="btn-text">Projects</span></a>
+                                <a class="text-light nav-link" href="/profile/<%= loggedUser.id %>/cv"><i class="fas fa-newspaper"></i><span class="btn-text">CV</span></a>
+                                <a class="text-light nav-link" href="/profile/<%= loggedUser.id %>/projects"><i class="fas fa-network-wired"></i><span class="btn-text">Projects</span></a>
                                 <a class="text-light nav-link" href="/user/<%= loggedUser.id %>"><i class="fas fa-user"></i><span class="btn-text">Edit Profile</span></a>
                                 <a class="text-light nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i><span class="btn-text">LOGOUT</span></a>
                                 <% } %>
