@@ -31,7 +31,7 @@
     <div class="input-group-prepend">
         <span class="input-group-text text-light bg-dark" id="basic-addon1">Phone:</span>
     </div>
-    <input name="phone" type="text" class="form-control" placeholder="" aria-label="text" aria-describedby="basic-addon1"
+    <input name="phone" type="tel" class="form-control" placeholder="" aria-label="tel" aria-describedby="basic-addon1"
     value="<%= user.phone %>">
 </div>
 <div class="input-group mb-3">
@@ -39,7 +39,7 @@
         <span class="input-group-text text-light bg-dark" id="basic-addon1">Birthday:</span>
     </div>
     <input name="birthday" type="date" class="form-control" placeholder="<%=user.birthday %>" aria-label="date"
-    aria-describedby="basic-addon1" value="<%= user.birthday %>">
+    aria-describedby="basic-addon1" value="<%= user.birthday %>" min="1900-01-01">
 </div>
 <div class="input-group mb-3">
     <div class="container files-container">
@@ -87,6 +87,6 @@
         </div>
         <h5 class="text-dark">Bio:</h5>
         <div class="form-group">
-            <textarea name="bio" class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" placeholder="About me"><%= bio %></textarea>
+            <textarea name="bio" class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" placeholder="About me"><%- bio %></textarea>
         </div>
         

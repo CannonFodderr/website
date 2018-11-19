@@ -4,7 +4,7 @@
 <div class="container page-content-container">
     <% include ../user/panel %>
     <h2 class="text-light">ADD JOB</h2>
-    <form action="/user/<%= user.id %>/jobs" method="POST">
+    <form action="/user/<%= loggedUser.id %>/jobs" method="POST">
         <% include ../forms/newJob %>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
     </form>

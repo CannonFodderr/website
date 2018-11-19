@@ -4,8 +4,7 @@
 <div class="container page-content-container">
     <% include panel %>
     <div class="card bg-light mb-3 admin-login">
-        <h1><%= user.username %> Profile:</h1>
-        <form action="/user/<%= user.id %>/education?_method=PUT" method="POST">
+        <form action="/user/<%= loggedUser.id %>/education?_method=PUT" method="POST">
             <% include ../forms/eduEdit %>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Update</button>
         </form>

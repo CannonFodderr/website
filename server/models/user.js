@@ -12,6 +12,9 @@ const User = db.define('User', {
     googleId: {
         type: Sequelize.INTEGER
     },
+    facebookId: {
+        type: Sequelize.BIGINT
+    },
     username: {
         type: Sequelize.TEXT,
         allowNull: false,

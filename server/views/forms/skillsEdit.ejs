@@ -1,4 +1,3 @@
-<h5 class="text-dark">Skills</h5>
 <div class="input-group-block project-features">
     <ul id="feature-list" class="list-group">
 <% if (user.skills) { %>
@@ -8,7 +7,7 @@
                 <span class="input-group-text text-light bg-dark" id="basic-addon1">
                     <i class="fas fa-trash delete-feature-icon text-danger"></i></span>
                 </div><li class="list-group-item user-feature-item">
-                    <input class="form-control feature-input" type="text" value="<%= item %>">
+                    <input class="form-control feature-input" type="text" value="<%- item %>">
                 </li>
             </div>
     <% }) %>
@@ -22,6 +21,6 @@
     <div class="input-group-append">
         <button class="btn btn-info" id="add-feature">ADD</button>
     </div>        
-    <input id="featuresInput" name="features" type="hidden" name="features" value="<% if( user.skills ) { user.skills.forEach((feat)=>{ %><%= feat.trim() %>;<% })} %>">
+    <input id="featuresInput" name="features" type="hidden" name="features" value="<% if( user.skills ) { user.skills.forEach((feat)=>{ %><%- feat %>;<% })} %>">
     <input type="hidden" name="_csrf" value="<%= csrf %>" />
 </div>

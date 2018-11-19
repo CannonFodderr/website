@@ -1,22 +1,32 @@
 <div class="user-panel">
     <h2 class="user-title text-dark bg-light"><a class="title-link" href="/user">User Panel</a></h2>
-    <p class="text-light">Welcome
-        <% if(user.firstName){ %>
-            <%= user.firstName %>
+    <div class="text-light">Welcome
+        <% if(loggedUser.firstName){ %>
+            <%= loggedUser.firstName %>
             <%} else { %>
-                <%= user.username %>
+                <%= loggedUser.username %>
                 <% } %>
+            </div>
                 <br />
-                <a href="/profile/<%= user.id %>/cv" class="btn btn-success grit bold">MY CV</a>
-                <a href="/profile/<%= user.id %>/print" class="btn btn-light grit bold"><i class="fas fa-print"></i></a>
-                <a href="/user/<%= user.id %>" class="btn btn-warning grit bold">Edit profile</a>
-                <a href="/logout" class="btn btn-outline-light grit bold">Logout</a>
-            </p>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="loggedUserDrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </button>
+                    <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item bg-dark text-light" href="/user/<%= loggedUser.id %>/messages/">Messages</a>
+                        <a class="dropdown-item bg-dark text-light" href="/profile/<%= loggedUser.id %>/cv">MY CV</a>
+                        <a class="dropdown-item bg-dark text-light" href="/profile/<%= loggedUser.id %>/print">Print</a>
+                        <a class="dropdown-item bg-dark text-light" href="/logout">Logout</a>
+                        <form action="/user/<%= loggedUser.id %>?_method=DELETE" method="POST" class="dropdown-item bg-dark">
+                            <input type="hidden" name="_csrf" value="<%= csrf %>">
+                            <button type="submit" class="btn btn-sm btn-danger del-btn grit">Delete Profile</button>
+                        </form>
+                    </div>
+                </div>
             <div class="user-controls">
-                <!-- <a class="btn btn-lg btn-link bg-dark text-light btn-back" href="#"><i class="fas fa-arrow-left" onclick="history.go(-1)"></i></a> -->
-                <a class="btn btn-outline-light" href="/user/<%= user.id %>/messages/">Messages</a>
-                <a class="btn btn-outline-light" href="/user/<%= user.id %>/projects/">Projects</a>
-                <a class="btn btn-outline-light" href="/user/<%= user.id %>/jobs/">Jobs</a>
+                <a class="btn btn-outline-light" href="/user/<%= loggedUser.id %>">Edit profile</a>
+                <a class="btn btn-outline-light" href="/user/<%= loggedUser.id %>/projects/">Projects</a>
+                <a class="btn btn-outline-light" href="/user/<%= loggedUser.id %>/jobs/">Jobs</a>
             </div>
             <div class="row  controls-row text-light no-gutters bg-light text-dark">
                 <div class="col-2">
@@ -30,7 +40,6 @@
                                     <%= messages.success %>
                                 </div>
                             </h5>
-                            
                             <% } %>
                             <% if (messages.failure) { %>
                                 <h5 class="card-header typer">
@@ -45,7 +54,6 @@
                                             <%= title.toUpperCase() %>
                                         </div>
                                     </h5>
-                                    
                                     <% } %>
                                 </div>
                             </div>

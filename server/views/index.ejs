@@ -98,26 +98,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer bg-dark contact-col-footer">
-                            <% if(user) { %>
-                                <div class="row text-center">
-                                    <div class="col">
-                                        <a class="text-light" href="/user/<%= user.id %>"><i class="fas fa-user"></i><span class="btn-text">YOUR PROFILE</span></a>
-                                    </div>
-                                    <div class="col">
-                                        <a class="text-light" href="/logout"><i class="fas fa-sign-out-alt"></i><span class="btn-text">LOGOUT</span></a>
-                                    </div>
-                                </div>
-                                <% } else { %>
-                                    <div class="row text-center">
-                                        <div class="col-12">
-                                            <a href="/register" class="btn btn-success btn-block grit">GET YOUR OWN CV</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <% } %>
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <% include ./partials/footer %>
+            </div>
+        </div>
+        <% include ./partials/footer %>
