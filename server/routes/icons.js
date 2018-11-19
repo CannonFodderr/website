@@ -5,7 +5,7 @@ const sanitizer = require('../utilities/sanitizer');
 
 // New Icon form
 router.get('/user/:userId/icons/new',utilities.isAdmin, (req, res)=>{
-    res.render('icons/new', { title: 'Add Icon', csrf: req.csrfToken(), user: req.user})
+    res.render('icons/new', { title: 'Add Icon'})
 })
 // Create new icon
 router.post('/user/:userId/icons',utilities.isAdmin, (req, res)=>{

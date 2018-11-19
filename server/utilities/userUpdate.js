@@ -13,7 +13,9 @@ const updateUser = async (req, imgsUrls) => {
             sanitized.cover_image = imgsUrls.cover_image
         } 
     }
-    sanitized.bio = sanitized.bio.replace(/\r?\n/g, '<br />');
+    if(sanitized.bio){
+        sanitized.bio = sanitized.bio.replace(/\r?\n/g, '<br />');
+    }
     User.update(sanitized, {
         where: {
             id: req.user.id

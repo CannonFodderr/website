@@ -57,7 +57,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
     })
     
     router.get('/user/:userId/projects/new',utilities.isLoggedIn, (req, res)=>{
-        res.render('./projects/new', {csrf: req.csrfToken(), title: 'New project', user: req.user})
+        res.render('./projects/new', {csrf: req.csrfToken(), title: 'New project'})
     })
     
     
@@ -96,7 +96,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
             Icon.findAll().then((icons)=>{
                 Tech.findAll().then((allTech)=>{
                     res.render('./projects/edit', 
-                    {project:project, csrf:req.csrfToken(), title: `Edit ${project.title}`, icons: icons, techs: allTech, projectTechs: projectTechs, user: project.User });
+                    {project:project, title: `Edit ${project.title}`, icons: icons, techs: allTech, projectTechs: projectTechs, user: project.User });
                 })
             })
         })

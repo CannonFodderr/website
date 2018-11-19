@@ -3,6 +3,7 @@ const passport          = require('passport');
 const User              = require('../models/user');
 const LocalStrategy     = require('passport-local').Strategy;
 const GoogleStrategy    = require('passport-google-oauth20');
+const FacebookStrategy  = require('passport-facebook').Strategy;
 const bcrypt            = require('bcrypt');
 const passwordGenerator = require('generate-password');
 const encrypt = require('./bcrypt');
@@ -104,4 +105,71 @@ function(req, accessToken, refreshToken, profile, cb) {
         })
     } 
     }
+));
+
+// FACEBOOK
+
+let facebookLoginConfig = {
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: `${cbURL}/login/facebook/callback`,
+    enableProof: true,
+    passReqToCallback: true,
+    profileFields: ['id', 'displayName', 'photos', 'email']
+}
+passport.use(new FacebookStrategy(facebookLoginConfig, 
+    (req, accessToken, refreshToken, profile, done)=>{
+    console.log(profile)
+    let facebookId = Number(profile.id)
+    let jsonData = profile._json;
+    // 
+    if( req.user ){
+        User.update({ facebookId: facebookId }, { where: {id: req.user.id }})
+        .then((updatedUser)=>{
+            return done(null, updatedUser)
+        })
+        .catch(e => {
+            console.error(e);
+        })
+    } else {
+        User.find({where: { facebookId: facebookId }})
+        .then((foundUser)=>{
+            // Create user if not found
+            console.log(foundUser);
+            if(foundUser === null){
+                let password = passwordGenerator.generate({
+                    length: 10,
+                    numbers: true,
+                    uppercase: false
+                })
+                encrypt.hashed(password)
+                .then((passData)=>{
+                    let username = profile.displayName.replace(" ", "");
+                    let nameArr = profile.displayName.split(' ');
+                    let newUser = { 
+                        facebookId: facebookId,
+                        username: username,
+                        password: passData.hashedPassword,
+                        salt: passData.salt,
+                        email: profile.emails[0].value,
+                        firstName: nameArr[0],
+                        lastName: nameArr[1],
+                        isAdmin: false,
+                    }
+                    console.log(newUser);
+                User.create(newUser)
+                .then((createdUser)=>{
+                    return done(null, createdUser);
+                })
+                .catch(e => { console.error(e); })
+                })
+    } else {
+        done(null, foundUser);
+    }
+})
+.catch(e => {
+    console.error(e);
+})
+} 
+}
 ));

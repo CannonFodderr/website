@@ -5,12 +5,12 @@
     <% include ../user/panel %>
     <h2 class="text-light">EDIT: <%- job.title %></h2>
     <!-- DELETE -->
-    <form action="/user/<%= user.id%>/jobs/<%=job.id %>?_method=DELETE" method="POST">
+    <form action="/user/<%= loggedUser.id%>/jobs/<%=job.id %>?_method=DELETE" method="POST">
         <button class="btn btn-danger del-btn" type="submit">DELETE</button>
         <input type="hidden" name="_csrf" value="<%= csrf %>">
     </form>
     <!-- EDIT -->
-    <form action="/user/<%= user.id%>/jobs/<%= job.id %>?_method=PUT" method="POST">
+    <form action="/user/<%= loggedUser.id%>/jobs/<%= job.id %>?_method=PUT" method="POST">
         <% include ../forms/editJob %>
         <button class="btn btn-success" type="submit">EDIT</button>
     </form>

@@ -8,8 +8,6 @@ let mailer = require('../mailer/mail')
 router.get('/', csrfMiddleware, (req, res) => {
     res.render('index', {
         title: process.env.OWNER,
-        csrf: req.csrfToken(),
-        user: req.user
     });
 });
 

@@ -29,7 +29,7 @@ router.get('/user/:userId/',middleware.isLoggedIn, (req, res) => {
         })
     }).catch((e) => {
         console.error(e)
-        res.redirect('back');
+        res.redirect('/register');
     })
 });
 
@@ -65,7 +65,6 @@ router.get('/user/:userId/education', middleware.isOwner, (req, res)=>{
     .then((foundUser)=>{
         res.render('./user/education', {
             title: 'Add Education',
-            csrf: req.csrfToken(),
             user: foundUser
         })
     })
@@ -77,20 +76,22 @@ router.put('/user/:userId/education', middleware.isOwner, (req, res)=>{
         let sanitizedBody = sanitizer.sanitizeBody(req);
         let eduFeatures = [];
         if(sanitizedBody.features){
-            let featuresArr = sanitizedBody.features.trim().split(';');
+            let featuresArr = req.body.features.trim().split(';');
             featuresArr.forEach((feat)=>{
                 if(feat.length > 1){
-                    eduFeatures.push(feat);
+                    let sanitizedFeat = req.sanitize(feat)
+                    eduFeatures.push(sanitizedFeat);
                 }
             })
         }
         foundUser.education = eduFeatures;
         foundUser.save();
-        res.redirect('back')
+        console.log("Updated")
+        res.redirect(`/user/${req.user.id}/education`)
     })
     .catch(e => {
         console.log(e);
-        res.redirect('back') 
+        res.redirect(`/user/${req.user.id}/education`) 
     })   
 })
 // User skills
@@ -99,7 +100,6 @@ router.get('/user/:userId/skills', middleware.isOwner, (req, res)=>{
     .then((foundUser)=>{
         res.render('./user/skills', {
             title: 'Add Skills',
-            csrf: req.csrfToken(),
             user: foundUser
         })
     })
@@ -111,25 +111,26 @@ router.put('/user/:userId/skills', middleware.isOwner, (req, res)=>{
         let sanitizedBody = sanitizer.sanitizeBody(req);
         let skillFeatures = [];
         if(sanitizedBody.features){
-            let featuresArr = sanitizedBody.features.trim().split(';');
+            let featuresArr = req.body.features.trim().split(';');
             featuresArr.forEach((feat)=>{
                 if(feat.length > 1){
-                    skillFeatures.push(feat);
+                    let sanitizedFeat = req.sanitize(feat)
+                    skillFeatures.push(sanitizedFeat);
                 }
             })
         }
         foundUser.skills = skillFeatures;
         foundUser.save();
-        res.redirect('back')
+        res.redirect(`/user/${req.user.id}/skills`)
     })
     .catch(e => {
         console.log(e);
-        res.redirect('back') 
+        res.redirect(`/user/${req.user.id}/skills`) 
     })   
 })
 // New User Form
 router.get('/register', (req, res) => {
-    res.render('./user/newProfile', {title: 'GET YOUR CV', csrf: req.csrfToken(), flash: req.flash() })
+    res.render('./user/newProfile', {title: 'GET YOUR CV', flash: req.flash() })
 });
 // Register new user
 router.post('/register', (req, res) => {
@@ -162,8 +163,29 @@ router.post('/register', (req, res) => {
         })
     }
 });
-
-
-
-
+// Admin Users view
+router.get('/user/:userId/allProfiles', middleware.isAdmin, (req, res)=>{
+    User.findAll()
+    .then(allUsers => {
+        res.render('admin/allProfiles', { title: "All Profiles", users: allUsers })
+    })
+    .catch(e => {
+        console.error(e);
+        res.redirect('back');
+    })
+    
+})
+// DELETE USER
+router.delete('/user/:userId', middleware.isAdminOrOwner, (req, res)=>{
+    User.destroy({where: {id: req.params.userId }})
+    .then(deletedUser => {
+        console.log("User removed from db by: ", req.user.username);
+        res.redirect('back');
+    })
+    .catch(e => {
+        req.flash('failure', "Could not delete user");
+        console.error(e);
+        res.redirect('/logout')
+    })
+})
 module.exports = router

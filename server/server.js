@@ -62,6 +62,8 @@ app.use(flash());
 
 app.use('*', (req, res, next)=>{
     res.locals.messages = req.flash();
+    res.locals.loggedUser = req.user;
+    res.locals.csrf = req.csrfToken();
     next();
 });
 // USE ROUTES

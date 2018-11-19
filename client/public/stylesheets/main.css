@@ -39,6 +39,18 @@ textarea{
     -webkit-mask-image: url('../images/grit.png');
     mask-type: alpha;
 }
+#scrollTop{
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s linear;
+    border: none;
+    font-size: 1.2em;
+}
+#scrollTop.show{
+    opacity: 1;
+    visibility: visible;
+    transition: 0.4s linear;
+}
 .navbar.navbar-expand-xl.navbar-dark {
     position: absolute;
     top: 0;
@@ -54,13 +66,23 @@ textarea{
 .navbar-brand{
     margin-left: 1rem;
 }
+.nav-item{
+    display: block;
+}
 .nav-container{
     margin-bottom: 6vh;
+}
+.nav-sign-logo{
+    height: 50px;
+    width: auto;
 }
 .brand-text{
     margin-left: 1vh;
 }
-
+.btn-toggle{
+    border: none;
+    outline: none;
+}
 .brand-logo{
     font-size: 1.3em;
     /* color: #9370db; */
@@ -69,12 +91,20 @@ textarea{
     margin: auto;
     width: 100%;
 }
+.form-drop{
+    width: 300px;
+}
 .search-group{
     width: 100%;
     /* margin: 1vh auto; */
 }
 .search-input{
     width: 80%;
+}
+.footer-controls{
+    position: fixed;
+    bottom: 2vh;
+    right: 0;
 }
 .page-404-container{
     display: flex;
@@ -572,7 +602,7 @@ a.nav-link:hover{
     margin-top: 3vh;
 }
 .project-features{
-    margin-bottom: 1vh;
+    /* margin-bottom: 1vh; */
 }
 .project-top-header{
     margin-bottom: 2vh;
@@ -850,6 +880,7 @@ a.nav-link:hover{
 #install-btn-wrapper.show{
     display: block;
     height: auto;
+    margin: 0.5vh 0.5vw;
     visibility: visible;
     -webkit-animation: fadein 0.5s, 2.5s;
     animation: fadein 0.5s, 10s;

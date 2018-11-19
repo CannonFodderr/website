@@ -5,7 +5,7 @@ const Job = require('../models/job');
 
 // New Job Form
 router.get('/user/:userId/jobs/new',utilities.isLoggedIn, (req, res)=>{
-    res.render('./jobs/new', { title: `Add New Job`, csrf: req.csrfToken(), user: req.user });
+    res.render('./jobs/new', { title: `Add New Job` });
 });
 
 // ADD New Job
@@ -13,7 +13,7 @@ router.post('/user/:userId/jobs', utilities.isLoggedIn, (req, res)=>{
     let sanitized = sanitizer.sanitizeBody(req)
     let features = null;
     if(sanitized.features){
-        features = sanitized.features.trim().split(';')
+        features = sanitized.features.split(';')
     }
     let newJob = {
         user_id: req.user.id,
@@ -39,7 +39,7 @@ router.post('/user/:userId/jobs', utilities.isLoggedIn, (req, res)=>{
 router.get('/user/:userId/jobs', utilities.isLoggedIn, (req, res)=>{
     Job.findAll({ where: {user_id: req.user.id }})
     .then((allJobs)=>{
-        res.render('./jobs/all', {title: 'All Jobs', jobs: allJobs, user: req.user })
+        res.render('./jobs/all', {title: 'All Jobs', jobs: allJobs })
     })
     .catch(e => {
         console.error(e);
@@ -50,7 +50,7 @@ router.get('/user/:userId/jobs', utilities.isLoggedIn, (req, res)=>{
 router.get('/user/:userId/jobs/:jobId/edit', utilities.isOwner, (req, res)=>{
     Job.findById(req.params.jobId)
     .then((foundJob)=>{
-        res.render('./jobs/edit', {title: `Edit ${foundJob.title}`, job:foundJob, user: req.user, csrf: req.csrfToken() })
+        res.render('./jobs/edit', {title: `Edit ${foundJob.title}`, job:foundJob })
     })
     .catch(e => {
         console.error(e);
@@ -59,8 +59,11 @@ router.get('/user/:userId/jobs/:jobId/edit', utilities.isOwner, (req, res)=>{
 })
 // Job Update Route
 router.put('/user/:userId/jobs/:jobId', utilities.isOwner, (req, res)=>{
-    let sanitized = sanitizer.sanitizeBody(req)
-    let features = sanitized.features.trim().split(';')
+    let sanitized = sanitizer.sanitizeBody(req);
+    let features = '';
+    if(sanitized.features){
+        features = sanitized.features.split(';');
+    }
     let updateData = {
         title: sanitized.title,
         description: sanitized.description,
