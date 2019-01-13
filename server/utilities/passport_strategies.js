@@ -4,7 +4,7 @@ const User              = require('../models/user');
 const LocalStrategy     = require('passport-local').Strategy;
 const GoogleStrategy    = require('passport-google-oauth20');
 const FacebookStrategy  = require('passport-facebook').Strategy;
-const bcrypt            = require('bcrypt');
+const bcrypt            = require('bcrypt-nodejs');
 const passwordGenerator = require('generate-password');
 const encrypt = require('./bcrypt');
 
