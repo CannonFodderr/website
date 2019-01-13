@@ -57,7 +57,7 @@ router.get('/profile/:userId/projects/:projectid', (req, res)=>{
     })
     
     router.get('/user/:userId/projects/new',utilities.isLoggedIn, (req, res)=>{
-        res.render('./projects/new', {csrf: req.csrfToken(), title: 'New project'})
+        res.render('./projects/new', {csrf: req.csrfToken(), title: 'New project', user: req.user})
     })
     
     
