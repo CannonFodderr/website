@@ -46,6 +46,4 @@ let generalDB = () => {
 }
 let db = generalDB()
 
-
-
 module.exports = db;
