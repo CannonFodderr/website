@@ -71,39 +71,12 @@
                                             <% } %>
                                             <% if( user.education || user.skills){ %>
                                                 <div class="col-6">
-                                                    <button class="cv-controls-btn btn btn-warning text-light grit" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
+                                                    <button class="cv-controls-btn btn btn-danger text-light grit" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth', block: 'start', inline: 'nearest'})">Education</button>
                                                 </div>
                                                 <% } %>
-                                                <% if( user.email ) {%>
-                                                    <div class="col-6">
-                                                        <!-- CONTACT COLLAPSE -->
-                                                        <button class="cv-controls-btn btn btn-danger grit" type="button grit" data-toggle="collapse" data-target="#contactCollapse" aria-expanded="false" aria-controls="contactCollapse">
-                                                            Contact <%= user.firstName %>
-                                                        </button>
-                                                    </div>
-                                                    <% } %>
+                                                
                                                 </div>
-                                                <% if( user.email ) { %>
-                                                    <div class="collapse bg-dark" id="contactCollapse">
-                                                            <% if(user.isAdmin) { %>
-                                                                <div class="container">
-                                                                        <ul class="contact-list-cv">
-                                                                            <li class="cv-social-li"><a rel="noreferrer" class="social-link" href="tel:+972526773370"><i class="fas fa-phone social-icon"></i>Phone</a></li>
-                                                                            <li class="cv-social-li text-success"><a rel="noreferrer" class="social-link" href="mailto:izhaki.idan@gmail.com"><i class="fas fa-envelope-open social-icon"></i>E-Mail</a></li>
-                                                                            <li class="cv-social-li"><a rel="noreferrer" target="_blank" class="social-link" href="https://www.facebook.com/izhaki.idan"><i class="fab fa-facebook-messenger social-icon"></i>Messenger</a></li>
-                                                                            <li class="cv-social-li"><a rel="noreferrer" target="_blank" class="social-link" href="https://github.com/CannonFodderr"><i class="fab fa-github-square social-icon"></i>GitHub</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                            <% } %>
-                                                        <div class="card card-body text-center contact-cv">
-                                                            <form action="/profile/<%= user.id %>/message" method="POST">
-                                                                <%  include ../forms/message %>
-                                                                <button class="btn btn-danger grit" type="submit">Send</button>
-                                                            </form>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    <% } %>
+                                                
                                                 </div>
                                             </div>
                                         </div>

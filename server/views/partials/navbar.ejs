@@ -6,83 +6,18 @@
     </button>
     <a class="navbar-brand text-light" href="/"><i class="fas fa-home brand-logo"></i></a>
     <div class="collapse navbar-collapse text-light" id="navbarToggler1">
-        <div class="btn-group dropdown nav-item">
-            <button type="button" class="btn btn-outline-info btn-sm dropdown-toggle text-light btn-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="owner-btn">
-                <i class="fas fa-cat brand-logo"></i><span class="brand-text">IDAN IZHAKI</span></button>
-                <div class="dropdown-menu bg-dark">
-                    <a class="nav-link text-light" href="/"><i class="fas fa-user menu-icon"></i><span class="btn-text">Contact</span></a>
-                    <a class="text-light nav-link" href="/profile/1/cv"><i class="fas fa-newspaper menu-icon"></i><span class="btn-text">CV</span></a>
-                    <a class="nav-link text-light" href="/profile/1/projects"><i class="fas fa-network-wired menu-icon"></i><span class="btn-text">Projects</span></a>
+                <div class="nav-item">
+                    <a class="nav-link text-light" href="/profile/1/projects" style="text-align:left"><i class="fas fa-network-wired menu-icon"></i><span class="btn-text">Portfolio</span></a>
                 </div>
-            </div>
-            <div class="btn-group dropdown nav-item">
-                <button type="button" class="btn btn-outline-info btn-sm dropdown-toggle text-light btn-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="user-btn">
-                    <i class="fas fa-newspaper menu-icon"></i><span class="brand-text">GET YOUR CV</span></button>
-                    <div class="dropdown-menu p-4 bg-dark text-light form-drop">
-                        <% if (!loggedUser) { %>
-                            <form action="/register" method="POST">
-                                <div class="row">
-                                    <div class="col-12 text-center">
-                                        <a class="dropdown-item btn brand-login-button google text-light" href="/login/google">
-                                            <img class="signin-logo" src="/images/logos/g-logo.png" alt="Google sign in logo">
-                                            Sign in with Google
-                                        </a>
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        <a class="dropdown-item btn brand-login-button google text-light" href="/login/facebook">
-                                            <img class="signin-logo" src="/images/logos/fb.png" alt="Google sign in logo">
-                                            Sign in with Facebook
-                                        </a>
-                                    </div>
-                                </div>
-                                <hr>
-                                <button class="btn btn-block btn-primary" type="button" data-toggle="collapse" data-target="#signcollapse" aria-expanded="false" aria-controls="collapseExample">
-                                    Sign up
-                                </button>
-                                <div class="collapse" id="signcollapse">
-                                    <div class="">
-                                        <% include ../forms/newProfile %>
-                                        <button type="submit" class="btn btn-block btn-success grit">GO!</button>  
-                                    </div>
-                                </div>                          
-                            </form>
-                            <hr>
-                            <form action="/login" method="POST">
-                                <button class="btn btn-block btn-primary" type="button" data-toggle="collapse" data-target="#logcollapse" aria-expanded="false" aria-controls="collapseExample">
-                                    Login
-                                </button>
-                                <div class="collapse" id="logcollapse">
-                                    <div class="">
-                                        <% include ../forms/userLogin %>
-                                        <div class="text-center">
-                                            <button class="btn btn-success btn-block grit" type="submit">GO!</button>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </form> 
-                            <% } else { %>
-                                <a class="text-light nav-link" href="/profile/<%= loggedUser.id %>/cv"><i class="fas fa-newspaper"></i><span class="btn-text">CV</span></a>
-                                <a class="text-light nav-link" href="/profile/<%= loggedUser.id %>/projects"><i class="fas fa-network-wired"></i><span class="btn-text">Projects</span></a>
-                                <a class="text-light nav-link" href="/user/<%= loggedUser.id %>"><i class="fas fa-user"></i><span class="btn-text">Edit Profile</span></a>
-                                <a class="text-light nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i><span class="btn-text">LOGOUT</span></a>
-                                <% } %>
-                            </div>
-                        </div>
-                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 mt-md-1 text-light">
-                            
-                        </ul>
+                <div class="nav-item">
+                    <a class="text-light nav-link" href="/profile/1/cv" style="text-align:left"><i class="fas fa-newspaper menu-icon"></i><span class="btn-text">CV</span></a>
+                </div>
                         <div class="nav-item">
                             <!-- PWA INSTALL BUTTON -->
                             <div id="install-btn-wrapper"></div>
                         </div>   
                         <div class="nav-item-sm">
                             <div class="input-group text-center search-group">
-                                <form class="form-inline my-2 my-lg-0 search-form" method="GET" action="/profile">
-                                    <input name="search" type="search" class="form-control bg-dark text-light search-input" placeholder="Find CVs" aria-label="search-form" aria-describedby="button-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-block btn-primary" type="submit" id="button-addon2">GO</button>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>
