@@ -9,3 +9,4 @@ seeders
 /models/
 server/uploads/*
 .certs
+.vscode/
