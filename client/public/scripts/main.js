@@ -65,26 +65,13 @@ showNotification = (data) => {
     if(data.type === "beforeinstallprompt"){
         var installBtn = document.getElementById("install-btn-wrapper");
         setTimeout(()=>{
-            installBtn.innerHTML = "<button class='btn btn-sm btn-primary'>Install App</button>"
+            installBtn.innerHTML = "<button class='btn btn-sm btn-primary'>ADD TO HOMESCREEN</button>"
             installBtn.addEventListener('click', (e)=>{
                 installBtn.className = installBtn.className.repeat("show", "");
                 installPrompt()
             })
             installBtn.className = "show"
         }, 2000);
-        // Install prompt notification
-        // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        //     setTimeout(()=>{
-        //         var toastRefresh = document.getElementById("messageToast");
-        //         toastRefresh.innerHTML = "<button class='btn btn-primary install-btn'>INSTALL APP</button>"
-        //         toastRefresh.addEventListener('click', (e)=>{
-        //             toastRefresh.className = toastRefresh.className.replace("show", "");
-        //             installPrompt()
-        //         });
-        //         toastRefresh.className = "show";
-        //         return setTimeout(() => { toastRefresh.className = toastRefresh.className.replace("show", ""); }, 10000);
-        //     }, 15000)
-        // }
     }
     if(data.active){
         var x = document.getElementById("messageToast");
