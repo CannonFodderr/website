@@ -9,4 +9,5 @@ seeders
 /models/
 server/uploads/*
 .certs
-.vscode/
+.vscode
+docker_env.list
