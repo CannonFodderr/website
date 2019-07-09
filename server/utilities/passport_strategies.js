@@ -39,14 +39,14 @@ let cbURL;
 if(process.env.HOST_STATE === 'prod'){
     cbURL = process.env.PROD_HOST
 } else {
-    cbURL = "http://localhost:8080"
+    cbURL = "http://localhost:9000"
 }
 
 let googleLoginConfig = {
     clientID: process.env.OAUTH_ID,
     clientSecret: process.env.OAUTH_SECRET,
     callbackURL: `${cbURL}/login/google/callback`,
-    passReqToCallback: true
+    passReqToCallback: true,
 }
 
 

@@ -1,7 +1,7 @@
 require('dotenv').load();
 
 const   express             = require('express'),
-        port                = process.env.PORT || 8080,
+        port                = process.env.PORT || 9000,
         bodyParser          = require('body-parser'),
         expressSanitizer    = require('express-sanitizer'),
         methodOverride      = require('method-override'),
